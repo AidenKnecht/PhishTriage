@@ -16,7 +16,7 @@ from datetime import datetime, timedelta
 from email.utils import parsedate_to_datetime
 
 from phishtriage.models import EmailRecord, Hop, HopAnalysis
-from phishtriage.rulesdata import same_org
+from phishtriage.rulesdata import organizational_domain, same_org
 
 _IPV4 = re.compile(r"(?<![\d.])(?:\d{1,3}\.){3}\d{1,3}(?![\d.])")
 _IPV6 = re.compile(r"(?<![\w:.])(?:IPv6:)?([0-9a-fA-F]{0,4}(?::[0-9a-fA-F]{0,4}){2,7})(?![\w:])")
@@ -127,8 +127,8 @@ def analyze_hops(
         analysis.flags.append("No Received headers")
         return analysis
 
-    recipient_org = _recipient_org(record, hops)
-    boundary = _boundary_hop(hops, recipient_org)
+    families = _recipient_families(record, hops)
+    boundary = _boundary_hop(hops, families)
     if boundary is not None:
         analysis.first_external_ip = boundary.from_ip
         analysis.first_external_host = boundary.from_host
@@ -140,6 +140,20 @@ def analyze_hops(
             )
         elif not boundary.from_ip:
             analysis.flags.append("Boundary hop has no source IP")
+    else:
+        # Every hop stayed inside the recipient's infrastructure family (intra-tenant
+        # mail, or provider-to-provider handoffs). Fall back to the sender IP the
+        # gateway recorded in Authentication-Results / Received-SPF, if any.
+        fallback = _ip_from_auth_headers(record)
+        if fallback:
+            analysis.first_external_ip = fallback
+            analysis.flags.append(
+                "No boundary hop identified; origin IP taken from Authentication-Results"
+            )
+        else:
+            analysis.flags.append(
+                "No external origin: message never left the recipient's mail infrastructure"
+            )
 
     for hop in hops:
         if hop.from_ip and is_private_ip(hop.from_ip) and hop is not boundary:
@@ -180,37 +194,87 @@ def _first_ip(text: str) -> str:
     return ""
 
 
-def _recipient_org(record: EmailRecord, hops: list[Hop]) -> str:
+# Hosting providers whose relays never carry the recipient's own domain name.
+# Any host in one of these groups is treated as the same infrastructure.
+_INFRA_FAMILIES: dict[str, str] = {}
+for _family, _orgs in {
+    "google": ("google.com", "gmail.com", "googlemail.com"),
+    "microsoft": (
+        "outlook.com",
+        "office365.com",
+        "exchangelabs.com",
+        "hotmail.com",
+        "live.com",
+        "microsoft.com",
+        "onmicrosoft.com",
+    ),
+}.items():
+    for _org in _orgs:
+        _INFRA_FAMILIES[_org] = _family
+
+_SENDER_IP = re.compile(
+    r"(?:sender IP is|client-ip=|smtp\.remote-ip=)\s*\[?([0-9a-fA-F.:]+)", re.IGNORECASE
+)
+
+
+def infra_family(host: str) -> str:
+    """Organisational domain of ``host``, collapsed to a provider family where known."""
+    if not host or _first_ip(host) == host.strip("[]"):
+        return ""
+    org = organizational_domain(host)
+    return _INFRA_FAMILIES.get(org, org)
+
+
+def _recipient_families(record: EmailRecord, hops: list[Hop]) -> set[str]:
+    """Infrastructure families that belong to the recipient side of the chain."""
+    families: set[str] = set()
     if record.to:
-        return record.to[0].rsplit("@", 1)[1]
+        families.add(infra_family(record.to[0].rsplit("@", 1)[1]))
     for hop in hops:
         m = _FOR.search(hop.raw)
         if m:
-            return m.group(1).rsplit("@", 1)[1].lower()
-    return ""
+            families.add(infra_family(m.group(1).rsplit("@", 1)[1]))
+    # The final delivering server is recipient infrastructure by definition.
+    for hop in reversed(hops):
+        fam = infra_family(hop.by_host)
+        if fam:
+            families.add(fam)
+            break
+    families.discard("")
+    return families
 
 
-def _boundary_hop(hops: list[Hop], recipient_org: str) -> Hop | None:
-    """First hop (origin-first) where the recipient's own servers accepted outside mail.
+def _boundary_hop(hops: list[Hop], families: set[str]) -> Hop | None:
+    """First hop (origin-first) where recipient infrastructure accepted outside mail.
 
-    A hop from one recipient-org host to another over a private address is
-    internal relaying, not a boundary. Mail that never leaves the org has no
-    boundary hop at all and therefore no external origin.
+    A recipient-family server receiving from another recipient-family host, or
+    from a private address with no hostname, is internal relaying, not a
+    boundary. If every hop is internal there is no boundary at all.
     """
-    if recipient_org:
-        for hop in hops:
-            if not (hop.by_host and same_org(hop.by_host, recipient_org)):
-                continue
-            # A recipient-org server accepting mail from a private address (or from
-            # another recipient-org host) is internal relaying/submission, not a boundary.
-            private_source = not hop.from_ip or is_private_ip(hop.from_ip)
-            org_source = not hop.from_host or same_org(hop.from_host, recipient_org)
-            if not (private_source and org_source):
-                return hop
-        if any(hop.by_host and same_org(hop.by_host, recipient_org) for hop in hops):
-            return None  # every hop is internal
-    # Unknown recipient infra: the last hop is the best guess.
-    return hops[-1] if hops else None
+    if not families:
+        return hops[-1] if hops else None  # unknown infrastructure: best guess
+    for hop in hops:
+        if infra_family(hop.by_host) not in families:
+            continue
+        source_family = infra_family(hop.from_host)
+        private_source = not hop.from_ip or is_private_ip(hop.from_ip)
+        internal = (source_family and source_family in families) or (
+            private_source and not hop.from_host
+        )
+        if not internal:
+            return hop
+    return None
+
+
+def _ip_from_auth_headers(record: EmailRecord) -> str:
+    for name in ("Authentication-Results", "Received-SPF", "ARC-Authentication-Results"):
+        for value in record.headers(name):
+            m = _SENDER_IP.search(value)
+            if m:
+                ip = _first_ip(m.group(1))
+                if ip:
+                    return ip
+    return ""
 
 
 def _check_timestamps(hops: list[Hop], analysis: HopAnalysis) -> None:

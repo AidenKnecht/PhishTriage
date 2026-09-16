@@ -6,7 +6,7 @@
 # Used for display-name spoof detection (auth.py) and lookalike-domain detection
 # (indicators.py). Lines starting with # are ignored.
 
-microsoft: microsoft.com office.com outlook.com live.com hotmail.com microsoftonline.com
+microsoft: microsoft.com office.com outlook.com live.com hotmail.com microsoftonline.com office365.com onmicrosoft.com windows.net azure.com
 office365: microsoft.com office.com microsoftonline.com
 outlook: microsoft.com outlook.com live.com
 onedrive: microsoft.com live.com
@@ -14,10 +14,11 @@ sharepoint: microsoft.com sharepoint.com
 paypal: paypal.com
 docusign: docusign.com docusign.net
 dropbox: dropbox.com dropboxmail.com
-amazon: amazon.com amazon.co.uk amazon.de amazonses.com
+amazon: amazon.com amazon.co.uk amazon.de amazonses.com amazonaws.com
+mychart: mychart.com mychart.org epic.com
 apple: apple.com icloud.com
 icloud: apple.com icloud.com
-google: google.com gmail.com googlemail.com
+google: google.com gmail.com googlemail.com googleapis.com googleusercontent.com withgoogle.com goo.gl
 gmail: google.com gmail.com
 chase: chase.com jpmchase.com jpmorgan.com
 wellsfargo: wellsfargo.com

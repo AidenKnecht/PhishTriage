@@ -78,15 +78,21 @@ rules:
     description: Return-Path domain does not align with From domain
     category: alignment
     weight: 15
-    rationale: An SPF pass for a domain the user never sees is exactly how bulk phishing kits get a green check while displaying a spoofed From.
-    when: {field: auth.spf_aligned, is_false: true}
+    rationale: An SPF pass for a domain the user never sees is exactly how bulk phishing kits get a green check while displaying a spoofed From; scored only when DMARC did not pass, because DMARC passing means the other mechanism aligned.
+    when:
+      all:
+        - {field: auth.spf_aligned, is_false: true}
+        - {field: auth.dmarc.status, not_in: [pass]}
 
   - id: dkim_misaligned
     description: DKIM signing domain does not align with From domain
     category: alignment
     weight: 10
-    rationale: A valid signature from an unrelated domain proves nothing about the displayed sender; it is the classic "authenticated but not aligned" trick.
-    when: {field: auth.dkim_aligned, is_false: true}
+    rationale: A valid signature from an unrelated domain proves nothing about the displayed sender; it is the classic "authenticated but not aligned" trick. Scored only when DMARC did not pass, since Microsoft 365 tenants routinely sign with onmicrosoft.com while SPF aligns.
+    when:
+      all:
+        - {field: auth.dkim_aligned, is_false: true}
+        - {field: auth.dmarc.status, not_in: [pass]}
 
   - id: reply_to_mismatch
     description: Reply-To points to a different domain than From

@@ -206,7 +206,12 @@ def analyze_indicators(
         else:
             domains.setdefault(host, Indicator(IndicatorType.DOMAIN, host, context="url host"))
 
-    for domain, ctx in ((record.from_domain, "From"), (record.reply_to_domain, "Reply-To")):
+    sender_domains = (
+        (record.from_domain, "From"),
+        (record.reply_to_domain, "Reply-To"),
+        (record.return_path_domain, "Return-Path"),
+    )
+    for domain, ctx in sender_domains:
         if domain and domain not in domains:
             domains[domain] = Indicator(IndicatorType.DOMAIN, domain, context=ctx)
         elif domain:

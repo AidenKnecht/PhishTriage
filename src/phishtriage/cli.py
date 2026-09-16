@@ -167,7 +167,7 @@ def _batch_table(results: list[tuple[Path, TriageResult]], base: Path) -> Table:
     t.add_column("Top rule", overflow="fold")
     for path, r in results:
         try:
-            shown = str(path.relative_to(base))
+            shown = path.relative_to(base).as_posix()
         except ValueError:
             shown = path.name
         color = VERDICT_COLORS[r.score.verdict]
@@ -208,7 +208,7 @@ def _write_csv(results: list[tuple[Path, TriageResult]], base: Path, out: Path) 
         w.writerow(["file", "label", "from", "subject", "score", "verdict", "top_rule", "rules"])
         for path, r in results:
             try:
-                shown = str(path.relative_to(base))
+                shown = path.relative_to(base).as_posix()
             except ValueError:
                 shown = path.name
             w.writerow(

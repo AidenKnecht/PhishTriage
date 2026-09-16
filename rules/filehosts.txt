@@ -1,0 +1,41 @@
+# File-hosting / form / redirect services commonly abused to host phishing pages
+# or payloads. Presence is a weak signal on its own; it is scored low.
+# Matched on the URL's host (org-level).
+dropbox.com
+dropboxusercontent.com
+drive.google.com
+docs.google.com
+forms.google.com
+forms.gle
+storage.googleapis.com
+firebasestorage.googleapis.com
+web.app
+onedrive.live.com
+1drv.ms
+sharepoint.com
+box.com
+wetransfer.com
+we.tl
+mega.nz
+mediafire.com
+sendspace.com
+file.io
+transfer.sh
+anonfiles.com
+discordapp.com
+cdn.discordapp.com
+pages.dev
+workers.dev
+netlify.app
+vercel.app
+glitch.me
+weebly.com
+wixsite.com
+000webhostapp.com
+github.io
+r2.dev
+ipfs.io
+formstack.com
+jotform.com
+typeform.com
+canva.site

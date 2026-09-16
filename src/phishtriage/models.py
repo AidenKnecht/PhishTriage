@@ -186,6 +186,7 @@ class Indicator:
     value: str
     context: str = ""
     flags: list[str] = field(default_factory=list)
+    details: dict[str, str] = field(default_factory=dict)
     enrichment: list[EnrichmentResult] = field(default_factory=list)
 
 
@@ -201,6 +202,7 @@ class AttachmentAnalysis:
     sha256: str
     md5: str
     flags: list[str] = field(default_factory=list)
+    details: dict[str, str] = field(default_factory=dict)
     enrichment: list[EnrichmentResult] = field(default_factory=list)
 
 

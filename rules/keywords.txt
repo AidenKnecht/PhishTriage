@@ -1,0 +1,90 @@
+# Lure keywords, grouped by category. Matched case-insensitively as whole
+# phrases in the subject and body. Scoring is per category (see scoring.yaml):
+# one hit in a category counts once, no matter how many phrases match.
+
+[urgency]
+urgent
+immediately
+within 24 hours
+within 48 hours
+act now
+right away
+as soon as possible
+final notice
+last chance
+expires today
+expire today
+time sensitive
+action required
+immediate action
+respond now
+today only
+
+[credential]
+verify your account
+confirm your account
+verify your identity
+confirm your identity
+validate your account
+update your password
+reset your password
+password will expire
+password has expired
+password expires
+your account has been
+account has been suspended
+account has been locked
+account will be suspended
+account will be closed
+unusual sign-in
+unusual activity
+suspicious activity
+suspicious sign-in
+sign in to review
+login to review
+re-enter your
+reactivate your account
+
+[financial]
+invoice attached
+payment overdue
+overdue invoice
+outstanding balance
+wire transfer
+bank transfer
+payment failed
+payment declined
+update your billing
+update payment
+billing information
+refund
+gift card
+purchase order
+remittance
+direct deposit
+change of bank
+
+[threat]
+legal action
+will be terminated
+will be deleted
+permanently deleted
+suspended permanently
+law enforcement
+failure to comply
+your account will be
+we will be forced
+avoid suspension
+avoid termination
+
+[reward]
+you have won
+you've won
+congratulations
+claim your prize
+claim your reward
+selected winner
+lottery
+free gift
+exclusive offer
+bonus

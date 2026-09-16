@@ -1,0 +1,8 @@
+Received: from weird.example.net (weird.example.net [203.0.113.9]) by mx.example.com; not a date at all
+Date: Thursday 45 Foo 2024 99:99:99
+From: =?UTF-8?B?U2VjdXJpdHkgVGVhbSDwn5Sh?= <security@example.net>
+To: =?iso-8859-1?q?Andr=E9?= <andre@example.com>, undisclosed-recipients:;
+Subject: =?utf-8?q?Action_required=3A_verify_your_account?=
+Content-Type: text/plain
+
+No message id, no return path, bad date.

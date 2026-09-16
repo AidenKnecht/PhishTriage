@@ -1,0 +1,46 @@
+Return-Path: <invoices@billing.example.net>
+Received: from smtp.example.net (smtp.example.net [198.51.100.7])
+	by mx.example.com with ESMTPS; Tue, 03 Sep 2024 08:00:05 +0000
+Message-ID: <multi-002@billing.example.net>
+Date: Tue, 03 Sep 2024 07:59:58 +0000
+From: "Billing Team" <invoices@billing.example.net>
+To: analyst@example.com
+Subject: Invoice 4471 attached
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="outer"
+
+--outer
+Content-Type: multipart/alternative; boundary="inner"
+
+--inner
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Please find invoice 4471 attached. Total due: =E2=82=AC1,200.
+
+--inner
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: base64
+
+PGh0bWw+PGJvZHk+PHA+UGxlYXNlIGZpbmQgaW52b2ljZSA0NDcxIGF0dGFjaGVkLjwvcD48YSBo
+cmVmPSJodHRwczovL2JpbGxpbmcuZXhhbXBsZS5uZXQvaW52b2ljZS80NDcxIj5WaWV3IG9ubGlu
+ZTwvYT48L2JvZHk+PC9odG1sPg==
+
+--inner--
+
+--outer
+Content-Type: application/pdf; name="invoice-4471.pdf"
+Content-Disposition: attachment; filename="invoice-4471.pdf"
+Content-Transfer-Encoding: base64
+
+JVBERi0xLjQKJeLjz9MKMSAwIG9iago8PC9UeXBlL0NhdGFsb2c+PgplbmRvYmoK
+
+--outer
+Content-Type: image/png
+Content-Disposition: inline; filename="logo.png"
+Content-Transfer-Encoding: base64
+
+iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNkYPhfDwAChwGA60e6
+kgAAAABJRU5ErkJggg==
+
+--outer--

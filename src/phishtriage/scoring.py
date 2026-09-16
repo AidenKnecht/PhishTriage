@@ -282,7 +282,8 @@ def _eval_field(cond: dict[str, Any], ctx: _Context) -> tuple[bool, list[str]]:
     if label == "reply_to_mismatch":
         evidence = [f"Reply-To {ctx.record.reply_to_addr} vs From {ctx.record.from_addr}"]
     if label in ("spf_aligned", "dkim_aligned"):
-        evidence = [f for f in ctx.auth.flags if "align" in f] or evidence
+        needle = "SPF/Return-Path" if label == "spf_aligned" else "DKIM domain"
+        evidence = [f for f in ctx.auth.flags if f.startswith(needle)] or evidence
     if label == "status":
         mech = _resolve(path.rsplit(".", 1)[0], ctx)
         domain = getattr(mech, "domain", "")
@@ -299,11 +300,15 @@ def _eval_flag(cond: dict[str, Any], ctx: _Context) -> tuple[bool, list[str]]:
         raise RuleError(f"flag scope must be one of {_INDICATOR_GROUPS} or 'any', got {scope!r}")
     groups = _INDICATOR_GROUPS if scope == "any" else (scope,)
     evidence: list[str] = []
+    seen_details: set[str] = set()
     for group in groups:
         for item in getattr(ctx.indicators, group, []):
             if flag in item.flags:
                 value = getattr(item, "value", None) or getattr(item, "filename", "?")
                 detail = item.details.get(flag, "")
+                if detail and detail in seen_details:
+                    continue  # a URL and its domain carry the same explanation
+                seen_details.add(detail)
                 evidence.append(f"{value}" + (f": {detail}" if detail else ""))
     return bool(evidence), evidence
 

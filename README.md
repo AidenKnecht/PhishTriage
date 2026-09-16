@@ -1,6 +1,6 @@
 # phishtriage
 
-[![CI](https://github.com/aidenknecht/phishtriage/actions/workflows/ci.yml/badge.svg)](https://github.com/aidenknecht/phishtriage/actions/workflows/ci.yml)
+[![CI](https://github.com/AidenKnecht/PhishTriage/actions/workflows/ci.yml/badge.svg)](https://github.com/AidenKnecht/PhishTriage/actions/workflows/ci.yml)
 
 A command-line phishing email analyzer that does what a SOC analyst does on first
 contact with a suspicious `.eml`: parse the headers, check SPF/DKIM/DMARC and

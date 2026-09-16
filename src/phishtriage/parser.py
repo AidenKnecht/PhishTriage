@@ -65,6 +65,10 @@ def parse_bytes(raw: bytes) -> EmailRecord:
     from_raw = getter.get("From")
     record.from_display, record.from_addr = _split_address(from_raw, record, "From")
     record.from_domain = _domain_of(record.from_addr)
+    # The strict policy silently drops extra addresses; check the raw header too.
+    raw_from = _decode_rfc2047(record.header("From") or "")
+    if len({a.lower() for a in _BARE_ADDR.findall(raw_from)}) > 1:
+        record.warnings.append(f"parser: From header is non-standard: {raw_from!r}")
 
     reply_raw = getter.get("Reply-To")
     _, record.reply_to_addr = _split_address(reply_raw, record, "Reply-To")

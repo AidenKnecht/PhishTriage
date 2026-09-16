@@ -1,0 +1,42 @@
+# Brands that phishers impersonate. One per line.
+#
+#   brand            -> brand name must appear somewhere in the sender's domain
+#   brand: d1 d2 ... -> the brand is legitimate only from these domains (org-level match)
+#
+# Used for display-name spoof detection (auth.py) and lookalike-domain detection
+# (indicators.py). Lines starting with # are ignored.
+
+microsoft: microsoft.com office.com outlook.com live.com hotmail.com microsoftonline.com
+office365: microsoft.com office.com microsoftonline.com
+outlook: microsoft.com outlook.com live.com
+onedrive: microsoft.com live.com
+sharepoint: microsoft.com sharepoint.com
+paypal: paypal.com
+docusign: docusign.com docusign.net
+dropbox: dropbox.com dropboxmail.com
+amazon: amazon.com amazon.co.uk amazon.de amazonses.com
+apple: apple.com icloud.com
+icloud: apple.com icloud.com
+google: google.com gmail.com googlemail.com
+gmail: google.com gmail.com
+chase: chase.com jpmchase.com jpmorgan.com
+wellsfargo: wellsfargo.com
+wells fargo: wellsfargo.com
+ups: ups.com
+fedex: fedex.com
+dhl: dhl.com dhl.de
+usps: usps.com
+netflix: netflix.com
+linkedin: linkedin.com
+facebook: facebook.com facebookmail.com meta.com
+instagram: instagram.com facebookmail.com
+adobe: adobe.com
+zoom: zoom.us zoom.com
+bankofamerica: bankofamerica.com
+bank of america: bankofamerica.com
+citibank: citi.com citibank.com
+americanexpress: americanexpress.com aexp.com
+american express: americanexpress.com aexp.com
+irs: irs.gov
+github: github.com
+slack: slack.com slack-mail.com

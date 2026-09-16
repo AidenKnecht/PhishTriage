@@ -1,0 +1,41 @@
+Return-Path: <noreply@git.example.net>
+Received: from out-18.smtp.git.example.net (out-18.smtp.git.example.net
+ [192.0.2.118]) by mx.example.com with ESMTPS id ee568 for
+ <analyst@example.com>; Wed, 04 Sep 2024 21:14:02 +0000
+Authentication-Results: mx.example.com; spf=pass
+ smtp.mailfrom=git.example.net; dkim=pass header.d=git.example.net; dmarc=pass
+ header.from=git.example.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=git.example.net;
+ s=pf2023; h=from:to:subject:date:message-id;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=dGhpcyBpcyBub3QgYSByZWFsIHNpZ25hdHVyZQ==
+Message-ID: <example/phishtriage/pull/12/c2345@git.example.net>
+Date: Wed, 04 Sep 2024 21:14:00 +0000
+From: "Priya Natarajan" <notifications@git.example.net>
+Reply-To: example/phishtriage <reply+ABC123@reply.git.example.net>
+To: analyst@example.com
+Subject: Re: [example/phishtriage] Add RDAP enricher (PR #12)
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============1147751987778388940=="
+
+--===============1147751987778388940==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+@analyst looks good, one nit on the cache TTL. Approved.
+
+--
+Reply to this email directly or view it on the web:
+https://git.example.net/example/phishtriage/pull/12#issuecomment-2345
+
+--===============1147751987778388940==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body><p>@analyst looks good, one nit on the cache TTL. Approved.</p><p=
+><a href=3D"https://git.example.net/example/phishtriage/pull/12#issuecomment-=
+2345">View it on the web</a></p></body></html>
+
+--===============1147751987778388940==--

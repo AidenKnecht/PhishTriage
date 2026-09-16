@@ -1,0 +1,19 @@
+Return-Path: <track@example.net>
+Received: from vps-2201.hosting.example (vps-2201.hosting.example
+ [203.0.113.140]) by mx.example.com with ESMTPS id a88d8 for
+ <analyst@example.com>; Fri, 06 Sep 2024 11:05:19 +0000
+Authentication-Results: mx.example.com; spf=softfail
+ smtp.mailfrom=example.net; dkim=none header.d=; dmarc=fail
+ header.from=example.net
+Message-ID: <ship-88121@example.net>
+Date: Fri, 06 Sep 2024 11:05:02 +0000
+From: "UPS Delivery" <track@example.net>
+To: analyst@example.com
+Subject: Your package could not be delivered - action required
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+We attempted to deliver your package but no one was available.
+Reschedule your delivery within 24 hours or the package will be returned:
+https://bit.ly/3xAmpLe

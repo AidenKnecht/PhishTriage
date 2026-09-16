@@ -1,0 +1,36 @@
+Return-Path: <notify@example.net>
+Received: from out2.example.net (out2.example.net [198.51.100.31]) by
+ mx.example.com with ESMTPS id 98366 for <analyst@example.com>; Thu, 05 Sep
+ 2024 09:20:44 +0000
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=example.net;
+ dkim=pass header.d=example.net; dmarc=none header.from=example.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.net; s=sel1;
+ h=from:to:subject:date:message-id;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=dGhpcyBpcyBub3QgYSByZWFsIHNpZ25hdHVyZQ==
+Message-ID: <ds-4471@example.net>
+Date: Thu, 05 Sep 2024 09:20:40 +0000
+From: "DocuSign" <notify@example.net>
+To: analyst@example.com
+Subject: Completed: Please review and sign - Contract Amendment
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============4017311820590755917=="
+
+--===============4017311820590755917==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Your document is ready for signature. Review it here:
+https://docs-review.example/s/4471
+
+--===============4017311820590755917==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body><p>Your document is ready for signature.</p><p><a href=3D"https:/=
+/docs-review.example/s/4471">https://www.docusign.example/Signing/EmailStart.=
+aspx?a=3D4471</a></p><p>This link will expire in 48 hours.</p></body></html>
+
+--===============4017311820590755917==--

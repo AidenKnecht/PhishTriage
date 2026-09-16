@@ -1,0 +1,35 @@
+Return-Path: <ar@example.net>
+Received: from mail.example.net (mail.example.net [192.0.2.10]) by
+ mx.example.com with ESMTPS id 124af for <analyst@example.com>; Tue, 10 Sep
+ 2024 13:12:00 +0000
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=example.net;
+ dkim=pass header.d=example.net; dmarc=none header.from=example.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.net; s=sel1;
+ h=from:to:subject:date:message-id;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=dGhpcyBpcyBub3QgYSByZWFsIHNpZ25hdHVyZQ==
+Message-ID: <inv-2291@example.net>
+Date: Tue, 10 Sep 2024 13:11:48 +0000
+From: "Accounts Receivable" <ar@example.net>
+To: analyst@example.com
+Subject: Overdue invoice 2291 - payment overdue
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============1967529638973479447=="
+
+--===============1967529638973479447==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Please see the attached overdue invoice. Payment is 30 days overdue.
+
+--===============1967529638973479447==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Invoice_2291.pdf.exe"
+MIME-Version: 1.0
+
+TVqQAAMAAAAEAAAA//8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+AAAAAAAAAFRoaXMgcHJvZ3JhbSBjYW5ub3QgYmUgcnVuIGluIERPUyBtb2RlLg0KJAAAAAAAAAAA
+AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+
+--===============1967529638973479447==--

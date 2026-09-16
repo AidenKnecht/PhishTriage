@@ -1,0 +1,45 @@
+Return-Path: <bounce@paypal-secure-login.example>
+Received: from mail.paypal-secure-login.example
+ (mail.paypal-secure-login.example [203.0.113.21]) by mx.example.com with
+ ESMTPS id 3f9fe for <analyst@example.com>; Mon, 02 Sep 2024 08:14:03 +0000
+Received: from [10.20.0.4] ([10.20.0.4]) by mail.paypal-secure-login.example
+ with ESMTPA id ce8d7; Mon, 02 Sep 2024 08:14:01 +0000
+Authentication-Results: mx.example.com; spf=pass
+ smtp.mailfrom=paypal-secure-login.example; dkim=pass
+ header.d=paypal-secure-login.example; dmarc=none
+ header.from=paypal-secure-login.example
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=paypal-secure-login.example; s=sel1; h=from:to:subject:date:message-id;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=dGhpcyBpcyBub3QgYSByZWFsIHNpZ25hdHVyZQ==
+Message-ID: <20240902081401.7f3a@paypal-secure-login.example>
+Date: Mon, 02 Sep 2024 08:13:59 +0000
+From: "PayPal" <service@paypal-secure-login.example>
+To: analyst@example.com
+Subject: Unusual activity on your account - verify your identity
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============5265338444409160544=="
+
+--===============5265338444409160544==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+We detected unusual activity on your PayPal account.
+
+To avoid suspension, verify your identity within 24 hours:
+https://paypal-secure-login.example/verify?id=7f3a2c
+
+PayPal Security Team
+
+--===============5265338444409160544==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body><p>We detected unusual activity on your PayPal account.</p><p>To =
+avoid suspension, verify your identity within 24 hours.</p><p><a href=3D"http=
+s://paypal-secure-login.example/verify?id=3D7f3a2c">Verify now</a></p><p>PayP=
+al Security Team</p></body></html>
+
+--===============5265338444409160544==--

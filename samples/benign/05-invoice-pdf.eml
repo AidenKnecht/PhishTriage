@@ -1,0 +1,41 @@
+Return-Path: <invoices@billing.example.net>
+Received: from smtp.example.net (smtp.example.net [198.51.100.7]) by
+ mx.example.com with ESMTPS id 3c2e8 for <analyst@example.com>; Fri, 06 Sep
+ 2024 08:00:05 +0000
+Authentication-Results: mx.example.com; spf=pass
+ smtp.mailfrom=billing.example.net; dkim=pass header.d=example.net; dmarc=pass
+ header.from=example.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.net;
+ s=billing; h=from:to:subject:date:message-id;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=dGhpcyBpcyBub3QgYSByZWFsIHNpZ25hdHVyZQ==
+Message-ID: <inv-4471@billing.example.net>
+Date: Fri, 06 Sep 2024 07:59:58 +0000
+From: "Example Billing" <invoices@billing.example.net>
+To: analyst@example.com
+Subject: Invoice 4471 for September
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============7121410413947001297=="
+
+--===============7121410413947001297==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Hi,
+
+Invoice 4471 for September is attached. Net 30 as usual.
+
+Thanks,
+Example Billing
+
+--===============7121410413947001297==
+Content-Type: application/pdf
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="invoice-4471.pdf"
+MIME-Version: 1.0
+
+JVBERi0xLjQKMSAwIG9iajw8L1R5cGUvQ2F0YWxvZy9QYWdlcyAyIDAgUj4+ZW5kb2JqCjIgMCBv
+Ymo8PC9UeXBlL1BhZ2VzL0NvdW50IDA+PmVuZG9iagp0cmFpbGVyPDwvUm9vdCAxIDAgUj4+CiUl
+RU9GCg==
+
+--===============7121410413947001297==--

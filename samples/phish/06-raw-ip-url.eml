@@ -1,0 +1,18 @@
+Received: from mail-corp.example (mail-corp.example [203.0.113.200]) by
+ mx.example.com with ESMTPS id 040f4 for <analyst@example.com>; Mon, 09 Sep
+ 2024 07:31:55 +0000
+Message-ID: <mbx-9@mail-corp.example>
+Date: Mon, 09 Sep 2024 07:31:50 +0000
+From: "helpdesk@example.com" <it-support@mail-corp.example>
+To: analyst@example.com
+Subject: Mailbox storage full - unusual sign-in detected
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Your mailbox has exceeded its storage limit and we detected an unusual sign-i=
+n.
+Validate your account immediately to avoid suspension:
+http://203.0.113.200/owa/auth/logon.aspx
+
+IT Helpdesk

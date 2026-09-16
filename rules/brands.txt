@@ -38,5 +38,3 @@ citibank: citi.com citibank.com
 americanexpress: americanexpress.com aexp.com
 american express: americanexpress.com aexp.com
 irs: irs.gov
-github: github.com
-slack: slack.com slack-mail.com

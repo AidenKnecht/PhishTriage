@@ -191,11 +191,24 @@ def _recipient_org(record: EmailRecord, hops: list[Hop]) -> str:
 
 
 def _boundary_hop(hops: list[Hop], recipient_org: str) -> Hop | None:
-    """First hop (origin-first) received *by* the recipient's own servers."""
+    """First hop (origin-first) where the recipient's own servers accepted outside mail.
+
+    A hop from one recipient-org host to another over a private address is
+    internal relaying, not a boundary. Mail that never leaves the org has no
+    boundary hop at all and therefore no external origin.
+    """
     if recipient_org:
         for hop in hops:
-            if hop.by_host and same_org(hop.by_host, recipient_org):
+            if not (hop.by_host and same_org(hop.by_host, recipient_org)):
+                continue
+            # A recipient-org server accepting mail from a private address (or from
+            # another recipient-org host) is internal relaying/submission, not a boundary.
+            private_source = not hop.from_ip or is_private_ip(hop.from_ip)
+            org_source = not hop.from_host or same_org(hop.from_host, recipient_org)
+            if not (private_source and org_source):
                 return hop
+        if any(hop.by_host and same_org(hop.by_host, recipient_org) for hop in hops):
+            return None  # every hop is internal
     # Unknown recipient infra: the last hop is the best guess.
     return hops[-1] if hops else None
 

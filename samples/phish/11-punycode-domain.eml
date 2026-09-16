@@ -1,0 +1,19 @@
+Return-Path: <no-reply@example.net>
+Received: from relay-9.example.net (relay-9.example.net [198.51.100.12]) by
+ mx.example.com with ESMTPS id c91e4 for <analyst@example.com>; Mon, 16 Sep
+ 2024 12:30:00 +0000
+Authentication-Results: mx.example.com; spf=softfail
+ smtp.mailfrom=example.net; dkim=none header.d=; dmarc=none
+ header.from=example.net
+Message-ID: <idn-1@example.net>
+Date: Mon, 16 Sep 2024 12:29:41 +0000
+From: "Apple ID" <no-reply@example.net>
+To: analyst@example.com
+Subject: Your Apple ID has been locked
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Your Apple ID has been locked for security reasons. Confirm your identity to =
+restore access:
+https://xn--ppl-hia8d.example/restore

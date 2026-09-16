@@ -1,0 +1,43 @@
+Return-Path: <jordan.lee@example.com>
+Received: from mail-b.example.com (mail-b.example.com [192.0.2.56]) by
+ mx.example.com with ESMTPS id 05478 for <analyst@example.com>; Mon, 09 Sep
+ 2024 10:10:10 +0000
+Received: from [10.30.1.9] ([10.30.1.9]) by mail-b.example.com with ESMTPA id
+ 51a81; Mon, 09 Sep 2024 10:10:08 +0000
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=example.com;
+ dkim=pass header.d=example.com; dmarc=pass header.from=example.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.com; s=sel1;
+ h=from:to:subject:date:message-id;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=dGhpcyBpcyBub3QgYSByZWFsIHNpZ25hdHVyZQ==
+Message-ID: <share-17@example.com>
+Date: Mon, 09 Sep 2024 10:10:05 +0000
+From: "Jordan Lee" <jordan.lee@example.com>
+To: analyst@example.com
+Subject: Q3 incident review notes
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============7808185329869483249=="
+
+--===============7808185329869483249==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Attached the notes from this morning. Also on the share drive: https://files.=
+example.com/d/q3-review
+
+Jordan
+
+--===============7808185329869483249==
+Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Q3-incident-review.docx"
+MIME-Version: 1.0
+
+UEsDBBQAAAAIAKOAMF3uR1hmHwAAAB0AAAATAAAAW0NvbnRlbnRfVHlwZXNdLnhtbLOxr8jNUShL
+LSrOzM+zVTLUM1Cyt7MJqSxILda3AwBQSwMEFAAAAAgAo4AwXSjgyeYkAAAAIgAAABEAAAB3b3Jk
+L2RvY3VtZW50LnhtbLOxr8jNUShLLSrOzM+zVTLUM1Cyt7Mpt0rJTy7NTc0r0bcDAFBLAQIUABQA
+AAAIAKOAMF3uR1hmHwAAAB0AAAATAAAAAAAAAAAAAACAAQAAAABbQ29udGVudF9UeXBlc10ueG1s
+UEsBAhQAFAAAAAgAo4AwXSjgyeYkAAAAIgAAABEAAAAAAAAAAAAAAIABUAAAAHdvcmQvZG9jdW1l
+bnQueG1sUEsFBgAAAAACAAIAgAAAAKMAAAAAAA==
+
+--===============7808185329869483249==--

@@ -1,0 +1,38 @@
+Return-Path: <ap@example.net>
+Received: from bulk-7.sendhost.example (bulk-7.sendhost.example
+ [203.0.113.77]) by mx.example.com with ESMTPS id 00790 for
+ <analyst@example.com>; Wed, 11 Sep 2024 10:00:31 +0000
+Authentication-Results: mx.example.com; spf=fail smtp.mailfrom=example.net;
+ dkim=none header.d=; dmarc=fail header.from=example.net
+Message-ID: <po-1188@example.net>
+Date: Wed, 11 Sep 2024 10:00:20 +0000
+From: "Accounts Payable" <ap@example.net>
+To: analyst@example.com
+Subject: Purchase order 1188 - remittance advice attached
+MIME-Version: 1.0
+Content-Type: multipart/mixed; boundary="===============5219441433200556995=="
+
+--===============5219441433200556995==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Please find the remittance advice attached. Enable editing and content to vie=
+w.
+
+--===============5219441433200556995==
+Content-Type: application/vnd.ms-word.document.macroEnabled.12
+Content-Transfer-Encoding: base64
+Content-Disposition: attachment; filename="Remittance_1188.docm"
+MIME-Version: 1.0
+
+UEsDBBQAAAAIAKOAMF3uR1hmHwAAAB0AAAATAAAAW0NvbnRlbnRfVHlwZXNdLnhtbLOxr8jNUShL
+LSrOzM+zVTLUM1Cyt7MJqSxILda3AwBQSwMEFAAAAAgAo4AwXSjgyeYkAAAAIgAAABEAAAB3b3Jk
+L2RvY3VtZW50LnhtbLOxr8jNUShLLSrOzM+zVTLUM1Cyt7Mpt0rJTy7NTc0r0bcDAFBLAwQUAAAA
+CACjgDBdXroLEyIAAAAgAAAAEwAAAHdvcmQvdmJhUHJvamVjdC5iaW67cF7wQUFOYnJqRn5OSmqR
+bl5+iW6iblFqYo5ubmJyUT4AUEsBAhQAFAAAAAgAo4AwXe5HWGYfAAAAHQAAABMAAAAAAAAAAAAA
+AIABAAAAAFtDb250ZW50X1R5cGVzXS54bWxQSwECFAAUAAAACACjgDBdKODJ5iQAAAAiAAAAEQAA
+AAAAAAAAAAAAgAFQAAAAd29yZC9kb2N1bWVudC54bWxQSwECFAAUAAAACACjgDBdXroLEyIAAAAg
+AAAAEwAAAAAAAAAAAAAAgAGjAAAAd29yZC92YmFQcm9qZWN0LmJpblBLBQYAAAAAAwADAMEAAAD2
+AAAAAAA=
+
+--===============5219441433200556995==--

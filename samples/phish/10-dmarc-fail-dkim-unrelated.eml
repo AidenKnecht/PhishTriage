@@ -1,0 +1,23 @@
+Return-Path: <bounce@notify-mailer.example>
+Received: from out.notify-mailer.example (out.notify-mailer.example
+ [198.51.100.90]) by mx.example.com with ESMTPS id 3609c for
+ <analyst@example.com>; Fri, 13 Sep 2024 06:58:12 +0000
+Authentication-Results: mx.example.com; spf=pass
+ smtp.mailfrom=notify-mailer.example; dkim=pass
+ header.d=notify-mailer.example; dmarc=fail header.from=chase.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=notify-mailer.example;
+ s=mailer; h=from:to:subject:date:message-id;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=dGhpcyBpcyBub3QgYSByZWFsIHNpZ25hdHVyZQ==
+Message-ID: <alert-55@notify-mailer.example>
+Date: Fri, 13 Sep 2024 06:58:01 +0000
+From: "Chase" <alerts@chase.com>
+To: analyst@example.com
+Subject: Suspicious activity: sign in to review your account
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+We noticed suspicious activity on your account. Sign in to review recent tran=
+sactions:
+https://chase-secure-alerts.example/review

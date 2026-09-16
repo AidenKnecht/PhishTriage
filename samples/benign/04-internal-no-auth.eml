@@ -1,0 +1,15 @@
+Received: from exch-02.corp.example.com (exch-02.corp.example.com [10.1.5.22])
+ by exch-01.corp.example.com with ESMTP id 360ba for <analyst@example.com>;
+ Thu, 05 Sep 2024 08:45:12 +0000
+Message-ID: <9a8b7c@exch-02.corp.example.com>
+Date: Thu, 05 Sep 2024 08:45:10 +0000
+From: "Sam Rivera" <sam.rivera@example.com>
+To: analyst@example.com
+Subject: Team lunch Thursday?
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: 7bit
+
+Thinking Thursday at noon, the usual place. Let me know if that works.
+
+Sam

@@ -1,0 +1,42 @@
+Return-Path: <bounce-12345@news.example.net>
+Received: from mta-4.news.example.net (mta-4.news.example.net [192.0.2.40]) by
+ mx.example.com with ESMTPS id 41b17 for <analyst@example.com>; Mon, 02 Sep
+ 2024 12:00:10 +0000
+Authentication-Results: mx.example.com; spf=pass
+ smtp.mailfrom=news.example.net; dkim=pass header.d=example.net; dmarc=pass
+ header.from=example.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.net; s=news;
+ h=from:to:subject:date:message-id;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=dGhpcyBpcyBub3QgYSByZWFsIHNpZ25hdHVyZQ==
+List-Unsubscribe: <https://news.example.net/unsubscribe?u=12345>
+Message-ID: <nl-2024-36@news.example.net>
+Date: Mon, 02 Sep 2024 12:00:00 +0000
+From: "Example Weekly" <newsletter@example.net>
+To: analyst@example.com
+Subject: Example Weekly #36: September releases and an exclusive offer
+MIME-Version: 1.0
+Content-Type: multipart/alternative;
+ boundary="===============5746821873689040416=="
+
+--===============5746821873689040416==
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+This week: three new releases, a community spotlight, and an exclusive offer =
+for subscribers.
+
+Read online: https://news.example.net/issues/36
+Unsubscribe: https://news.example.net/unsubscribe?u=3D12345
+
+--===============5746821873689040416==
+Content-Type: text/html; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+MIME-Version: 1.0
+
+<html><body><h1>Example Weekly #36</h1><p>Three new releases, a community spo=
+tlight, and an exclusive offer.</p><p><a href=3D"https://news.example.net/iss=
+ues/36">Read online</a> | <a href=3D"https://news.example.net/unsubscribe?u=
+=3D12345">Unsubscribe</a></p></body></html>
+
+--===============5746821873689040416==--

@@ -1,0 +1,24 @@
+Return-Path: <x9k2@mailer-relay.example>
+Received: from mailer-relay.example (mailer-relay.example [203.0.113.88]) by
+ mx.example.com with ESMTPS id 9175d for <analyst@example.com>; Wed, 04 Sep
+ 2024 16:45:30 +0000
+Authentication-Results: mx.example.com; spf=fail
+ smtp.mailfrom=mailer-relay.example; dmarc=fail header.from=example.com
+Message-ID: <b7a1@mailer-relay.example>
+Date: Wed, 04 Sep 2024 16:45:12 +0000
+From: "Dana Whitfield" <dana.whitfield@example.com>
+Reply-To: dana.whitfield.ceo@freemail.example
+To: analyst@example.com
+Subject: Quick favor - urgent
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+Hi,
+
+I'm in a meeting and can't talk. I need you to process a wire transfer today =
+for a vendor before close of business. Reply to this email and I'll send the =
+details. Please keep this confidential.
+
+Dana
+Sent from my iPhone

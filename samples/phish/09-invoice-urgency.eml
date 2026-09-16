@@ -1,0 +1,25 @@
+Return-Path: <billing@example.net>
+Received: from mail.example.net (mail.example.net [192.0.2.10]) by
+ mx.example.com with ESMTPS id 284d7 for <analyst@example.com>; Thu, 12 Sep
+ 2024 15:44:09 +0000
+Authentication-Results: mx.example.com; spf=pass smtp.mailfrom=example.net;
+ dkim=pass header.d=example.net; dmarc=none header.from=example.net
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=example.net; s=sel1;
+ h=from:to:subject:date:message-id;
+ bh=47DEQpj8HBSa+/TImW+5JCeuQeRkm5NMpJWZG3hSuFU=;
+ b=dGhpcyBpcyBub3QgYSByZWFsIHNpZ25hdHVyZQ==
+Message-ID: <fin-3301@example.net>
+Date: Thu, 12 Sep 2024 15:44:00 +0000
+From: "accounts@example.com" <billing@example.net>
+Reply-To: accounts.payable.desk@freemail.example
+To: analyst@example.com
+Subject: FINAL NOTICE: outstanding balance - legal action
+MIME-Version: 1.0
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+This is your final notice. Your outstanding balance of $4,860.00 must be paid=
+ within 24 hours or we will be forced to pursue legal action.
+
+View the invoice: https://files-share.example/d/9f8e7d/invoice.pdf
+Reply to this email to arrange payment.

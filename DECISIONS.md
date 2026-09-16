@@ -80,3 +80,10 @@ Choices that weren't spelled out in `CLAUDE.md`, and why. Newest at the bottom.
 - **Country of the origin hop is a report field, not a scoring signal.** Geography is context for an analyst, not evidence on its own, so no rule references it.
 - **Cache layout**: `~/.cache/phishtriage/<source>/<sha1(indicator)>.json` with a timestamp, 24h TTL, `PHISHTRIAGE_CACHE_DIR` override. `phishtriage cache clear` wipes it; `cache info` counts it.
 - **Tests use `httpx.MockTransport`**, and `tests/conftest.py` monkeypatches `socket.connect` to raise, so any test that reaches the network fails loudly.
+
+## Docs, CI, and sanitisation
+
+- **CI runs on Ubuntu only**, Python 3.11 and 3.12, via `astral-sh/setup-uv`. It also runs `phishtriage batch samples --offline` as a smoke test so a regression in the CLI itself (not just the library) fails the build. Coverage is enforced at 85% with `--cov-fail-under`.
+- **The CI badge URL assumes `github.com/aidenknecht/phishtriage`.** Change it in `README.md` if the repo lands somewhere else.
+- **`scripts/sanitize.py` is byte-oriented on purpose.** Parsing and re-serialising a real email would normalise headers and destroy the evidence (folding, odd encodings, duplicate headers). It does regex replacement on the raw bytes, drops only the handful of headers that name the mailbox owner, and redacts opaque tokens of 16+ characters in query strings and 24+ in path segments. It prints `STILL CONTAINS RECIPIENT` if the address survives in some encoding it doesn't know about; review by hand regardless.
+- **The writeup outline leaves the finding as a slot.** The piece is meant to be built around whatever the real spam-folder run turns up, so the outline lists the candidate findings to look for and the six screenshots that would support each, rather than pre-deciding the story.

@@ -96,24 +96,30 @@ Then 15 real emails from my own Gmail and university Microsoft 365 inboxes
 | benign/real-04-labcorp-notice.eml | 0 | CLEAN | |
 | benign/real-05-website-listing-claimed.eml | 0 | CLEAN | |
 | benign/real-06-bootcamp-promo.eml | 0 | CLEAN | |
+| benign/real-07-intrastack-interview.eml | 0 | CLEAN | |
+| benign/real-08-glowup-charity-form.eml | 5 | CLEAN | lure_keywords |
+| benign/real-09-globifye-assessment.eml | 15 | CLEAN | lure_keywords |
 | phish/real-01-mychart-medicare-kit.eml | 65 | LIKELY PHISH | display_name_spoof |
 | phish/real-02-uc-account-job-scam-admin.eml | 35 | SUSPICIOUS | dkim_fail_or_none |
 | phish/real-03-uc-account-job-scam-assistant.eml | 25 | SUSPICIOUS | dkim_fail_or_none |
 | phish/real-04-uc-account-credential-update.eml | 40 | SUSPICIOUS | lure_keywords |
 | phish/real-05-uc-account-credential-update-2.eml | 35 | SUSPICIOUS | dkim_fail_or_none |
+| phish/real-06-insureio-fake-teams-interview.eml | 5 | CLEAN | lure_keywords |
 
-Whole corpus at threshold 50: 25/29 correct, 4 missed, 0 false alarms. The
-four misses are all the same thing: job scams and credential lures sent from
+Whole corpus at threshold 50: 28/33 correct, 5 missed, 0 false alarms. Four
+of the misses are the same thing: job scams and credential lures sent from
 compromised student accounts *inside* the university's own Microsoft 365
 tenant. No `Authentication-Results`, no external hop, a sender domain that is
 genuinely the university's. Every infrastructure check passes because the
 infrastructure is clean; only the text is wrong, and text is deliberately
 capped at 15 points. They are listed in `samples/known-misses.txt` and the
-regression test holds them at SUSPICIOUS. The one benign SUSPICIOUS is an ISC2
+regression test holds them at SUSPICIOUS. The fifth miss is worse: a
+fake-interview scam ("install Microsoft Teams to meet a recruiter") that
+scores CLEAN because nothing about it is structurally wrong. The one benign
+SUSPICIOUS is an ISC2
 webinar invite whose visible link text says `isc2.org` while every href goes
 through Salesforce's click-tracker, which is a real mismatch that every
-marketing platform produces. Four more "internship interview" emails sit in
-`samples/unlabeled/` because I couldn't honestly call them either way.
+marketing platform produces.
 
 Real-mail calibration also fixed three bugs the synthetic set couldn't show:
 Microsoft 365 and Gmail hop chains never name the recipient's domain, so

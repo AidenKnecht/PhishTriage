@@ -13,3 +13,9 @@ phish/real-02-uc-account-job-scam-admin.eml          # job scam, shortened apply
 phish/real-03-uc-account-job-scam-assistant.eml      # job scam, contact by SMS only
 phish/real-04-uc-account-credential-update.eml       # credential harvest via Google Form
 phish/real-05-uc-account-credential-update-2.eml     # credential harvest via Google Form
+
+# Fake-interview scam: "install Microsoft Teams and meet a senior technical
+# recruiter for an online briefing". Sent through Zoho with SPF and DKIM
+# passing for the scammer's own domain; DMARC neutral. Nothing structural is
+# wrong, and the text is polite corporate boilerplate. Scores 0-10 offline.
+phish/real-06-insureio-fake-teams-interview.eml  floor=0  # fake Teams interview, no bad signal at all

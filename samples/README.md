@@ -24,7 +24,8 @@ The `real-*.eml` files are sanitised inbox exports; see the section at the end.
 
 The regression test in `tests/test_scoring.py` asserts every `phish/` file scores
 at least 50 and every `benign/` file scores under 50, except the files listed in
-`known-misses.txt`, which must score 20-49.
+`known-misses.txt`, which must score below 50 and above their documented floor
+(20 by default, i.e. still SUSPICIOUS; `floor=0` admits a CLEAN miss).
 
 ### phish/
 
@@ -81,8 +82,11 @@ anecdote, not a benchmark; treat the numbers accordingly.
 | `real-03-uc-account-job-scam-assistant.eml` | Same scam family, contact by text message only | 25 | SUSPICIOUS | **known miss** |
 | `real-04-uc-account-credential-update.eml` | "System maintenance: update your school email and password within 48 hours", Google Form | 40 | SUSPICIOUS | **known miss** |
 | `real-05-uc-account-credential-update-2.eml` | Same template, different compromised account | 35 | SUSPICIOUS | **known miss** |
+| `real-06-insureio-fake-teams-interview.eml` | Fake-interview scam: "set up Microsoft Teams to meet a senior technical recruiter for an online briefing", sent via Zoho, DMARC neutral | 5 | CLEAN | **known miss, floor 0** |
 
-The four UC-account emails are listed in `known-misses.txt`. They are
+The Insureio email is the worst kind of miss: nothing structural is wrong and the text is polite corporate boilerplate, so it scores CLEAN. It is listed with `floor=0` so the test admits it without pretending it is SUSPICIOUS.
+
+The four UC-account emails are also listed in `known-misses.txt`. They are
 intra-tenant Exchange Online mail: no `Authentication-Results`, no external
 hop, sender domain genuinely the university's. Every infrastructure signal is
 clean because the infrastructure *is* clean. Offline, only the text gives them
@@ -100,16 +104,6 @@ removed from the list.
 | `real-04-labcorp-notice.eml` | Transactional notice into the M365 tenant | 0 | CLEAN | |
 | `real-05-website-listing-claimed.eml` | SaaS notification via SendGrid | 0 | CLEAN | |
 | `real-06-bootcamp-promo.eml` | Promo sent from Gmail API into the M365 tenant | 0 | CLEAN | |
-
-### unlabeled/
-
-Four "internship" emails the author has not classified. They are excluded from
-the regression test and the confusion matrix until they move to `phish/` or
-`benign/`.
-
-| File | What it is | Score |
-|---|---|---:|
-| `real-01-globifye-assessment.eml` | "Dear Candidate", complete a Google Form assessment by Monday | 15 |
-| `real-02-intrastack-interview.eml` | Handshake application follow-up with a Calendly link | 0 |
-| `real-03-insureio-teams-interview.eml` | "Set up Microsoft Teams to meet a senior technical recruiter" | 0 |
-| `real-04-glowup-charity-form.eml` | "Fill out this form for our charity", Brevo tracking links | 5 |
+| `real-07-intrastack-interview.eml` | Recruiting follow-up to a Handshake application, Calendly link | 0 | CLEAN | |
+| `real-08-glowup-charity-form.eml` | Charity internship org asking applicants to fill in a form, Brevo tracking links | 5 | CLEAN | |
+| `real-09-globifye-assessment.eml` | Small company's Google Form screening quiz, "Dear Candidate", deadline Monday | 15 | CLEAN | generic greeting + urgency; borderline but real |

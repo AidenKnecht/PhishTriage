@@ -287,18 +287,27 @@ def _corpus(kind: str) -> list[Path]:
     return files
 
 
-def _known_misses() -> dict[str, str]:
-    """``samples/known-misses.txt``: phish files the offline rules are known to under-score."""
+def _known_misses() -> dict[str, tuple[int, str]]:
+    """``samples/known-misses.txt``: ``{path: (floor, reason)}``.
+
+    Line format: ``<path> [floor=N] # reason``. The floor defaults to 20
+    (must still be SUSPICIOUS); ``floor=0`` admits a miss that scores CLEAN.
+    """
     path = ROOT / "samples" / "known-misses.txt"
-    out: dict[str, str] = {}
+    out: dict[str, tuple[int, str]] = {}
     if not path.is_file():
         return out
     for raw in path.read_text(encoding="utf-8").splitlines():
         line = raw.strip()
         if not line or line.startswith("#"):
             continue
-        name, _, reason = line.partition("#")
-        out[name.strip().replace("\\", "/")] = reason.strip()
+        spec, _, reason = line.partition("#")
+        parts = spec.split()
+        floor = 20
+        for token in parts[1:]:
+            if token.startswith("floor="):
+                floor = int(token[6:])
+        out[parts[0].replace("\\", "/")] = (floor, reason.strip())
     return out
 
 
@@ -314,10 +323,11 @@ def test_every_phish_sample_scores_at_least_50(path):
     rel = path.relative_to(ROOT / "samples").as_posix()
     misses = _known_misses()
     if rel in misses:
-        # Documented miss: must still be at least SUSPICIOUS, and if it ever
-        # reaches 50 the entry should be removed so the list stays honest.
-        assert 20 <= result.score.score < 50, (
-            f"{rel} is listed as a known miss ({misses[rel]}) but scored "
+        # Documented miss: must stay above its floor, and if it ever reaches
+        # 50 the entry should be removed so the list stays honest.
+        floor, reason = misses[rel]
+        assert floor <= result.score.score < 50, (
+            f"{rel} is listed as a known miss ({reason}, floor {floor}) but scored "
             f"{result.score.score}: {fired}"
         )
         return

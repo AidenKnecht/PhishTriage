@@ -130,3 +130,14 @@ dear user
 dear account holder
 dear valued
 good day
+
+# Fake-interview scams: the "interview" happens in a Teams/Telegram chat with
+# a "recruiter" who never appears on camera.
+[job_scam]
+set up an account with microsoft teams
+download the microsoft teams
+interview via microsoft teams
+interview will be conducted via
+senior technical recruiter
+online briefing
+hiring manager will contact you via

@@ -1,0 +1,2137 @@
+Received: from IA1PR01MB9139.prod.exchangelabs.com (2603:10b6:208:593::15) by
+ SJ2PR01MB8619.prod.exchangelabs.com with HTTPS; Tue, 15 Sep 2026 19:51:56
+ +0000
+Received: from DS1PR06CA0017.namprd06.prod.outlook.com (2603:10b6:8:23e::15)
+ by IA1PR01MB9139.prod.exchangelabs.com (2603:10b6:208:593::15) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.406.12; Tue, 15 Sep 2026 19:51:48 +0000
+Received: from DS3PEPF0000C37D.namprd04.prod.outlook.com
+ (2603:10b6:8:23e:cafe::54) by DS1PR06CA0017.outlook.office365.com
+ (2603:10b6:8:23e::15) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.9 via Frontend Transport; Tue, 15
+ Sep 2026 19:51:48 +0000
+Authentication-Results: spf=pass (sender IP is 13.111.112.52)
+ smtp.mailfrom=bounce.labcorpmessage.com; dkim=pass (signature was verified)
+ header.d=labcorpmessage.com;dkim=pass (signature was verified)
+ header.d=s10.y.mc.salesforce.com;dmarc=pass action=none
+ header.from=labcorpmessage.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of
+ bounce.labcorpmessage.com designates 13.111.112.52 as permitted sender)
+ receiver=protection.outlook.com; client-ip=13.111.112.52;
+ helo=mta.labcorpmessage.com; pr=C
+Received: from mta.labcorpmessage.com (13.111.112.52) by
+ DS3PEPF0000C37D.mail.protection.outlook.com (10.167.23.7) with Microsoft SMTP
+ Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.428.7 via
+ Frontend Transport; Tue, 15 Sep 2026 19:51:48 +0000
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=10dkim1; d=labcorpmessage.com;
+ h=From:To:Subject:Date:List-Unsubscribe:List-Unsubscribe-Post:MIME-Version:
+ Message-ID:Content-Type; i=labcorp@labcorpmessage.com;
+ bh=fRlVcSLDcIl/yIcqUx/PSIcDpGFkEF5X643vWQqTJBs=;
+ b=hQ/FVllaTRwjiG6S7m5zOkJiGFF7mHgrF+4UqtwXLyPOJPtMxgrR9cHLxn1Alb0+rUS35klk5mgU
+   a/MeC6iZo18FLxPw2AcDASpq3dYlN2gt03mbBCrRyFG/oZog4q94DcLoFJYsaFm55KIZyrEvjSCQ
+   i7pCkGu1bOd6EFmtV+h4dd6yic0N7YO1djjvJ9peTwfU/WM/zX3tCOncRgD5aboUrJVEy3qxf3kP
+   OfveXiifEgfLGth5rPc8y71R3zEZwsiOBCyHhzWthO5VXVURUY94lFdDfbpaR5PH3gry/GJ4Kfq1
+   DCX7N+EvUFY2ub2OiRiaH/QZGV5MWiog7iSBJA==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=fbldkim10; d=s10.y.mc.salesforce.com;
+ h=From:To:Subject:Date:List-Unsubscribe:List-Unsubscribe-Post:MIME-Version:
+ Message-ID:Content-Type;
+ bh=fRlVcSLDcIl/yIcqUx/PSIcDpGFkEF5X643vWQqTJBs=;
+ b=PQ2nUmk8levgzvV9U7Y5oe/13uR60gDsIFl1SOt3xOF1bI2J3dAJpV76sx054//K370DvuqonqN9
+   tdSVXoZFLadeNaqIxP84e56uqqnqylIv5jnsSw9mlZoKtejDgc880a7HJKkmqK8oENdmKJr1mfss
+   4mTiEvPR1/kKZdxm5OJ8MtxAjpPgqN9CvJXYNrDaGSro1MR34vIRzUnuD0jVKL8U1w2YkyTjtem5
+   kEknzUCoMLB3+4pLKMei5Cj3ofBD4TczhbQAJnoGTw63pB9NmgjKdKJlcrRrs8RHI4yKbbILDZ/P
+   DbrljEyqUTTjDDOVa7HvcWXzc383LiQCAmwrhg==
+Received: by mta.labcorpmessage.com id hl6gt639mjca for <analyst@example.com>; Tue, 15 Sep 2026 19:51:47 +0000 (envelope-from <bounce-MHQ46MSOEZPEVLX6OXP45IOKTQ.100224@bounce.labcorpmessage.com>)
+From: "Labcorp" <labcorp@labcorpmessage.com>
+To: <analyst@example.com>
+Subject: =?UTF-8?B?VG9kYXnigJlzIGxhYiB0ZXN0IGNhbiBzaGFwZSB0b21vcnJvdw==?=
+ =?UTF-8?B?4oCZcyBoZWFsdGggZGVjaXNpb25zLg==?=
+Date: Tue, 15 Sep 2026 13:51:47 -0600
+List-Unsubscribe: <https://click.labcorpmessage.com/subscription_center.aspx?jwt=REDACTED>, <mailto:leave-363SMH2LLSMEBIYVPLVPBFWG7Q.100224@leave.labcorpmessage.com>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+X-SFMC-Stack: 10
+x-job: 100024080_2833038
+Message-ID: <cd2dcd35-ff6d-4cdd-92a2-07daf73d51fa@dfw1s10mta1908.xt.local>
+Content-Type: multipart/alternative;
+	boundary="vEly2Jq4HFaS=_?:"
+Return-Path: bounce-MHQ46MSOEZPEVLX6OXP45IOKTQ.100224@bounce.labcorpmessage.com
+X-MS-Exchange-Organization-ExpirationStartTime: 15 Sep 2026 19:51:48.3592
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 5c934e49-facc-454c-7505-08df1362c76f
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: f5222e6c-5fc6-48eb-8f03-73db18203b63:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: DS3PEPF0000C37D:EE_|IA1PR01MB9139:EE_|SJ2PR01MB8619:EE_
+X-MS-Exchange-Organization-AuthSource: DS3PEPF0000C37D.namprd04.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 5c934e49-facc-454c-7505-08df1362c76f
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-UI-Tagging: External
+X-MS-Exchange-Organization-SCL: 1
+X-Microsoft-Antispam: BCL:4;ARA:13230040|704161211799003|704160911799003|7149299003|31052699007|12012899012|39142699007|3109299003|69100299015|7049299003|3122999038|13102899012|30052699003|3072899012|5062899012|3092899012|2092899012|1032899013|4123199012|5063199012|4022899009|5073199012|5063699009|56012099006|19002099009|10067099003|11063799006|16102099003|55112099003|18002099003|21082099003|2066899003|4133799003|13003099007|8096899003;
+X-Forefront-Antispam-Report: CIP:13.111.112.52;CTRY:US;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:mta.labcorpmessage.com;PTR:mta.labcorpmessage.com;CAT:NONE;SFS:(13230040)(704161211799003)(704160911799003)(7149299003)(31052699007)(12012899012)(39142699007)(3109299003)(69100299015)(7049299003)(3122999038)(13102899012)(30052699003)(3072899012)(5062899012)(3092899012)(2092899012)(1032899013)(4123199012)(5063199012)(4022899009)(5073199012)(5063699009)(56012099006)(19002099009)(10067099003)(11063799006)(16102099003)(55112099003)(18002099003)(21082099003)(2066899003)(4133799003)(13003099007)(8096899003);DIR:INB;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 15 Sep 2026 19:51:48.1208
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 5c934e49-facc-454c-7505-08df1362c76f
+X-MS-Exchange-CrossTenant-Id: f5222e6c-5fc6-48eb-8f03-73db18203b63
+X-MS-Exchange-CrossTenant-AuthSource: DS3PEPF0000C37D.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR01MB9139
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:07.9749456
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0406.000
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:I;ENG:(910005)(944490095)(944506478)(944626604)(4710232)(4713193)(4714117)(4999285)(920097)(930201)(20251009189)(140003);
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?M0Ixdm5qTyt5VnRqem9xVWVTNXNZNW50aDhxMmF6bkkrZGVaWWc1UEdTLzA4?=
+ =?utf-8?B?RGRJS1B5VS9QcXpudDM1R25UeWFqUEltdXRmRzVBbXpzQklobWozQkZJNEpx?=
+ =?utf-8?B?S3FVd09Ra1Q4SEFLaitPZjB4NTRIRVVGaDE2aFRRM2xrdVVwb1VOaXE3Vloz?=
+ =?utf-8?B?UUgvR3VpSHpqTUxEanhYaENqaU4vQkNQVUNlSXRQTmNGSDZEcm9ScVdybnNZ?=
+ =?utf-8?B?ME55RDVzTk4xOGlrdVN3SGFEci9xOXdTY1VmWW1YM2JKSEEyNmVjVDBhL1pz?=
+ =?utf-8?B?MGZEbUNmaU9OMWtIZ0VZK01SekFnVTBPVytaTWZYUjNHeWZObjAzSUZjSzZJ?=
+ =?utf-8?B?bnBleDdsZDhvMlBQdS8vSm9Ca1JYNDl2NmJrRUF0TDZlQjlycjRLSnFETith?=
+ =?utf-8?B?ZWJmUW0yanVhNkxudkVoUlpLYzV1NWpsRGdiVnpMOEVGKy9VdlNPaGxpM0FI?=
+ =?utf-8?B?VjdUdVc2Um9keENUdEVRYThROGJMZmlzMjJvRnpyWkZFQ0NQYytHY0hpSWZz?=
+ =?utf-8?B?K2VZVmx2TGtsNDVYb1RTZGpVSWYxTWJZQ1lVVUw1N3FuajA2WXV0QlRaNlpS?=
+ =?utf-8?B?OE9KbThxYzl1ZHgrNFZ5blprTDZOSlVqMXVDTTJTcG05MEo0SFdLV0pJTkZ0?=
+ =?utf-8?B?SURZOXFJamtSV0M1MWVLM1d3a1hzNWtvZTBYUXNhR0xYL3dFWWtFODFUOUFz?=
+ =?utf-8?B?L1FXU0NBbTlwcnZOYTZadFRpQlcyN1VndXhneFpkMTc0Y2lJRnh3NGJscldC?=
+ =?utf-8?B?YjBJU1EzeEQzajNYSHFBTjlIMFg0MUJMMmtEYVRQMHdsNStQSmpZakNaSDVq?=
+ =?utf-8?B?aGlUZjBGSnA0Yk83M3ZkSXFiaWd2dDlyRHJ2RDlDckNCV2dzVktMNUR3OUFr?=
+ =?utf-8?B?QVAvYjRxMHRUeEw4dCtwdDI2Q05LMFBCeWh2NXNrdDdkbDFLVUoxMFBieWcr?=
+ =?utf-8?B?Vjcwemo3dVBwNnQrOU9oWE1yZk1xSTFwV2liWXgvM0tvU1JLSTRUTWNWdldt?=
+ =?utf-8?B?TVlLMjN6UkNKejBvajZyYkVUS2JiT2ZVdjl1enRTNGVmV2pKaUExVlhtc2g4?=
+ =?utf-8?B?L0YrWm1DcGQ1L25QN2NPblIwci9Yc0poRVlwSVE2T0RoTlpDOHlCaFVLd1Jy?=
+ =?utf-8?B?Mkd6aDdJczBuYVcrMktlNFhPT1l6NzA1NXpxaHVwRGpVWjBia2J5cEhKQy8v?=
+ =?utf-8?B?a0NDaGNGRWxJUUxOQmgwUUlZbTVNRk0reDVjOCtIY041dzNrcVllR0hNaEpm?=
+ =?utf-8?B?Zm94R2lhY1pDWnlUcTJWalZCcll6UHdTZFF2b0c4RVJKQytHdVlzZXJmVWh4?=
+ =?utf-8?B?NzJFOFBDT3VZeUJXSHJpeStUQmNJalVVQ2gvSzVlREVPeFlmSm0xUHlMM2hX?=
+ =?utf-8?B?Y0VxOTVBUVNmUWNYL0p3cEpGQmsxWGtVRnpBS1RQVXBQR2lIQ0NjaUJ4SlYx?=
+ =?utf-8?B?cmtMQUs5QzZwK0kzZGVjN0Mxb1drZWZFYkQyOVRURnA3VkpMUXpOSTBIaUth?=
+ =?utf-8?B?a3orbjN6WmM1b3o3K3Y3R0t1K3JDRDFzSU82R3BqTGlZOEpteEZNeXdpS3NJ?=
+ =?utf-8?B?d0owaTVaYmhybEQzb09xaXB0YlBzeUEwRnNaRWR3MUw3K2ZSamxpTUptWkQy?=
+ =?utf-8?B?WVlWUyt6N0RFdVBLb3dhRElaWHV1eEpUSkJUb0NYR2Z0RFMydUZTSTd2NWhD?=
+ =?utf-8?B?NStFU2tlQk5vK2JFVnRJUHpXYUg1aGpqM2VZeDlwNkhGMWJrNlArcnFVOU1M?=
+ =?utf-8?B?Yzdpc3ZPZjJ6dDJNeUZYMTZidHFxaWt3dkFtaWNxZGI1amxxSC85RVR0cngy?=
+ =?utf-8?B?b0xzL1pBQ0YrWS8vVnNyQTBQNTNwSkxseElRc2Rsa0JDaEJqamd4MVlOdHc2?=
+ =?utf-8?B?LzRSVjd5VFpQUzhDS2R4emlEL0NnNFd5c0RiNmlJcEx4RTFneHl4azB2RVIr?=
+ =?utf-8?B?QWw0djNVeWZrNjFrMDJtQXhsZ1E0OCtNWXRqNkhhTDlibWlpS3ViQUM0VVpL?=
+ =?utf-8?B?V1V0V1RYVDVQQ1ZxZ3doK2Z4U3lDWjN3ME83L3l5b3h2VWFzUzlnbG5uT05G?=
+ =?utf-8?B?cm90N05mSDhnY0pOeUs5alFwM3NZNU9CZ21NdWhsUkJvY1FqTjc0ak55TFpx?=
+ =?utf-8?B?WE82SzE0RUlTQnBVRmZYMmt3WSs3Y21VSWg5MlVEUEg2TVhUT0NuVGszR3Rn?=
+ =?utf-8?B?ZElMNVVTV2UzbU5oQk9LVDNFVGtSQ0Fac01ETDJuU3plSGxtdHJFZmFhN1R5?=
+ =?utf-8?B?Qnk3Y2lMYm9TbHphdGFBTjZXRW94alRYUlZLT1FjZmJzUXdxc0JKaGNKdzRH?=
+ =?utf-8?B?Zk5QaktZUjE1QjRVMlVMN3Zuc1Z1bllBTmYyRDc2dGxWR2ZMRFprOXZSeGRX?=
+ =?utf-8?B?WFR6b1FCZTVibkhTRUt1ZHVLQjhRdEE5NVJFdDRqcDgvbWg0MU5xUE5GSTlr?=
+ =?utf-8?B?eWZPeFE2bktINUpYaVhrNDRZQm5WVkpSNWxmTHRvclluZ0xvWENQZFBORm52?=
+ =?utf-8?B?cFhJSU5Zbm9XR0hqZEVDYUZUcVJodWZvWVZTQkJCUmd1TzhJaWsrc1QyOUxt?=
+ =?utf-8?B?cnFtU0ZVdHBVYXdONUk2N05OV0hKa29rMkhoZkpzVmVWbVR6WG5pNm56aGtl?=
+ =?utf-8?B?em1FTFpybEh3ZzhzVnBSV3pIRVpjTkRVQVppOUZzbW0yS0FpMlJrVjh4VEtv?=
+ =?utf-8?B?bjBidTBVaFN5bFpzWTNtZFdXU0xxWWh2b01POUVnLzRQU0ZzRGRTS3hEN2lQ?=
+ =?utf-8?B?SWpndm03cnZrYWJQTW5mL1gvdE43d1BLUUZOaklkWnBVSGhObkxVbVNUZ0Fm?=
+ =?utf-8?B?dXR6TFlkb2NvV0w2M0tITVhGUDNzTFQzM1RZcDVPNklYTDRqZFIrY3Y1ekdB?=
+ =?utf-8?B?d0IxRWhwVzY2WFBlc0tUQVQ1a3B5YnpobE9CdzBKWmpMUGlwYW1wejU2NVIz?=
+ =?utf-8?B?SkI1UUl5bXB5OXczdENnZFBTR3N4WlF6bnYreE9jYkJVb2luMDE0TFpiaDRU?=
+ =?utf-8?B?eUM1VjVML2JPS3VCdGpyckZGQ3gzNUpBazlhVXN3Y05SbGFRaGdFN2dad2Fo?=
+ =?utf-8?B?WWk0cVBSSHVMZXZaNENLcE85MU1WS09vMlpOWmJzRTVaUDRYWEY4YXAxeWZp?=
+ =?utf-8?B?Sm5ZeEU4U2U4UHhnaE1sbWw2Um1CaUcrZXBOMDd5cFFtMWtjaUNTU0IrUFBB?=
+ =?utf-8?B?ODZUOS9SUW5zb1lsTkw5UnFiYjJQVnd5TGM3V1IvT3Z6U2VTQjBIWkpMeENK?=
+ =?utf-8?B?SlQvdVB4YjdrYWlBS3czb0JMVi8rOW5kUzBJMmFlSnRxWFFHSTdmN2Z3VDRS?=
+ =?utf-8?B?SWJMZFl4SDFMKzU1Z244WjIzK2NHZWE0SW53VzNackxTSm11ZytnalMrUjEx?=
+ =?utf-8?B?Tyt2V1hsQjBEalFQeENQZkhLemJEWHAwY3VVNklRdmdWMThVWEFFSG1ZZz09?=
+MIME-Version: 1.0
+
+--vEly2Jq4HFaS=_?:
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+External Email: Use Caution
+
+Directly order lab tests for heart health, hormones, allergy and more.
+
+ =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=
+=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C  =E2=80=8C =E2=80=
+=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =
+=E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C  =E2=80=8C =E2=80=8C =E2=80=8C =E2=
+=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=
+=8C =E2=80=8C =E2=80=8C  =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =
+=E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=80=8C =E2=
+=80=8C
+[https://image.labcorpmessage.com/lib/fe40157075640679751c70/m/1/Labcorp_Lo=
+go_Horizonta_LtBlu.png]<https://click.labcorpmessage.com/?qs=3DREDACTED>
+[Ask the expert] [Labcorp OnDemand]
+
+Labcorp OnDemand puts your health in your hands.
+
+=2E
+
+Learn more<https://click.labcorpmessage.com/?qs=3DREDACTED>
+
+Purchase the same trusted tests directly from Labcorp OnDemand
+
+Did you know you have the power to purchase your own lab tests through Labc=
+orp OnDemand? Whether you=E2=80=99re monitoring your wellness, checking key=
+ health markers or planning for the future, we make it simple and secure to=
+ get trusted testing.
+
+When you purchase a health test from us you can expect:
+
+=E2=9C=93 Important information and insights
+
+=E2=9C=93 Trusted results in a matter of days
+
+=E2=9C=93 Ease and convenience with over 2,200 in-person locations
+
+=E2=9C=93 One transparent price with no surprise fees
+
+Browse tests<https://click.labcorpmessage.com/?qs=3DREDACTED>
+
+Check out our most popular OnDemand tests
+
+Get 15% off your first health test from Labcorp OnDemand* with promo code T=
+EST15 at checkout. Terms apply.
+
+[Inflammation (hs-CRP) Test]
+
+Inflammation (hs-CRP) Test
+
+Inflammation blood markers can detect inflammation caused by multiple condi=
+tions.
+
+Shop test<https://click.labcorpmessage.com/?qs=3DREDACTED> =C2=BB
+
+[https://image.labcorpmessage.com/lib/fe40157075640679751c70/m/1/CardSpacer=
+.gif]
+[Cortisol Test]
+
+Cortisol Test
+
+Check cortisol levels for insights on the body=E2=80=99s stress hormone.
+
+Shop test<https://click.labcorpmessage.com/?qs=3DREDACTED> =C2=BB
+
+[Comprehensive Testosterone Test]
+
+Comprehensive Testosterone Test
+
+Male hormone check: Get a complete picture with our comprehensive testoster=
+one test
+
+Shop test<https://click.labcorpmessage.com/?qs=3DREDACTED> =C2=BB
+
+[https://image.labcorpmessage.com/lib/fe40157075640679751c70/m/1/CardSpacer=
+.gif]
+[https://image.labcorpmessage.com/lib/fe40157075640679751c70/m/1/standard-t=
+hyroid-test-img01.jpg]
+
+Standard Thyroid Test
+
+Assess thyroid function with a Free T4 and TSH blood test.
+
+Shop test<https://click.labcorpmessage.com/?qs=3DREDACTED> =C2=BB
+
+Explore Labcorp OnDemand=E2=80=99s full suite of tests today.
+
+
+Shop all tests<https://click.labcorpmessage.com/?qs=3DREDACTED>
+
+Great value.
+Ordered the test, scheduled the appointment. Appointment was fast and easy.=
+ Got result very fast. Ordered the test to get a snapshot of where I was at=
+.
+
+P.L. Verified Customer, September 27, 2025
+
+[https://image.labcorpmessage.com/lib/fe40157075640679751c70/m/1/5_star_cro=
+pped.gif]
+
+*Offer valid at ondemand.labcorp.com. Exclusions apply<https://click.labcor=
+pmessage.com/?qs=3DREDACTED>. Offer valid on purchase of one test and canno=
+t be applied to previous purchases or combined with any other offer. Limit =
+one promo code use per customer. Valid in the U.S. only. Terms of the offer=
+ are subject to change.
+
+   =C2=BB  Login or create an account<https://click.labcorpmessage.com/?qs=
+=3DREDACTED>
+  =C2=BB   Find a testing location or make an appointment<https://click.lab=
+corpmessage.com/?qs=3DREDACTED>
+   =C2=BB  Learn about clinical trials<https://click.labcorpmessage.com/?qs=
+=3DREDACTED>
+[Facebook]<https://click.labcorpmessage.com/?qs=3DREDACTED>           [Twit=
+ter] <https://click.labcorpmessage.com/?qs=3DREDACTED>           [Instagram=
+] <https://click.labcorpmessage.com/?qs=3DREDACTED>                 [Linked=
+In] <https://click.labcorpmessage.com/?qs=3DREDACTED>          [YouTube] <h=
+ttps://click.labcorpmessage.com/?qs=3DREDACTED>
+
+This message was sent to analyst@example.com. Add labcorp@labcorpmessage.co=
+m to your address book to ensure our emails reach your inbox.
+
+Privacy Policy<https://click.labcorpmessage.com/?qs=3DREDACTED>  |  Terms o=
+f Use<https://click.labcorpmessage.com/?qs=3DREDACTED>  |  Non-discriminati=
+on Notice<https://click.labcorpmessage.com/?qs=3DREDACTED>  |  View in Brow=
+ser<https://click.labcorpmessage.com/?qs=3DREDACTED>  |  Unsubscribe<https:=
+//click.labcorpmessage.com/?qs=3DREDACTED>
+
+=C2=A9 2026 Laboratory Corporation of America=C2=AE Holdings. All Rights Re=
+served.
+531 S. Spring Street, Burlington, NC 27215 USA
+
+--vEly2Jq4HFaS=_?:
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.=
+w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"><html xmlns=3D"http://www.w3.=
+org/1999/xhtml" xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:sc=
+hemas-microsoft-com:office:office"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+<meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1"=
+>
+<!--[if (gte mso 9)|(IE)]><!--><link rel=3D"preconnect" href=3D"https://fon=
+ts.googleapis.com"><link rel=3D"preconnect" href=3D"https://fonts.gstatic.c=
+om" crossorigin=3D""><link href=3D"https://fonts.googleapis.com/css2?family=
+=3DOpen+Sans:ital,wght@0,300..800;1,300..800&amp;display=3Dswap" rel=3D"sty=
+lesheet"><!--<![endif]--><!--[if (gte mso 9)|(IE)]><!--><style type=3D"text=
+/css">  @import url('https://fonts.googleapis.com/css2?family=3DOpen+Sans:i=
+tal,wght@0,300..800;1,300..800&display=3Dswap')
+} </style><!--<![endif]--><!--[if (gte mso 9)|(IE)]><!--><style type=3D"tex=
+t/css">
+  @font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 300 800;
+    font-stretch: 100%;}
+  font-display: swap;
+  mso-font-alt: 'Arial';
+  src: url(https://fonts.gstatic.com/s/opensans/v40/memvYaGs126MiZpBA-UvWbX=
+2vVnXBbObj2OVTS-muw.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+0=
+2DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U=
++2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  @font-face {
+  font-family: 'Open Sans';
+  font-style: italic;
+  font-weight: 300 800;
+    font-stretch: 100%;}
+  font-display: swap;
+  mso-font-alt: 'Arial';
+  src: url(https://fonts.gstatic.com/s/opensans/v40/memtYaGs126MiZpBA-UFUIc=
+VXSCEkx2cmqvXlWqWuU6F.woff2) format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+0=
+2DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122, U=
++2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+    } </style><!--<![endif]--><style type=3D"text/css">
+         sup {=20
+    line-height: 1;=20
+    font-size: 70%;=20
+     vertical-align: top;}
+    mso-text-raise:13%;
+}
+    ReadMsgBody{ width: 100%;}
+      .ExternalClass {width: 100%;}
+      .ExternalClass, .ExternalClass p, .ExternalClass span, .ExternalClass=
+ font, .ExternalClass td, .ExternalClass div {line-height: 100%;}
+      body {-webkit-text-size-adjust:100%; -ms-text-size-adjust:100%;margin=
+:0 !important;}
+      h1, h2, h3, h4, h5, h6 { margin: 0; }
+      p { margin: 1em 0;}
+      table td { border-collapse: collapse;}
+      img {outline:0;}
+      a img {border:none;}
+      @-ms-viewport{ width: device-width;}
+  </style><style type=3D"text/css">
+      @media only screen and (max-width: 480px) {
+         .container { width:100% !important; }
+        .footer { width:auto !important; margin-left:0; }
+        .mobile-hidden { display:none !important; }
+        .logo { display:block !important; padding:0 !important; }
+        img { max-width:100% !important; height:auto !important; max-height=
+:auto !important;}
+        .header img{width:100% !important; max-width:175px !important; heig=
+ht:auto !important; max-height:auto !important;}
+        .photo img { width:100% !important; max-width:100% !important; heig=
+ht:auto !important;}
+        .drop { display:block !important; width: 100% !important; float:lef=
+t; clear:both;}
+        .footerlogo { display:block !important; width: 100% !important; pad=
+ding-top:15px; float:left; clear:both;}
+        .nav4, .nav5, .nav6 { display: none !important; }
+        .tableBlock {width:100% !important;}
+        .responsive-td {width:100% !important; display:block !important; pa=
+dding:0 !important; }
+        .fluid, .fluid-centered {width: 100% !important; max-width: 100% !i=
+mportant; height: auto !important; margin-left: auto !important; margin-rig=
+ht: auto !important;}
+        .fluid-centered {margin-left: auto !important; margin-right: auto !=
+important;}
+        /* MOBILE GLOBAL STYLES - DO NOT CHANGE */
+        body { padding: 0px !important; font-size: 16px !important; font-fa=
+mily:sans-serif !important; line-height: 150% !important;}
+        h1 { font-size: 22px !important; line-height: normal !important;}
+        h2 { font-size: 20px !important; line-height: normal !important;}
+        h3 { font-size: 18px !important; line-height: normal !important;}
+        .buttonstyles {font-family:Arial,helvetica,sans-serif !important; f=
+ont-size: 16px !important; color: #FFFFFF !important;}
+        /* END OF MOBILE GLOBAL STYLES - DO NOT CHANGE */
+      }
+      @media only screen and (max-width: 640px) {
+                   .mobile-text-center {
+           text-align: center !important;}
+        .container { width:100% !important; }
+        .mobile-hidden { display:none !important; }
+        .logo { display:block !important; padding:0 !important; }
+        .photo img { width:100% !important; height:auto !important;}
+        .nav5, .nav6 { display: none !important;}
+        .fluid, .fluid-centered {width: 100% !important; max-width: 100% !i=
+mportant; height: auto !important; margin-left: auto !important; margin-rig=
+ht: auto !important;}
+        .fluid-centered {margin-left: auto !important; margin-right: auto !=
+important;}
+      }
+    </style><style type=3D"text/css">
+      }
+      /* CLIENT-SPECIFIC STYLES */
+      body {
+         margin: 0;
+         padding: 0;
+         }
+       table {
+         border-collapse:collapse;}
+         mso-table-lspace:0;
+         mso-table-rspace:0;=20
+         }
+       h1 {
+         margin:0.67em 0;
+         font-size:2em;
+         }
+       h2 {
+         margin:0.83em 0;
+         font-size:1.5em;
+         }
+       html[dir] h3, h3 {
+         margin:1em 0;
+         font-size:1.17em;
+         }
+
+    /* iOS BLUE LINKS */
+     =20
+          #root [x-apple-data-detectors=3Dtrue],
+           a[x-apple-data-detectors=3Dtrue]{
+             color: inherit !important;
+             text-decoration: inherit !important;
+           }
+       [x-apple-data-detectors-type=3D"calendar-event"] {
+             color: inherit !important;
+             -webkit-text-decoration-color: inherit !important;
+       }
+       u + .body a {
+         color: inherit;
+         text-decoration: none;
+         font-size: inherit;
+         font-weight: inherit;
+         line-height: inherit;
+         }
+       .body {
+         word-wrap: normal;
+         word-spacing:normal;
+         }
+       div[style*=3D"margin: 16px 0"] {
+         margin: 0!important;
+         } =20
+      body, table, td, h1, h2, h3, h4, p, a, span, div, sup, li, ul { margi=
+n: 0; padding: 0; font-family:'Open Sans', Tahoma, Helvetica, sans-serif !i=
+mportant; }   =20
+   =20
+    .lAlign { text-align: left !important; }
+    }
+  </style><!--[if mso]>       <style type=3D"text/css">           /* Begin =
+Outlook Font Fix */               body, table, td {                  font-f=
+amily : Calibri, Candara, Segoe, "Segoe UI", Optima, Arial, sans-serif;    =
+              line-height : 100%;                  font-size : 16px;       =
+           color : #231F20;               }           /* End Outlook Font F=
+ix */       </style>     <![endif]--><!-- added body global attributes here=
+ -->
+</head>
+<body text=3D"#231f20" style=3D"margin: 0px; -webkit-text-size-adjust:none;=
+background-color : transparent; font-family : Calibri, 'Open Sans', Tahoma,=
+ Arial, sans-serif ; line-height : 100%; font-size : 16px; color : #231F20;=
+ padding : 0px; ">
+<p><strong><span title=3D"This email came from an address that is outside o=
+f the University, proceed with caution!" style=3D"color:white"><span style=
+=3D"font-size:
+11pt;font-family:&quot;Open Sans&quot;,sans-serif;color:#ffffff; windowtext=
+ 3.0pt;
+padding:4.0pt;background:#e00122">External
+ Email: Use Caution</span></strong></p>
+<br>
+</span>
+<div><style type=3D"text/css">
+div.preheader=20
+{ display: none !important; }=20
+</style>
+<div class=3D"preheader" style=3D"font-size: 1px; display: none !important;=
+">Directly order lab tests for heart health, hormones, allergy and more.</d=
+iv>
+<div style=3D"font-size:0; line-height:0;"><img src=3D"https://click.labcor=
+pmessage.com/open.aspx?REDACTED&amp;d=3D100224&amp;bmt=3D0" width=3D"1" hei=
+ght=3D"1" alt=3D"">
+<div style=3D"font-size:1px; color:#fff; display:none; overflow:hidden;visi=
+bility:hidden;">
+&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C=
+&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C=
+&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=
+=80=8C&nbsp;=E2=80=8C&nbsp;&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nb=
+sp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nb=
+sp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nb=
+sp;&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=
+=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;=E2=80=8C&nbsp;
+</div>
+<!--[if mso]><style type=3D"text/css">.background_main, table, table td, p,=
+ div, h1, h2, h3, h4, h5, h6 {         font-family:"Calibri, 'Open Sans', T=
+ahoma, Arial, sans-serif !important;        }</style><![endif]-->
+<table width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" alig=
+n=3D"center">
+<tbody>
+<tr>
+<td align=3D"center">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"500" bgcol=
+or=3D"#DFF5FA" style=3D"background-color:#DFF5FA" class=3D"container" align=
+=3D"center">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top"><!-- top slot 1 -->
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table cellspacing=3D"0" cellpadding=3D"0" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"responsive-td" valign=3D"top">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"sl=
+ot-styling">
+<tbody>
+<tr>
+<td style=3D"padding: 0px; " class=3D"slot-styling camarker-inner"><!-- How=
+ to use this
+Update the UTM value in line number 16 SET @UTM =3D ""
+Once you have updated this content block and added to your email. Update al=
+l links with this  to add URL parameter in links.
+https://www.labcorp.com/?
+-->
+<div style=3D"display:block;font-size:5px;"><!-- How to use this  Make sure=
+ you have Email_Version field in your sendable DE. Update the IF and ELSE c=
+onditions with the values you want to use to differentiate the UTMs.  Once =
+you have updated this content block and added to your email. Update all lin=
+ks with this  to add URL parameter in links.  https://www.labcorp.com/?   -=
+->
+<div style=3D"display:none;"></div>
+</div>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 18px 15px 15px 25px; " class=3D"stylingblock-content-=
+wrapper camarker-inner">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" role=3D"presentat=
+ion">
+<tbody>
+<tr>
+<td class=3D"mobile-text-center" align=3D"left"><a href=3D"https://click.la=
+bcorpmessage.com/?qs=3DREDACTED" title=3D"Logo Home" data-linkto=3D"https:/=
+/"><img data-assetid=3D"385807" src=3D"https://image.labcorpmessage.com/lib=
+/fe40157075640679751c70/m/1/Labcorp_Logo_Horizonta_LtBlu.png" alt=3D"" widt=
+h=3D"150" style=3D"padding: 0px; text-align: center; height: auto; width: 1=
+50px; border: 0px;"></a></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<!-- slot 2  -->
+<td align=3D"center" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table cellspacing=3D"0" cellpadding=3D"0" width=3D"100%">
+<tbody>
+<tr>
+<td class=3D"responsive-td" valign=3D"top">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" class=3D"slot-styling" style=3D"min-width: 100%; ">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-margin-cell" style=3D"padding: 0px 15px; =
+">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #FFFFFF; border: 0px; min-width: 100%; " cl=
+ass=3D"slot-styling">
+<tbody>
+<tr>
+<td style=3D"padding: 0px; " class=3D"slot-styling camarker-inner">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #1A2188; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px; " class=3D"stylingblock-content-wrapper camarker=
+-inner">
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td>
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"responsive-td" style=3D"width: 50%; padding-rig=
+ht: 0px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"min-width: 100%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-wrapper camarker-inner"><style>
+@media only screen and (max-width:480px){
+  .mobile-img{
+    display:block !important;
+    max-height:none !important;
+    overflow:visible !important;
+  }
+  .desktop-img{
+    display:none !important;
+    max-height:0 !important;
+    overflow:hidden !important;
+  }
+}
+</style>
+<table role=3D"presentation" width=3D"100%" cellpadding=3D"0" cellspacing=
+=3D"0" border=3D"0">
+<tbody>
+<tr>
+<td align=3D"center"><!-- =E2=9C=85 Outlook ONLY sees this --><!--[if mso]>=
+         <img class=3D"desktop-img" data-assetid=3D"529427" src=3D"https://=
+image.labcorpmessage.com/lib/fe40157075640679751c70/m/1/Hero+Image+2D.png" =
+alt=3D"Ask the expert" width=3D"275" style=3D"display: block; padding: 0px;=
+ text-align: center; height: auto; width: 100%; border: 0px transparent;"> =
+       <!-- =E2=9C=85 Non-Outlook clients --><!--[if !mso]><!--><!-- Deskto=
+p Image --><img class=3D"desktop-img" data-assetid=3D"529427" src=3D"https:=
+//image.labcorpmessage.com/lib/fe40157075640679751c70/m/1/Hero+Image+2D.png=
+" alt=3D" Ask the expert" width=3D"275" style=3D"display: block; padding: 0=
+px; text-align: center; height: auto; width: 100%; border: 0px transparent;=
+"><!-- Mobile Image -->
+<img class=3D"mobile-img" data-assetid=3D"513673" src=3D"https://image.labc=
+orpmessage.com/lib/fe40157075640679751c70/m/1/Hero+Image+Design+1.png" alt=
+=3D"Labcorp OnDemand" width=3D"275" style=3D"display: none; padding: 0px; t=
+ext-align: center; height: auto; width: 100%; border: 0px transparent;overf=
+low:hidden;"><!--<![endif]-->
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" class=3D"responsive-td" style=3D"width: 50%; padding-lef=
+t: 0px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 15px 15px 0px; " class=3D"stylingblock-content-wrappe=
+r camarker-inner">
+<div align=3D"center" style=3D"padding-bottom: 0px;">
+<p class=3D"mobile-text-center" style=3D"font-size:16pt;mso-line-height-rul=
+e:exactly;line-height:22pt; font-weight:normal; color:#ffffff;">
+Labcorp OnDemand puts your health in your hands.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #1A2188; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px; " class=3D"stylingblock-content-wrapper camarker=
+-inner">
+<div align=3D"center" style=3D"padding-bottom: 10px;">
+<p class=3D"mobile-text-center" style=3D"font-size:17pt;mso-line-height-rul=
+e:exactly;line-height:15pt; font-weight:normal; color:#1A2188;">
+.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 15px 20px; " class=3D"stylingblock-content-wrappe=
+r camarker-inner">
+<div align=3D"center" style=3D"padding-top:0px;"><!--[if mso]><v:roundrect =
+xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-=
+com:office:word" href=3D"https://www.ondemand.labcorp.com/?utm_source=3DSFM=
+C&utm_medium=3Demail&utm_campaign=3DREDACTED&utm_content=3Dunder45" style=
+=3D"height:36pt;width:100pt;v-text-anchor:middle;" arcsize=3D"48%" fillcolo=
+r=3D"#FFFFFE" stroke=3D"true" strokecolor=3D"#3a5ce9"><w:anchorlock/><v:tex=
+tbox inset=3D"0,0,0,0"><center><![endif]--><a align=3D"center" bgcolor=3D"#=
+FFFFFE" data-hs-link-id=3D"0" data-linkto=3D"other" href=3D"https://click.l=
+abcorpmessage.com/?qs=3DREDACTED" style=3D"width: auto; display:inline-bloc=
+k; font-size:16px;line-height:22px; mso-line-height-rule:exactly;font-weigh=
+t:normal;-webkit-text-size-adjust: none; text-decoration: none; word-break:=
+ break-word; letter-spacing: undefined; text-size-adjust: none; padding-lef=
+t:25px; padding-right:25px; padding-top: 14px; padding-bottom: 14px;text-al=
+ign: center; border-radius: 35px; -moz-border-radius: 35px; -webkit-border-=
+radius: 35px;mso-border-alt: none; background-color: #FFFFFE; border: 1px s=
+olid #3A5CE9;color: #3A5CE9;" target=3D"_blank" title=3D"Button 4">Learn
+ more</a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<!-- slot 3  -->
+<td align=3D"center" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table cellspacing=3D"0" cellpadding=3D"0" style=3D"width:100%">
+<tbody>
+<tr>
+<td class=3D"responsive-td" valign=3D"top" style=3D"width: 100%;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" class=3D"slot-styling" style=3D"min-width: 100%; ">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-margin-cell" style=3D"padding: 13px 15px =
+0px; ">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #F0FFFE; min-width: 100%; " class=3D"slot-s=
+tyling">
+<tbody>
+<tr>
+<td style=3D"padding: 0px; " class=3D"slot-styling camarker-inner">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #F0FFFF; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 20px 15px 5px; " class=3D"stylingblock-content-wrappe=
+r camarker-inner">
+<div align=3D"center">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:24px;line-height:30px; font-weight:bold;color: #3a5ce9">
+Purchase the same trusted tests directly from Labcorp OnDemand </p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #F0FFFF; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 23px 10px 25px; " class=3D"stylingblock-content-wrapp=
+er camarker-inner">
+<div align=3D"left">
+<p class=3D"mobile-text-center" style=3D"margin: 0pt; font-size: 15px; line=
+-height: 20px; font-weight: normal; color: rgb(35, 31, 32); text-align: cen=
+ter;">
+Did you know you have the power to purchase your own lab tests through Labc=
+orp OnDemand? Whether you=E2=80=99re monitoring your wellness, checking key=
+ health markers or planning for the future, we make it simple and secure to=
+ get trusted testing.<br>
+<br>
+When you purchase a health test from us you can expect:</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #F0FFFF; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 3px 10px; " class=3D"stylingblock-content-wrapper cam=
+arker-inner">
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" role=3D"present=
+ation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" width=3D"40">
+<table cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"middle">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:24px;line-height:30px; font-weight:normal; color: #3a5ce9=
+">
+=E2=9C=93 <font class=3D"mobile-text-center" style=3D"font-size: 15px; line=
+-height: 20px; font-weight: normal; color: rgb(35, 31, 32);">
+Important information and insights</font></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #F0FFFF; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 3px 10px; " class=3D"stylingblock-content-wrapper cam=
+arker-inner">
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" role=3D"present=
+ation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" width=3D"40">
+<table cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"middle">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:24px;line-height:30px; font-weight:normal; color: #3a5ce9=
+">
+=E2=9C=93 <font class=3D"mobile-text-center" style=3D"font-size: 15px; line=
+-height: 20px; font-weight: normal; color: rgb(35, 31, 32);">
+Trusted results in a matter of days </font></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #F0FFFF; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 3px 10px; " class=3D"stylingblock-content-wrapper cam=
+arker-inner">
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" role=3D"present=
+ation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" width=3D"40">
+<table cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"middle">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:24px;line-height:30px; font-weight:normal; color: #3a5ce9=
+">
+=E2=9C=93 <font class=3D"mobile-text-center" style=3D"font-size: 15px; line=
+-height: 20px; font-weight: normal; color: rgb(35, 31, 32);">
+Ease and convenience with over 2,200 in-person locations</font></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #F0FFFF; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 3px 10px; " class=3D"stylingblock-content-wrapper cam=
+arker-inner">
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" role=3D"present=
+ation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" width=3D"40">
+<table cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"middle">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:24px;line-height:30px; font-weight:normal; color: #3a5ce9=
+">
+=E2=9C=93 <font class=3D"mobile-text-center" style=3D"font-size: 15px; line=
+-height: 20px; font-weight: normal; color: rgb(35, 31, 32);">
+One transparent price with no surprise fees </font></p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #F0FFFF; border: 0px; min-width: 100%; " cl=
+ass=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 20px 0px 30px; " class=3D"stylingblock-content-wrappe=
+r camarker-inner">
+<div align=3D"center"><!--[if mso]><v:roundrect xmlns:v=3D"urn:schemas-micr=
+osoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:word" href=3D"ht=
+tps://www.ondemand.labcorp.com/products?utm_source=3DSFMC&utm_medium=3Demai=
+l&utm_campaign=3DREDACTED&utm_content=3Dunder45" style=3D"height:36pt;width=
+:120pt;v-text-anchor:middle;" arcsize=3D"48%" fillcolor=3D"#3A5CE9" stroke=
+=3D"true" strokecolor=3D"#3a5ce9"><w:anchorlock/><v:textbox inset=3D"0,0,0,=
+0"><center><![endif]--><a align=3D"center" bgcolor=3D"#3a5ce9;" data-hs-lin=
+k-id=3D"0" data-linkto=3D"other" href=3D"https://click.labcorpmessage.com/?=
+qs=3DREDACTED" style=3D"width: auto; display:inline-block; font-size:16px;l=
+ine-height:22px; mso-line-height-rule:exactly;font-weight:normal;-webkit-te=
+xt-size-adjust: none; text-decoration: none; word-break: break-word; letter=
+-spacing: undefined; text-size-adjust: none; padding-left:25px; padding-rig=
+ht:25px; padding-top: 14px; padding-bottom: 14px;text-align: center; border=
+-radius: 35px; -moz-border-radius: 35px; -webkit-border-radius: 35px;mso-bo=
+rder-alt: none; background-color: #3A5CE9; border: 1px solid #3A5CE9;color:=
+ #ffffff;" target=3D"_blank" title=3D"Browse tests">Browse
+ tests</a><!--[if mso]></center></v:textbox></v:roundrect><![endif]--></div=
+>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<!-- slot 4  -->
+<td align=3D"center" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table cellspacing=3D"0" cellpadding=3D"0" style=3D"width:100%">
+<tbody>
+<tr>
+<td class=3D"responsive-td" valign=3D"top" style=3D"width: 100%;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" class=3D"slot-styling" style=3D"min-width: 100%; ">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-margin-cell" style=3D"padding: 20px 15px =
+0px; ">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #1A2188; border: 0px; min-width: 100%; " cl=
+ass=3D"slot-styling">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 13px; " class=3D"slot-styling camarker-inner">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #1A2188; border: 0px transparent; min-width=
+: 100%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 20px 20px 23px; " class=3D"stylingblock-content-wrapp=
+er camarker-inner">
+<div style=3D"text-align: center;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt;mso-line-height-rule:ex=
+actly; font-size:24px;line-height:27px; font-weight:bold; color: #ffffff">
+Check out our most popular OnDemand tests</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #1A2188; border: 0px transparent; min-width=
+: 100%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 5px 20px 23px; " class=3D"stylingblock-content-wrappe=
+r camarker-inner">
+<div style=3D"text-align: center;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:15px;line-height:20px; font-weight:normal;color:#ffffff">
+Get 15% off your first health test from Labcorp OnDemand* with promo code <=
+b>TEST15</b> at checkout. Terms apply.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"min-width: 100%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-wrapper camarker-inner">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px; " class=3D"stylingblock-content-wrapper camarker=
+-inner">
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td>
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"responsive-td" style=3D"width: 100%; padding-bo=
+ttom: 0px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #FFFFFF; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px; " class=3D"stylingblock-content-wrapper camarker=
+-inner">
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"responsive-td">
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" bgcolor=3D=
+"#ffffff" style=3D"background-color: #ffffff; width: 100%;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"responsive-td" style=3D"width: 223px; padding-r=
+ight: 0px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1a2188; min-width: 100=
+%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-wrapper camarker-inner">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1a2188;">
+<tbody>
+<tr>
+<td style=3D"width: 223px; padding: 13px 0px 0px 0px;" align=3D"center"><im=
+g data-assetid=3D"543640" src=3D"https://image.labcorpmessage.com/lib/fe401=
+57075640679751c70/m/1/Inflammation-Test-img01_235X183.png" alt=3D"Inflammat=
+ion (hs-CRP) Test" width=3D"223" style=3D"display: block; padding: 0px; tex=
+t-align: center; height: auto; width: 100%; border: 0px;"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 15px 15px 10px 15px; " class=3D"stylingblock-content-=
+wrapper camarker-inner">
+<div style=3D"text-align: left;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:14pt;line-height:18pt; font-weight:bold; color: #1a2188;"=
+>
+Inflammation (hs-CRP) Test</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 15px 10px 15px; " class=3D"stylingblock-content-w=
+rapper camarker-inner">
+<div style=3D"text-align: left;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:10pt;line-height:20px; font-weight:normal; color: #231f20=
+;">
+Inflammation blood markers can detect inflammation caused by multiple condi=
+tions.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 0px; " class=3D"stylingblock-content-wrapper cama=
+rker-inner">
+<div align=3D"center" style=3D"text-align: center;">
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" role=3D"present=
+ation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" style=3D"padding: 0px 15px 20px 15px; " class=3D"mobile-=
+text-center">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:11pt;line-height:15pt; font-weight:normal; color:#FFFFFE;=
+">
+<a data-linkto=3D"http://" href=3D"https://click.labcorpmessage.com/?qs=3DR=
+EDACTED" style=3D"text-decoration:underline;color:#3a5ce9;">Shop
+ test</a>&nbsp;<span style=3D"font-size:13pt; color:#3a5ce9">=C2=BB</span><=
+/p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" class=3D"mobile-hidden" bgcolor=3D"#1a2188" style=3D"bac=
+kground-color: #1A2188; width: 13px; padding: 0px 0px 0px 0px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1A2188; min-width: 100=
+%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 0px 20px 0px;" class=3D"stylingblock-content-wrap=
+per camarker-inner">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1a2188;">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 0px 20px 0px; " align=3D"center"><img data-asseti=
+d=3D"526144" src=3D"https://image.labcorpmessage.com/lib/fe4015707564067975=
+1c70/m/1/CardSpacer.gif" alt=3D"" height=3D"190" width=3D"13" style=3D"disp=
+lay: block; padding: 0px; text-align: center; height: 190px; width: 13px; b=
+order: 0px;"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" class=3D"responsive-td" style=3D"width: 223px; padding-l=
+eft: 0px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" class=3D"stylingblock-content-wrapper" style=3D"min-width: 100%; ">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-margin-cell" style=3D"padding: 0px 0px 0p=
+x; ">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1a2188; min-width: 100=
+%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-wrapper camarker-inner">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1a2188;">
+<tbody>
+<tr>
+<td style=3D"padding: 13px 0px 0px 0px;" align=3D"center"><img data-assetid=
+=3D"497648" src=3D"https://image.labcorpmessage.com/lib/fe40157075640679751=
+c70/m/1/Cortisol-test-img01.jpg" alt=3D"Cortisol Test" width=3D"223" style=
+=3D"display: block; padding: 0px; text-align: center; height: auto; width: =
+100%; border: 0px;"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 15px 15px 10px 15px; " class=3D"stylingblock-content-=
+wrapper camarker-inner">
+<div style=3D"text-align: left;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:14pt;line-height:18pt; font-weight:bold; color: #1a2188;"=
+>
+Cortisol Test</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 15px 10px 15px; " class=3D"stylingblock-content-w=
+rapper camarker-inner">
+<div style=3D"text-align: left;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:10pt;line-height:20px; font-weight:normal; color: #231f20=
+;">
+Check cortisol levels for insights on the body=E2=80=99s stress hormone.</p=
+>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 15px 20px 15px; " class=3D"stylingblock-content-w=
+rapper camarker-inner">
+<div align=3D"center" style=3D"text-align: center;">
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" role=3D"present=
+ation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" class=3D"mobile-text-center">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:11pt;line-height:15pt; font-weight:normal; color:#3a5ce9;=
+">
+<a data-linkto=3D"http://" href=3D"https://click.labcorpmessage.com/?qs=3DR=
+EDACTED" style=3D"text-decoration:underline;">Shop
+ test</a>&nbsp;<span style=3D"font-size:13pt;">=C2=BB</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"responsive-td" style=3D"width: 100%; padding-to=
+p: 0px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" class=3D"stylingblock-content-wrapper" style=3D"min-width: 100%; ">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-margin-cell" style=3D"padding: 0px 0px 15=
+px; ">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #FFFFFF; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px; " class=3D"stylingblock-content-wrapper camarker=
+-inner">
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"responsive-td">
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" bgcolor=3D=
+"#ffffff" style=3D"background-color: #ffffff; width: 100%;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"responsive-td" style=3D"width: 223px; padding-r=
+ight: 0px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1a2188; min-width: 100=
+%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-wrapper camarker-inner">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1a2188;">
+<tbody>
+<tr>
+<td style=3D"width: 223px; padding: 13px 0px 0px 0px;" align=3D"center"><im=
+g data-assetid=3D"496194" src=3D"https://image.labcorpmessage.com/lib/fe401=
+57075640679751c70/m/1/comprehensive-testosterone-test-img01_HR.jpg" alt=3D"=
+Comprehensive Testosterone Test" width=3D"223" style=3D"display: block; pad=
+ding: 0px; text-align: center; height: auto; width: 100%; border: 0px;"></t=
+d>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 15px 15px 10px 15px; " class=3D"stylingblock-content-=
+wrapper camarker-inner">
+<div style=3D"text-align: left;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:14pt;line-height:18pt; font-weight:bold; color: #1a2188;"=
+>
+Comprehensive Testosterone Test</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 15px 10px 15px; " class=3D"stylingblock-content-w=
+rapper camarker-inner">
+<div style=3D"text-align: left;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:10pt;line-height:20px; font-weight:normal; color: #231f20=
+;">
+Male hormone check: Get a complete picture with our comprehensive testoster=
+one test</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 0px; " class=3D"stylingblock-content-wrapper cama=
+rker-inner">
+<div align=3D"center" style=3D"text-align: center;">
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" role=3D"present=
+ation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" style=3D"padding: 0px 15px 20px 15px; " class=3D"mobile-=
+text-center">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:11pt;line-height:15pt; font-weight:normal; color:#FFFFFE;=
+">
+<a data-linkto=3D"http://" href=3D"https://click.labcorpmessage.com/?qs=3DR=
+EDACTED" style=3D"text-decoration:underline;color:#3a5ce9;">Shop
+ test</a>&nbsp;<span style=3D"font-size:13pt; color:#3a5ce9">=C2=BB</span><=
+/p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" class=3D"mobile-hidden" bgcolor=3D"#1a2188" style=3D"bac=
+kground-color: #1A2188; width: 13px; padding: 0px 0px 0px 0px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1A2188; min-width: 100=
+%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 0px 20px 0px;" class=3D"stylingblock-content-wrap=
+per camarker-inner">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1a2188;">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 0px 20px 0px; " align=3D"center"><img data-asseti=
+d=3D"526144" src=3D"https://image.labcorpmessage.com/lib/fe4015707564067975=
+1c70/m/1/CardSpacer.gif" alt=3D"" height=3D"190" width=3D"13" style=3D"disp=
+lay: block; padding: 0px; text-align: center; height: 190px; width: 13px; b=
+order: 0px;"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" class=3D"responsive-td" style=3D"width: 223px; padding-l=
+eft: 0px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" class=3D"stylingblock-content-wrapper" style=3D"min-width: 100%; ">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-margin-cell" style=3D"padding: 0px 0px 0p=
+x; ">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1a2188; min-width: 100=
+%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-wrapper camarker-inner">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" role=3D"presentat=
+ion" bgcolor=3D"#1a2188" style=3D"background-color: #1a2188;">
+<tbody>
+<tr>
+<td style=3D"padding: 13px 0px 0px 0px;" align=3D"center"><img data-assetid=
+=3D"511979" src=3D"https://image.labcorpmessage.com/lib/fe40157075640679751=
+c70/m/1/standard-thyroid-test-img01.jpg" alt=3D"" width=3D"223" style=3D"di=
+splay: block; padding: 0px; text-align: center; height: auto; width: 100%; =
+border: 0px;"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 15px 15px 10px 15px; " class=3D"stylingblock-content-=
+wrapper camarker-inner">
+<div style=3D"text-align: left;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:14pt;line-height:18pt; font-weight:bold; color: #1a2188;"=
+>
+Standard Thyroid Test</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 15px 10px 15px; " class=3D"stylingblock-content-w=
+rapper camarker-inner">
+<div style=3D"text-align: left;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:10pt;line-height:20px; font-weight:normal; color: #231f20=
+;">
+Assess thyroid function with a Free T4 and TSH blood test.</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 15px 20px 15px; " class=3D"stylingblock-content-w=
+rapper camarker-inner">
+<div align=3D"center" style=3D"text-align: center;">
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" role=3D"present=
+ation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" class=3D"mobile-text-center">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly; font-size:11pt;line-height:15pt; font-weight:normal; color:#3a5ce9;=
+">
+<a data-linkto=3D"http://" href=3D"https://click.labcorpmessage.com/?qs=3DR=
+EDACTED" style=3D"text-decoration:underline;">Shop
+ test</a>&nbsp;<span style=3D"font-size:13pt;">=C2=BB</span></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #1A2188; border: 0px transparent; min-width=
+: 100%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 20px 20px 10px; " class=3D"stylingblock-content-wrapp=
+er camarker-inner">
+<div style=3D"text-align: center;">
+<p class=3D"mobile-text-center" style=3D"margin:0pt;mso-line-height-rule:ex=
+actly; font-size:18px;line-height:24px; font-weight:bold; color: #ffffff">
+Explore Labcorp OnDemand=E2=80=99s full suite of tests today.</p>
+<span style=3D"line-height:6px;">&nbsp;</span></div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 10px 0px 25px; " class=3D"stylingblock-content-wrappe=
+r camarker-inner">
+<div align=3D"center"><!--[if mso]><v:roundrect xmlns:v=3D"urn:schemas-micr=
+osoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:word" href=3D"ht=
+tps://www.ondemand.labcorp.com/products?utm_source=3DSFMC&utm_medium=3Demai=
+l&utm_campaign=3DREDACTED&utm_content=3Dunder45" style=3D"height:36pt;width=
+:100pt;v-text-anchor:middle;" arcsize=3D"45%" stroke=3D"true" fillcolor=3D"=
+#ffffff" strokecolor=3D"#3a5ce9"><w:anchorlock/><v:textbox inset=3D"0,0,0,0=
+"><center style=3D"color:#ffffff; font-family:Calibri, sans-serif, Tahoma, =
+Verdana; font-size:16px"><![endif]--><a align=3D"center" bgcolor=3D"#3a5ce9=
+" data-hs-link-id=3D"0" href=3D"https://click.labcorpmessage.com/?qs=3DREDA=
+CTED" style=3D"mso-line-height-rule:exactly;font-size: 16px; line-height: 2=
+0px; border-radius: 35px; -moz-border-radius: 35px; -webkit-border-radius: =
+35px;-webkit-text-size-adjust: none; text-decoration: none; display: inline=
+-block; width: auto; padding-left:20px; padding-right:20px; padding-top: 13=
+px; padding-bottom: 13px; font-weight:normal; text-align: center; mso-borde=
+r-alt: none; word-break: break-word; letter-spacing: undefined; text-size-a=
+djust: none; background-color: #FFFFFE; border: 1px solid #3A5CE9; color: #=
+3A5CE9;" target=3D"_blank" title=3D"Shop all tests">Shop
+ all tests</a><!--[if mso]></center></v:textbox></v:roundrect></td></tr></t=
+able><![endif]--></div>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #DFF5FA; border: 0px transparent; min-width=
+: 100%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 15px 20px; " class=3D"stylingblock-content-wrapper ca=
+marker-inner">
+<p class=3D"mobile-text-center" style=3D"margin:0pt;mso-line-height-rule:ex=
+actly; font-size:12pt;line-height:24px; font-weight:normal;color:#rgb(35, 3=
+1, 32);text-align:center">
+<b>Great value.</b><br>
+Ordered the test, scheduled the appointment. Appointment was fast and easy.=
+ Got result very fast. Ordered the test to get a snapshot of where I was at=
+.<br>
+<br>
+<b>P.L. Verified Customer, September 27, 2025</b></p>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" class=3D"stylingblock-content-wrapper" style=3D"min-width: 100%; ">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-margin-cell" style=3D"padding: 0px 0px 15=
+px; ">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #DFF5FA; min-width: 100%; " class=3D"stylin=
+gblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 0px 10px; " class=3D"stylingblock-content-wrapper=
+ camarker-inner">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" role=3D"presentat=
+ion">
+<tbody>
+<tr>
+<td align=3D"center"><img data-assetid=3D"545873" src=3D"https://image.labc=
+orpmessage.com/lib/fe40157075640679751c70/m/1/5_star_cropped.gif" alt=3D"" =
+height=3D"58" width=3D"200" style=3D"display: block; padding: 0px; text-ali=
+gn: center; height: 58px; width: 200px;"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<!-- slot 5  -->
+<td align=3D"center" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table cellspacing=3D"0" cellpadding=3D"0" style=3D"width:100%">
+<tbody>
+<tr>
+<td class=3D"responsive-td" valign=3D"top" style=3D"width: 100%;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" class=3D"slot-styling" style=3D"min-width: 100%; ">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-margin-cell" style=3D"padding: 0px 15px 1=
+0px; ">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"sl=
+ot-styling">
+<tbody>
+<tr>
+<td style=3D"padding: 10px 0px 0px; " class=3D"slot-styling camarker-inner"=
+>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 15px 0px; " class=3D"stylingblock-content-wrapper cam=
+arker-inner">
+<p class=3D"mobile-text-center" style=3D"margin:0pt; mso-line-height-rule:e=
+xactly;font-size:11px;line-height:13px; font-weight:normal; color:#rgb(35, =
+31, 32)">
+*Offer valid at ondemand.labcorp.com. <a data-linkto=3D"https://" href=3D"h=
+ttps://click.labcorpmessage.com/?qs=3DREDACTED" style=3D"color:#3a5ce9;text=
+-decoration:underline;" title=3D"ondemand.labcorp.com">
+Exclusions apply</a>. Offer valid on purchase of one test and cannot be app=
+lied to previous purchases or combined with any other offer. Limit one prom=
+o code use per customer. Valid in the U.S. only. Terms of the offer are sub=
+ject to change.</p>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 10px 3px 0px; " class=3D"stylingblock-content-wrapper=
+ camarker-inner">
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td>
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"responsive-td" style=3D"width: 100%; padding-bo=
+ttom: 3px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"min-width: 100%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-wrapper camarker-inner">
+<table align=3D"center" cellpadding=3D"0" cellspacing=3D"0" role=3D"present=
+ation" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" style=3D"padding: 0px 0px 15px 0px;">
+<div align=3D"center"><!--[if mso]><v:roundrect xmlns:v=3D"urn:schemas-micr=
+osoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:word" href=3D"ht=
+tps://patient.labcorp.com/landing?utm_source=3DSFMC&utm_medium=3Demail&utm_=
+campaign=3DREDACTED&utm_content=3Dunder45" style=3D"height:28pt;width:345pt=
+;v-text-anchor:middle; arcsize=3D"0%" stroke=3D"true" fillcolor=3D"#F0FFFF"=
+ strokecolor=3D"#F0FFFF"><w:anchorlock/><v:textbox inset=3D"0,0,0,0"><![end=
+if]--><a align=3D"left" bgcolor=3D"#f0ffff" class=3D"mobile-text-center" da=
+ta-hs-link-id=3D"0" data-linkto=3D"other" href=3D"https://click.labcorpmess=
+age.com/?qs=3DREDACTED" style=3D"auto;display: block; font-size:15px;line-h=
+eight:20px;mso-line-height-rule:exactly;font-weight:normal; -webkit-text-si=
+ze-adjust: none; text-align: left; text-decoration: none; padding-left:0px;=
+ padding-right:10px; padding-top: 10px; padding-bottom: 10px; mso-border-al=
+t: none; border-radius: 10px; -moz-border-radius: 10px; -webkit-border-radi=
+us: 10px; mso-border-alt: none; word-break: break-word; letter-spacing: und=
+efined; mso-line-height-alt: 12pt; text-size-adjust: none; background-color=
+: #F0FFFF; border: 1px solid #F0FFFF;color: #3a5ce9;" target=3D"_blank" tit=
+le=3D"Login or sign up">&nbsp;&nbsp;
+<span style=3D"color:#3a5ce9">=C2=BB</span>&nbsp;&nbsp;Login or create an a=
+ccount</a><!--[if mso]></v:textbox></v:roundrect><![endif]--></div>
+</td>
+</tr>
+<tr>
+<td align=3D"center" style=3D"padding: 0px 0px 15px 0px;">
+<div align=3D"center"><!--[if mso]><v:roundrect xmlns:v=3D"urn:schemas-micr=
+osoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:word" href=3D"ht=
+tps://www.labcorp.com/patients/labs-and-appointments?utm_source=3DSFMC&utm_=
+medium=3Demail&utm_campaign=3DREDACTED&utm_content=3Dunder45" style=3D"heig=
+ht:28pt;width:345pt;v-text-anchor:middle; arcsize=3D"0%" stroke=3D"true" fi=
+llcolor=3D"#F0FFFF" strokecolor=3D"#F0FFFF"><w:anchorlock/><v:textbox inset=
+=3D"0,0,0,0"><![endif]--><a align=3D"left" class=3D"mobile-text-center" dat=
+a-hs-link-id=3D"0" data-linkto=3D"other" href=3D"https://click.labcorpmessa=
+ge.com/?qs=3DREDACTED" style=3D"width:auto;display: block; font-size:15px;l=
+ine-height:20px;mso-line-height-rule:exactly;font-weight:normal; -webkit-te=
+xt-size-adjust: none; text-align: left; text-decoration: none; padding-left=
+:0px; padding-right:10px; padding-top: 10px; padding-bottom: 10px; mso-bord=
+er-alt: none; border-radius: 10px; -moz-border-radius: 10px; -webkit-border=
+-radius: 10px; mso-border-alt: none; word-break: break-word; letter-spacing=
+: undefined; mso-line-height-alt: 12pt; text-size-adjust: none; background-=
+color: #F0FFFF; border: 1px solid #F0FFFF;color: #3a5ce9;" target=3D"_blank=
+" title=3D"Find a testing location">&nbsp;&nbsp;<span style=3D"color:#3a5ce=
+9">=C2=BB
+</span>&nbsp;&nbsp;Find a testing location or make an appointment</a><!--[i=
+f mso]></v:textbox></v:roundrect><![endif]--></div>
+</td>
+</tr>
+<tr>
+<td align=3D"center" style=3D"padding: 0px 0px 15px 0px;">
+<div align=3D"center"><!--[if mso]><v:roundrect xmlns:v=3D"urn:schemas-micr=
+osoft-com:vml" xmlns:w=3D"urn:schemas-microsoft-com:office:word" href=3D"ht=
+tps://www.labcorp.com/patients/tests/trials?utm_source=3DSFMC&utm_medium=3D=
+email&utm_campaign=3DREDACTED&utm_content=3Dunder45" style=3D"height:28pt;w=
+idth:345pt;v-text-anchor:middle; arcsize=3D"0%" stroke=3D"true" fillcolor=
+=3D"#F0FFFF" strokecolor=3D"#F0FFFF"><w:anchorlock/><v:textbox inset=3D"0,0=
+,0,0"><![endif]--><a align=3D"left" bgcolor=3D"#f0ffff" class=3D"mobile-tex=
+t-center" data-hs-link-id=3D"0" data-linkto=3D"other" href=3D"https://click=
+.labcorpmessage.com/?qs=3DREDACTED" style=3D"width:auto;display: block; fon=
+t-size:15px;line-height:20px; mso-line-height-rule:exactly;font-weight:norm=
+al; -webkit-text-size-adjust: none; text-align: left; text-decoration: none=
+; padding-left:0px; padding-right:10px; padding-top: 10px; padding-bottom: =
+10px; mso-border-alt: none; border-radius: 10px; -moz-border-radius: 10px; =
+-webkit-border-radius: 10px; mso-border-alt: none; word-break: break-word; =
+letter-spacing: undefined; mso-line-height-alt: 12pt; text-size-adjust: non=
+e; background-color: #F0FFFF; border: 1px solid #F0FFFF;color: #3a5ce9;" ta=
+rget=3D"_blank" title=3D"clinical trials">&nbsp;&nbsp;
+<span style=3D"color:#3a5ce9">=C2=BB</span>&nbsp;&nbsp;Learn about clinical=
+ trials</a><!--[if mso]></v:textbox></v:roundrect><![endif]--></div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td>
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"responsive-td" style=3D"width: 100%; padding-to=
+p: 3px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"min-width: 100%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td class=3D"stylingblock-content-wrapper camarker-inner">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"border-collapse:collapse; background-color: transparent; min-=
+width: 100%; " class=3D"stylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px; " class=3D"stylingblock-content-wrapper camarker=
+-inner">
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" style=3D"w=
+idth: 100%;">
+<tbody>
+<tr>
+<td>
+<table cellspacing=3D"0" cellpadding=3D"0" role=3D"presentation" dir=3D"rtl=
+" style=3D"border-collapse:collapse; width: 100%;">
+<tbody>
+<tr>
+<td width=3D"45%" valign=3D"top" class=3D"responsive-td" dir=3D"ltr" style=
+=3D"padding-left: 7.5px;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 5px 0px 15px; " class=3D"stylingblock-content-wrapper=
+ camarker-inner">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" alig=
+n=3D"center">
+<tbody>
+<tr>
+<td width=3D"100%" style=3D"padding:0px 0px 0px 0px;" valign=3D"top" align=
+=3D"center">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" align=3D"center">
+<tbody>
+<tr>
+<td width=3D"20" align=3D"center"><a style=3D"font-weight:normal;color:#231=
+f20;text-decoration:underline;line-height:100%;" href=3D"https://click.labc=
+orpmessage.com/?qs=3DREDACTED" name=3D"Facebook" target=3D"_blank" xt=3D"SP=
+CLICK"><img alt=3D"Facebook" name=3D"LC_Facebook" src=3D"https://image.labc=
+orpmessage.com/lib/fe3f157075640679751273/m/1/a44fecf8-974e-4b5b-8109-b6a9a=
+c8c7802.png" style=3D"display:block;" title=3D"Facebook" width=3D"20" heigh=
+t=3D"20" border=3D"0"></a></td>
+<td width=3D"20">&nbsp;</td>
+<td width=3D"20" align=3D"center"><a style=3D"font-weight:normal;color:#231=
+F20;text-decoration:underline;line-height:100%;" href=3D"https://click.labc=
+orpmessage.com/?qs=3DREDACTED" name=3D"Twitter" target=3D"_blank" xt=3D"SPC=
+LICK"><img alt=3D"Twitter" name=3D"layouts_images_tw1.png" src=3D"https://i=
+mage.labcorpmessage.com/lib/fe40157075640679751c70/m/1/twitterx-3a5.png" st=
+yle=3D"display:block;" title=3D"Twitter" width=3D"20" height=3D"20" border=
+=3D"0"></a></td>
+<td width=3D"20">&nbsp;</td>
+<td width=3D"20" align=3D"center"><a style=3D"font-weight:normal;color:#231=
+F20;text-decoration:underline;line-height:100%;" href=3D"https://click.labc=
+orpmessage.com/?qs=3DREDACTED" name=3D"Instagram" target=3D"_blank" xt=3D"S=
+PCLICK"><img alt=3D"Instagram" name=3D"layouts_images_in1.png" src=3D"https=
+://image.labcorpmessage.com/lib/fe3f157075640679751273/m/1/5ce13726-b034-49=
+59-809e-d90d03c4927a.png" style=3D"display:block;" title=3D"Instagram" widt=
+h=3D"20" height=3D"20" border=3D"0"></a></td>
+<td width=3D"20">&nbsp;</td>
+<td width=3D"20" align=3D"center"><a style=3D"font-weight:normal;color:#231=
+F20;text-decoration:underline;line-height:100%;" href=3D"https://click.labc=
+orpmessage.com/?qs=3DREDACTED" name=3D"LinkedIn" target=3D"_blank" xt=3D"SP=
+CLICK"><img alt=3D"LinkedIn" name=3D"layouts_images_google1.png" src=3D"htt=
+ps://image.labcorpmessage.com/lib/fe3f157075640679751273/m/1/2dc318ec-a520-=
+4e70-9ea9-7ffc9b7e4581.png" style=3D"display:block;" title=3D"LinkedIn" wid=
+th=3D"20" height=3D"20" border=3D"0"></a></td>
+<td width=3D"20">&nbsp;</td>
+<td width=3D"20" align=3D"center"><a style=3D"font-weight:normal;color:#231=
+F20;text-decoration:underline;line-height:100%;" href=3D"https://click.labc=
+orpmessage.com/?qs=3DREDACTED" name=3D"YouTube" target=3D"_blank" xt=3D"SPC=
+LICK"><img alt=3D"YouTube" name=3D"layouts_images_y_t.png" src=3D"https://i=
+mage.labcorpmessage.com/lib/fe3f157075640679751273/m/1/a71cebc1-f175-4437-b=
+483-05a342940419.png" style=3D"display:block;" title=3D"YouTube" width=3D"2=
+0" height=3D"20" border=3D"0"></a></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top" class=3D"responsive-td" dir=3D"ltr" style=3D"width: 55%;=
+">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 0px; " class=3D"stylingblock-content-wrapper camarker=
+-inner">
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" styl=
+e=3D"width:100%" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"left" class=3D"mobile-text-center" style=3D"padding: 0px 0px 0=
+px 0px; line-height:100%;">
+<p style=3D"margin:0pt;mso-font-size-alt:10px; mso-line-height-alt:12px; ms=
+o-line-height-rule:exactly;font-size:10px;line-height:12px; font-weight:nor=
+mal; color:#231f20;">
+This message was sent to analyst@example.com. Add labcorp@labcorpmessage.co=
+m to your address book to ensure our emails reach your inbox.</p>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 15px 0px 10px; " class=3D"stylingblock-content-wrappe=
+r camarker-inner">
+<div align=3D"center">
+<p style=3D"margin:0pt;mso-line-height-rule:exactly;font-size:10px;line-hei=
+ght:11px; font-weight:normal; color:#231f20;">
+<a data-linkto=3D"http://" href=3D"https://click.labcorpmessage.com/?qs=3DR=
+EDACTED" style=3D"color:#231f20;text-decoration:underline;" target=3D"_blan=
+k" title=3D"Privacy Policy">Privacy
+ Policy</a> &nbsp;|&nbsp; <a data-linkto=3D"http://" href=3D"https://click.=
+labcorpmessage.com/?qs=3DREDACTED" style=3D"color:#231f20;text-decoration:u=
+nderline;" target=3D"_blank" title=3D"Terms of Use">
+Terms of Use</a> &nbsp;|&nbsp; <a data-linkto=3D"http://" href=3D"https://c=
+lick.labcorpmessage.com/?qs=3DREDACTED" style=3D"color:#231f20;text-decorat=
+ion:underline;" target=3D"_blank" title=3D"Non-Discrimination Notice">
+Non-discrimination Notice</a> &nbsp;|&nbsp; <a data-linkto=3D"http://" href=
+=3D"https://click.labcorpmessage.com/?qs=3DREDACTED" style=3D"color:#231f20=
+;text-decoration:underline;" target=3D"_blank" title=3D"View in Browser">
+View in Browser</a> &nbsp;|&nbsp; <a data-linkto=3D"http://" href=3D"https:=
+//click.labcorpmessage.com/?qs=3DREDACTED" style=3D"color:#231f20;text-deco=
+ration:underline;" target=3D"_blank" title=3D"Unsubscribe">
+Unsubscribe</a> </p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<!-- bottom slot -->
+<td align=3D"center" valign=3D"top">
+<table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" width=3D"100%">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top">
+<table cellspacing=3D"0" cellpadding=3D"0" style=3D"width:100%">
+<tbody>
+<tr>
+<td class=3D"responsive-td" valign=3D"top" style=3D"width: 100%;">
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: #FFFFFF; border: 0px; min-width: 100%; " cl=
+ass=3D"slot-styling">
+<tbody>
+<tr>
+<td style=3D"padding: 0px 0px 15px; " class=3D"slot-styling camarker-inner"=
+>
+<table cellpadding=3D"0" cellspacing=3D"0" width=3D"100%" role=3D"presentat=
+ion" style=3D"background-color: transparent; min-width: 100%; " class=3D"st=
+ylingblock-content-wrapper">
+<tbody>
+<tr>
+<td style=3D"padding: 10px 5px 15px; " class=3D"stylingblock-content-wrappe=
+r camarker-inner">
+<div align=3D"center">
+<p style=3D"margin:0pt;mso-font-size-alt:10px; mso-line-height-alt:13px; ms=
+o-line-height-rule:exactly;font-size:10px;line-height:13px;font-weight:norm=
+al;color:#231f20;">
+=C2=A9 2026 Laboratory Corporation of America=C2=AE Holdings. All Rights Re=
+served. <br>
+531 S. Spring Street, Burlington, NC 27215 USA </p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+<td valign=3D"top"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</custom></div>
+</div>
+</body>
+</html>
+
+--vEly2Jq4HFaS=_?:--

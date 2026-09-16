@@ -83,9 +83,43 @@ against it. The design notes behind each weight are in
 | phish/11-punycode-domain.eml | 70 | LIKELY PHISH | display_name_spoof |
 | phish/12-html-attachment.eml | 50 | LIKELY PHISH | container_attachment |
 
-Confusion matrix at threshold 50: 12/12 phish, 6/6 benign, 0 missed, 0 false
-alarms. These are synthetic files (see [`samples/README.md`](samples/README.md));
-results on real spam-folder exports will replace this table.
+Synthetic corpus: 12/12 phish, 6/6 benign, 0 missed, 0 false alarms.
+
+Then 15 real emails from my own Gmail and university Microsoft 365 inboxes
+(sanitised, see [`samples/README.md`](samples/README.md)):
+
+| File | Score | Verdict | Top rule |
+|---|---:|---|---|
+| benign/real-01-udemy-promo.eml | 0 | CLEAN | |
+| benign/real-02-golfnow-promo.eml | 0 | CLEAN | |
+| benign/real-03-isc2-webinar.eml | 25 | SUSPICIOUS | link_text_mismatch |
+| benign/real-04-labcorp-notice.eml | 0 | CLEAN | |
+| benign/real-05-website-listing-claimed.eml | 0 | CLEAN | |
+| benign/real-06-bootcamp-promo.eml | 0 | CLEAN | |
+| phish/real-01-mychart-medicare-kit.eml | 65 | LIKELY PHISH | display_name_spoof |
+| phish/real-02-uc-account-job-scam-admin.eml | 35 | SUSPICIOUS | dkim_fail_or_none |
+| phish/real-03-uc-account-job-scam-assistant.eml | 25 | SUSPICIOUS | dkim_fail_or_none |
+| phish/real-04-uc-account-credential-update.eml | 40 | SUSPICIOUS | lure_keywords |
+| phish/real-05-uc-account-credential-update-2.eml | 35 | SUSPICIOUS | dkim_fail_or_none |
+
+Whole corpus at threshold 50: 25/29 correct, 4 missed, 0 false alarms. The
+four misses are all the same thing: job scams and credential lures sent from
+compromised student accounts *inside* the university's own Microsoft 365
+tenant. No `Authentication-Results`, no external hop, a sender domain that is
+genuinely the university's. Every infrastructure check passes because the
+infrastructure is clean; only the text is wrong, and text is deliberately
+capped at 15 points. They are listed in `samples/known-misses.txt` and the
+regression test holds them at SUSPICIOUS. The one benign SUSPICIOUS is an ISC2
+webinar invite whose visible link text says `isc2.org` while every href goes
+through Salesforce's click-tracker, which is a real mismatch that every
+marketing platform produces. Four more "internship interview" emails sit in
+`samples/unlabeled/` because I couldn't honestly call them either way.
+
+Real-mail calibration also fixed three bugs the synthetic set couldn't show:
+Microsoft 365 and Gmail hop chains never name the recipient's domain, so
+boundary detection now works in provider families; DKIM signed by a tenant's
+`onmicrosoft.com` domain is normal, so alignment rules only score when DMARC
+itself failed; and `storage.googleapis.com` is Google, not a Google lookalike.
 
 ## Limitations
 

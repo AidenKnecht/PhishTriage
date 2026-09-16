@@ -1,0 +1,716 @@
+Received: by 2002:a05:6124:1ea1:b0:448:b4c5:5917 with SMTP id l33csp4612620vlr;
+        Tue, 15 Sep 2026 05:39:12 -0700 (PDT)
+X-Received: by 2002:a05:622a:387:b0:530:ba79:edd3 with SMTP id d75a77b69052e-5310d09f26emr106883301cf.62.1789475952523;
+        Tue, 15 Sep 2026 05:39:12 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789475952; cv=none;
+        d=google.com; s=arc-20260327;
+        b=HXSNTgXSmWXzqdJMrKZqjmxnT8n0qi7iBQLHlt/BLKU/nTaDaxi7eGJAmH8ZKIY5DH
+         CWaM9zzJ650jbLd4fB4H5yLiDI4zRwWCYQU6q/7KMzzE0Zn0OTJFpLXqSwlfXPT8D5Kb
+         m0mAAiqUL5qX5Gj6QekQ1m4D08lAeBV/pSvjts51KfLR9OCTzGYZLwv7IyYrl5CCnyuJ
+         vNYbp0u5WTYzjJwFU5dPezrtoTbUV5DmRDKtk/odXgs/e826tzU76TCHwJsPc1VPaVG0
+         uswcpTDGEDKo8sBdWwd2sHQ/cKm9+18VQoBaCOHn8CRAOG4RglgYwbxKN+HVYseV7KrT
+         /AVQ==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=feedback-id:message-id:reply-to:mime-version:list-unsubscribe-post
+         :list-unsubscribe:date:subject:to:from:dkim-signature:dkim-signature;
+        bh=W6V6q/Thg8gR2exErhsNbo+jWqpfe2FQNU3sMDAYuns=;
+        fh=/Unso2o9gfJ/mtP2iz6STgGHIx93wz7Rh1AUTQCTQac=;
+        b=ldapdGgHsXtxUZBhtBonLonZ+McRbpuoQKtyxXjKKuz5fw8Ob0Y4Ku9aWhvI9zfbcI
+         FWYwn4a22yyHNDlr2Lhu4mdosb13/px1+QckHP73qzatDkivbIov+fdsrEK9A+OLVlud
+         NTY5ZTkbyGNW1GXT22dbFWhQDIYJPTn5baoNT1eSiDcGHIZk+YO1U24ti6PNpefhaNaa
+         5PE2S2r6YAR41ky9mBnufh1nEjPBh52yu64pevoc6+A+uB0rXrdjxpkV1+8rCTmCfiGw
+         C0s5B1+bwRI/kmD+dajlUQMrViAhaJG19D9D7hexnPM5x235iVGJP26jTc2O55Z5kBFE
+         MNyQ==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@email.golfnow.com header.s=200608 header.b=H+O5MbMs;
+       dkim=pass header.i=@s7.y.mc.salesforce.com header.s=fbldkim7 header.b=J+2DbNVU;
+       spf=pass (google.com: domain of bounce-ptrcf3oxjxoevdra6nrx3ok6pi.70247@bounce.email.golfnow.com designates 136.147.177.35 as permitted sender) smtp.mailfrom=bounce-PTRCF3OXJXOEVDRA6NRX3OK6PI.70247@bounce.email.golfnow.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=email.golfnow.com
+Return-Path: <bounce-PTRCF3OXJXOEVDRA6NRX3OK6PI.70247@bounce.email.golfnow.com>
+Received: from mta2.email.golfnow.com (mta2.email.golfnow.com. [136.147.177.35])
+        by mx.google.com with ESMTPS id d75a77b69052e-530ddad77ecsi153954691cf.274.2026.09.15.05.39.12
+        for <analyst@example.com>
+        (version=TLS1_3 cipher=TLS_AES_256_GCM_SHA384 bits=256/256);
+        Tue, 15 Sep 2026 05:39:12 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounce-ptrcf3oxjxoevdra6nrx3ok6pi.70247@bounce.email.golfnow.com designates 136.147.177.35 as permitted sender) client-ip=136.147.177.35;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@email.golfnow.com header.s=200608 header.b=H+O5MbMs;
+       dkim=pass header.i=@s7.y.mc.salesforce.com header.s=fbldkim7 header.b=J+2DbNVU;
+       spf=pass (google.com: domain of bounce-ptrcf3oxjxoevdra6nrx3ok6pi.70247@bounce.email.golfnow.com designates 136.147.177.35 as permitted sender) smtp.mailfrom=bounce-PTRCF3OXJXOEVDRA6NRX3OK6PI.70247@bounce.email.golfnow.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=email.golfnow.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=200608; d=email.golfnow.com;
+ h=From:To:Subject:Date:List-Unsubscribe:List-Unsubscribe-Post:MIME-Version:
+ Reply-To:Message-ID:Content-Type; i=goplay@email.golfnow.com;
+ bh=W6V6q/Thg8gR2exErhsNbo+jWqpfe2FQNU3sMDAYuns=;
+ b=H+O5MbMst44HGe9NTcKfQ8K8QcvTnGPR4LW+GTtim6ilIAfaXb63gCQZW1rYyBaO3cBK9zHVIYYX
+   dTQllyvjg7FiZSGuJ9uhPmsCbzHI6gjRCE/ORMubEKzwuPBCP0ES2mvnI75kuKko3nRajp9WP2op
+   VRjJ1+ERF4P73dqf/qI=
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; s=fbldkim7; d=s7.y.mc.salesforce.com;
+ h=From:To:Subject:Date:List-Unsubscribe:List-Unsubscribe-Post:MIME-Version:
+ Reply-To:Message-ID:Content-Type;
+ bh=W6V6q/Thg8gR2exErhsNbo+jWqpfe2FQNU3sMDAYuns=;
+ b=J+2DbNVUuW5cyNkT9cEv6+QGGfEjk1RZNjDYLrkkumgRLJcRdElaBittxsXfqBsQ1fXaWda44ayk
+   Q1NRelItBrf63KhYc/M4AjL8UxFO5TbWElFeM745fqFH8ZJT0L6msX6NIZd5qpyJ1YsuHcstKQYN
+   y4SP1vhOvxoIaLALtIPh5KH7uDchbPSSSAtReDR2WhQK5E7hVSo7hzjpQLR/qFnu7BfE6U+dQTgJ
+   CIJA6P+Qq9vUHEmq+QCeWHRDaXdSSUiV/qjfHOszpITLBBChu9CynVr3KnkB+d3rClou126Se4xD
+   ycsO6guTcdASX2HQRYpbeuKpz6+gRxuyeivVSA==
+Received: by mta2.email.golfnow.com id hl4u7039mjcq for <analyst@example.com>; Tue, 15 Sep 2026 11:57:00 +0000 (envelope-from <bounce-PTRCF3OXJXOEVDRA6NRX3OK6PI.70247@bounce.email.golfnow.com>)
+From: "GolfNow" <goplay@email.golfnow.com>
+To: <analyst@example.com>
+Subject: Analyst, your golf deal is here
+Date: Tue, 15 Sep 2026 05:57:00 -0600
+List-Unsubscribe: <https://click.email.golfnow.com/subscription_center.aspx?jwt=REDACTED>, <mailto:leave-6FIR3R5RMRUEVBG5UUU4JRIJQY.70247@leave.email.golfnow.com>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+MIME-Version: 1.0
+Reply-To: "GolfNow" <reply-7GGSN3KHLYKE5JLS6MD3ZLX7RA.70247@email.golfnow.com>
+X-SFMC-Stack: 7
+x-job: 7208803_468386
+Message-ID: <441937a5-3cf0-4128-a68e-8c78a394b120@atl1s07mta0630.xt.local>
+Feedback-ID: 7208803:468386:136.147.177.35:sfmktgcld
+Content-Type: multipart/alternative;
+	boundary="hDNWuckcJNuU=_?:"
+
+This is a multi-part message in MIME format.
+
+--hDNWuckcJNuU=_?:
+Content-Type: text/plain;
+	charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+
+ &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; &zwnj; 
+ 
+
+  
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+Golf Now 
+
+ 
+ 
+Hello Analyst | 6,656 GolfPass Points
+
+Apply your points toward a GolfPass+ membership when you check out
+
+ 
+
+
+
+
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+
+
+ 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+
+
+ 
+ 
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+ 
+
+ 
+
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+ 
+ 
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+ 
+
+ 
+
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+ 
+ 
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+ 
+
+
+ 
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+
+ 
+
+
+
+ 
+ 
+
+ 
+
+  
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+     
+ 
+https://click.email.golfnow.com/?qs=REDACTED 
+     
+ 
+https://click.email.golfnow.com/?qs=REDACTED 
+    
+ 
+https://click.email.golfnow.com/?qs=REDACTED 
+     
+ 
+https://click.email.golfnow.com/?qs=REDACTED 
+
+https://click.email.golfnow.com/?qs=REDACTED 
+Privacy policy   |  
+https://click.email.golfnow.com/?qs=REDACTED 
+Preferences   |  
+https://click.email.golfnow.com/?qs=REDACTED 
+View in browser 
+
+7580 Golf Channel Dr., Orlando, FL 32819
+
+https://click.email.golfnow.com/?qs=REDACTED 
+Unsubscribe  from GolfNow email communications.
+
+
+
+ 
+
+
+
+--hDNWuckcJNuU=_?:
+Content-Type: text/html;
+	charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html>
+
+<head>
+    <title></title>
+
+    <style type="text/css">
+      
+      @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+      @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&display=swap');
+      
+        {
+            literal
+        }
+
+        html {
+            width: 100%;
+        }
+
+        body bgcolor="#E4E4E4" {
+            width: 100%;
+            margin: 0;
+            padding: 0;
+        }
+
+        .ReadMsgBody {
+            width: 100%;
+            background-color: #E4E4E4;
+        }
+
+        .ExternalClass {
+            width: 100%;
+            background-color: #E4E4E4;
+        }
+
+        table,
+        td {
+            border-collapse: collapse;
+            mso-table-lspace: 0pt;
+            mso-table-rspace: 0pt;
+        }
+
+@media screen {
+
+    /* POPPINS — Regular (400) */
+              @font-face {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 400;
+                font-display: swap;
+                src: local('Poppins Regular'), local('Poppins-Regular'),
+url(https://fonts.gstatic.com/s/poppins/v20/pxiEyp8kv8JHgFVrJJfedw.woff2) format('woff2');
+        unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+              }
+
+    /* POPPINS — SemiBold (600) */
+              @font-face {
+                font-family: 'Poppins';
+                font-style: normal;
+                font-weight: 600;
+                font-display: swap;
+                src: local('Poppins SemiBold'), local('Poppins-SemiBold'),
+url(https://fonts.gstatic.com/s/poppins/v20/pxiByp8kv8JHgFVrLDz8Z1xlEA.woff2) format('woff2');
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+             }
+
+    /* NUNITO SANS — Regular (400) */
+              @font-face {
+                font-family: 'Nunito Sans';
+                font-style: normal;
+                font-weight: 400;
+                font-display: swap;
+                src: local('Nunito Sans Regular'), local('NunitoSans-Regular'),
+url(https://fonts.gstatic.com/s/nunitosans/v12/pe0qMImSLYBIv1o4X1M8cce9I9tAcA.woff2) format('woff2');
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+             }
+
+     /* NUNITO SANS — SemiBold (600) */
+              @font-face {
+                font-family: 'Nunito Sans';
+                font-style: normal;
+                font-weight: 600;
+                font-display: swap;
+                src: local('Nunito Sans SemiBold'), local('NunitoSans-SemiBold'),
+url(https://fonts.gstatic.com/s/nunitosans/v12/pe0qMImSLYBIv1o4X1M8ccfFIttAcA.woff2) format('woff2');
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            }
+
+     /* ROBOTO — Regular (300) */
+              @font-face {
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 300;
+                font-display: swap;
+                src: local('Roboto'), local('Roboto-Regular'), url(https://fonts.gstatic.com/s/roboto/v20/KFOmCnqEu92Fr1Mu4mxK.woff2) format('woff2');
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            }
+
+     /* ROBOTO — SemiBold (600) */
+            @font-face {
+                font-family: 'Roboto';
+                font-style: normal;
+                font-weight: 600;
+                font-display: swap;
+                src: local('Roboto Bold'), local('Roboto-Bold'), url(https://fonts.gstatic.com/s/roboto/v20/KFOlCnqEu92Fr1MmWUlfBBc4.woff2) format('woff2');
+                unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+            }
+
+}
+
+
+        @media only screen and (max-width: 640px) {
+            table.table_scale {
+                width: 100% !important;
+                margin: 0 auto !important;
+                padding: 0 auto !important;
+            }
+
+            img.img_scale {
+                width: 100% !important;
+                height: auto !important;
+            }
+
+            img.mobile_stack {
+                width: 100% !important;
+                height: auto !important;
+                margin-top: 20px !important;
+            }
+
+            td.center {
+                text-align: center !important;
+            }
+
+            table.full {
+                width: 100% !important;
+                height: auto !important;
+                margin: 0px !important;
+            }
+
+            .content {
+                font-size: 130% !important;
+                line-height: 120% !important;
+            }
+
+            td.center-content {
+                text-align: center !important;
+                font-size: 120% !important;
+                line-height: 110% !important;
+            }
+
+            td.content {
+                font-size: 130% !important;
+                line-height: 120% !important;
+            }
+
+            td.full {
+                padding: 10px !important;
+            }
+        }
+
+        .video-wrapper {
+            display: none;
+        }
+
+        @media (-webkit-min-device-pixel-ratio: 0) and (min-device-width:1024px) {
+            .video-wrapper {
+                display: block !important;
+            }
+
+            .video-fallback {
+                display: none !important;
+            }
+        }
+
+        @supports (-webkit-overflow-scrolling:touch) and (color:#ffffffff) {
+            div[class^=video-wrapper] {
+                display: block !important;
+            }
+
+            div[class^=video-fallback] {
+                display: none !important;
+            }
+        }
+
+        #MessageViewBody .video-wrapper {
+            display: block !important;
+        }
+
+        #MessageViewBody .video-fallback {
+            display: none !important;
+        }
+
+            {
+            /literal
+        }
+    </style>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <meta name="x-apple-disable-message-reformatting">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+</head>
+
+<body style="width:100%;padding:0; background-color:#E4E4E4"><style type="text/css">
+div.preheader 
+{ display: none !important; } 
+</style>
+<div class="preheader" style="font-size: 1px; display: none !important;">We found the courses worth your time</div>
+
+    <!--[if mso]> <style type="text/css"> body, span, table, td, li, a  {font-family: Arial, Helvetica, sans-serif !important;} </style> <![endif]-->
+    <!--[if gte mso 15]> <style type="text/css"> body, span, table, td, li, a  {font-family: Arial, Helvetica, sans-serif !important;} </style> <![endif]-->
+
+    <div style="display: none; font-size: 1px;max-height: 0px; max-width: 600px; opacity: 0; overflow: hidden; mso-hide: all; font-family: sans-serif;">
+        &zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;&zwnj;&nbsp;
+    </div>
+
+
+
+    <table width="600" cellspacing="0" cellpadding="0" border="0" align="center" style="background-color:#E4E4E4">
+        <tbody>
+            <tr>
+                <td align="center" style="" bgcolor="#E4E4E4" class="content">
+
+                  <table align="center" width="600" cellspacing="0" cellpadding="25" border="0" bgcolor="#E4E4E4" class="table_scale">
+                        <tbody>
+                            <tr>
+                                <td align="center">
+
+                                    <a href="https://click.email.golfnow.com/?qs=REDACTED" target="_blank" style="outline:none; text-decoration:none;" ><img src="https://image.email.golfnow.com/lib/fe931372756c0c7d76/m/1/9b7835ea-069b-4dd2-b6ff-8c2b01016f26.png" width="260" border="0" alt="GolfNow" style="padding-top:35px; border: 0; max-width: 300px; vertical-align: middle;" class="content"></a>
+                                  
+                                  
+                                  <a href="https://click.email.golfnow.com/?qs=REDACTED"  style="display: none !important; mso-hide: all; color: #fff; font-size: 1px; line-height: 0px;">Golf Now</a>
+
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                    <!-- End Header Product Section -->
+
+                  
+                    <!-- Do not edit -->
+                    <table width="600" cellspacing="0" cellpadding="0" border="0">
+                        <tbody>
+                            <tr>
+                                <td align="center" style="background:#E4E4E4;" class="full">
+                                    <table align="center" width="600" cellspacing="0" border="0" class="table_scale">
+                                        <tbody>
+                                            <tr style="background-color:#E4E4E4;">
+                                                <td class="responsive-td" valign="top" style="width:600px; padding-bottom:40px;">
+                                                    <table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner">
+<table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="min-width: 100%; " class="stylingblock-content-wrapper"><tr><td class="stylingblock-content-wrapper camarker-inner"><!--Loyalty Points -->  <!-- Email Header : BEGIN -->  <table bgcolor="#303030" border="0" cellpadding="0" cellspacing="0" width="600"> <tr> <td width="600" max-width="600px" align="center" valign="top" style=" color: #ffffff; font-weight: normal; padding: 20px 20px 20px 20px; text-decoration:none;"> <p style="font-family:roboto-regular, Arial, sans-serif;color:#ffffff;font-size: 16px;text-decoration:none;margin-bottom:10px;">Hello Analyst | <span style="font-family:roboto-bold, Arial, sans-serif;color:#3cbe67"><strong>6,656 GolfPass Points</strong></span></p><p style="font-family:roboto-regular, Arial, sans-serif;font-size:10px;text-decoration:none;margin-top:0px;">Apply your points toward a GolfPass+ membership when you&nbsp;check&nbsp;out</p> </td> </tr> </table> </td>
+</tr></table>
+</td></tr></table>
+<!--
+
+-->
+
+<!-- Begin Default Hero -->
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center"><a  href="https://click.email.golfnow.com/?qs=REDACTED" target="_blank"><img src="https://image.email.golfnow.com/lib/fe931372756c0c7d76/m/1/6df75ab4-f0ab-483a-9f4b-b9e663e8c428.gif" width="600" alt="Turn free time into a tee time | Book now" border="0" align="center"></a></td>
+  </tr>
+</table>
+
+ 
+<!-- MI Course 1 -->
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center"><a href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block" ><img src="https://mi.golfnow.com/p/rp/1cb7fe4f067991b2.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&mi_drive_dist0=40&mi_drive_dist1=20&mi_drive_dist2=20&mi_drive_dist3=20&mi_drive_dist4=40&mi_drive_dist5=20&mi_drive_dist6=40&mi_drive_dist7=&mi_drive_dist8=&mi_drive_dist9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" alt="Display images to show real-time content" style="border: 0;" border="0" class="fluid"/></a></td>
+  </tr>
+</table>
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tbody>
+    <tr>
+      <td align="center"><table width="600" border="0" cellpadding="0" cellspacing="0" style="border-collapse:collapse;" align="center" >
+          <tr>
+            <td valign="top" align="center" style="padding-bottom:20px; background-color: #e3e3e3"><a  href="https://click.email.golfnow.com/?qs=REDACTED"><img alt="Loading the BEST TEE TIME DEALS"  src="https://mi.golfnow.com/p/rp/0d36d6ca3a1be678.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&mi_drive_dist0=40&mi_drive_dist1=20&mi_drive_dist2=20&mi_drive_dist3=20&mi_drive_dist4=40&mi_drive_dist5=20&mi_drive_dist6=40&mi_drive_dist7=&mi_drive_dist8=&mi_drive_dist9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" style="border: 0;" border="0" class="fluid" width="200"/></a></td>
+            <td valign="top" align="center" style="padding-bottom:20px; background-color: #e3e3e3"><a  href="https://click.email.golfnow.com/?qs=REDACTED"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/9770898f48f7a7f9.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&mi_drive_dist0=40&mi_drive_dist1=20&mi_drive_dist2=20&mi_drive_dist3=20&mi_drive_dist4=40&mi_drive_dist5=20&mi_drive_dist6=40&mi_drive_dist7=&mi_drive_dist8=&mi_drive_dist9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a></td>
+            <td valign="top" align="center" style="padding-bottom:20px; background-color: #e3e3e3"><a  href="https://click.email.golfnow.com/?qs=REDACTED"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/69dffdf2e238305a.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&mi_drive_dist0=40&mi_drive_dist1=20&mi_drive_dist2=20&mi_drive_dist3=20&mi_drive_dist4=40&mi_drive_dist5=20&mi_drive_dist6=40&mi_drive_dist7=&mi_drive_dist8=&mi_drive_dist9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"></a></td>
+          </tr>
+        </table></td>
+    </tr>
+  </tbody>
+</table>
+
+ 
+<!-- MI Course 2 --> 
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img src="https://mi.golfnow.com/p/rp/b1ec2bf8b701fbb0.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&mi_drive_dist0=40&mi_drive_dist1=20&mi_drive_dist2=20&mi_drive_dist3=20&mi_drive_dist4=40&mi_drive_dist5=20&mi_drive_dist6=40&mi_drive_dist7=&mi_drive_dist8=&mi_drive_dist9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" alt="Display images to show real-time content" style="border: 0;" border="0" class="fluid"/></a></td>
+  </tr>
+</table>
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center" style="padding-bottom:20px;"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/9b88078fe414cc17.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a></td>
+    <td valign="top" align="center" style="padding-bottom:20px;"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/20333d8064714e94.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a></td>
+    <td valign="top" align="center" style="padding-bottom:20px;"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/793a27635d4d717c.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a></td>
+  </tr>
+</table>
+<table bgcolor="#e3e3e3" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center">&nbsp;</td>
+  </tr>
+</table>
+ 
+
+<!-- Start Banner 1 Dynamic code-->
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img alt="Display images to show real-time content" style="border: 0; display: block;" border="0" src="https://mi.golfnow.com/p/rp/a3416e5b94f7811f.png?mi_u=REDACTED&REDACTED=45069&utm_medium=Email&utm_campaign=REDACTED&utm_source=HotDeals" /></a></td>
+  </tr>
+</table>
+<table bgcolor="#e3e3e3" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center">&nbsp;</td>
+  </tr>
+</table>
+<!-- End Banner 1 --> 
+
+<!-- MI Course 3 --> 
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img src="https://mi.golfnow.com/p/rp/18de0d0ae2bb92f2.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&mi_drive_dist0=40&mi_drive_dist1=20&mi_drive_dist2=20&mi_drive_dist3=20&mi_drive_dist4=40&mi_drive_dist5=20&mi_drive_dist6=40&mi_drive_dist7=&mi_drive_dist8=&mi_drive_dist9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" alt="Display images to show real-time content" style="border: 0;" border="0"  class="fluid"/></a></td>
+  </tr>
+</table>
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center" style="padding-bottom:20px;"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/d8cda4e87a76f56b.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a></td>
+    <td valign="top" align="center" style="padding-bottom:20px;"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/7280a91cafca42d4.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a></td>
+    <td valign="top" align="center" style="padding-bottom:20px;"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/8a8624ae0f090781.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a></td>
+  </tr>
+</table>
+<table bgcolor="#e3e3e3" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center">&nbsp;</td>
+  </tr>
+</table>
+ 
+
+<!-- Start Banner 2 -->
+<table width="100%" cellspacing="0" cellpadding="0" role="presentation"><tr><td align="center"><a href="https://click.email.golfnow.com/?qs=REDACTED" title=""   data-linkto="https://"><img data-assetid="135224" src="https://image.email.golfnow.com/lib/fe931372756c0c7d76/m/1/a5bacabe-dcab-4ceb-9b50-0b7cb9b657f5.png" alt="10% off gift cards order $100+ | Code: GNSEPT26 - Buy now | 9/14-9/21/26 | terms & conditions apply." height="150" width="600" style="display: block; padding: 0px; text-align: center; height: 150px; width: 600px; border: 0px;"></a></td></tr></table>
+<table bgcolor="#e3e3e3" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center">&nbsp;</td>
+  </tr>
+</table>
+
+<!-- End Banner 2 --> 
+
+
+<!-- MI Course 4 --> 
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block" ><img src="https://mi.golfnow.com/p/rp/d7d6c0e564914a24.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&mi_drive_dist0=40&mi_drive_dist1=20&mi_drive_dist2=20&mi_drive_dist3=20&mi_drive_dist4=40&mi_drive_dist5=20&mi_drive_dist6=40&mi_drive_dist7=&mi_drive_dist8=&mi_drive_dist9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" alt="Display images to show real-time content" style="border: 0;" border="0" class="fluid"/></a></td>
+  </tr>
+</table>
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center" style="padding-bottom:20px;"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/fe9ab7484c85f9d5.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a></td>
+    <td valign="top" align="center" style="padding-bottom:20px;"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/014bdcd0b95b00b0.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a></td>
+    <td valign="top" align="center" style="padding-bottom:20px;"><a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/ac4fb946a06d4b31.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a></td>
+  </tr>
+</table>
+<table bgcolor="#e3e3e3" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center">&nbsp;</td>
+  </tr>
+</table>
+
+<!-- MI Course 5 --> 
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="background-color: #e3e3e3">
+    <tr>
+        <td valign="top" align="center" style="background-color: #e3e3e3">
+           <a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block"><img src="https://mi.golfnow.com/p/rp/05618a492f1e972f.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&mi_drive_dist0=40&mi_drive_dist1=20&mi_drive_dist2=20&mi_drive_dist3=20&mi_drive_dist4=40&mi_drive_dist5=20&mi_drive_dist6=40&mi_drive_dist7=&mi_drive_dist8=&mi_drive_dist9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" alt="Display images to show real-time content" style="border: 0;" border="0" class="fluid"/></a>
+        </td>
+    </tr>
+</table>
+<table bgcolor="#ffffff" border="0" cellpadding="0" cellspacing="0" width="600" align="center" style="background-color: #e3e3e3">
+    <tr>
+        <td valign="top" align="center" style="padding-bottom:20px; background-color: #e3e3e3">
+            <a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block; background-color: #e3e3e3"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/1a00215e3f5114b9.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a>
+        </td>
+        <td valign="top" align="center" style="padding-bottom:20px; background-color: #e3e3e3">
+          <a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block; background-color: #e3e3e3"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/7cb865569fd59926.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a>
+        </td>
+        <td valign="top" align="center" style="padding-bottom:20px; background-color: #e3e3e3">
+          <a  href="https://click.email.golfnow.com/?qs=REDACTED" style="display: block; background-color: #e3e3e3"><img alt="Loading the BEST TEE TIME DEALS" border="0" src="https://mi.golfnow.com/p/rp/0cbba8646af5ac0b.png?mi_u=REDACTED&mi_facility0=4284&mi_facility1=3904&mi_facility2=6197&mi_facility3=6745&mi_facility4=3915&mi_facility5=3267&mi_facility6=6186&mi_facility7=&mi_facility8=&mi_facility9=&source=HotDeals&utm_medium=email&utm_campaign=REDACTED" class="fluid" width="200"/></a>
+        </td>
+    </tr>
+</table>
+<!-- Start Banner 3 -->
+
+<!-- End Banner 3 --> 
+<table bgcolor="#e3e3e3" border="0" cellpadding="0" cellspacing="0" width="600" align="center">
+  <tr>
+    <td valign="top" align="center">&nbsp;</td>
+  </tr>
+</table>
+
+<table width="1" height="1" cellpadding="0" cellspacing="0" border="0">
+  <tr>
+    <td style="font-size:0px; line-height:0px;"><img src="https://mi.golfnow.com/p/cp/bc9c9f00c1e9b2c6/o.gif?mi_u=REDACTED" width="1" height="1" alt="" aria-hidden="true" /></td>
+  </tr>
+</table><table cellpadding="0" cellspacing="0" width="100%" role="presentation" style="background-color: transparent; min-width: 100%; " class="stylingblock-content-wrapper"><tr><td style="padding: 10px 0px 0px; " class="stylingblock-content-wrapper camarker-inner">             
+ </td></tr></table><style data-ignore-inlining> 
+@media (prefers-color-scheme: dark) { #_t::before {content:url('https://h46ycakp.emltrk.com/v2/h46ycakp?rd&i=187197909&t=HotDeals2024');}} 
+@media (prefers-color-scheme: light) { #_t::before {content:url('https://h46ycakp.emltrk.com/v2/h46ycakp?rl&i=187197909&t=HotDeals2024');}} 
+@media print{ #_t {background-image:url('https://h46ycakp.emltrk.com/v2/h46ycakp?p&i=187197909&t=HotDeals2024');}} 
+div.OutlookMessageHeader {background-image:url('https://h46ycakp.emltrk.com/v2/h46ycakp?f&i=187197909&t=HotDeals2024')} 
+table.moz-email-headers-table {background-image:url('https://h46ycakp.emltrk.com/v2/h46ycakp?f&i=187197909&t=HotDeals2024')} 
+blockquote #_t {background-image:url('https://h46ycakp.emltrk.com/v2/h46ycakp?f&i=187197909&t=HotDeals2024')} 
+#MailContainerBody #_t {background-image:url('https://h46ycakp.emltrk.com/v2/h46ycakp?f&i=187197909&t=HotDeals2024')} 
+</style><div id="_t"></div>
+<img src="https://h46ycakp.emltrk.com/v2/h46ycakp?i=187197909&t=HotDeals2024" width="1" height="1" border="0" alt="" />
+                                                </td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                  <!-- END Do not edit -->
+
+
+
+
+
+                                    <!-- Start Footer -->
+          <table width="600" bgcolor="#E4E4E4" class="content" border="0" cellpadding="15" cellspacing="0" align="center" style="">
+
+
+                                        <tr>
+                                            <td width="600" bgcolor="#E4E4E4" align="center"><a href="https://click.email.golfnow.com/?qs=REDACTED" target="_blank" style="outline:none; text-decoration:none;" ><img src="https://image.email.golfnow.com/lib/fe931372756c0c7d76/m/1/26d02d0d-4d23-4751-a4e6-f80df49dfb09.png" alt="GolfNow Go Play" width="260" style="display: block; padding-bottom:10px; text-align: center; line-height: auto; height: auto;max-width: 300px; border: 0px;">
+                                              
+                                                    <!-- Start Social Media Section -->
+
+                                        <tr>
+                                            <td bgcolor="#E4E4E4" align="center" style="padding-bottom:10px; ">
+                                                <a href="https://click.email.golfnow.com/?qs=REDACTED" target="_blank"><img src="https://image.email.golfnow.com/lib/fe931372756c0c7d76/m/1/924efe57-2b27-484b-a5c2-037546682f9b.png" alt="Facebook" width="25" height="25" border="0"></a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a href="https://click.email.golfnow.com/?qs=REDACTED" target="_blank"><img src="https://image.email.golfnow.com/lib/fe931372756c0c7d76/m/1/fbb8c428-8606-4b91-91f9-404694bef8c7.png" alt="Instagram" width="25" height="25" border="0"></a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                                <a href="https://click.email.golfnow.com/?qs=REDACTED" target="_blank"><img src="https://image.email.golfnow.com/lib/fe931372756c0c7d76/m/1/4cd8a0b6-c8e9-4cfe-87e2-d240a93ba295.png" alt="Twitter" width="25" height="25" border="0"></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                                                                                                                     <a href="https://click.email.golfnow.com/?qs=REDACTED" target="_blank"><img src="https://image.email.golfnow.com/lib/fe931372756c0c7d76/m/1/4ecc1fdd-3e3d-4a3f-b86f-5b4e87d2bd64.png" alt="TikTok" width="25" height="25" border="0"></a> &nbsp;&nbsp;&nbsp;&nbsp;
+                                              <a href="https://click.email.golfnow.com/?qs=REDACTED" target="_blank"><img src="https://image.email.golfnow.com/lib/fe931372756c0c7d76/m/1/ed03be6f-9feb-4512-96c1-7439dd5a85a8.png" alt="YouTube" width="25" height="25" border="0"></a>
+                                            </td>
+                                        </tr>
+                                                                                                  <!-- END Social Media Section -->
+                                              
+                                        </a>
+                                </td>
+                    </table>
+
+
+                    <table width="600" max-width="600" bgcolor="#E4E4E4" class="content" border="0" cellpadding="15" cellspacing="0" align="center" style="margin-top:-3px;">
+
+                        <tr>
+                            <td width="600" max-width="600px" align="center" valign="top" style="padding:15px; font-size:14px; line-height:21px; font-family: 'Roboto', Arial, sans-serif; font-weight:normal; color:#a2a2a2;"><br><a href="https://click.email.golfnow.com/?qs=REDACTED"  class="outlookFont" style="color:#a2a2a2;text-decoration:none;">Privacy&nbsp;policy</a><span style="color:#a2a2a2;"> &nbsp;|&nbsp; </span><a href="https://click.email.golfnow.com/?qs=REDACTED"  class="outlookFont" style="color:#a2a2a2;text-decoration:none;">Preferences</a><span style="color:#a2a2a2;"> &nbsp;|&nbsp; </span>
+<a class="outlookFont hide" href="https://click.email.golfnow.com/?qs=REDACTED"  target="_blank" style="color:#a2a2a2;text-decoration:none;">View&nbsp;in&nbsp;browser</a><br>
+<br><span style="text-decoration: none !important;">7580 Golf Channel Dr., Orlando, FL 32819</span></td>
+                        </tr>
+                        <tr>
+                            <td class="outlookFont" align="center" valign="top" style="padding:10px 15px 40px; font-size:14px; line-height:19px; font-family: 'Roboto', Arial, sans-serif; font-weight:normal; color:#a2a2a2;"><a href="https://click.email.golfnow.com/?qs=REDACTED"  class="outlookFont" style="color:#a2a2a2; text-decoration:underline !important;">Unsubscribe</a> from GolfNow email&nbsp;communications.</td>
+                        </tr>
+
+                    </table>
+
+
+
+
+
+                    <!-- End Footer -->
+
+                </td>
+
+            </tr>
+
+        </tbody>
+
+    </table>
+    </td>
+    </tr>
+    </tbody>
+    </table>
+
+
+</body>
+
+</html>
+<img src="https://click.email.golfnow.com/open.aspx?REDACTED&d=70247&bmt=0" width="1" height="1" alt="">
+
+--hDNWuckcJNuU=_?:--
+

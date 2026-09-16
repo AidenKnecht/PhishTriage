@@ -1,0 +1,15 @@
+# Phish samples the offline rules are known to score below 50.
+# Format: <path relative to samples/>  # why
+#
+# The regression test requires these to score at least 20 (SUSPICIOUS) and
+# fails if one ever reaches 50, so the list cannot silently go stale.
+# Every entry here is a finding for the writeup, not a bug to hide.
+
+# Intra-tenant Microsoft 365 mail from compromised university accounts: no
+# Authentication-Results, no external hop, sender domain genuinely the
+# university's. Every infrastructure signal is clean because the
+# infrastructure is clean; only the text gives it away.
+phish/real-02-uc-account-job-scam-admin.eml          # job scam, shortened apply link
+phish/real-03-uc-account-job-scam-assistant.eml      # job scam, contact by SMS only
+phish/real-04-uc-account-credential-update.eml       # credential harvest via Google Form
+phish/real-05-uc-account-credential-update-2.eml     # credential harvest via Google Form

@@ -88,3 +88,45 @@ lottery
 free gift
 exclusive offer
 bonus
+
+# Added after the first real-mail run: phrasing used by compromised-account
+# "system maintenance" credential harvests.
+[credential]
+email and password
+update your details
+update his/her details
+update their details
+lose access
+losing access
+for verification
+system maintenance
+security features
+security mechanisms
+
+# Work-from-home / personal-assistant scams sent from compromised student
+# accounts. Individually weak; together they read like nothing else.
+[job_scam]
+personal assistant
+administrative assistant
+weekly pay
+part-time job
+part time position
+part time personal
+home-based
+work from home
+kindly text
+for details kindly
+send your resume to
+one-time submission
+competitive salary
+
+# Impersonal greetings: bulk lures don't know your name.
+[generic_greeting]
+dear applicant
+dear candidate
+dear student
+dear customer
+dear user
+dear account holder
+dear valued
+good day

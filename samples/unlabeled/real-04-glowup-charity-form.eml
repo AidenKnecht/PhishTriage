@@ -1,0 +1,898 @@
+Received: from DS9PR01MB994465.prod.exchangelabs.com (::1) by
+ SJ2PR01MB8619.prod.exchangelabs.com with HTTPS; Mon, 16 Mar 2026 15:55:28
+ +0000
+Received: from IA4P221CA0001.NAMP221.PROD.OUTLOOK.COM (2603:10b6:208:559::16)
+ by DS9PR01MB994465.prod.exchangelabs.com (2603:10b6:8:35d::11) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9700.19; Mon, 16 Mar 2026 15:52:23 +0000
+Received: from BL6PEPF00022571.namprd02.prod.outlook.com
+ (2603:10b6:208:559:cafe::d3) by IA4P221CA0001.outlook.office365.com
+ (2603:10b6:208:559::16) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.25 via Frontend Transport; Mon,
+ 16 Mar 2026 15:52:47 +0000
+Authentication-Results: spf=pass (sender IP is 77.32.149.4)
+ smtp.mailfrom=shared-p100-i4.d.sp1-brevo.net; dkim=pass (signature was
+ verified) header.d=glowupacs.org;dmarc=pass action=none
+ header.from=glowupacs.org;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of
+ shared-p100-i4.d.sp1-brevo.net designates 77.32.149.4 as permitted sender)
+ receiver=protection.outlook.com; client-ip=77.32.149.4;
+ helo=shared-p100-i4.d.sp1-brevo.net; pr=C
+Received: from shared-p100-i4.d.sp1-brevo.net (77.32.149.4) by
+ BL6PEPF00022571.mail.protection.outlook.com (10.167.249.39) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.17
+ via Frontend Transport; Mon, 16 Mar 2026 15:52:31 +0000
+DKIM-Signature: a=rsa-sha256; bh=c79OKmYrIWFG1AlbbwCgmgjtPb8OYmNYwMIlFP0vnDI=;
+ c=relaxed/relaxed; d=glowupacs.org;
+ h=to:cc:from:reply-to:subject:date:mime-version:content-type:list-id:list-unsubscribe:x-csa-complaints:list-unsubscribe-post:message-id:sender:x-sib-id:x-mailin-client:x-mailin-campaign:feedback-id:bimi-selector;
+ q=dns/txt; s=brevo1; t=1773676340; v=1;
+ b=E5BVfU5deUUwNp+GXYeLmh3YNrXeZ1jWEgKRcn9B+AQK3hLMaHkI+CcqNohdPR/3g2hEFPbC
+ 5rs3utsysJye09MzTxT9pse9DOJT3+hAa2kOO3ZAPw8/K1MvANbQDmRPYQdyXxK+BUbOm72h6Ur
+ 9C5oxG2ys4VqqpqUN6SLt5tTMvtPuY7bn4tGGGfbNfWjTdiApa/RAReWKyN7RXPq1aTUGouCNuy
+ IfsCVs72HJD7WbZKsiQ6wwbq4GUA3pPJD46ROF9rtDetqzuQQxbvSPRMX3orYQ2OhgJrdG80OPP
+ RGO56CjnsZ2ctwDGpvz+7Zcxw6cBMkh9yrBapzcILXMGQ==
+To: <analyst@example.com>
+Subject: Your Internship Application - GlowUp ACS
+Content-Type: multipart/alternative; boundary="-------?=_76094-8742423293384"
+Date: Mon, 16 Mar 2026 15:52:20 +0000
+Feedback-ID: 77.32.149.4:10212430_15:10212430:Sendinblue
+From: People Operations <peopleops@glowupacs.org>
+List-Id: MTAyMTI0MzAtMzU5NC0xOA== <MTAyMTI0MzAtMzU5NC0xOA==.list-id.mailin.fr>
+List-Unsubscribe: <mailto:unsubscribe@shared-p100-i4.d.sp1-brevo.net?subject=unsub-p30m0k6ksk3j&body=p30m0k6ksk3j>,<https://ln750.r.sp1-brevo.net/mk/un/li/sh/REDACTED/bzEXKXXs_fZE>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+Message-Id: <202616031552.p30m0k6ksk3j@shared-p100-i4.d.sp1-brevo.net>
+Reply-To: <peopleops@glowupacs.org>
+X-Csa-Complaints: csa-complaints@eco.de
+X-Mailer: Sendinblue
+X-Mailin-Campaign: 15
+X-Mailin-Client: 10212430
+X-sib-id: KcVHMDUZ6FRLo2_ZcmVqqr6vCzIUehwGHbX5lc20NDEEqZq_dIezavCcygQLFd18lNvut-ZxLhFabyEHNtD6jkqJ3T755sTLupCMpxUdeqqWX6Nv6rG1xbVOYQ6FAHjJvx6zvDptUXIXOAE9q8FtfERqu87dMu71MEwYhVzVY2RFR3eWzeYinfb3i_OME4vxP8kEFH9glNcpq_XQE65jpnMaw0op2yVsDaXmqUGfRXPztd6k
+Return-Path: bounces-ln750-peopleops=glowupacs.org@shared-p100-i4.d.sp1-brevo.net
+X-MS-Exchange-Organization-ExpirationStartTime: 16 Mar 2026 15:52:32.1669
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 594f2eac-be93-4fd3-19c5-08de837408e2
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: f5222e6c-5fc6-48eb-8f03-73db18203b63:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF00022571:EE_|DS9PR01MB994465:EE_|SJ2PR01MB8619:EE_
+X-MS-Exchange-Organization-AuthSource: BL6PEPF00022571.namprd02.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 594f2eac-be93-4fd3-19c5-08de837408e2
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-UI-Tagging: External
+X-MS-Exchange-Organization-SCL: 5
+X-Forefront-Antispam-Report: CIP:77.32.149.4;CTRY:FR;LANG:en;SCL:5;SRV:;IPV:NLI;SFV:SPM;H:shared-p100-i4.d.sp1-brevo.net;PTR:shared-p100-i4.d.sp1-brevo.net;CAT:SPM;SFS:(13230040)(30052699003)(69100299015)(3109299003)(1032899013)(5073199012)(31052699007)(39142699007)(4123199012)(5063199012)(4022899009)(7049299003)(7149299003)(13003099007)(18002099003)(56012099003)(19002099003)(21082099003)(55112099003)(16102099003)(8096899003)(2066899003)(4076899003);DIR:INB;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|30052699003|69100299015|3109299003|1032899013|5073199012|31052699007|39142699007|4123199012|5063199012|4022899009|7049299003|7149299003|13003099007|18002099003|56012099003|19002099003|21082099003|55112099003|16102099003|8096899003|2066899003|4076899003;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 16 Mar 2026 15:52:31.8144
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 594f2eac-be93-4fd3-19c5-08de837408e2
+X-MS-Exchange-CrossTenant-Id: f5222e6c-5fc6-48eb-8f03-73db18203b63
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF00022571.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS9PR01MB994465
+X-MS-Exchange-Transport-EndToEndLatency: 00:02:57.1595128
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9700.017
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:J;OFR:SpamFilterAuthJ;ENG:(910005)(944506478)(944626604)(4710137)(4715077)(4999163)(920097)(930201)(3100021)(140003);RF:JunkEmail;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?djREbVA3MDNMSUoremJNQTVpcUJ3TFI5ZG9rTGhNRm44OGw2SFByTy9Fa1JB?=
+ =?utf-8?B?ekFEcjh1cTRhYzhiTlVUMWt0K2ZicW92cnkreitNdDRKOFJWd0kvbmkzSDN5?=
+ =?utf-8?B?V1FBR0RUd2JwRzd6TmswMWw3RVRZVG1xN2p2SFdtYnRqSFkwQmFuS1VhdmJw?=
+ =?utf-8?B?M0E1QWZTMUhxRmxBRTV6a294TDg4Yk96T0FqKzZRczc1MURxVmV1YnkyV3R5?=
+ =?utf-8?B?dUgzZnhXZnJ6SVk3T1diWHpFaXQ4cDQwKytpYWpCYm9ncmxsZDNMeisxVE1s?=
+ =?utf-8?B?Y2xEbW5BMWF0bEVFbXFUaVBKcTVQOGNHSmNMYzh3TmErSk9nUHRQd2lWc0lv?=
+ =?utf-8?B?QUNsRjkrMEJPZ3Y3RUNtRmhBdHN3bHIxcDN6M1hoQzhSQ0NRZURBeU9yZjZO?=
+ =?utf-8?B?bVV5ZUJVblBmZWZGZVF1WTk0dUp4bmxpTkZJNGNBdDg0eXZyY0haaFZBV3pJ?=
+ =?utf-8?B?QVlsUnp4RGNwWWhrTjlDUWF6MG9EUEtrVDR6WThkR0t3L2V0N0JJVGh1VFpk?=
+ =?utf-8?B?bnE4VW94cy9pNUlDNXI2amlNbXVOeGg4bk50TVFsaWVaL2pYcVN2TG1EOWRM?=
+ =?utf-8?B?aDlWVEI2Skd0Z1Z3ZWMxM1JidWpRT3d4dG9mZE15S29CUlpnbXJGT3NhaExP?=
+ =?utf-8?B?TDhkaFpadXFFSXYvaDBUZmNMcEkzbUREUXk2YUNJWmoyMVZudnFUcFZRWEl0?=
+ =?utf-8?B?MStKMW5JU0p0WGtPblJWY2FsQ1FaYkRYNnNZSHMwZC96MWJra0FieXNaLzVU?=
+ =?utf-8?B?RVhZOHA2UVc2ck9VVkx6SFdYaDJjcTZPaGdkOHNlWTVadHh4UkEyZEdxSi91?=
+ =?utf-8?B?YkZYcWRpL1FTMGxFckIyN1BHeGJ6ZUxvV0hXMHJOU0R4RnU2NXMwNW90Q21H?=
+ =?utf-8?B?ZlVDbTRVTTNxVTg3cGNBbW5XRGJZbDJlWW1zRmhyNnMzOFhROUFzckJTNTBJ?=
+ =?utf-8?B?cDlwZEkwdUl0Wm1pRS9CRVRkVVlXQ1cwZDNhVWdpK24rUEQ4MkQzeEZ6NE9I?=
+ =?utf-8?B?L0JEMmdBVUk0dHlJNXRvTUpZYzdmazBmS3hmUENVT1BZZEFacmNQdWhDMGV6?=
+ =?utf-8?B?ODJHN1B0SnpBc3FXL0pwYzF4bitUTnpBaGhpakpwR2ZBK1BpNVoyUi9tQTBI?=
+ =?utf-8?B?MHJJZlVzanJ0MHdPMzlnRkRMeUtIQWFZMGorUEJ4d1F5eUVTNE0wUVBMTDVG?=
+ =?utf-8?B?elhMVkliVWhnMS9Lb0YwWkM5eGZ6bmdPQjV6U29NZVNLQlVISkgzODJOa0tz?=
+ =?utf-8?B?MTJVdWpsQWFvOHM2MGRud2xGWnNXZnRkaTZ3Q1RSSElhdmx2L1BEd2srUFRl?=
+ =?utf-8?B?emIxcGs0bUE0bTdCTkFoTWFYVzcxUkRRTHkrdVlSMk94cmg3K2xlWFlnY2Rl?=
+ =?utf-8?B?VHdzTHpPWEF6YWlScVcyYUtWVkc2WndJbDFGM1ZUdWtqVnkwcUllQUQ5Yjlq?=
+ =?utf-8?B?UkdjL1REditmaFRrc09HR0ZrazBTSHRYTEF6U2tZNnBGK2l5VTE3V0tsSmlC?=
+ =?utf-8?B?Z3pjZEp4dHFxUmRtQmtvRkpiUjVhbFE2cGZwQ0dJSXlza3NhRVg2MTVleGVI?=
+ =?utf-8?B?RWNjSGsrREVIaHhYVTAvZEFMcS9tOVdSMXJNQnRQMDEydTRXcjV0SnRIbTAy?=
+ =?utf-8?B?ZEI3Um5rdTBvczYxU1FZZUY4R3V6bUt0WDFWd1BsaWZHc3VwaXVwa0EwbThi?=
+ =?utf-8?B?YURVTVpUUXRDaEFyUjRQUm9CdXUyaitMbWRlZTZ5dnJmaWY5SXhtK3NXSHl2?=
+ =?utf-8?B?QjJodVRlcjBKM0hoTG5TS2R5OEV4MGIrKzA5eG9yYjdzVzQ3bm5nYXg3Y3ps?=
+ =?utf-8?B?VklaY28vVlM4S2R5aWQ2QkUxOVF2UUgySENUejUveEI4Z2gyTjZ1NVR3NnBl?=
+ =?utf-8?B?c2ZKRG5lRzZxVEZRdFRFcjJoMTN4U3ZBUDdGQkplZ3ZTRGhOb3hOVVU2eDZO?=
+ =?utf-8?B?dWJEbFBKeVEramxiOGx6ZCtJcTk4emNqYUdselNHbzR1NDZ4WDkwRXZjeXhv?=
+ =?utf-8?B?WFZZV204U3dwOXhzUlRFNlFsMStEa0t2Uzk4NlZvOUJXRWFiWWUzdTNlSjFs?=
+ =?utf-8?B?dWwxMkc0a2lXTmdoWjdiMEplRHc0bjJycVhJUUFNZUowN1V6cWFhNXZQWVU5?=
+ =?utf-8?B?THd1N2drcnJqcGUrMVlaajBhL3pCekxXS05rK2szMUdhQUlCNnpWdGt2ODMy?=
+ =?utf-8?B?bkdlT1JCN0kxMUhhYnNOVC9nS3ljdFYrazlYVFVNQXdGRWlOay9Ua0pVOWR5?=
+ =?utf-8?B?QXNFQmlaV2dQT2RHZVpLUHpiOSs2WG9KcW1sa3BjaG43VHI5OFJQOTNuRXdI?=
+ =?utf-8?B?QXQvTXFYMWVvenArYlJsTitPVVpoWW1pTDdSODAwamlFMzArZUg1ZG56K3gy?=
+ =?utf-8?B?YlJVYTNqYnpFL3M0QmluVllidTZUZW5SVU02RVErWDI4blozRzJMczBYSi9G?=
+ =?utf-8?B?bEZ3WWkwV1JOZi9XTXZRWXk2Rm5yT3pXckdCbG9nemNKQTlkTGMwaXZRRlBk?=
+ =?utf-8?B?b0lUcVQ4YVF2ZVpiWTlKZE55ejhzRVJHL0dGSnBkY3JqS0wzekVmQ2ZEVGJz?=
+ =?utf-8?B?UmNwTFd0TDh3UjdnOGI2bXBiSm5oUkpHNWVFMVpzM09uc2kyZVVMN3NHR1Nq?=
+ =?utf-8?B?bTVVeTFQbG1KTGtvckM0cEZsRTI0QzNoUDVUYnBEelBZR1o2bGRrL083bU1X?=
+ =?utf-8?B?OHhteUJUMFR6UDlsVVlIb0VlcFUyV3c4TUlDbFNtYW5pQTVHMDR2V2xCR1h0?=
+ =?utf-8?B?UzdUR1lBdSthNkhhOTg3c0lHRGxqS0lYajBQcERVR2c2cGh1TzBWUncvazRQ?=
+ =?utf-8?B?TCtyLy9zWHBrS3JaYmNSTzVXQmVVVVRpK0krTGRsRjJYQTlmN1lUQzBBL1hY?=
+ =?utf-8?B?dXoxRmh4ZTZrNXBTL1RYT0pGKzl2MjhKSXpTMU5TSGJqWCtZM3IyQnpDUlI3?=
+ =?utf-8?B?UVVpZ2ZzMlJLYjZGeXdjUDlhamRkT2JKTTZkcSsvMUpWNUlpcFVQM004aitR?=
+ =?utf-8?B?bzczME9aQUJrSkZIVjlQNlJtV01HazQ1Y2VEVFRvVDJOSGJkeDJNdGk5aFNz?=
+ =?utf-8?B?NUR5SmN0YkUrckZUWGpNNFJDY256T0dsTGFqWDNjS3N5Vjd3V09KQ1pSSGtQ?=
+ =?utf-8?B?RndNUTFwWnpyeERuVEdUdWNlUzhqQjh0SnZFZ2lyY0tmZWhGNmVERUFEWWlS?=
+ =?utf-8?B?Z09zQUdIcmxGS2RDSjRXRmNjRE51WnVoNEo0T1pQekZLYkFvQ0xrNVhQczE3?=
+ =?utf-8?B?bVN3Z0crcUZYOVN6aGFDZWxHdE5CcnhUWHNCMU41T0tMdUdGdzZaRHBoK0NE?=
+ =?utf-8?B?ei91bmlkRSt2QW5uMzh1WksyajZzeXFNYTdPTFRLMmFEdTJ1TFRpaEgyTGZ5?=
+ =?utf-8?B?UHI5RjArZEttdk9QTEJzMFgzK1p6M1BtT1ZUU3A5ZGVqNmx4a2NuZEdXV0NY?=
+ =?utf-8?B?Y00wSksvY0ZaWWlEZlE4Y2hNcHBWTjUzMUFCbmpvUHBaNW1USlMxTGtuTGlw?=
+ =?utf-8?B?THlTWlpnL0wvRDg0bHNZVjNIaVhqQXhvZm8rRUVzeVEyOXQ3T1VvZEQ5b05w?=
+ =?utf-8?B?dzczejIzeFZvalJuYllETFRFS2ZSc3NaaVlOaGpudjVtRmdIK0tmT0NVRnY0?=
+ =?utf-8?B?V0ZLam9sR2U5dTNIdis3bnVKbmY3U3h1Y1NYSWRXK1JiMU5jVUJCbTlET1BG?=
+ =?utf-8?B?TEUzY3FiQll4dUFtbGhRZk9DdkVWUFNFRGpIOFZYZS9TdU0xSFJmYThUTW9t?=
+ =?utf-8?B?Vk9qWS8ra3dyZmpaS2lxUTVQSk1Ga2tsVmxGTE0reXBNSHVlZEtqQzRSTHFi?=
+ =?utf-8?B?dlVBRXlBRldRd2tBVG0yZVdEWFdORW9KZ2NkYmdja1QyZ0lSU09GWEk0SDhG?=
+ =?utf-8?B?KzhGemlEcUVnWklNYlY3T01IZnZJRDZWTjAzN3Q0dzVWNGhjRDBhaG1CWFlD?=
+ =?utf-8?B?dEVLSXdoR2czR2I2OTZPUm1TSjlRazRJZ0JJa01Oa0MxSEo3Q01XeVU1VVBa?=
+ =?utf-8?B?UnpCQWMybjVZb1NoS0NFcjVLMDJ6THFxVTlGRWxOQXViY2xCZmJyT3Urb28r?=
+ =?utf-8?B?OVBKejJUMEJ3S3lFY3ZDN2RnSTZRbU5RTmtuRkhtQjc5TS92VGl2ODB6V0kv?=
+ =?utf-8?B?am14VkxJSjk4RzVqdC9vTDYyMVdUSEtRN2Vod2tYS3I4WkFGeGxOeXplYlRF?=
+ =?utf-8?B?dENWNk9pNXdlN3hsNGVicXNmRGxNMWFnVS9ZNkFNR2dWZ083Ly9YamtkMWRE?=
+ =?utf-8?B?amNQZENoYU52dnNWVXdkNTdma2RiQkh0NXRTVHlGVy9GRUp6NU0rWVdCTGFn?=
+ =?utf-8?B?Z2RZTVQ5Rjk0OEx0c0l3LzJ6dFJJazU0SG5LdmxNMEhnc2RGdHI5dWNUcEx4?=
+ =?utf-8?B?b0JEOW0zY1ZQbUdDWHZDOHQzcm4yWXR1QzFwZVlZV25UdlN0MldaczRCZ3dK?=
+ =?utf-8?B?WnBmVTROSDg4U05UV3pjNEh0dktCYngzUDNkTHJFR04wY09wVUxZd1F5NkNq?=
+ =?utf-8?B?YkpqOVI4amEzNGhQT2xwWmpyeUZvZjJyNmRxLzR3a09EQS9pNzA1NEVHU2Z0?=
+ =?utf-8?B?c0twMDI1NEJvY0haV2FtQlRGWUozOU1BUGhCbEhOSVZpOTVHU1JGTTFyNmY4?=
+ =?utf-8?B?eDhxQTBnOXkxcGFpNzhOUFMrbnkzRDc0b2I0bEZuYTNwc0kwMlRWQit5NkVX?=
+ =?utf-8?B?L2lKUWxZYWRJWUhTeVEzSy85dW9KYzE0L0pwY2ZKRm16MFpMWk50MHZjdDNp?=
+ =?utf-8?B?dVVPS0lDN2I0OEE4ZTZPb2ZhNFJRb0czelRSVXlKcGpjQW04RzlQVEJ2RTF6?=
+ =?utf-8?B?ME9TSzJKSlN4NlhMTkV1a3o4ZU5QenV1eEx3R2I4ckVpb3RXY0swV3owaDlw?=
+ =?utf-8?B?dGRmMzM5MFJRWlFlbFRuVFYrbmtrM2UvUUMxK1pLejJWMmorUitiWjJYK1pz?=
+ =?utf-8?B?ckpzazJVM0FpL2M1eEVOd2ZxS3pVSzRSUytqVE1aa0JJZ0FpeVBDWjFRK2JW?=
+ =?utf-8?B?MUhxZG95d2FmYXQvblJ4UUtCdmk4M04yK0t0YmlsK0hyLzhBbklLUjZ3WVcr?=
+ =?utf-8?B?VXVhOTA4SWxIc2g1aGZXckxvNXdkd0xYL25GU0V3MXQ2Q3dmblJQajJDcHhZ?=
+ =?utf-8?B?TVNZM0lpTm51V2JWdmh5Umg4Z0dNZDM1b1BKRDNNZkpsbVR3UzJjWXBBbXRB?=
+ =?utf-8?B?eUlsY1JTQXloQUhRRHJxUUdzazJCWjBSUGFsbEppaHlkbkE1ZTR1cGtoTUU1?=
+ =?utf-8?Q?BegCrUslTROsIUJ?=
+MIME-Version: 1.0
+
+---------?=_76094-8742423293384
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset="utf-8"
+
+External Email: Use Caution
+
+To get to know you more, please fill out this form for our charity=E2=80=8C=
+   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =
+=C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=
+=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=
+=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=
+=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=
+=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C=
+   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =
+=C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=
+=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=
+=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=
+=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=
+=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C=
+   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =
+=C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=
+=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=
+=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=
+=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=
+=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C=
+   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =
+=C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=
+=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=
+=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=
+=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=
+=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C=
+   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =
+=C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=
+=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=
+=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=
+=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=
+=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C=
+   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =
+=C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=
+=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=
+=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=
+=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=
+=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C=
+   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =
+=C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=
+=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=
+=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=
+=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=
+=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C=
+   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =
+=C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=
+=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=
+=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=
+=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=
+=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD=E2=80=8C   =C2=AD
+If you are not able to see this mail, click here<https://ln750.r.sp1-brevo.=
+net/mk/mr/sh/REDACTED/Yll_9L95y8uC>
+[https://ln750.r.sp1-brevo.net/mk/op/sh/REDACTED/6OfhwOEN20CF]
+[https://ln750.img.sp1-brevo.net/im/sh/TrSQ2qteRPri.png?u=3DREDACTED]
+
+You've Moved Forward In The Process
+
+Hello Analyst,
+
+
+We'd like to thank you for applying through Handshake to the Internship pos=
+ition at our nonprofit GlowUp ACS. Congratulations =E2=80=94 you=E2=80=99ve=
+ officially moved into the second stage!
+
+
+I=E2=80=99m Alessandra Veliz, the Executive Director of GlowUp ACS. GlowUp =
+ACS is built on collaboration, clarity, and initiative. This form is design=
+ed to help us understand how you think, how you express yourself, and how w=
+ell you align with the environment we cultivate here.
+
+
+Before completing the form, please remember to review the dedicated screeni=
+ng website<https://ln750.r.sp1-brevo.net/mk/cl/f/sh/REDACTED/-ZJcTu0LqfNy>.=
+ It walks you through our expectations, culture, policies, and available ro=
+les. It=E2=80=99s designed to help you determine whether this opportunity i=
+s the right fit before we move into time-intensive interviews.
+
+
+=F0=9F=94=97 Submit your Phase 2 application here<https://ln750.r.sp1-brevo=
+.net/mk/cl/f/sh/REDACTED/0dBFrBO2ISht>, only after reading the other link.<=
+https://ln750.r.sp1-brevo.net/mk/cl/f/sh/REDACTED/EHjBnrsALo3v>
+
+
+
+Looking forward to reading your responses,
+Alessandra Veliz
+Executive Director
+GlowUp ACS
+
+
+
+
+=C2=AD
+GlowUp ACS, A 501(c)3 Nonprofit
+
+89 Sherwood Ave, 3rd Floor, 07502, Paterson
+
+You've received this because you agreed to let us contact you about roles.
+
+Unsubscribe<https://ln750.r.sp1-brevo.net/mk/un/v2/sh/REDACTED/bzEXKXXs_fZE=
+>
+
+[Mailin] <https://ln750.r.sp1-brevo.net/tracking/?utm_campaign=3DREDACTED&u=
+tm_medium=3Demail&utm_source=3Dlogo_mailin>
+
+---------?=_76094-8742423293384
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=UTF-8
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org=
+/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns=3D"http://www.w3.org/1999/xht=
+ml" xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micros=
+oft-com:office:office"><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+<meta http-equiv=3D"X-UA-Compatible" content=3D"IE=3Dedge">
+<meta name=3D"format-detection" content=3D"telephone=3Dno">
+<meta name=3D"viewport" content=3D"width=3Ddevice-width, initial-scale=3D1.=
+0">
+<title>Your Internship Application - GlowUp ACS</title>
+<style type=3D"text/css" emogrify=3D"no">#outlook a { padding:0; } .Externa=
+lClass { width:100%; } .ExternalClass, .ExternalClass p, .ExternalClass spa=
+n, .ExternalClass font, .ExternalClass td, .ExternalClass div { line-height=
+: 100%; } table td { border-collapse: collapse; mso-line-height-rule: exact=
+ly; } .editable.image { font-size: 0 !important; line-height: 0 !important;=
+ } .nl2go_preheader { display: none !important; mso-hide:all !important; ms=
+o-line-height-rule: exactly; visibility: hidden !important; line-height: 0p=
+x !important; font-size: 0px !important; } body { width:100% !important; -w=
+ebkit-text-size-adjust:100%; -ms-text-size-adjust:100%; margin:0; padding:0=
+; } img { outline:none; text-decoration:none; -ms-interpolation-mode: bicub=
+ic; } a img { border:none; } table { border-collapse:collapse; mso-table-ls=
+pace:0pt; mso-table-rspace:0pt; } th { font-weight: normal; text-align: lef=
+t; } *[class=3D"gmail-fix"] { display: none !important; } </style><style ty=
+pe=3D"text/css" emogrify=3D"no"> @media (max-width: 600px) { .gmx-killpill =
+{ content: ' \03D1';} } </style><style type=3D"text/css" emogrify=3D"no">@m=
+edia (max-width: 600px) { .gmx-killpill { content: ' \03D1';} .r0-o { borde=
+r-style: solid !important; margin: 0 auto 0 auto !important; width: 320px !=
+important } .r1-i { background-color: #ffffff !important } .r2-c { box-sizi=
+ng: border-box !important; text-align: center !important; valign: top !impo=
+rtant; width: 100% !important } .r3-o { border-style: solid !important; mar=
+gin: 0 auto 0 auto !important; width: 100% !important } .r4-i { padding-bot=
+tom: 0px !important; padding-left: 15px !important; padding-right: 15px !im=
+portant; padding-top: 0px !important } .r5-c { box-sizing: border-box !impo=
+rtant; display: block !important; valign: top !important; width: 100% !impo=
+rtant } .r6-o { border-style: solid !important; width: 100% !important } .r=
+7-i { padding-bottom: 0px !important; padding-left: 0px !important; padding=
+-right: 0px !important; padding-top: 0px !important } .r8-i { padding-botto=
+m: 15px !important; padding-top: 15px !important } .r9-i { padding-bottom: =
+20px !important; padding-left: 15px !important; padding-right: 15px !import=
+ant; padding-top: 20px !important } .r10-i { padding-left: 0px !important; =
+padding-right: 0px !important } .r11-c { box-sizing: border-box !important;=
+ text-align: left !important; valign: top !important; width: 100% !importan=
+t } .r12-o { border-style: solid !important; margin: 0 auto 0 0 !important;=
+ width: 100% !important } .r13-i { padding-top: 15px !important; text-align=
+: center !important } .r14-c { box-sizing: border-box !important; padding-b=
+ottom: 0px !important; padding-top: 0px !important; text-align: left !impor=
+tant; valign: top !important; width: 100% !important } .r15-c { box-sizing:=
+ border-box !important; padding-bottom: 30px !important; padding-top: 30px =
+!important; text-align: center !important; width: 100% !important } .r16-i =
+{ background-color: #eff2f7 !important } .r17-c { box-sizing: border-box !i=
+mportant; text-align: center !important; valign: top !important; width: 320=
+px !important } .r18-i { color: #3b3f44 !important; padding-bottom: 20px !i=
+mportant; padding-left: 15px !important; padding-right: 15px !important; pa=
+dding-top: 20px !important } .r19-i { color: #3b3f44 !important; padding-le=
+ft: 0px !important; padding-right: 0px !important } .r20-i { color: #3b3f44=
+ !important; padding-bottom: 15px !important; padding-top: 15px !important;=
+ text-align: center !important } .r21-c { box-sizing: border-box !important=
+; text-align: center !important; valign: middle !important; width: 100% !im=
+portant } .r22-o { background-size: cover !important; border-style: solid !=
+important; margin: 0 auto 0 auto !important; width: 100% !important } .r23-=
+i { color: #3b3f44 !important; padding-bottom: 10px !important; padding-lef=
+t: 0px !important; padding-right: 0px !important; padding-top: 10px !import=
+ant } .r24-i { color: #3b3f44 !important; text-align: center !important } b=
+ody { -webkit-text-size-adjust: none } .nl2go-responsive-hide { display: no=
+ne } .nl2go-body-table { min-width: unset !important } .mobshow { height: a=
+uto !important; overflow: visible !important; max-height: unset !important;=
+ visibility: visible !important } .resp-table { display: inline-table !impo=
+rtant } .magic-resp { display: table-cell !important } } </style><!--[if !m=
+so]><!--><style type=3D"text/css" emogrify=3D"no">@import url("https://font=
+s.googleapis.com/css2?family=3DArial black"); </style><!--<![endif]--><styl=
+e type=3D"text/css">p, h1, h2, h3, h4, ol, ul, li { margin: 0; } .nl2go-def=
+ault-textstyle { color: #3b3f44; font-family: arial,helvetica,sans-serif; f=
+ont-size: 16px; line-height: 1.5; word-break: break-word } .default-button =
+{ color: #ffffff; font-family: arial,helvetica,sans-serif; font-size: 16px;=
+ font-style: normal; font-weight: normal; line-height: 1.15; text-decoratio=
+n: none; word-break: break-word } a, a:link { color: #0092ff; text-decorati=
+on: underline } .default-heading1 { color: #1F2D3D; font-family: arial,helv=
+etica,sans-serif; font-size: 36px; font-weight: 400; word-break: break-word=
+ } .default-heading2 { color: #1F2D3D; font-family: arial,helvetica,sans-se=
+rif; font-size: 32px; font-weight: 400; word-break: break-word } .default-h=
+eading3 { color: #1F2D3D; font-family: arial,helvetica,sans-serif; font-siz=
+e: 24px; font-weight: 400; word-break: break-word } .default-heading4 { col=
+or: #1F2D3D; font-family: arial,helvetica,sans-serif; font-size: 18px; font=
+-weight: 400; word-break: break-word } a[x-apple-data-detectors] { color: i=
+nherit !important; text-decoration: inherit !important; font-size: inherit =
+!important; font-family: inherit !important; font-weight: inherit !importan=
+t; line-height: inherit !important; } .no-show-for-you { border: none; disp=
+lay: none; float: none; font-size: 0; height: 0; line-height: 0; max-height=
+: 0; mso-hide: all; overflow: hidden; table-layout: fixed; visibility: hidd=
+en; width: 0; } </style><!--[if mso]><xml> <o:OfficeDocumentSettings> <o:Al=
+lowPNG/> <o:PixelsPerInch>96</o:PixelsPerInch> </o:OfficeDocumentSettings> =
+</xml><![endif]--><style type=3D"text/css">a:link{color: #0092ff; text-deco=
+ration: underline;}</style>
+</head>
+<body bgcolor=3D"#ffffff" text=3D"#3b3f44" link=3D"#0092ff" yahoo=3D"fix" s=
+tyle=3D"background-color: #ffffff;">
+<p><strong><span title=3D"This email came from an address that is outside o=
+f the University, proceed with caution!" style=3D"color:white"><span style=
+=3D"font-size:
+11pt;font-family:&quot;Open Sans&quot;,sans-serif;color:#ffffff; windowtext=
+ 3.0pt;
+padding:4.0pt;background:#e00122">External
+ Email: Use Caution</span></strong></p>
+<br>
+</span>
+<div>
+<table cellpadding=3D"0" border=3D"0" cellspacing=3D"0" style=3D"mso-hide:a=
+ll; display:none;">
+<tbody>
+<tr>
+<td>To get to know you more, please fill out this form for our charity=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp;
+ =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C=
+ &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp=
+; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp;
+ =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=
+=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD=E2=
+=80=8C &nbsp; =C2=AD=E2=80=8C &nbsp; =C2=AD</td>
+</tr>
+</tbody>
+</table>
+<div align=3D"center" style=3D"color: #727272; font-size: 10px;">If you are=
+ not able to see this mail, click
+<a style=3D"color:#01a4c6;" target=3D"_blank" href=3D"https://ln750.r.sp1-b=
+revo.net/mk/mr/sh/REDACTED/Yll_9L95y8uC">
+here</a></div>
+<!--[if mso]> <img width=3D"1" height=3D"1" src=3D"https://ln750.r.sp1-brev=
+o.net/mk/op/sh/REDACTED/6OfhwOEN20CF" /> <![endif]--><!--[if !mso]> <!---->=
+<img style=3D"display:none" src=3D"https://ln750.r.sp1-brevo.net/mk/op/sh/R=
+EDACTED/6OfhwOEN20CF"><!-- <![endif]-->
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" class=3D"nl2go-body-table" width=3D"100%" style=3D"background-color: #ff=
+ffff; width: 100%;">
+<tbody>
+<tr>
+<td>
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"600" align=3D"center" class=3D"r0-o" style=3D"table-layout: fix=
+ed; width: 600px;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"r1-i" style=3D"background-color: #ffffff;">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" align=3D"center" class=3D"r3-o" style=3D"table-layout: fi=
+xed; width: 100%;">
+<tbody>
+<tr>
+<td class=3D"r4-i">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation">
+<tbody>
+<tr>
+<th width=3D"100%" valign=3D"top" class=3D"r5-c" style=3D"font-weight: norm=
+al;">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" class=3D"r6-o" style=3D"table-layout: fixed; width: 100%;=
+">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"r7-i" style=3D"padding-left: 15px; padding-righ=
+t: 15px;">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation">
+<tbody>
+<tr>
+<td class=3D"r2-c" align=3D"center">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"205" class=3D"r3-o" style=3D"table-layout: fixed; width: 205px;=
+">
+<tbody>
+<tr>
+<td class=3D"r8-i" style=3D"font-size: 0px; line-height: 0px; padding-botto=
+m: 15px; padding-top: 15px;">
+<img src=3D"https://ln750.img.sp1-brevo.net/im/sh/TrSQ2qteRPri.png?u=3DREDA=
+CTED" width=3D"205" border=3D"0" style=3D"display: block; width: 100%;" sib=
+_img_id=3D"0"></td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" align=3D"center" class=3D"r3-o" style=3D"table-layout: fi=
+xed; width: 100%;">
+<tbody>
+<tr>
+<td class=3D"r9-i" style=3D"padding-bottom: 20px; padding-top: 20px;">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation">
+<tbody>
+<tr>
+<th width=3D"100%" valign=3D"top" class=3D"r5-c" style=3D"font-weight: norm=
+al;">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" class=3D"r6-o" style=3D"table-layout: fixed; width: 100%;=
+">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"r10-i" style=3D"padding-left: 15px; padding-rig=
+ht: 15px;">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation">
+<tbody>
+<tr>
+<td class=3D"r11-c" align=3D"left">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" class=3D"r12-o" style=3D"table-layout: fixed; width: 100%=
+;">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" class=3D"r13-i nl2go-default-textstyle"=
+ style=3D"color: #3b3f44; font-family: arial,helvetica,sans-serif; font-siz=
+e: 16px; word-break: break-word; line-height: 1; padding-top: 15px; text-al=
+ign: center;">
+<div>
+<p style=3D"margin: 0;">You've Moved Forward In The Process</p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" align=3D"center" class=3D"r3-o" style=3D"table-layout: fi=
+xed; width: 100%;">
+<tbody>
+<tr>
+<td class=3D"r9-i" style=3D"padding-bottom: 20px; padding-top: 20px;">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation">
+<tbody>
+<tr>
+<th width=3D"100%" valign=3D"top" class=3D"r5-c" style=3D"font-weight: norm=
+al;">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" class=3D"r6-o" style=3D"table-layout: fixed; width: 100%;=
+">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"r10-i" style=3D"padding-left: 15px; padding-rig=
+ht: 15px;">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation">
+<tbody>
+<tr>
+<td class=3D"r14-c nl2go-default-textstyle" align=3D"left" style=3D"color: =
+#3b3f44; font-family: arial,helvetica,sans-serif; font-size: 16px; word-bre=
+ak: break-word; line-height: 1.5; text-align: left; valign: top;">
+<div>
+<p style=3D"margin: 0;"><span id=3D"isPasted" style=3D"font-weight: 400;">H=
+ello&nbsp;</span>Analyst<span style=3D"font-weight: 400;">,</span></p>
+<p class=3D"default" data-header=3D"0" data-textformat=3D"{fgc:rgb(34, 34, =
+34),size:9.75,type:text}" data-margin-bottom=3D"9.75pt" data-margin-top=3D"=
+9.75pt" data-hd-info=3D"0" data-line-height=3D"1.2" style=3D"margin: 0;">
+<br>
+</p>
+<p class=3D"default" data-start=3D"504" data-end=3D"669" id=3D"isPasted" st=
+yle=3D"margin: 0;">
+We'd like to thank you for applying through Handshake to the Internship pos=
+ition at our nonprofit GlowUp ACS. Congratulations =E2=80=94 you=E2=80=99ve=
+ officially moved into the second stage!&nbsp;</p>
+<p class=3D"default" data-start=3D"504" data-end=3D"669" style=3D"margin: 0=
+;"><br>
+</p>
+<p class=3D"default" data-start=3D"671" data-end=3D"902" style=3D"margin: 0=
+;">I=E2=80=99m Alessandra Veliz, the Executive Director of GlowUp ACS. Glow=
+Up ACS is built on collaboration, clarity, and initiative. This form is des=
+igned to help us understand how you think, how you
+ express yourself, and how well you align with the environment we cultivate=
+ here.</p>
+<p class=3D"default" data-start=3D"1930" data-end=3D"2221" style=3D"margin:=
+ 0;"><br>
+</p>
+<p class=3D"default" data-start=3D"1930" data-end=3D"2221" style=3D"margin:=
+ 0;">Before completing the form, please remember to review the dedicated sc=
+reening
+<a href=3D"https://ln750.r.sp1-brevo.net/mk/cl/f/sh/REDACTED/-ZJcTu0LqfNy" =
+target=3D"_blank" rel=3D"noopener noreferrer" type=3D"absoluteLink" style=
+=3D"color: #0092ff; text-decoration: underline;" sib_link_id=3D"0" templati=
+ng=3D"n">
+website</a>. It walks you through our expectations, culture, policies, and =
+available roles. It=E2=80=99s designed to help you determine whether this o=
+pportunity is the right fit before we move into time-intensive interviews.<=
+/p>
+<p class=3D"default" data-start=3D"2223" data-end=3D"2419" style=3D"margin:=
+ 0;"><br>
+</p>
+<p class=3D"default" data-start=3D"2223" data-end=3D"2419" style=3D"margin:=
+ 0;">=F0=9F=94=97 <strong data-start=3D"2226" data-end=3D"2267">
+Submit your Phase 2 application&nbsp;</strong><a href=3D"https://ln750.r.sp=
+1-brevo.net/mk/cl/f/sh/REDACTED/0dBFrBO2ISht" type=3D"absoluteLink" target=
+=3D"_blank" rel=3D"noopener noreferrer" style=3D"color: #0092ff; text-decor=
+ation: underline;" sib_link_id=3D"1" templating=3D"n"><strong data-start=3D=
+"2226" data-end=3D"2267">here</strong></a><strong data-start=3D"2226" data-=
+end=3D"2267">,
+ only after reading the other link.</strong><a data-start=3D"2270" data-end=
+=3D"2419" rel=3D"noopener" target=3D"_new" class=3D"decorated-link" href=3D=
+"https://ln750.r.sp1-brevo.net/mk/cl/f/sh/REDACTED/EHjBnrsALo3v" style=3D"c=
+olor: #0092ff; text-decoration: underline;" sib_link_id=3D"2" templating=3D=
+"n"></a></p>
+<p class=3D"default" style=3D"margin: 0;"><br>
+</p>
+<p class=3D"default" data-start=3D"2591" data-end=3D"2760" style=3D"margin:=
+ 0;"><br>
+</p>
+<p class=3D"default" data-start=3D"2591" data-end=3D"2760" style=3D"margin:=
+ 0;">Looking forward to reading your responses,<br data-start=3D"2633" data=
+-end=3D"2636">
+<strong data-start=3D"2636" data-end=3D"2656">Alessandra Veliz</strong><br =
+data-start=3D"2656" data-end=3D"2659">
+Executive Director<br data-start=3D"2677" data-end=3D"2680">
+GlowUp ACS</p>
+<p class=3D"default" data-header=3D"0" data-textformat=3D"{fgc:rgb(34, 34, =
+34),size:9.75,type:text}" data-margin-bottom=3D"9.75pt" data-margin-top=3D"=
+9.75pt" data-hd-info=3D"0" data-line-height=3D"1.2" style=3D"margin: 0;">
+<br>
+</p>
+<p style=3D"margin: 0;"><br class=3D"zw-br">
+<br class=3D"zw-br">
+</p>
+</div>
+</td>
+</tr>
+<tr>
+<td class=3D"r15-c" align=3D"center" style=3D"padding-bottom: 30px; padding=
+-top: 30px;">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation" height=3D"3" style=3D"border-top-style: solid; background=
+-clip: border-box; border-top-color: #4A4A4A; border-top-width: 3px; font-s=
+ize: 3px; line-height: 3px;">
+<tbody>
+<tr>
+<td height=3D"0" style=3D"font-size: 0px; line-height: 0px;">=C2=AD</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" align=3D"center" class=3D"r3-o" style=3D"table-layout: fi=
+xed; width: 100%;">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"r16-i" style=3D"background-color: #eff2f7;">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"600" align=3D"center" class=3D"r0-o" style=3D"table-layout: fix=
+ed; width: 600px;">
+<tbody>
+<tr>
+<td class=3D"r18-i" style=3D"color: #3b3f44; font-size: 16px; padding-botto=
+m: 20px; padding-top: 20px;">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation">
+<tbody>
+<tr>
+<th width=3D"100%" valign=3D"top" class=3D"r5-c" style=3D"font-weight: norm=
+al;">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" class=3D"r6-o" style=3D"table-layout: fixed; width: 100%;=
+">
+<tbody>
+<tr>
+<td valign=3D"top" class=3D"r19-i" style=3D"color: #3b3f44; font-size: 16px=
+; padding-left: 15px; padding-right: 15px;">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation">
+<tbody>
+<tr>
+<td class=3D"r11-c" align=3D"left">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" class=3D"r12-o" style=3D"table-layout: fixed; width: 100%=
+;">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" class=3D"r20-i nl2go-default-textstyle"=
+ style=3D"font-family: arial,helvetica,sans-serif; line-height: 1.5; word-b=
+reak: break-word; color: #3b3f44; font-size: 16px; padding-bottom: 15px; pa=
+dding-top: 15px; text-align: center;">
+<div>
+<h4 class=3D"default-heading4" style=3D"margin: 0; font-family: arial,helve=
+tica,sans-serif; font-weight: 400; word-break: break-word; color: #1F2D3D; =
+font-size: 18px;">
+<span style=3D"font-size: 18px;">GlowUp ACS, A 501(c)3 N</span><span style=
+=3D"font-size: 18px;">onprofit</span></h4>
+<p style=3D"margin: 0;"><span style=3D"font-size: 16px;">89 Sherwood Ave, 3=
+rd Floor, 07502, Paterson</span></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td class=3D"r11-c" align=3D"left">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" class=3D"r12-o" style=3D"table-layout: fixed; width: 100%=
+;">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" class=3D"r20-i nl2go-default-textstyle"=
+ style=3D"font-family: arial,helvetica,sans-serif; line-height: 1.5; word-b=
+reak: break-word; color: #3b3f44; font-size: 16px; padding-bottom: 15px; pa=
+dding-top: 15px; text-align: center;">
+<div>
+<p style=3D"margin: 0;"><span style=3D"font-size: 16px;">You've received th=
+is because you agreed to let us contact you about roles.</span></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+<tr>
+<td class=3D"r21-c" align=3D"center">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"570" align=3D"center" class=3D"r22-o" style=3D"table-layout: fi=
+xed; width: 570px;">
+<tbody>
+<tr>
+<td class=3D"r23-i" style=3D"color: #3b3f44; font-size: 16px; padding-botto=
+m: 10px; padding-left: 232px; padding-right: 232px; padding-top: 10px;">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation">
+<tbody>
+<tr>
+<th width=3D"106" valign=3D"top" class=3D"r5-c" style=3D"font-weight: norma=
+l;">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" class=3D"r6-o" style=3D"table-layout: fixed;">
+<tbody>
+<tr>
+<td class=3D"r19-i" style=3D"color: #3b3f44; font-size: 16px; padding-left:=
+ 8px; padding-right: 8px;">
+<table width=3D"100%" cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=
+=3D"presentation">
+<tbody>
+<tr>
+<th width=3D"100%" valign=3D"top" class=3D"r11-c" style=3D"font-weight: nor=
+mal;">
+<table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" role=3D"presentatio=
+n" width=3D"100%" class=3D"r12-o" style=3D"table-layout: fixed; width: 100%=
+;">
+<tbody>
+<tr>
+<td align=3D"center" valign=3D"top" class=3D"r24-i nl2go-default-textstyle"=
+ style=3D"font-family: arial,helvetica,sans-serif; line-height: 1.5; color:=
+ #3b3f44; font-size: 16px; text-align: center; word-break: break-word;">
+<div>
+<p style=3D"margin: 0;"><span style=3D""><u><a href=3D"https://ln750.r.sp1-=
+brevo.net/mk/un/v2/sh/REDACTED/bzEXKXXs_fZE" target=3D"_blank" style=3D"col=
+or: #0092ff; text-decoration: underline;">Unsubscribe</a></u></span></p>
+</div>
+</td>
+</tr>
+</tbody>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</th>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+</td>
+</tr>
+</tbody>
+</table>
+<div style=3D"font:normal 10px Arial; color:#ccc; text-align:center; margin=
+:20px auto 5px; width:200px;">
+<div style=3D"margin:10px auto 0px; width:200px;"><a href=3D"https://ln750.=
+r.sp1-brevo.net/tracking/?utm_campaign=3DREDACTED&amp;utm_medium=3Demail&am=
+p;utm_source=3Dlogo_mailin"><img alt=3D"Mailin" src=3D"https://ln750.r.sp1-=
+brevo.net/public/images/logo_nb_en.png" width=3D"129" height=3D"48">
+</a></div>
+</div>
+</div>
+</body>
+</html>
+
+---------?=_76094-8742423293384--

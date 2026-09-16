@@ -1,0 +1,388 @@
+Received: from DS4PR01MB994357.prod.exchangelabs.com (::1) by
+ SJ2PR01MB8619.prod.exchangelabs.com with HTTPS; Fri, 11 Sep 2026 21:51:05
+ +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=PV0sTPVpTI3ttca7aWMFGId6OoAOUq42Hw/BxtgiORItmC6k8s3ssmCzB66imfwjZdbRpb8t8iUdGLTgCr6Swg2/0JcmQocqLl4gMNewCMw1gcNarvvemB2oT5lq0khaV0F7tA1e7hsmqVdB+DNTojGg/SHfzRsCBaMjhSdy8OW3iecQnDx14GTRYLozbOxWulM87z7dvoUqdtNL5NYkdo/XR6UTq6rZHNbYXDkMr+QkQ/+EGyFG2H5Caf6fraBKJf5QoYeu73wZRFvnj/muLmaKP2NMvT3kO8Zgrk/dKCoyrimPpWCwSTM2jsyfINn5xn2SyPAQ9s1KA3zWf4TJqw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=csNA1H8elGjceXvsM303KU5fA1/gdiwcVsmtTZBYcbg=;
+ b=M9G349xIAseFQ5HxdAVa16dxvpz4hU0QZCKmtbL3xuZTPdzoIlu/L2LypQG5nkL/e4fvbiGNZy/u6PjLWyJzPgahfcalf4syY9vrFxlWaP3UgGwgg3LyPNNG1X10jcUJX3EQyFUxx3MrY2GNWxbQZUC2JnvaGmb2KXkfN0CyIZBnkul6OWR153fQjW8c25vZaZAIlLIJeZqRI1qKwZk13my6MP8q/7Q86rHG7dHDM9+kYoz066XM08FfHai+9Cqp0gUZd9cMYYQxvGa29OsAnIHC/vMkBDjFy8ASmebJZbK6y+G3bo/UrQ/W94702CIc6nzRu2irnH9Dizt1QhzMnw==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 2607:f8b0:4864:20::1143) smtp.rcpttodomain=mail.uc.edu
+ smtp.mailfrom=codingmacaw.com; dmarc=pass (p=quarantine sp=quarantine
+ pct=100) action=none header.from=codingmacaw.com; dkim=pass (signature was
+ verified) header.d=codingmacaw.com; arc=pass (0 oda=0 ltdi=1)
+Received: from BN9PR03CA0637.namprd03.prod.outlook.com (2603:10b6:408:13b::12)
+ by DS4PR01MB994357.prod.exchangelabs.com (2603:10b6:8:349::7) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.21.406.9; Fri, 11 Sep 2026 21:50:48 +0000
+Received: from BN3PEPF00022BBD.namprd04.prod.outlook.com
+ (2603:10b6:408:13b:cafe::9a) by BN9PR03CA0637.outlook.office365.com
+ (2603:10b6:408:13b::12) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.406.9 via Frontend Transport; Fri, 11
+ Sep 2026 21:50:47 +0000
+Authentication-Results: spf=pass (sender IP is 2607:f8b0:4864:20::1143)
+ smtp.mailfrom=codingmacaw.com; dkim=pass (signature was verified)
+ header.d=codingmacaw.com;dmarc=pass action=none
+ header.from=codingmacaw.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of codingmacaw.com
+ designates 2607:f8b0:4864:20::1143 as permitted sender)
+ receiver=protection.outlook.com; client-ip=2607:f8b0:4864:20::1143;
+ helo=mail-yw1-x1143.google.com; pr=C
+Received: from mail-yw1-x1143.google.com (2607:f8b0:4864:20::1143) by
+ BN3PEPF00022BBD.mail.protection.outlook.com (2603:10b6:40f:fc02::a55) with
+ Microsoft SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id
+ 15.21.406.5 via Frontend Transport; Fri, 11 Sep 2026 21:50:47 +0000
+Received: by mail-yw1-x1143.google.com with SMTP id 00721157ae682-87c938111a7so8717357b3.0
+        for <analyst@example.com>; Fri, 11 Sep 2026 14:50:47 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789163447; cv=none;
+        d=google.com; s=arc-20260327;
+        b=m75y3eivQGjidquqpuNnxEO2TMJQCwC5zNNyvLLtW2djQw4VUM9V7wcIUu2dsR69+y
+         PaepX1YRtSIOeEpPt/sjrTRiFvDTd5colVad2ahbysbwvYsUEOEvlwrRLWA6ARDBXhBY
+         QAJTVL7TJxgPVdcZTf96Ohvtxw1NdUE0SW0aTt34K/9+BWjIQJtMh6eePr9JOZOobndX
+         heAXIQdZGy4YXQV0RH7dmh7v4uF8574GWrZmmeJpaVvP8CEj2sqZ4Bqc53CYvfe1opWv
+         a/gOd1e+VV/0EwqnSDnmWTz5buxvOaHuUKDG52CsJpy4j6b9jVe/z8tUSppg/YxTV24R
+         ZASg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:subject:message-id:date:from:sender:mime-version:dkim-signature;
+        bh=csNA1H8elGjceXvsM303KU5fA1/gdiwcVsmtTZBYcbg=;
+        fh=ifygCICR4VaPH2nXBRtg0HnwGQU85wwqQP/DAqCQco8=;
+        b=eSBhAdPZKlqP4d5vkD6YK/B3RGPiPsP6UJFsKqHcJwEKDGijROpk4j79rS3wZedg3A
+         idpmS8Da5dKl8SbkP/jM0gmm6Gd0Et1o/D/buwWC1BjjYLaT+hlzZav6Qqya5YeONuUa
+         FvvIEOBWy3NbwYDKFwkasNusrMwa+uFWm7VpEc64ZTxv0L4/l+5Waih5zPiikddINcgP
+         CMuFxtlWBdAYRczuTWLE/4cwQbpdQN79OBQgG89qJoaP605a/3k206vZNpquaglHl+fT
+         jSh1SdFTQKr9gT3xMaHx9RpcT1rAD6FBlwlT3mNTbjB/Zz9c9v3UacRW7Gk8/24FKGkw
+         wDGg==;
+        darn=mail.uc.edu
+ARC-Authentication-Results: i=1; mx.google.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=codingmacaw.com; s=google; t=1789163447; x=1789768247; darn=mail.uc.edu;
+        h=content-type:to:subject:message-id:date:from:sender:mime-version
+         :from:to:cc:subject:date:message-id:reply-to:content-type;
+        bh=csNA1H8elGjceXvsM303KU5fA1/gdiwcVsmtTZBYcbg=;
+        b=SFYrvQdieat43bbYlI/BIfv7WDycQGq/ha38LmmhyWwvzsAGPDmVwy2Oe4vgqtzXGN
+         gcX2DAg3BIOW56HEColwlQuQzOpiaGtTpnV7LONpfDNo9cbOwGQyXol6c2ttOj/2hmoY
+         dEcND7gDIlzEgQhwVvZpWis5y50P0t+Y9gIUab19HAZLKCXrzByv8usZRim6MiCTuKlv
+         Q20PorR2sZjVUG3psIc+GdjppFnOUcWHtwgapxxrWASZp6xIcFVC6KMBxx750eOEb/ta
+         XPJtBE2N+Q428jrgr4BhQsoVxuM2HID7cAfVq/WWEB3tIF7wGSFYXJHMtZyiHXtw0lpk
+         DtqQ==
+X-Google-DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+        d=1e100.net; s=20251104; t=1789163447; x=1789768247;
+        h=content-type:to:subject:message-id:date:from:sender:mime-version
+         :x-gm-gg:x-gm-message-state:from:to:cc:subject:date:message-id
+         :reply-to:content-type;
+        bh=csNA1H8elGjceXvsM303KU5fA1/gdiwcVsmtTZBYcbg=;
+        b=bXKExgi5ubew4JnKsL7yFIUZlIIgC3vd7+JDFpxel4Q5sGMhzCkFwcSrmpp+pM2OBQ
+         0v6bLfK7gmGJl2OPtRfZJPJOHGION65ET3HaL4+XxEegfkUHoMHZ4HiV+pVfnKlqFSSR
+         Mcl+ku71UNy9b/EbCMSLW8rWNQtJvhD+j2Nut8z9f7QnuK78yj1SR+ajgbf/bUtDScFW
+         3bOF4LKL+Q88q/f3zsOtqW/IZfOTo6B4VvBf/+bMVrmphEviqJfdYYe5wT06QZemPzp8
+         qrjGQX9uUVB79oUsJE1L24JlYYYz/fuV2Z8jj/ztCoYkAJkfOmV9I8FGYA2sIwwu6MHk
+         ni5g==
+X-Gm-Message-State: AFuF++kNSqG5c/A4n4/wo8kfnKtfEWa905RTKurpG/ZnjlwOIhJc4Ejb
+	DzTfXDE/b3jA3qxq7F4BFvx5BLj6k09b7Hp2lfOYMUnIWXSCjxTZ48HTIYRh2OHDnPODlaKHiv2
+	Vg+JU1tQ7ue+s7P5Id4FdKclGDJ3sggtLUfagflzL7nc8jG3X1ClUjjfe
+X-Gm-Gg: AYBFou17b9L+KIZsGePAyL+molijdbrFV7LdyRYEOo01o+opIoJ38hwGCo8UwIMzDKz
+	PI0nrj42XsqMW9novfpUJGnKTxEGLF2uFP9MHAjHzQAXHOJUAizLBcV60orHZJOt62vmuDi6oO+
+	f1g9pKnICQrv4tW1GApyCmtYPmiWhaj7urtOn8mMSwcigljyh+HQDjU/Qtuclclss36fwEPznBX
+	4VebfElMof2kyTA/L+/rYAK73SmqFQ73oxtKNREKkjFP26BXG9xFKF9PPfvf2fxuXVxRoErtEDj
+	7Y/kHlk4wKqzfry2uqVER28dhtClEezZSyYZCTnlVf6igZsXrO79P4c=
+X-Received: by 2002:a05:690c:86:b0:834:fadf:6050 with SMTP id
+ 00721157ae682-8820214bf2dmr31292947b3.16.1789163446790; Fri, 11 Sep 2026
+ 14:50:46 -0700 (PDT)
+Received: from 1082471248903 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 11 Sep 2026 14:50:45 -0700
+Received: from 1082471248903 named unknown by gmailapi.google.com with
+ HTTPREST; Fri, 11 Sep 2026 14:50:45 -0700
+Sender: rajesh@codingmacaw.com
+From: rajesh@codingmacaw.com
+Date: Fri, 11 Sep 2026 14:50:45 -0700
+X-Google-Sender-Auth: oAV53TzLta7aRzVqP77_s-mSRVA
+X-Gm-Features: AcwNN1WrhZQW2EVO2wgSEM6_wWFHTc1Fu-rIpqc6jzfC3MdCGLAbq7zl_sAuNtI
+Message-ID: <CAHWBgaK8YpRtaOae1yQbfmzdyzRKaxjGnnSJ2B4VC7De1PC0Gg@mail.gmail.com>
+Subject: =?UTF-8?Q?FREE_10=2DDay_Cybersecurity_Bootcamp_=E2=80=93_Starts_Septem?=
+	=?UTF-8?Q?ber_22nd?=
+To: analyst@example.com
+Content-Type: multipart/alternative; boundary="000000000000b0fc16065b3c138f"
+Return-Path: rajesh@codingmacaw.com
+X-MS-Exchange-Organization-ExpirationStartTime: 11 Sep 2026 21:50:47.8129
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: bb81ad9a-f398-4359-a203-08df104ebd3a
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: f5222e6c-5fc6-48eb-8f03-73db18203b63:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BN3PEPF00022BBD:EE_|DS4PR01MB994357:EE_|SJ2PR01MB8619:EE_
+X-MS-Exchange-Organization-AuthSource: BN3PEPF00022BBD.namprd04.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: bb81ad9a-f398-4359-a203-08df104ebd3a
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-UI-Tagging: External
+X-MS-Exchange-Organization-SCL: 5
+X-Forefront-Antispam-Report: CIP:2607:f8b0:4864:20::1143;CTRY:;LANG:en;SCL:5;SRV:;IPV:NLI;SFV:SPM;H:mail-yw1-x1143.google.com;PTR:mail-yw1-x1143.google.com;CAT:SPM;SFS:(13230040)(704162211799003)(30052699003)(43022699015)(13003099007)(6133799003)(18002099003)(16102099003)(55112099003)(5023799004)(11063799006)(5063699009)(56012099006)(8096899003)(10067099003)(19002099009);DIR:INB;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|704162211799003|30052699003|43022699015|13003099007|6133799003|18002099003|16102099003|55112099003|5023799004|11063799006|5063699009|56012099006|8096899003|10067099003|19002099009;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 11 Sep 2026 21:50:47.7344
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: bb81ad9a-f398-4359-a203-08df104ebd3a
+X-MS-Exchange-CrossTenant-Id: f5222e6c-5fc6-48eb-8f03-73db18203b63
+X-MS-Exchange-CrossTenant-AuthSource: BN3PEPF00022BBD.namprd04.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS4PR01MB994357
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:17.5409789
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0406.000
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:J;OFR:SpamFilterAuthJ;ENG:(910005)(944506478)(944626604)(4710232)(4715172)(4999285)(920097)(930201)(3100021)(140003);RF:JunkEmail;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?RTF5UitONk5xUXU1M3JvNS9wU0lXSVIxYXQzdERxUUh6Wk1ZMloyWlNOcnNH?=
+ =?utf-8?B?Y1ZYNlI4K1E5NDgwYUhmU05hLzc2YWZjaHloOG45MExNeGwzdHhvUnNMMDlJ?=
+ =?utf-8?B?T3BQV2d3Z24zT3dldE0rOVRqVFhBeGRjZStyemxyOGI2WHVHZngxa3NXbE9D?=
+ =?utf-8?B?YWIwNjJNN2NQRTNxdHdLWVFDZjk5d1dKeWtCaXpXSDl3bXd3Y2RFY2tnM0ky?=
+ =?utf-8?B?ajArTjN4QmxEZ3d3MUR0Wm5yc3VRRzM3blFXWFJUTlNFSkdMMVU0dGQwVHVl?=
+ =?utf-8?B?aktKSG5nR2QvWHI1VXhxelpoZmEvVS9NRkMzQ0h6ZGNEUVFxS1dWbHRDK2ND?=
+ =?utf-8?B?V0V2dVV6a3RiNnMvelo1aXI4cC8rMUN1VTc3d21NK2ZHZkhBWWhyYkhiR2Zz?=
+ =?utf-8?B?aHcyUnNEUHFQT0N5aGJNZlcrSHYwOXV1dlJ1Wk5VenpzSm9INkRsWG1laHJD?=
+ =?utf-8?B?L3ZZc0czcUpXby9kZk1ZeXV4L2d0YndUUytYN2toUEh6czF3OUNYTWRjeVRQ?=
+ =?utf-8?B?V2JKNFNyL2lMajVwZGkrMThUMTZVMXdWMzJxUnFqNCt4WE9KZzByejZjV0la?=
+ =?utf-8?B?bzMwKzJBa05VK01YcDhmTGVRL2I1M2llVThCMXZleUZlZVRrOHdCSVd5a1FJ?=
+ =?utf-8?B?b0xQUXMvWXNVZEZVeURNVGtIQ25za21BNytXVzYzZEQ0dmdFc0ZRZVVLOW1k?=
+ =?utf-8?B?K0svYk9EeTMrSlF0cjc2cjZrRDVNZHlGVnBHQmRzNG9zSENBNmQzTHdJUlNR?=
+ =?utf-8?B?UDRTVjdzenJlTzVDaWcxZlVuSFJiUlJpd0pVWG1vcnUxS3c5SHZUczV1MlV5?=
+ =?utf-8?B?dkJTZFpLK3NyNlJCc0dRL2dybTQ0Qjk2MkJKdFRHRDU1bzF6TEw4c3hjOFFQ?=
+ =?utf-8?B?SzN2R3hOcUtoVTI0RWgyOVdic1lwc0JzMERvWnNkdjdDOVJXSzNieEd5MUE1?=
+ =?utf-8?B?Y2FHdDlJZ0VPSU80cDdEUmdDWjJxMGwveXlXL2JuZjFTVkkrdU5ENWQ4cmJ5?=
+ =?utf-8?B?aEN5d2JCZm13dlBhdzlJeU9uLzArd3FGUXBxZzNIR1lLSG9Fc2pCcWFPRFZ3?=
+ =?utf-8?B?cUU2dXljRFduNk14K0luWktGTmhCMU9DZGd1dGlrUUNjdzEydlZzQllTVDVL?=
+ =?utf-8?B?bEVUMjVORVNJc1llSUVXdm9SK3JxQXF0UElZVjlGWlZEdFA1UVJmbmZWYzNx?=
+ =?utf-8?B?ZytYbzNzS2V5dHlBZE9iYjZzNWhUOElYUFVOY2hFV0x3WnZUNEdva0JhWUFh?=
+ =?utf-8?B?MkhtMzZDQ3A3QXpZb0dDbkloOTdSWG1uZC93ck85N3duM3lxWnphVUV6Rm1H?=
+ =?utf-8?B?MVM2cFRvTExNUDQzL0pMQm9uTG1JZld0TTRaQzBCTXE3ZjBaTmlVZGdyNlJV?=
+ =?utf-8?B?RWRPTk8yakVEc2hIb0oyOEFzQXJ6YkJKb1ZPTzRSWDhoR0N4cFEvWVl4bCt2?=
+ =?utf-8?B?WE1DU3VsclZmekU5Vk1Vd2RxY1lOanZlRnJOKzM0Wmo1c2phOUhBL3B1SE1l?=
+ =?utf-8?B?RUJOUm53ajR3VGVNV3VZMDNralZqSCtQcXFFRkNYNnJVTCtqcTdabytlakxI?=
+ =?utf-8?B?dmhraGFwNzdKUzgxZG1CQzVkckVxaWdLQkwxcGRVUUw5bFVKc00xRjU0dHJ4?=
+ =?utf-8?B?a0o3ckRldTdyMkhtOXFXbzFsMmRtTVFXU2J1eVp1OEQrWktmcXd2NFZaeVZm?=
+ =?utf-8?B?NGh0YmZ2YzJ5Rk8vNVBRcEVsVEc5aTQxQ05XLzIxS1NpVlVFNlh0Q3hVakFR?=
+ =?utf-8?B?L3NZb2tUSjJYQTRIYnNQU0lHTEJaM2NseHp2czNqQjBpUzk4Sk8rOWczN0hX?=
+ =?utf-8?B?YWg2SUdjSENHNHlSbUNKVG5vczVkV2RlVDNxTFpaazJORjJBckIxaDNmNHRV?=
+ =?utf-8?B?dzFVUDg1QXQrN0I2NnRNV0FyK1dpNG45dVE3REplTGRZRkxuOVoza2lkQ3h1?=
+ =?utf-8?B?OGdsZkI2YlZKSG9iKzQ3a0FMYXNGT2lNMTh4UkI3MkZnUVVWZXJ1TFBwL1Rw?=
+ =?utf-8?B?V2toUzNPWThCOVN6a0VnUXVmZEE5aEwxS1luYXZ4bEQ1TlRCczg2RVJZVmJ3?=
+ =?utf-8?B?Zmx5Qmd1Z250cExjQWJzM2sySC9qTENHVzlRNVNlZTJRYWNjdk44OWFDemhN?=
+ =?utf-8?B?SGhUL0o0amx5T1MyRWpSYy9aL1VNc2tMV05US0FFUm5FalZFMjZjSFNsUkFU?=
+ =?utf-8?B?WEpuOVBNUW5UVkw1ODd1UUdLbFNJWWJyU3dWeFdhWE9wdGZhRmRvZit1b1Vq?=
+ =?utf-8?B?SXRndDBJZHV6ZGg2RHBoK0RGQUxaNkdiMS9KbFlEUkhvd25ZZEhYN2NlVHpW?=
+ =?utf-8?B?cDFHa0tjaEx1WEErMlBaNzM2RXRjaXlzZ0NSK1ZQbVFoZ1dpNW4yaEdzMHVa?=
+ =?utf-8?B?MGRwZTRYWm5yaHV1TWxaU3VUNkhTdzRwdzFjSUlNaHNzL1N3Wk9xUVNQOUJu?=
+ =?utf-8?B?ejdER0xDSnZwY0F5blJEU2FucHUwSTQ0MnF3TGVWNnNOM0Y1UzBWYWlOQ3A3?=
+ =?utf-8?B?R1c1ZG1kWVNva2tGWWJWYlc2bWJEeUdPdUVpOGdXci9aMC9EMTZJdWJtaGU2?=
+ =?utf-8?B?SVdKMHU2bjJXRDNZY3ZPb2ZhaFhjNnZaM291WjVoMnlYS3Y4bFV6QlZOVFRz?=
+ =?utf-8?B?ZFYxa2VtK0Q2UG4wdG5Ec3VGbk9PdkdhVyt6OFZISUpuVTM3d012ZC8rdFJY?=
+ =?utf-8?B?eDVnSVVxcCsrbGtNcElud1dzZW5hM2gvNWEwVFNneWFseENKQlB1eXpsNHhp?=
+ =?utf-8?B?M3I2K2hyVU10STZncm5Ib3Z6Zlk5ZTlSTXlaVXBZd1hPa0YvSk5ITGRlZVov?=
+ =?utf-8?B?a3Q5T0hkNzJvS1dDK0szNTcrcHN6eTVrVVM5ZE9iY1psdHhER1dBRVpHWHUv?=
+ =?utf-8?B?QnNHMU9LSU1zYnp6RDNGUktLRTRUelRlSnpHM3ZGL3R2MEU3bTBIbGdBQmhx?=
+ =?utf-8?B?K2xLa2JMVTRRUG1hTllSV2wwMS9IdEJSRmdzbGJaK3RnVUxNUFFRUURYVVVv?=
+ =?utf-8?B?bHJNMjdHMUZQaUNQOGZ2Ni92VnlIaS9ldlFSZzUwaVc3ZkFPM1JwbHVSVGpG?=
+ =?utf-8?B?aGpXWFZBSFpDem5KWiswM1FYM0ZySVZjemdDaFNYNXlWbzQ4bk1FckZEY1JC?=
+ =?utf-8?B?cSs2KzlDRWhjdUphaHhWSmgvaC9ZOUJDZ0lINlJtVjJCT0ozNWVTZHloYUYz?=
+ =?utf-8?B?YVg2OVFRaG9hc0NYZTBpQ05xSzVnVFMzRjZUblVseE9OaW1GTVNQZ2VOU0lU?=
+ =?utf-8?B?aE02dW82SDhQSm5aL25MSVZtSG1aUTJHUUwxaHAvV1NHbjFhMklVSjdERkd1?=
+ =?utf-8?B?UmV2Y2hPQ2RySWxUL0dvSmZLcVBNdEZ5OFkzcGpqK3FaWXlwcFVoRGNxUk8v?=
+ =?utf-8?B?RDdVNEtLK1h3TG1BK3NKRm1rUVJxWWY2TFZVeTUxRExzZ1p3b0ZkSFFHQkJm?=
+ =?utf-8?B?QU5KaWEwb0pFWGNxUHc0emJTdzExVURjMi92bURuYzFWK29zRmdOQzgyaTRv?=
+ =?utf-8?B?enUxOUcvck1CSng2QWlJSmU3aWZYS0RvL0kvaDlhVVhwNWhxVzlldXB1RFdU?=
+ =?utf-8?B?RlkxNitaVnBaRWtxWVMxMDhzclZBYXhJeDBPZ0Z5VUl6NlJiYXhJRWJNNWJl?=
+ =?utf-8?B?NGx5WDVGSkJ0U0pjeHhLN2Q3SC9qT0ZEeXZyMzNBZndBV252eU85cmdYSWhM?=
+ =?utf-8?B?aUhkYXREeG9KaFFwelF3eEtZTC9BVnNyK3MxVXNjY25UT2ZPb0NjWC81SnYx?=
+ =?utf-8?B?ZVYrTVU5NllCSkN1MWF1TDZUb01rb1czOFFITmFrdThqeWl1bW5Qc2FaU2l0?=
+ =?utf-8?B?WGR3ZmNzckJiNUN5VDdEeEV2WS9tbGNsS2pqcnp3MGdNOWlyWk12NHRsNUEy?=
+ =?utf-8?B?V3dSb2JMSVArTnprOWY2L1BNVXVkR01yZzBlM09LZ3BKZDZJMTdsWVhmNzF0?=
+ =?utf-8?B?MUZuMDVkYXdzR0JrTlZKQ3RwWjZLcU1yNWlZTjJQSXFKQmJjSGxiVkx2YmpZ?=
+ =?utf-8?B?S3JBUkRHVmlSZFc2U2JpbXBleU9zdkV1Nm1IK2EwMEJFM1RpWXVDZnJHMzJW?=
+ =?utf-8?B?ZDFRS0hic24vamxpQXVaRjdiZitDSmI1TTcvbkRncjRYOHNYT3RtYXZWWGt6?=
+ =?utf-8?Q?Ql2UURoPeQYofBC9juJiPQx1/pEUHTmkwmi0=3D?=
+MIME-Version: 1.0
+
+--000000000000b0fc16065b3c138f
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+External Email: Use Caution
+
+I hope you're doing well.
+
+I came across your profile and wanted to personally invite you to our FREE =
+10-Day Cybersecurity Bootcamp, designed for students, recent graduates, car=
+eer changers, and aspiring cybersecurity professionals who want to build pr=
+actical, job-ready skills.
+
+The program starts on September 22nd, and you'll receive 2 hours of live on=
+line training each day for 10 days, led by experienced industry professiona=
+ls.
+
+What You'll Learn
+Cybersecurity fundamentals
+Networking and security basics
+Cybersecurity threats and vulnerabilities
+Threat detection and prevention
+Security monitoring and incident response
+Identity and access management
+Network security concepts
+Security tools and technologies
+Hands-on cybersecurity exercises
+Real-world cybersecurity scenarios and use cases
+Industry best practices
+Live instructor-led training
+Certificate of Completion
+
+Please find the detailed Cybersecurity Bootcamp Syllabus attached for your =
+reference. It includes the complete curriculum and topics that will be cove=
+red throughout the program.
+
+After successfully completing the free bootcamp, you'll also have the oppor=
+tunity to enroll in our Master Bootcamp Program, where we provide Guarantee=
+d Job Placement Assistance to help you pursue a career in Cybersecurity and=
+ Information Security.
+
+Interested? Please Complete the Mandatory Step Below
+1. Join our Official WhatsApp Group (Mandatory):
+https://chat.whatsapp.com/DCkhpZ7wNzKCDaeMvdxOLM
+
+Please Click Here to Join the WhatsApp Group
+
+Please Note: Joining the WhatsApp group is mandatory. All important updates=
+=E2=80=94including the Zoho meeting link, trainer details, daily schedule, =
+syllabus, announcements, and other bootcamp communications=E2=80=94will be =
+shared only in this WhatsApp group.
+
+Candidates who do not join the WhatsApp group will not be considered for th=
+e bootcamp.
+
+Not Looking for Cybersecurity Training?
+If this opportunity isn't relevant to you, please feel free to ignore this =
+email=E2=80=94no action is required.
+
+However, if you know a friend, classmate, colleague, recent graduate, caree=
+r changer, or aspiring cybersecurity professional who may benefit from this=
+ free training program, we'd appreciate you forwarding this invitation to t=
+hem.
+
+This program is specifically designed to help entry-level candidates and as=
+piring professionals interested in Cybersecurity and Information Security g=
+ain practical exposure, strengthen their technical skills, and better prepa=
+re for entry-level opportunities.
+
+We look forward to helping aspiring cybersecurity professionals build the s=
+kills, practical experience, and confidence needed to begin their careers i=
+n Cybersecurity.
+
+If you have any questions, simply reply to this email.
+
+Best regards,
+
+Coding Macaw Bootcamp
+Empowering Future Cybersecurity Professionals with Industry-Focused Trainin=
+g & Guaranteed Job Placement Assistance
+
+--000000000000b0fc16065b3c138f
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+</head>
+<body>
+<p><strong><span title=3D"This email came from an address that is outside o=
+f the University, proceed with caution!" style=3D"color:white"><span style=
+=3D"font-size:=0A=
+11pt;font-family:&quot;Open Sans&quot;,sans-serif;color:#ffffff; windowtext=
+ 3.0pt;=0A=
+padding:4.0pt;background:#e00122">External
+ Email: Use Caution</span></strong></p>
+<br>
+</span>
+<div>
+<div dir=3D"ltr">I hope you're doing well.<br>
+<br>
+I came across your profile and wanted to personally invite you to our FREE =
+10-Day Cybersecurity Bootcamp, designed for students, recent graduates, car=
+eer changers, and aspiring cybersecurity professionals who want to build pr=
+actical, job-ready skills.<br>
+<br>
+The program starts on September 22nd, and you'll receive 2 hours of live on=
+line training each day for 10 days, led by experienced industry professiona=
+ls.<br>
+<br>
+What You'll Learn<br>
+Cybersecurity fundamentals<br>
+Networking and security basics<br>
+Cybersecurity threats and vulnerabilities<br>
+Threat detection and prevention<br>
+Security monitoring and incident response<br>
+Identity and access management<br>
+Network security concepts<br>
+Security tools and technologies<br>
+Hands-on cybersecurity exercises<br>
+Real-world cybersecurity scenarios and use cases<br>
+Industry best practices<br>
+Live instructor-led training<br>
+Certificate of Completion<br>
+<br>
+Please find the detailed Cybersecurity Bootcamp Syllabus attached for your =
+reference. It includes the complete curriculum and topics that will be cove=
+red throughout the program.<br>
+<br>
+After successfully completing the free bootcamp, you'll also have the oppor=
+tunity to enroll in our Master Bootcamp Program, where we provide Guarantee=
+d Job Placement Assistance to help you pursue a career in Cybersecurity and=
+ Information Security.<br>
+<br>
+Interested? Please Complete the Mandatory Step Below<br>
+1. Join our Official WhatsApp Group (Mandatory):<br>
+<a href=3D"https://chat.whatsapp.com/DCkhpZ7wNzKCDaeMvdxOLM">https://chat.w=
+hatsapp.com/DCkhpZ7wNzKCDaeMvdxOLM</a><br>
+<br>
+Please Click Here to Join the WhatsApp Group<br>
+<br>
+Please Note: Joining the WhatsApp group is mandatory. All important updates=
+=E2=80=94including the Zoho meeting link, trainer details, daily schedule, =
+syllabus, announcements, and other bootcamp communications=E2=80=94will be =
+shared only in this WhatsApp group.<br>
+<br>
+Candidates who do not join the WhatsApp group will not be considered for th=
+e bootcamp.<br>
+<br>
+Not Looking for Cybersecurity Training?<br>
+If this opportunity isn't relevant to you, please feel free to ignore this =
+email=E2=80=94no action is required.<br>
+<br>
+However, if you know a friend, classmate, colleague, recent graduate, caree=
+r changer, or aspiring cybersecurity professional who may benefit from this=
+ free training program, we'd appreciate you forwarding this invitation to t=
+hem.<br>
+<br>
+This program is specifically designed to help entry-level candidates and as=
+piring professionals interested in Cybersecurity and Information Security g=
+ain practical exposure, strengthen their technical skills, and better prepa=
+re for entry-level opportunities.<br>
+<br>
+We look forward to helping aspiring cybersecurity professionals build the s=
+kills, practical experience, and confidence needed to begin their careers i=
+n Cybersecurity.<br>
+<br>
+If you have any questions, simply reply to this email.<br>
+<br>
+Best regards,<br>
+<br>
+Coding Macaw Bootcamp<br>
+Empowering Future Cybersecurity Professionals with Industry-Focused Trainin=
+g &amp; Guaranteed Job Placement Assistance</div>
+</div>
+</body>
+</html>
+
+--000000000000b0fc16065b3c138f--

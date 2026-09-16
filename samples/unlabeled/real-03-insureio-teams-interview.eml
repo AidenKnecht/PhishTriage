@@ -1,0 +1,317 @@
+Received: from SN4PR01MB994782.prod.exchangelabs.com (::1) by
+ SJ2PR01MB8619.prod.exchangelabs.com with HTTPS; Wed, 20 May 2026 14:45:36
+ +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=FDJtlhs44lTs+d1ITBh90sT4q3XpO/CLkfbobR62lRpkzUTfthM5PIhIi25AVOWS+r9HPxqbTl5/9Wu7YPVKBiBKCNESQxxAohWdoSPv1icd1cAunfXGT9gLTTKVmeZTO6tN8Z/skyNNoMey05qKUmVZb2Qdxj+mGHeioJmHG40kZLo4Ivjc/8Vkgs+yT5idpwsu3C4OVQcGc6JBu3fh/BFTfnRoIrPNoyN+loR6Aurj6RpAFK7Bai8s2O/jlZKZccgrmQVTy9itKP9cX+V7pvHE9a1MlKHdynlNRVwoKYE+V5qPWTQZcVwLVhac6cAg/fdr+XvW4gagZN1YQfcF3Q==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=v9K4xDQT6B70EUaBu0OdoKWjAY20qTIaqR7YK2jfnvM=;
+ b=Qsap5Ru2aVVrGAM9/DM9YvqjDRPkTmSG2PG1DBxPVRshFnKC7rWGEIrfXQXNZkJqsow3qzVK27hH50KwqJfSHzDSaONXtzuEfg38tH9AclYR1P0YLZ4Gx/lAAyfHqz23Znn5mLv8T8z2+CBdt3jYZWnrsA4CouMKt6/ET2TqHZSoA0g8J/QXO/AmRXQt3uPzY4XEHoxvDc1Aup2WF9VciAjsjNxn3hTMFq+9INkLXLWQU5dhnu69hHZDAayAijDCk+7+fEOw9gNe95nNEjwqptA+PiZH/bhUlpwBsOBZ7R1mDxDZMZ6jfub3T1tPUEIzTA53hyKgJvkOQHmRmU9PxQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 136.143.188.56) smtp.rcpttodomain=mail.uc.edu smtp.mailfrom=insureio.us;
+ dmarc=bestguesspass action=none header.from=insureio.us; dkim=pass (signature
+ was verified) header.d=insureio.us; arc=pass (0 oda=0 ltdi=0 93)
+Received: from PH8P221CA0005.NAMP221.PROD.OUTLOOK.COM (2603:10b6:510:2d8::10)
+ by SN4PR01MB994782.prod.exchangelabs.com (2603:10b6:806:502::18) with
+ Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.21.48.14; Wed, 20 May
+ 2026 14:45:35 +0000
+Received: from CY4PEPF0000E9CD.namprd03.prod.outlook.com
+ (2603:10b6:510:2d8:cafe::b5) by PH8P221CA0005.outlook.office365.com
+ (2603:10b6:510:2d8::10) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.16 via Frontend Transport; Wed, 20
+ May 2026 14:45:34 +0000
+Authentication-Results: spf=pass (sender IP is 136.143.188.56)
+ smtp.mailfrom=insureio.us; dkim=pass (signature was verified)
+ header.d=insureio.us;dmarc=bestguesspass action=none
+ header.from=insureio.us;compauth=pass reason=109
+Received-SPF: Pass (protection.outlook.com: domain of insureio.us designates
+ 136.143.188.56 as permitted sender) receiver=protection.outlook.com;
+ client-ip=136.143.188.56; helo=sender4-of-o56.zoho.com; pr=C
+Received: from sender4-of-o56.zoho.com (136.143.188.56) by
+ CY4PEPF0000E9CD.mail.protection.outlook.com (10.167.241.132) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.21.48.11
+ via Frontend Transport; Wed, 20 May 2026 14:45:34 +0000
+ARC-Seal: i=1; a=rsa-sha256; t=1779288332; cv=none; 
+	d=zohomail.com; s=zohoarc; 
+	b=bUgO76dBQlp/m1IStibioseGLRT6pG1Xd3BJnGBabnVtsKHWMYn5n5167i9vD+v+nC9DPNtAGYnAN/Ro8iCw6V7iZZttsD9i08sTA/fZtuA5dwVGl8VhC0xwhghCjc5ln7BnZ7YTwaEUpS3or3+24TVCV3AT4eOO3Q3jmyZFyLo=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.com; s=zohoarc; 
+	t=1779288332; h=Content-Type:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:To:To:Message-Id:Reply-To:Cc; 
+	bh=v9K4xDQT6B70EUaBu0OdoKWjAY20qTIaqR7YK2jfnvM=; 
+	b=JqlRPLkD26yD3rqQsQpLwVPassXbgKBc2ijiGbQlC2RwcwECdTS+PeY8a7i4iuCNy63ywComdRIfTsPuEhmeNT//tP/+1dFivNV4wE/Rjhbt1kg8tf8BYvSVaIbkd1pgII12J2s5pepGcar+ZNvtydf6tCvdrdB5IwG2YGdmurI=
+ARC-Authentication-Results: i=1; mx.zohomail.com;
+	dkim=pass  header.i=insureio.us;
+	spf=pass  smtp.mailfrom=careers@insureio.us;
+	dmarc=pass header.from=<careers@insureio.us>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1779288332;
+	s=zmail; d=insureio.us; i=careers@insureio.us;
+	h=Date:Date:From:From:To:To:Message-Id:Message-Id:In-Reply-To:Subject:Subject:MIME-Version:Content-Type:Reply-To:Cc;
+	bh=v9K4xDQT6B70EUaBu0OdoKWjAY20qTIaqR7YK2jfnvM=;
+	b=SokuMQA+XBpBc/tsxZQJB96j9MzTj69xZmxcqoytdUuX/8XFRSS2dbFWoBITLF1S
+	ccdWuEAP4CYM37XYM/9/G89u5Cr4kHrqkRaw7qoaHWaSyeGsby0Fftod9jS955x9tEE
+	Ozfhnr/l0T9LZX4Vv/BtV761P7miEyOwov+bUZgg=
+Received: from mail.zoho.com by mx.zohomail.com
+	with SMTP id 17792883308841021.2914680219526; Wed, 20 May 2026 07:45:30 -0700 (PDT)
+Date: Wed, 20 May 2026 10:45:30 -0400
+From: Insureio <careers@insureio.us>
+To: "Analyst" <analyst@example.com>
+Message-Id: <19e45d95260.2ab3cc6534077.2227944097051120325@insureio.us>
+In-Reply-To:
+Subject: Insureio- Invitation to Interview for Data Analyst Internship
+ Position
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_87722_102569142.1779288330848"
+User-Agent: Zoho Mail
+X-Mailer: Zoho Mail
+Return-Path: careers@insureio.us
+X-MS-Exchange-Organization-ExpirationStartTime: 20 May 2026 14:45:34.6851
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 6a8aa467-40d0-40f5-c8ab-08deb67e7320
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: f5222e6c-5fc6-48eb-8f03-73db18203b63:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: CY4PEPF0000E9CD:EE_|SN4PR01MB994782:EE_|SJ2PR01MB8619:EE_
+X-MS-Exchange-Organization-AuthSource: CY4PEPF0000E9CD.namprd03.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 6a8aa467-40d0-40f5-c8ab-08deb67e7320
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-UI-Tagging: External
+X-MS-Exchange-Organization-SCL: 5
+X-Forefront-Antispam-Report: CIP:136.143.188.56;CTRY:US;LANG:en;SCL:5;SRV:;IPV:NLI;SFV:SPM;H:sender4-of-o56.zoho.com;PTR:sender4-of-o56.zoho.com;CAT:SPM;SFS:(13230040)(704162111799003)(29132699027)(8096899003)(5033499012)(18003699003)(56012099003)(22082099003)(19002099003)(16102099003)(55112099003)(11063799006)(80162021);DIR:INB;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|704162111799003|29132699027|8096899003|5033499012|18003699003|56012099003|22082099003|19002099003|16102099003|55112099003|11063799006|80162021;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 20 May 2026 14:45:34.5602
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 6a8aa467-40d0-40f5-c8ab-08deb67e7320
+X-MS-Exchange-CrossTenant-Id: f5222e6c-5fc6-48eb-8f03-73db18203b63
+X-MS-Exchange-CrossTenant-AuthSource: CY4PEPF0000E9CD.namprd03.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: SN4PR01MB994782
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:01.7148059
+X-MS-Exchange-Processed-By-BccFoldering: 15.21.0048.002
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:J;OFR:SpamFilterAuthJ;ENG:(910005)(944506478)(944626604)(4710137)(4715077)(4999163)(920097)(930201)(3100021)(140003);RF:JunkEmail;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?MFVoV0RHRTloeXNRT0g1bkVZZ0tSTmcyKzBWdEhlQmF3bnYweWMyRTFqYjRz?=
+ =?utf-8?B?QTl4QnRQUkM4NjZ5RzRFdnFYTldlaDBMZ2xyN3ZtQlhNS2U0aUZSRS9nMTFw?=
+ =?utf-8?B?aTlNN3c2UDZpQ09hdmdWYi9seVVZOStCdGloZ1dsSnhNVGlZZklXeE9rdWxo?=
+ =?utf-8?B?ZEJ2UWNKRERCRGx2ZStybUg4S3dFOGJsOExQRjRROU5RQ2l0VmpPVU5pUDJV?=
+ =?utf-8?B?VzhJc3F4ZTRpaTdaSlc5bFR3a3pGMyt2d1FQRTFERE82dmU2UndqUm14QTVL?=
+ =?utf-8?B?OTFBZXRUMFFueGFzREZtc1ZEc3lhOGRlTEFDWnRRQnFyRGtXZStvVjBQZ2Qy?=
+ =?utf-8?B?bXpnQlNTSnNRMzZXcy8zQ2NHTzVtZE9FTVVWenpucmJLYlJYT3pSTU1KWTVF?=
+ =?utf-8?B?dEdrYlVBK3BKSndaQnNvLzhmUUNyTkNZRkNsOFV1TXUzZDFRa1dHTzJjU2Rs?=
+ =?utf-8?B?Q1gwMkdLVVozeXFUK3RBS1BBWkxrSEdUbFJGcncybzdOQU80UXdCUnlXYkZ1?=
+ =?utf-8?B?MWpTTGdBc3BiSzFKSXN3NU1hRW1wRTQ4OHBPRTRDSElvUGRDUjJmalVTVWVC?=
+ =?utf-8?B?UUpoRFIxN2xUc0FZZXRwV2hMZHdSL2dPajdWem1KVTdZcGpzTWxxMmUyeU82?=
+ =?utf-8?B?bHhGa3h1OGRqbXlvenhkeXluTmxEdnNaODh5N2pobndGY2xiaGNMd1JJUDZk?=
+ =?utf-8?B?ZzM1SmxBMWM0akJCWk1TMGl0V0lqV3d1U2YvK2F6eGJQakFyYjVRbUpSQUZk?=
+ =?utf-8?B?TERHdDZTSmlLUDVNOW9PdDVGTXJ0THU2elVqMEpDL2pPSHpucFJ4V080VXZB?=
+ =?utf-8?B?SWVkNCt5WUNsN3VVcTU0VUk0S3pTZkk2Snh6MHhwbjZnY3g2bnJhZ1BhbGEz?=
+ =?utf-8?B?YTFxRktHVmRxZ0xlazhvdFlSeXR1UzREM2FrRU01MTBJNkgwSEc3NzFhVVJi?=
+ =?utf-8?B?bDg2T3ZleEVWRVhRKzRHQTA5SlF5OGl4cjNxa0IySGZHdTNUdTdKZ2ZhaXha?=
+ =?utf-8?B?ZVQyN2xNUUFHaUNhNFdlMG41MGE4REt5UzNLS1hmTkJQNWlZN2lIWC96SWlh?=
+ =?utf-8?B?SHhGUWgwbm1PMXhjVk9DTTVSTC96OENRSFZ4N1hleUF2R3R3cHU3cXVUVkFp?=
+ =?utf-8?B?c2Fmbkk0MXZMdFVmbWtDTDJSV3pQU2lFMWFaQlhWVHZGeGVaVEVPaFJpTFd6?=
+ =?utf-8?B?VXo2eDAyaTNVM1JTS2E3akZ2K05jamRvcVZ3Zjg1aGFYNGpnaURmWFVVbmt2?=
+ =?utf-8?B?cWQ0WXRJRmMwdC8zOG40SEVMTG82aExqb0VZMXZCV1hYTHhDNzcrRUdJRTVh?=
+ =?utf-8?B?Y2lZa3VPN0VVRGFGK1RCbEZrZzZBN2w5U3VmQ2pUcWZMTzBZWHZxVnhhb2hU?=
+ =?utf-8?B?L0FIeUxSb3lhSzVPU05hWjgxYjhWd0hLZW1oOG9ZVHhPK0NydkRlUDd2b3g0?=
+ =?utf-8?B?K0ZmRUhuMnp2Tm9CemNIM0FGUGZUcEg5WWYrSGt0RHQ4VE5UU0w5THdWclha?=
+ =?utf-8?B?M2ZMWHVaNjN4S0hBTC9OUTFndHh4NHorTllqTk5kcGZqOWRXNnVTT0dOc3hs?=
+ =?utf-8?B?UklKNEhSSmw5YWYvR3V1UXVZWnR4NytUb29SNFhUdEZXdmVrQWFsalVmbkha?=
+ =?utf-8?B?RzQ5L1BaMlhHMkg5alQvbGRsK1VKNXplN3JIbXU0TStPYTM4VTczTTFHV3JX?=
+ =?utf-8?B?U3ptOWthT3kzTlM3UDh0K2E3dGVoNENKcnpSdEJFdk9VMDd3UzliZFVTc2oz?=
+ =?utf-8?B?WHc0cEdjZVBmK0gzR0UwQmoxOG9UYlZub3A2NWwrUTJFRk5ZWGRCL0tacmNp?=
+ =?utf-8?B?R0R4b1plZkhWKzJkZUYrbHRxTmhPdTJad1hxTitIczN4WGw0US82a2IxelFU?=
+ =?utf-8?B?Z2JHNVhrNzdVTHN4dTYzVmtWNTNmNXV2SERvQ0NlTkhXQnplQjZqaE96Y2t3?=
+ =?utf-8?B?N2hZMHdOZGc4U3pGSWtPQmhqTzFTblMwbDE1ZGs5N1l1Sm5Kek5sRUVJcEFj?=
+ =?utf-8?B?RXl1dXUwdDFLWUU2VVRYWTR5eDFKU25TTHFtM2ZXNSs0cnhQbWtRL3hNZ3Uy?=
+ =?utf-8?B?NFc3WWZFc2hhTElza2NlejFybDdCRjUwcW44MFdxMTdjdHEzRW9xR1VEQ25S?=
+ =?utf-8?B?SFdtbC8vN2lsYWVFVGtiWnJSa09iYXYrQ1BNVlNmd2hWeHdrOXNLWGFhY1R4?=
+ =?utf-8?B?cUxxN2ZUMzA3MHJGaFk2Y3lLSkNKc0I1ZEtvb1hydzIzakg0SnROeWNTQjA4?=
+ =?utf-8?B?bTRRZHlPbmlLbmkxb2RnNGt4MFVGYXBUQ0pqOUE2RUpqNUdObXIzV1BvUUJU?=
+ =?utf-8?B?aEl6a2hXZWdOcS9qZlE5a0tKL29sWnFweEYraVloNEJoSHhXZkpBUGdIZGEx?=
+ =?utf-8?B?T3pDQWFZNFFqaHA1TXdhdVhYLzAyNlZMU0NMWEJ2Ukt4TDg2UVpnSVF6L28y?=
+ =?utf-8?B?akswUUpKczJhSGlJZ09hWGlkMG1JY1ZtTXdtWllYRnlWelhTcHkzdUpjS05W?=
+ =?utf-8?B?ZUlGbkdxS3hocU1GaFEzVERscUljRHJ4WFFxZ2ZIUnMwMTE3d1luUCtpekpW?=
+ =?utf-8?B?MlNsR2xhRjZjNnVGVGVwKzFFSDdZQy9oaVVIQ0ovVHJxMnRlRVhsZ0VXdktT?=
+ =?utf-8?B?VTRxYWhFS1EvclgvTTAzOU5PZkhBUGtUaUllQmZNY0c4Y3k1a2tvY0hNbUhN?=
+ =?utf-8?B?dTRENWt2ZW1UblFlWmVoNlN3OHBnQURxbnFYNHUrd2g0L0I1UHlVcHpISlFJ?=
+ =?utf-8?B?azVrUXorQ0lvTmUwdktuaFBCRFJVQjB3cFNGbm1kT2VDQ1BMV2JKSHpMYUR5?=
+ =?utf-8?B?Z2lwNmgrOEd0T1BXbVV4ZC8vSkYzZERvVnR6RGR1TFNibURCSEs2dE9Kc3BG?=
+ =?utf-8?B?ckpac0R0alFyRkhyNjdXc2M1Rzdqc3lCczVTUFppc3NVSDR5SVA5RDd0Wk1P?=
+ =?utf-8?B?dFJJMUpGUHRoMi9pMVRIMWUwb1ZHbU5rR3A3YkMwYVo1Q1F5NElHcGZ6UEha?=
+ =?utf-8?B?cXhWTjYvb20wZjhEQ2hJbXhUR3FvOWFDUitUN09uOHJZZktUVkJTNWozdEF1?=
+ =?utf-8?B?WGRlazJaTmh6NVNyRkFNUjh6OGRGUnl1TVdFMklNRkJDemoyT1QveS8vTCtU?=
+ =?utf-8?B?aE1TL2dXM1l0L1VFSE9Va0VlK0FIMnRid3JBcmRkZlVUWHdla0IrUWxIdHpJ?=
+ =?utf-8?B?VHlrQmt2V3oxQkpDQzQvMTBZQ3o2Y1FZWEg3aDQzd2RMN29icDBpUVpicmQ1?=
+ =?utf-8?B?RnpVN0F4V3VTOW96VjFnNXpsdXFwRXF1eFNsWm13OG54OFF1OEY0c3ZWRlps?=
+ =?utf-8?B?RDM5ME9FbDlzd0lTdUZqM09QMUV0dHBnbExQSFcwOHFQZHRFNGkrTDdnSEU2?=
+ =?utf-8?B?QkNUdC95RklWUTVLNnVRMlV1dkxBczE4WG5FR0sxZi9WajNDYVp4bHJUbFFv?=
+ =?utf-8?B?V2Y5RmxSVTVqUW5sUzVRdHpRTklsNmszZ1R4bmFvdTVNY3JyeVVra1JJMUU1?=
+ =?utf-8?B?cWJyWllNeXZjUkN4MGpKREM0UndQWlovdWxySUJGZ2Z6UDUzTEh6ZDU5aGRD?=
+ =?utf-8?B?MmU1Q0Z3WEhwTkd6b1ZmYnE1blRtdkpnSEZNMm9rQXpIejJPSGwrMm5CNy9x?=
+ =?utf-8?B?RlMrNGNyUjhRSHdpOWVKczJ4MnRMSUtXbkx6ZjFBODRaK0YxbzZ4aWRnY2JG?=
+ =?utf-8?B?QjdnVjdROEx0UlNUTmZBVUFndjlaUVpMU1NiNlNzM1V2UlVCMTBFT0FrZVZm?=
+ =?utf-8?B?QWtrZHlIclNIL1I0ZHZabTNReGJ2Z2E2ZVQ1UUZORVQwOW9aaXovQnpvQzEw?=
+ =?utf-8?B?S0c2djhGYlVlakdyNUJHY1F3ZmJyc3IzSVVXemVvcFFIZUpKNmQrWGdXYksz?=
+ =?utf-8?B?ZytIQnJta1JtSlY4K1VIOHVYY0N0UlltUFZOTk04aHNuVXJwdFVlL2c0TUVD?=
+ =?utf-8?B?R25mcFMwUFJuZHlXOE1DVEpRanBnRFFZSUNyb00zblQzTkN3cXRwc0JYSWdr?=
+ =?utf-8?B?U0ZBV3pveFR3elBTQmdGbGhOUVBHejBqeENLdFR5bjBkZ1Y2d0JwQ09uUDhB?=
+ =?utf-8?B?dHg2eDVIWmZoYXRoVzEveldiTnJYbFpFRHBWWXVrc016OVBCRGhCcEsvaisz?=
+ =?utf-8?B?MWlBTEZIK2UvR2VZdktBRGdGbWc1WW5Md2ZtSWEvSE5Nd25hQzJ6d0UvZHVm?=
+ =?utf-8?B?c2dqZXdQd3prOThYNEJiTzJjeDR6bEx3N1c0Y2NBc2hLbXVKK1lwWFZRdnlk?=
+ =?utf-8?B?amhENzVPS3lwc1RWaEJUcGlqZmxmZVNjdFFMVDlMTmhURUxGRkc3UStVQmo1?=
+ =?utf-8?B?b0lZZ3lONnJIYXFJYTlNT0dtT2dSQnM5eGpCcEZLdG5BVU1qNTJ3SE1XODNr?=
+ =?utf-8?B?MHUyeXRGNWVxa09FMlBmRkwyS2hJeFFwNGlrTU80dWRHL25Tdm8zdEZVbjJj?=
+ =?utf-8?B?RkZjck4wbzRKaGcwek5XMG13UXZZV20zRUVwT0hvdHB5YTVBVi84T1FCTDZH?=
+ =?utf-8?B?eUZXSDN4Y3k4TzZSYmRCb2VDYjlVbVJkQzRJWHpDR1kySzFxbEZXTlE3UmFk?=
+ =?utf-8?B?TnF2Vk9obW5nWXFwam1IUUVBZno2M09jeEYrVWU1OXI2OVBwVGpNbmFHY3Zu?=
+ =?utf-8?B?TVJ2RExjYUkvM1BYcHZxY29XRHl1Y0NranhtZDgrd2RzQ0hWbmRkU21pOTQw?=
+ =?utf-8?B?QWV1ZlJuTytFRmpBTU43NnZHSWVTT1NFbmRVTjROSGc1Y1NkOWVmU25JMVZq?=
+ =?utf-8?B?NUtBcFhBODJoTnBFM29OekdjejJCKzM2VnkzT3lEdUY3bUtQbEFUOXRBQ1hh?=
+ =?utf-8?B?c3NmeU9UcklBZ09PZXF3ekpVRmtwQm0xcnhCVHNhOTNxTVQyeTJrQlpSZDhI?=
+ =?utf-8?B?b09sZG1ybW1FR3lobDVuWEtHWVQvejNpV1RIaCtpVEJTWW43TlFVRGJDTlJj?=
+ =?utf-8?B?SGIva2IwbWNjblRna3lSS3lEeEJrU2U1NE80NXVOQkFzbUdleDJPSkdxYnhz?=
+ =?utf-8?B?SURLckJZRkwrNHVoUUdpei94RGJNampCbFdvTldnc1p5TzNXT2RQZXk3RXRN?=
+ =?utf-8?B?b3NSVjhGM3pXRWZSQ0V2b0FuQVExamdEUm5uN1JoaXlDQ3Q3T0MxZXgrbWdO?=
+ =?utf-8?B?QzF6T1VocXNpUmhFdTFrMm04dU5OZkZONUJPcWFmRVVNbUUrTVNmeE05cEdy?=
+ =?utf-8?B?anpIZFVRZmtlcEd5VGg4a2V2OGxwdkk5VkVtNGJCWmVZWmR0OCtqUk53UDN0?=
+ =?utf-8?B?Z2Y4aE5PWHZ6RnJNY2JDZWpwZEFweHlYNGI0WHFZWUFOaTlVMnZaR0RxaGU5?=
+ =?utf-8?Q?sNJ3Hy+jD+Ox8=3D?=
+MIME-Version: 1.0
+
+------=_Part_87722_102569142.1779288330848
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+External Email: Use Caution
+
+
+Dear Analyst,
+
+Thank you for your interest in the Data Analyst Internship position at Insu=
+reio. We are pleased to inform you that after reviewing your application, w=
+e would like to invite you to participate in an interview to further discus=
+s your qualifications and suitability for this role.
+
+Our recruitment panel has reviewed your profile and believes that your skil=
+ls and experiences align with our company=E2=80=99s needs. As a result, we =
+have scheduled an online briefing and interview with a senior technical rec=
+ruiter who will provide more information about the position and the opportu=
+nity to discuss your background in greater detail.
+
+To proceed with the interview, please follow the steps outlined below:
+1 Set up an account with Microsoft Teams and download the Microsoft Teams a=
+pplication on your mobile device or desktop.
+2 Once your account is set up, please provide your Email ID associated with=
+ the Microsoft Teams account. This will allow us to connect with you for th=
+e interview.
+
+Your Accreditation Code is INSUREIO/014/INT2026. This code will serve as yo=
+ur identifier throughout the interview process and will be used for all fut=
+ure communications regarding your candidacy.
+
+If you encounter any issues during the Microsoft Teams setup or have any ot=
+her questions, please do not hesitate to reach out to us for assistance.
+
+We are excited about the potential of having you join our team and look for=
+ward to your interview. Your timely response is essential to ensure the smo=
+oth scheduling of your interview.
+
+Best regards,
+Recruitment and Staffing
+Insureio
+
+
+------=_Part_87722_102569142.1779288330848
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+</head>
+<body>
+<p><strong><span title=3D"This email came from an address that is outside o=
+f the University, proceed with caution!" style=3D"color:white"><span style=
+=3D"font-size:=0A=
+11pt;font-family:&quot;Open Sans&quot;,sans-serif;color:#ffffff; windowtext=
+ 3.0pt;=0A=
+padding:4.0pt;background:#e00122">External
+ Email: Use Caution</span></strong></p>
+<br>
+</span>
+<div>
+<div style=3D"font-family: Verdana, Arial, Helvetica, sans-serif; font-size=
+: 10pt;">
+<div><br>
+</div>
+<div>Dear&nbsp;Analyst,<br>
+</div>
+<div><br>
+</div>
+<div>Thank you for your interest in the Data Analyst Internship position at=
+ Insureio. We are pleased to inform you that after reviewing your applicati=
+on, we would like to invite you to participate in an interview to further d=
+iscuss your qualifications and suitability
+ for this role.<br>
+</div>
+<div><br>
+</div>
+<div>Our recruitment panel has reviewed your profile and believes that your=
+ skills and experiences align with our company=E2=80=99s needs. As a result=
+, we have scheduled an online briefing and interview with a senior technica=
+l recruiter who will provide more information
+ about the position and the opportunity to discuss your background in great=
+er detail.<br>
+</div>
+<div><br>
+</div>
+<div>To proceed with the interview, please follow the steps outlined below:=
+<br>
+</div>
+<div>1 Set up an account with Microsoft Teams and download the Microsoft Te=
+ams application on your mobile device or desktop.<br>
+</div>
+<div>2 Once your account is set up, please provide your Email ID associated=
+ with the Microsoft Teams account. This will allow us to connect with you f=
+or the interview.<br>
+</div>
+<div><br>
+</div>
+<div>Your Accreditation Code is INSUREIO/014/INT2026. This code will serve =
+as your identifier throughout the interview process and will be used for al=
+l future communications regarding your candidacy.<br>
+</div>
+<div><br>
+</div>
+<div>If you encounter any issues during the Microsoft Teams setup or have a=
+ny other questions, please do not hesitate to reach out to us for assistanc=
+e.<br>
+</div>
+<div><br>
+</div>
+<div>We are excited about the potential of having you join our team and loo=
+k forward to your interview. Your timely response is essential to ensure th=
+e smooth scheduling of your interview.<br>
+</div>
+<div><br>
+</div>
+<div>Best regards,<br>
+</div>
+<div>Recruitment and Staffing<br>
+</div>
+<div>Insureio<br>
+</div>
+</div>
+<br>
+</div>
+</body>
+</html>
+
+------=_Part_87722_102569142.1779288330848--

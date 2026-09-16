@@ -32,6 +32,7 @@ PLACEHOLDER_NAME = "Analyst"
 # Opaque tokens in query strings and path segments (hex / base64url / uuid-ish).
 _QUERY_TOKEN = re.compile(rb"([?&](?:[A-Za-z0-9_\-\.]+)=)([A-Za-z0-9_\-%\.~+/]{16,})")
 _PATH_TOKEN = re.compile(rb"(/)([A-Za-z0-9_\-]{24,})(?=[/?\s\"'<>)]|$)")
+_URL_SPAN = re.compile(rb"https?://[^\s\"'<>]+", re.IGNORECASE)
 _DROP_HEADERS = (b"x-original-to", b"delivered-to", b"x-envelope-to", b"x-rcpt-to")
 
 
@@ -65,9 +66,13 @@ def sanitize(raw: bytes, recipient: str, name: str | None = None) -> bytes:
         head = b"\n".join(kept)
         out = head + sep + body
 
-    out = _QUERY_TOKEN.sub(rb"\1REDACTED", out)
-    out = _PATH_TOKEN.sub(rb"\1REDACTED", out)
-    return out
+    # Only rewrite tokens inside URLs; header encoded-words and base64 bodies
+    # look token-like but must stay byte-exact.
+    def _redact_url(m: re.Match[bytes]) -> bytes:
+        url = _QUERY_TOKEN.sub(rb"\1REDACTED", m.group(0))
+        return _PATH_TOKEN.sub(rb"\1REDACTED", url)
+
+    return _URL_SPAN.sub(_redact_url, out)
 
 
 def main(argv: list[str] | None = None) -> int:

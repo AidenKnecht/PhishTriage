@@ -1,0 +1,368 @@
+Received: from IA1PR01MB9145.prod.exchangelabs.com (::1) by
+ SJ2PR01MB8619.prod.exchangelabs.com with HTTPS; Thu, 5 Mar 2026 20:54:01
+ +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=hBMLvYSDMX0sqpBFjcBAZ+fC5+iNETM7BSnWd67qp7pE+LDtvFBQXaVE7sfr3bxfDpCTATT1OfPDCYBm1FsCrU6raZ8uEs/ZM1P55nXNZ7ILnbqLy1xmlI2ayk2Cg65KiFBoBARL3Bz/cXNXr6yCPWH/KcHmQlT+eUTxPK0rWu0XzC17ebUQV5UPpXZ6Yf/8h9PZCjW/KyBaJSzUX0s2hjr5ge/r9mVW7dOrnmHsqBoIF2dYNhvQKsLale6dpwC/qqJ7lPDFdsDI2cmIZUZJT4LO+RxSuernBKLSdQO+ZoP+5eGmLv0wWITUBtu9EQJ8iMw+Pt18q9ImFpEKfEcUpw==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xSs4T5FA2DjRklj0NPj3WkcXmcAJwMvnxl596J9yCCI=;
+ b=ie5ozJVUuWVj9Ckj19KSU7F7jTEYdQlkB98wATTfNUVkYmjvbOdb7dQiefAw7nCf/RaEUceog5b77I4sXTgRAXGUDl5qGfeUHtWO8XhqcGZVgOk9iTWOk14VikiWmkXR6sEwS82pdmsIrQqoIp8/OCYZ/zqqgLUOvqYw8C+K8hUhLvMC97soQhEoG69wOqKYpOHbFyKUrVKVQFsddZ4/HbWVpF5/YWirflKwoot8SpEK/buGpo3rSqv6A8klj2o4RRLFkEJCPKS7bH/8abC/Ck/+W+Tvis/ah2a6523kjwD4gPzgJXrOeRgcc4veQcYUn7JKUumNzpNNeL2wik9JKQ==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 2a01:111:f403:c105::5) smtp.rcpttodomain=mail.uc.edu
+ smtp.mailfrom=intrastack.com; dmarc=pass (p=none sp=none pct=100) action=none
+ header.from=intrastack.com; dkim=pass (signature was verified)
+ header.d=netorgft6326551.onmicrosoft.com; arc=pass (0 oda=1 ltdi=1
+ spf=[1,1,smtp.mailfrom=intrastack.com] dkim=[1,1,header.d=intrastack.com]
+ dmarc=[1,1,header.from=intrastack.com])
+Received: from CH2PR15CA0013.namprd15.prod.outlook.com (2603:10b6:610:51::23)
+ by IA1PR01MB9145.prod.exchangelabs.com (2603:10b6:208:592::9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9654.22; Thu, 5 Mar 2026 20:53:50 +0000
+Received: from CH2PEPF0000013D.namprd02.prod.outlook.com
+ (2603:10b6:610:51:cafe::67) by CH2PR15CA0013.outlook.office365.com
+ (2603:10b6:610:51::23) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9654.22 via Frontend Transport; Thu,
+ 5 Mar 2026 20:53:25 +0000
+Authentication-Results: spf=pass (sender IP is 2a01:111:f403:c105::5)
+ smtp.mailfrom=intrastack.com; dkim=pass (signature was verified)
+ header.d=NETORGFT6326551.onmicrosoft.com;dmarc=pass action=none
+ header.from=intrastack.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of intrastack.com
+ designates 2a01:111:f403:c105::5 as permitted sender)
+ receiver=protection.outlook.com; client-ip=2a01:111:f403:c105::5;
+ helo=CH5PR02CU005.outbound.protection.outlook.com; pr=C
+Received: from CH5PR02CU005.outbound.protection.outlook.com
+ (2a01:111:f403:c105::5) by CH2PEPF0000013D.mail.protection.outlook.com
+ (2603:10b6:61f:fc00::345) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9678.18 via Frontend Transport; Thu,
+ 5 Mar 2026 20:53:49 +0000
+ARC-Seal: i=1; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=none;
+ b=sQoe8s3rtrLqIzoED/C5JAygvYcStCnFiFqgRZ88ciW2o6zRmpmCxgIXu0abtPhRPXyN5v5iDPNFoFvQSTRlmPikQ3CeuPww+zKhEN25anYuKH6UF9MiWDRCNufOFzjSwojPw2kkdGddVrO/ZgQ9s92B50qBLVM/mb6pcVIJ7+5j6dKFWoF/XCq4xoOAP7JSYk9wA2QTGeNPgVrYk4STdYWQIfNa8JOfGqdtUXGHyOcI5Oh4begI4ilF80ohUlysqWd5BHyLvRo1pblyZkb6VOYMy+ICosRWBLul1TLOwn8HxkWPcFLnWVbpXsxwBONroEkGPRXiTEdjLUD8JanOWA==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=xSs4T5FA2DjRklj0NPj3WkcXmcAJwMvnxl596J9yCCI=;
+ b=mC69vDiuBigiuSUUnWcNBeelHbuzfM9XCqJ+lGQ0YT2RfWVGshfZuRe6eoSfUCjYJY3RaQVCHJshCkqb5QvWhSwT40Kmc4xjq/+mlzS+OT0C9YnY7t3YTh/D+PYoDsB5Hsd3A9f2ItVANzvwg094nuPZNCpCm2UydXAX++vk/v8fwe+ZwcJINaQKpr2ocTSYdJU9POmjk+lsuLEUbrB1cURQ4q9932x77GghXBYrZ7idamOqOu/g/m+2B1fNLadGEJEDZDpV+Dv5qRj3WlG4xUtT/YsvXL1jc64Fy68fyY3Qjpd8xSH+Mum7JTqbLadbRN6HoblUxH8X+3ETz3lNAw==
+ARC-Authentication-Results: i=1; mx.microsoft.com 1; spf=pass
+ smtp.mailfrom=intrastack.com; dmarc=pass action=none
+ header.from=intrastack.com; dkim=pass header.d=intrastack.com; arc=none
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed;
+ d=NETORGFT6326551.onmicrosoft.com;
+ s=selector1-NETORGFT6326551-onmicrosoft-com;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-SenderADCheck;
+ bh=xSs4T5FA2DjRklj0NPj3WkcXmcAJwMvnxl596J9yCCI=;
+ b=BXI4H2B0SbapBYWH8p/M1XfJtM7BNmAnN31SydFe+ZdDEQjvaFZqlXNogcpOhYNyENaSiZqxdYmLyRkNDI25WEuYJgefSwNZyI2N7G98DWt8tPfzy2YiKNw82yJkTvxS/g12JnlWt9RnZbUGSzo9Bsw7Z/UmbcQjxBYI6yGDrZrlZr0JWD+zGIDbhXvunp+q5HiHbB1BFMv5QgJn3XkJpzP4LfDETGFLpOpMbiPMpGgx68SnKIgrEtbhKGv7BMsacS+/JZqp9ojHQ3SVyz6SbxIddNT84aLbFP47Ys+kq5t8DtrasgmvLgOB0T4JNxPuRZ/8S6bZF3wA4bTGvWvLeg==
+Received: from PH5PR05MB998480.namprd05.prod.outlook.com
+ (2603:10b6:510:34c::6) by DS0PR05MB10835.namprd05.prod.outlook.com
+ (2603:10b6:8:1fd::10) with Microsoft SMTP Server (version=TLS1_2,
+ cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id 15.20.9678.18; Thu, 5 Mar
+ 2026 20:53:44 +0000
+Received: from PH5PR05MB998480.namprd05.prod.outlook.com
+ ([fe80::6eb5:6c7d:281d:7600]) by PH5PR05MB998480.namprd05.prod.outlook.com
+ ([fe80::6eb5:6c7d:281d:7600%4]) with mapi id 15.20.9654.022; Thu, 5 Mar 2026
+ 20:53:41 +0000
+From: Stefan Nguyen <stefan.nguyen@intrastack.com>
+Subject: Intrastack Solutions Internship Interview Invitation
+Thread-Topic: Intrastack Solutions Internship Interview Invitation
+Thread-Index: AQHcrOIDt8qgRgXs30a6+gQdwj0BaA==
+Date: Thu, 5 Mar 2026 20:53:41 +0000
+Message-ID: <PH5PR05MB99848077347675F28FBD8132CF907DA@PH5PR05MB998480.namprd05.prod.outlook.com>
+Accept-Language: en-US
+Content-Language: en-US
+X-MS-Has-Attach:
+X-MS-TNEF-Correlator:
+msip_labels:
+Authentication-Results-Original: dkim=none (message not signed)
+ header.d=none;dmarc=none action=none header.from=intrastack.com;
+x-ms-traffictypediagnostic: PH5PR05MB998480:EE_|DS0PR05MB10835:EE_|CH2PEPF0000013D:EE_|IA1PR01MB9145:EE_|SJ2PR01MB8619:EE_
+X-MS-Office365-Filtering-Correlation-Id: 8f47d2ac-2316-4491-e40c-08de7af94dbf
+x-ms-exchange-senderadcheck: 1
+x-ms-exchange-antispam-relay: 0
+X-Microsoft-Antispam-Untrusted: BCL:0;ARA:13230040|1800799024|10070799003|366016|376014|7416014|38070700021|8096899003|13003099007;
+X-Microsoft-Antispam-Message-Info-Original: FBncir+PvhO+ASj9b6Y8Wh2dAd6tTMMhfm5IOebi4NUe3tHS86eqfJSZ8QLuKqz6cieu+VtMR51fHfyiT4k+sy2nhYbHAzxrMNeaaNDzcQubUn9Risi/sUL9So8toXlnvLxJXKH+ZZJN2zgcC7JzXDkU12foNXalTC5CYFgbMsrNOqX4+LLjHZPVR6OPnm90p5hnw2Tbe8VevDgEd5RkLAPog50z0ETXktr1qyeQvgud/wHr6TdUI3nJwhjsdr2wwOYjXwpWzBbzkPbkYFeOmy2JTJOXof2ViK06D6ez+C6HLBQrDCwGmhxKNpomPyPEXEu9/u+I2yEN7ElT1GBPSRqJdDFKryaB/oHXg7tU8uf/YypCcF+BirBhrfcGaGesE8ePKqGbWKq8jOIC8dB57V7KoTVBMxgTPIxuwK7fX+ZCl4RDjvbbsUF5GdRRyQE7DXdksrv0uoi1n3JUeV3qs7Ni5cNjgitzBbmQthIDq8O24/zGrwSm6W2uV9jvVQBvbHBgYotYOBV2ikIL9NU2tEAbJbDqcYaKh6NdfhIHMzIXNMewOlpkoSA0bAFJNv2A53DgTP4YyngqkiAo9on/VuK2HSbYRah1HEMEUKlcm6QLX1WByHcLo70xbGMoZQq4YBDnl503aYO5QzTtOw7n80jcbk3UndecWvB7oQeURowNHOch1e51P7POYfXvSRaPxB4I5KerHoX1s/Fd8+PwHT5rgNUS1Nb6+7VISj/WpYwqV+3c7VPkX1TB7pQjtbBmoaZrBB4zsTw/WdzfYn7YuFMWh2cxLBHAlOmbEYNbZeg=
+X-Forefront-Antispam-Report-Untrusted: CIP:255.255.255.255;CTRY:;LANG:en;SCL:1;SRV:;IPV:NLI;SFV:NSPM;H:PH5PR05MB998480.namprd05.prod.outlook.com;PTR:;CAT:NONE;SFS:(13230040)(1800799024)(10070799003)(366016)(376014)(7416014)(38070700021)(8096899003)(13003099007);DIR:OUT;SFP:1102;
+X-MS-Exchange-AntiSpam-MessageData-Original-ChunkCount: 2
+X-MS-Exchange-AntiSpam-MessageData-Original-0: =?Windows-1252?Q?vyVoC5IL85ttigjQbHJkoimLMZPHY0FMRCnWczB0S0vnbRmRhxQZ3o4C?=
+ =?Windows-1252?Q?ks2tMXRCU7JFiSDPrg1CyWi5noV60EYFY9gDPbBBWGCYoqiuZE6PmsM/?=
+ =?Windows-1252?Q?hQ6DTzpN2RTlpZde+jal4gfcY5cok/GXmVDxagD2U+0l0Nxx2LOi7NLc?=
+ =?Windows-1252?Q?gxjwp2YGgSpiC99FhZu6upZ10DQhbVVCX8DDJloYwshoq5waoIp2d3Xi?=
+ =?Windows-1252?Q?gMcN61t6CXG+INp7QxTBk9htmj/zGQosByVbeYsXIZq+5ovwj9nlZAls?=
+ =?Windows-1252?Q?F8x5B8oprByZ3HMjFEm/M29xreV7w4Q9tk3NLSUIK+gZzbxIlDnRKyBt?=
+ =?Windows-1252?Q?wd3lBIVY0eDMlOvDJ6ksG16yIVoqfPy8Z76N3Uqk4ZIVFDDRDXfxpETv?=
+ =?Windows-1252?Q?3w9iPurmJdgDto/SNZKh/aBj7q9GHtx4q2IOWPlkLngp8Lk2g0PGVBkT?=
+ =?Windows-1252?Q?3A3VfTpIwIjMRI1oOYQ38ll11LSEaugC9wpd5caMFXnuf+q0JRqnLrGZ?=
+ =?Windows-1252?Q?OsoJUyOBhkyJmIja8sL7rR5UKTJIxdZP5ZGqyaODuK5aiuOTwgXLotVq?=
+ =?Windows-1252?Q?i7vDhxnKKFuA5UOs4T8FSe7h2HP0rNLYq2kHPnutsLJfWBms7sKe5IQb?=
+ =?Windows-1252?Q?I6z3hYB5+/fAGP48SeDS6gkPm9Amx8BU1YRLsoSeUEn5CXWLLNhgA5t6?=
+ =?Windows-1252?Q?gF4VWRPEglpRWJYY6MvNQuL2yCB1ZMmOkruJd/6Be82vZ78ljCTJC2PS?=
+ =?Windows-1252?Q?4sH28OS3W8ZPSpRp2Id8P2aYTjJRon9bSFH8aK5RRJqQXnJNmFIcDGaM?=
+ =?Windows-1252?Q?jsRGk68jOBCmCHQaZlYW3HQcwxvyuhgWm+czqKBJWG7Vx/uBqRoZFiU5?=
+ =?Windows-1252?Q?6eV4ldkqxsMCag1u5WocWZgg7EJEiIbMeja+ZRHkqqgs6hqpAMC+Pcl1?=
+ =?Windows-1252?Q?V2Q+QbglTmQnW3eaQmXyM+ioRavcH74a5UlLdW7nTWtj3bm/5ugb8Fbn?=
+ =?Windows-1252?Q?m4Duk11W0oa/eaKf0nMVa4RgvgDdrk0ng08eFcUvdsTSZZZf1v3HcuAw?=
+ =?Windows-1252?Q?Pf29M41owzZzcK4Vi9V2ckc2wujKCBMO6a0SIIlASapvQM2+6PRyg03k?=
+ =?Windows-1252?Q?0ixx3OFle50i1ompmIvccoM4xTZBh0Yse95boydT41Tvd4sGLxLEPBht?=
+ =?Windows-1252?Q?M7h/64FSgcGyE9upEweVv58HsEKA6tLk5WFPYCHnKvgcwxb6kAroM/2Y?=
+ =?Windows-1252?Q?OFDp9LqPkX3KEOFmtOGpNQWD7lBw72jBPUSfob/OttKAtRE3Fmr36cVr?=
+ =?Windows-1252?Q?m3om5fMSxEnPe8iDJ3grUr2YHGyTcR3lWY+mu6OBkS5IBbwowEz2u4m0?=
+ =?Windows-1252?Q?xeFysx4gxgo519dzCsUAq0f8MUmP3uFwtbQk7YrRC9SjM620TWvN6hlT?=
+ =?Windows-1252?Q?DGLCFE1P5MOxNoNXyQ18ZWn/rEGvApI8hyMsJjXFeCmPgGw996ZRkt+j?=
+ =?Windows-1252?Q?xGtNKZVLnshJ+Eaf7rR5JZs2OVlw7qUDXfSbQxWG9mlRXNDQ7pjwXHGi?=
+ =?Windows-1252?Q?R5BMuzWl3cQbYMbqfw3vCCVHbeN+baM6AjF+IE5oObn0wavNySTxgktn?=
+ =?Windows-1252?Q?cVlLz4yHn7k9ylueod1+yEsoxORb0fMOWv0yBoKDbaJQLS3L2yqsp0CU?=
+ =?Windows-1252?Q?rpJwfVHMJPsd2QG5jMRvO79S4CKrIOHQ3d7IyPTsfEt2Dg57Fk3Q0GPH?=
+ =?Windows-1252?Q?Llp6ZNoayLpOvoFz9ZMGgtcxEyYWYY6nNRqlKEEWNdhStbaJTVkaoryT?=
+ =?Windows-1252?Q?ffsF0jEEXDapaMscMlExMW1GIZR7YjyO4KPB7zysFcWNIlF86aekCT8Q?=
+ =?Windows-1252?Q?y52mP0gM74UwGwRgFCDnqheH3iWvL2BuB7YKVf4U/GWPFf9vZxpjA8l4?=
+ =?Windows-1252?Q?xNICP0ET?=
+X-MS-Exchange-AntiSpam-MessageData-Original-1: e7urFCSLhBybIg==
+Content-Type: multipart/alternative;
+	boundary="_000_PH5PR05MB99848077347675F28FBD8132CF907DAPH5PR05MB998480_"
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: DS0PR05MB10835
+Return-Path: stefan.nguyen@intrastack.com
+X-MS-Exchange-Organization-ExpirationStartTime: 05 Mar 2026 20:53:50.3055
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 8f47d2ac-2316-4491-e40c-08de7af94dbf
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: f5222e6c-5fc6-48eb-8f03-73db18203b63:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-Exchange-Transport-CrossTenantHeadersStripped: CH2PEPF0000013D.namprd02.prod.outlook.com
+X-MS-Exchange-Transport-CrossTenantHeadersPromoted: CH2PEPF0000013D.namprd02.prod.outlook.com
+X-MS-PublicTrafficType: Email
+X-MS-Exchange-Organization-AuthSource: CH2PEPF0000013D.namprd02.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id-Prvs: 651a9201-f68f-4f25-e980-08de7af94882
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-UI-Tagging: External
+X-MS-Exchange-Organization-SCL: 5
+X-Forefront-Antispam-Report: CIP:2a01:111:f403:c105::5;CTRY:;LANG:en;SCL:5;SRV:;IPV:NLI;SFV:SPM;H:CH5PR02CU005.outbound.protection.outlook.com;PTR:mail-northcentralusazlp170120005.outbound.protection.outlook.com;CAT:SPM;SFS:(13230040)(704162111799003)(35042699022)(39142699007)(31052699007)(13003099007)(8096899003)(54012099003);DIR:INB;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|704162111799003|35042699022|39142699007|31052699007|13003099007|8096899003|54012099003;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 05 Mar 2026 20:53:49.9059
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 8f47d2ac-2316-4491-e40c-08de7af94dbf
+X-MS-Exchange-CrossTenant-Id: f5222e6c-5fc6-48eb-8f03-73db18203b63
+X-MS-Exchange-CrossTenant-AuthSource: CH2PEPF0000013D.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: IA1PR01MB9145
+X-MS-Exchange-Transport-EndToEndLatency: 00:00:11.8096086
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9678.017
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:J;OFR:SpamFilterAuthJ;ENG:(910005)(944506478)(944626604)(4710137)(4715077)(4999163)(920097)(930201)(3100021)(140003);RF:JunkEmail;
+X-Microsoft-Antispam-Message-Info:
+	=?Windows-1252?Q?bDH5Bg4zGPfRQJCRfHBk0AJjNxmVnFguxnEbtI++3s2holHyEoRycu1v?=
+ =?Windows-1252?Q?k1j3NpO31MezkTnwbermzlo63lH6d1hcIvDH8mgnh0LFH6pryQ65AwnL?=
+ =?Windows-1252?Q?ZsOCLPn5iH+kOvQH8sSWh4qYDNMOJA3dCWRVvCMJ9WzZimw6vBq0zh/C?=
+ =?Windows-1252?Q?IZra81KVitRbefaqketPKsrVGTdiX2RvTOpf6l7Brt4jIv+Z7Fe4p6pu?=
+ =?Windows-1252?Q?dP7kIcr4LD7l7WW2tCYR1Z8rSgGpeQd1flF2aeivm+gm/zqz4Pg7m4Bv?=
+ =?Windows-1252?Q?q48LwWl/5UQKa8RX6iiaLl4/e7OdjonB6DAa4a2Bcw+6713hSfkmRTiS?=
+ =?Windows-1252?Q?G3QI/DUSB2CaX8qGpj2VAR7QnfaQznYs4lUAOCiTAu1hnMYUy76s7V2Y?=
+ =?Windows-1252?Q?apuDcArD93VfcPK4un4TvrRWJwPuRGfZM4Dqc1kTzMeEFPifhFicOxze?=
+ =?Windows-1252?Q?RJ2pDzYUIOHjaAJDuyjYtINf6NOY+EyeofqMVqRzz83gCDmBm2xGwhKY?=
+ =?Windows-1252?Q?zMjjHVfXxEiyf46DtvslXCqGFhYkhUG/RWJG+1loMvCYsFF23VdwBoOO?=
+ =?Windows-1252?Q?nPzPcwi/3/cdwrWWlxVkXpshZCYJVYRM6JsLEz12uibgo5UY50/sJaTj?=
+ =?Windows-1252?Q?s05hFyLx2I9FZAUq3KpCGdmpAgC70yMoaf8IarE98VEQ250YUzy7W8la?=
+ =?Windows-1252?Q?KsRfDNIj5zZnmUc96LTfu7VomFbhWOv0wT/lZH+XyKfLitHq5DTNDSy2?=
+ =?Windows-1252?Q?eo0UDxAFMPQm43My7BAoLns7NJMN8kVIoP9lCujbzhsEQq20vH7xXyfU?=
+ =?Windows-1252?Q?7EqIaLgpWzAVjqW6aVgYO15Ia5QRNz9LLB+S/EmgyykQBQdzr6aScR59?=
+ =?Windows-1252?Q?GEZd9Q2maWIjLo3btjbZV/TDhjhFGFfJmFSTZyy6rfDQVs7bKFT6Udb5?=
+ =?Windows-1252?Q?Ln5TRCH5QdM6GVsCURgmw+RSGsfsLCqxl+Sf2A+KCB5lisqGFqEbPoll?=
+ =?Windows-1252?Q?SDLGSsLK+Z460Sama/0RY0RzRQPX8FjLuyT5fr14emvbXQrQZXdw5FMf?=
+ =?Windows-1252?Q?CtN3WUcire9qfSTFrrKi+1goN6K3ppxqU8m/rt25TQ86pLegs/nDTinU?=
+ =?Windows-1252?Q?2pWKw+DMtj3S8QxH3IW3meqD9sqmickB+CoZrXDLBx2vtXQ1zyKTAA+f?=
+ =?Windows-1252?Q?xZz42iUAI2Z4QJVAnDqXuVTIOaufFEiagNf7qPNOaafs/pbLBv7xULna?=
+ =?Windows-1252?Q?v4nWcsjUAxhAj7kMPFEuK6XwP3DREEoN9+NhzRujzohB7hmsTY3NnkgV?=
+ =?Windows-1252?Q?bygZhZaHT+i6LKOPcCVmDI8EDGcoN7GPOxYW9aUzEgRzOPMqHdbuacA4?=
+ =?Windows-1252?Q?sola9n9sL88d71MgNlYUvLh1MXF90KqgaJA6YaEmTJpPRd/AUfFz9XgS?=
+ =?Windows-1252?Q?mAHe0cRh2CDp1FLq84WiEiXX8qoOWCGPSYoDvc6RVdThfD/ekTt69lB0?=
+ =?Windows-1252?Q?5gayB5/LiwkIblTb26b3iGEYqc+J+a0zgDTpZWKSQGDp7pchepLiTdLT?=
+ =?Windows-1252?Q?zRiVoMQ1VYFqRUAMEOfzKm5D8HfYC1dAyZbmLCIQGIR5OC5sLp/KNkj3?=
+ =?Windows-1252?Q?U4Kj3wD1oVrC+EMUwfpxAYy4RzNcAllub5/gG2iXTplT0/luogCQ5HGP?=
+ =?Windows-1252?Q?sBob0AVQpUGduBE//AQc0Q9/mQ/tPbClhy5f5y8Y4owuG9jbmNittDIN?=
+ =?Windows-1252?Q?Q1U1hxcn3qqUgpnkCHble5kYOMeoEpN5nWSmR1BKNe9LqQDxZt9KAed0?=
+ =?Windows-1252?Q?/cNfo2QjjGa7DiUZtHXrHeF58l684OikJS65uU/6lsUNiNVdUtk0K7aq?=
+ =?Windows-1252?Q?xtdw+cfYsuHf8pw0Et/x+PMsbtsCNcZMVanPcr51DpFoMaz96/aFT+zB?=
+ =?Windows-1252?Q?tou+p1ABc4pJdUN2u395s9qakph+CaKFz3t5TUiFeMHnVnO+unxT2XDB?=
+ =?Windows-1252?Q?Chu/zLvhsduZu5D14AJTEy5tploKhRPBfKVHJ9bjEHT2oT679+cjumDT?=
+ =?Windows-1252?Q?tmiTyBikBkL6JrZ3yh5CjCfhjKgEd1bDPcbFeiK5ACbPGnqnDJf7aLQB?=
+ =?Windows-1252?Q?llkNWDrNX9plCzOcGZk9kCbYL10fXF8M9jRrilurXYUpTWz+jHueDH7b?=
+ =?Windows-1252?Q?cJLwoOrd83JGZqAwZVN+P2h1bNOYuEXXMHNbJ4XX1BANjRAb/HoBg9a5?=
+ =?Windows-1252?Q?qguMQNP2zXsX3ynKTy4YNVnz0oQgMbvkDrmIaODWSD8UtA93TiY7ATFw?=
+ =?Windows-1252?Q?XgZJ/9scW2t8hieufhISDWUKw4VsaMaKMu1KDNRVZ62/mYOCCmoFXv6M?=
+ =?Windows-1252?Q?yxUIOKgqYSygsK6CKSE/Y1OeUWsDLOrbXQ/jxzjzmW3g/9IEw8pTcnAc?=
+ =?Windows-1252?Q?jpkIVCzd3nTl9XW/1alRrWeniQm9HguYzjA/BckXgvtIygsHaWRCOL/b?=
+ =?Windows-1252?Q?NdCr7aKhpfHqH3chn6nxe/rvTPQABl94XOiJWznO2GiKUIoNkUJQpJCM?=
+ =?Windows-1252?Q?78SZXJoBwtF/2uushHXSJqI+6p9GjBhQENlZ50zwWXjTgYfDe7JYJxPF?=
+ =?Windows-1252?Q?9MiQv/Euupl9FnbiiXAHStzaN3+umcwWMlJ9uN9/u3FU7M6kA9JwCCFx?=
+ =?Windows-1252?Q?+5MK9jF88HZfLEQ+gKRFTKj6XXNltVBED28jb1C+gnFzcJXAfsu7ThUY?=
+ =?Windows-1252?Q?KW5/1H++XhoXzc3rQi8Z1WboN4w0i7QYc1GPftETShS5jX90dLh/F4ZA?=
+ =?Windows-1252?Q?8AYJnK3PUfMeE+idjw6PYCJu9H40VREerZDXfihsE1n1CuhXHYjZGprm?=
+ =?Windows-1252?Q?WbCyXTAGp0IJ0OoM1V/bns0y0lMRyQrdkfQew4+b+MrmXhiAav0gyK25?=
+ =?Windows-1252?Q?/mMP1AHODsYFVVqTFzMQdzb/IVHZ6jw1slv6DpsAa7I2ML9Ne5Tn6uJE?=
+ =?Windows-1252?Q?WY1ldzHtSMaEew45q0pfnd2eAHbBP3VsPkYCgltLZq3qIBQiGjKj1Fq0?=
+ =?Windows-1252?Q?QFLOSo0e3dCPoYH/AfCyYXFvQXl2ekHzlEQ+FegcT56Huov+L1Tiuc51?=
+ =?Windows-1252?Q?J4G5h6jSqGzTsNY1TEEby+D0og2GrY9XCnZt/sz2pELDJQC86GvIwo7i?=
+ =?Windows-1252?Q?vzUkbapUhzJYvU4SxfqlOEaJVot6td30Zd8DVRu3rB0Rr6HxvTb0muAp?=
+ =?Windows-1252?Q?oL7PBFOLAAYih52i6WmC25Fzk+qqhWiip9GTAZT/YEGGVzu+H1hEMJ+3?=
+ =?Windows-1252?Q?hZwX+a4ZXk4vv8yopbF860hozfVc1ZS1HEeN6y33cxbSd1OJ2nrsKLWn?=
+ =?Windows-1252?Q?Zq1BGBzuGlukUCjqy/0t6x1FolmIqgNNQZQye7+aMlSvTs34bMlCzmQf?=
+ =?Windows-1252?Q?LJWEBnv8s8CfoThWhOLlLqHFQOZlIe0LMIDcC+ALZqZp1kEnN56aE/Er?=
+ =?Windows-1252?Q?huXDcGiq6ptLxkDg6UpcZ6L9dLaJIeymuLLSbf//qLGlN9i3KPizJ9NL?=
+ =?Windows-1252?Q?dc03h1DDJnHIXFKsw+cXWaqQZnF3bPb58c6Z+A=3D=3D?=
+MIME-Version: 1.0
+
+--_000_PH5PR05MB99848077347675F28FBD8132CF907DAPH5PR05MB998480_
+Content-Type: text/plain; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+External Email: Use Caution
+
+Hello,
+Thank you for submitting your resume through Handshake and for your interes=
+t in the Internship Program at Intrastack Solutions.
+Intrastack Solutions is a technology consulting firm specializing in Artifi=
+cial Intelligence (AI), Machine Learning (ML), Cloud Architecture, and Ente=
+rprise Application Development. Our team works with organizations across mu=
+ltiple industries and currently supports consulting engagements with govern=
+ment and enterprise clients across eight U.S. states, responding to Request=
+s for Proposal (RFPs) and delivering advanced technology solutions.
+We are seeking motivated students currently pursuing degrees in Computer Sc=
+ience, Information Technology, or related technical fields who are interest=
+ed in gaining real-world experience working on advanced research and develo=
+pment initiatives.
+Our internship program provides exposure to cutting-edge technologies and e=
+nterprise projects in areas such as:
+=95 Cloud Engineering & Architecture
+=95 Artificial Intelligence and Machine Learning
+=95 DevOps and Infrastructure Automation
+=95 Data Engineering and Analytics
+=95 Cybersecurity and Cloud Security
+=95 Full-Stack and Mobile Application Development
+We would like to invite you to a 30-minute introductory interview to learn =
+more about your educational background, technical experience, and the techn=
+ologies you are currently working with.
+Please use the scheduling link below to book a convenient time for your int=
+erview:
+https://calendly.com/vietsongtv/intrastack-solutions
+Once scheduled, you will receive a calendar confirmation with meeting detai=
+ls.
+We look forward to speaking with you and learning more about your interests=
+ and technical background.
+Best regards,
+Stefan Nguyen
+Principal Solutions Architect
+Intrastack Solutions
+
+
+
+--_000_PH5PR05MB99848077347675F28FBD8132CF907DAPH5PR05MB998480_
+Content-Type: text/html; charset="Windows-1252"
+Content-Transfer-Encoding: quoted-printable
+
+<html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3DWindows-1=
+252">
+<style type=3D"text/css" style=3D"display:none;"> P {margin-top:0;margin-bo=
+ttom:0;} </style>
+</head>
+<body dir=3D"ltr">
+<p><strong><span title=3D"This email came from an address that is outside o=
+f the University, proceed with caution!" style=3D"color:white"><span style=
+=3D"font-size:=0A=
+11pt;font-family:&quot;Open Sans&quot;,sans-serif;color:#ffffff; windowtext=
+ 3.0pt;=0A=
+padding:4.0pt;background:#e00122">External
+ Email: Use Caution</span></strong></p>
+<br>
+</span>
+<div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Hello,</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Thank you for submitting your resume through Handshake and for your interes=
+t in the Internship Program at Intrastack Solutions.</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Intrastack Solutions is a technology consulting firm specializing in Artifi=
+cial Intelligence (AI), Machine Learning (ML), Cloud Architecture, and Ente=
+rprise Application Development. Our team works with organizations across mu=
+ltiple industries and currently
+ supports consulting engagements with government and enterprise clients acr=
+oss eight U.S. states, responding to Requests for Proposal (RFPs) and deliv=
+ering advanced technology solutions.</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+We are seeking motivated students currently pursuing degrees in Computer Sc=
+ience, Information Technology, or related technical fields who are interest=
+ed in gaining real-world experience working on advanced research and develo=
+pment initiatives.</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Our internship program provides exposure to cutting-edge technologies and e=
+nterprise projects in areas such as:</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+=95 Cloud Engineering &amp; Architecture<br>
+=95 Artificial Intelligence and Machine Learning<br>
+=95 DevOps and Infrastructure Automation<br>
+=95 Data Engineering and Analytics<br>
+=95 Cybersecurity and Cloud Security<br>
+=95 Full-Stack and Mobile Application Development</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+We would like to invite you to a <b>30-minute introductory interview</b>&nb=
+sp;to learn more about your educational background, technical experience, a=
+nd the technologies you are currently working with.</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Please use the scheduling link below to book a convenient time for your int=
+erview:</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+<a class=3D"OWAAutoLink" id=3D"OWAacf9fd39-cb5f-f4b3-1cb4-63df4d26f291" hre=
+f=3D"https://calendly.com/vietsongtv/intrastack-solutions">https://calendly=
+.com/vietsongtv/intrastack-solutions</a></div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Once scheduled, you will receive a calendar confirmation with meeting detai=
+ls.</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+We look forward to speaking with you and learning more about your interests=
+ and technical background.</div>
+<div style=3D"margin-top: 1em; margin-bottom: 1em; font-family: Aptos, Apto=
+s_EmbeddedFont, Aptos_MSFontService, Calibri, Helvetica, sans-serif; font-s=
+ize: 12pt; color: rgb(0, 0, 0);" class=3D"elementToProof">
+Best regards,<br>
+Stefan Nguyen<br>
+Principal Solutions Architect<br>
+Intrastack Solutions<br>
+<br>
+</div>
+<div style=3D"font-family: Aptos, Aptos_EmbeddedFont, Aptos_MSFontService, =
+Calibri, Helvetica, sans-serif; font-size: 12pt; color: rgb(0, 0, 0);" clas=
+s=3D"elementToProof">
+<br>
+</div>
+</div>
+</body>
+</html>
+
+--_000_PH5PR05MB99848077347675F28FBD8132CF907DAPH5PR05MB998480_--

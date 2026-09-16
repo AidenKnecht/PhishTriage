@@ -1,0 +1,2934 @@
+Received: by 2002:a05:6124:1ea1:b0:448:b4c5:5917 with SMTP id l33csp3893475vlr;
+        Mon, 14 Sep 2026 13:20:15 -0700 (PDT)
+X-Received: by 2002:a05:6a20:6a1f:b0:3d0:5305:4fb9 with SMTP id adf61e73a8af0-3db40435e7cmr8095221637.7.1789417215454;
+        Mon, 14 Sep 2026 13:20:15 -0700 (PDT)
+ARC-Seal: i=1; a=rsa-sha256; t=1789417215; cv=none;
+        d=google.com; s=arc-20260327;
+        b=cUWsrZe+UfB+sU2715NO8qzEk1gT7tVLRKtqcIgBbp/u0ScjmkZfq/gNxru6qYpumL
+         C9EM1W7Lg7Kv48xm9QdVIv7vbwARbPgPVKT0dRrUKZuq1C9WY+V3hyZKlbC9p71MyZ/d
+         TEg21YrUuZ5M6R+MXzt6kyaeq/aXsrQ3yD89wQKAQ9EHe+ALe963xvmB3eIJMIX0Qrty
+         fm86pW34viJBMm8PjlCBmvrSF8byc1XTwy/vo5AJKw2+GjD9TIVKQV8wsNPTJ+vEexBP
+         zI8Dki0qRvhghK9IOD2gkJuhVt0zxK4GvncWmgqmbeVPnBUhGOK3vZ2U4681D7k0ArMV
+         gvtg==
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc-20260327;
+        h=to:list-unsubscribe-post:list-unsubscribe:reply-to:subject
+         :message-id:mime-version:from:date:dkim-signature:dkim-signature;
+        bh=SnMVlaoawW9QT5bBHVJNeMSecGoN2YsUz4w2BzmMgS4=;
+        fh=lIB7MTxrcQDbXUDyJXAK2bWQbPZ/w1sFmn5UFwqLrCc=;
+        b=e4TCZJ0jTvDf9qMm27wXTHATr5rCaal7sIquiAuy5DaZMtO2c+0Rm4CC0pYGYRGJ6K
+         BF+lPXwVkQR9XcfSZdfPrYDQKkv0ym5I4kGsLovYe8NlWjdCREV82clFoKwALhFuspRV
+         ASf++I8EOb0gFhYJWkBfFIUfNyuY14Kj6P5MVegT7gZj/WG23Qla3DEedzljXsjvD6YU
+         +n6SwVWhUCMQ/tIIkEO0ZdTe0F+N1HLdVYs1ZvREfT5V3wnfh8Qt5TLxqspsDInVBq7Q
+         Botx5tILDimcNcac5PutFujLQ3s0jGzOXZ+GiSQSPXEXxxx/gZU+scDawwMZ+qSbq2ii
+         jymg==;
+        dara=google.com
+ARC-Authentication-Results: i=1; mx.google.com;
+       dkim=pass header.i=@students.udemy.com header.s=s1 header.b=fOB0vRoS;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b="EotP1/sa";
+       spf=pass (google.com: domain of bounces+21743674-a840-Analyst=gmail.com@abmail.students.udemy.com designates 149.72.191.144 as permitted sender) smtp.mailfrom="bounces+21743674-a840-Analyst=gmail.com@abmail.students.udemy.com";
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=students.udemy.com
+Return-Path: <bounces+21743674-a840-Analyst=gmail.com@abmail.students.udemy.com>
+Received: from o3616.abmail.students.udemy.com (o3616.abmail.students.udemy.com. [149.72.191.144])
+        by mx.google.com with ESMTPS id 41be03b00d2f7-cc4c65d56d0si21593764a12.110.2026.09.14.13.20.14
+        for <analyst@example.com>
+        (version=TLS1_3 cipher=TLS_AES_128_GCM_SHA256 bits=128/128);
+        Mon, 14 Sep 2026 13:20:15 -0700 (PDT)
+Received-SPF: pass (google.com: domain of bounces+21743674-a840-Analyst=gmail.com@abmail.students.udemy.com designates 149.72.191.144 as permitted sender) client-ip=149.72.191.144;
+Authentication-Results: mx.google.com;
+       dkim=pass header.i=@students.udemy.com header.s=s1 header.b=fOB0vRoS;
+       dkim=pass header.i=@sendgrid.info header.s=smtpapi header.b="EotP1/sa";
+       spf=pass (google.com: domain of bounces+21743674-a840-Analyst=gmail.com@abmail.students.udemy.com designates 149.72.191.144 as permitted sender) smtp.mailfrom="bounces+21743674-a840-Analyst=gmail.com@abmail.students.udemy.com";
+       dmarc=pass (p=REJECT sp=REJECT dis=NONE) header.from=students.udemy.com
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=students.udemy.com;
+	h=content-type:date:from:mime-version:subject:reply-to:list-unsubscribe:
+	list-unsubscribe-post:to:cc:content-type:date:feedback-id:from:subject:to;
+	s=s1; t=1789417213;
+	bh=SnMVlaoawW9QT5bBHVJNeMSecGoN2YsUz4w2BzmMgS4=;
+	b=fOB0vRoSQNEGjKzCaKLeOYyx0lP7jQhdjY1EHJoKGqJGjByVe84yivW+2/fi6KCOCHNE
+	abDLSsTGei7cZUIxAwuGuPiEM0nX05ks404aKNLHIQPEtknegrhPyHpxT0fFAi6DgZI8Wa
+	5XTNUq0mhEHve+2y72wQ2ZilwQpWCFhQZely49M7vN3QYwC9eW9S1I+62ki740xzt+lCtb
+	i2K54OWFHHRdbKzDGvenN/SKU8uUU73WYXxzTJhmxx5lX29r97T9MQKdFwmMYiuT+NUrgp
+	B6XcmIdaw5xqqlrlADut7KpGjAZSyVuPGOCRM8wqYe9UJZWZewjSC2+3lKL11KDg==
+DKIM-Signature: v=1; a=rsa-sha256; c=relaxed/relaxed; d=sendgrid.info;
+	h=content-type:date:from:mime-version:subject:reply-to:list-unsubscribe:
+	list-unsubscribe-post:to:cc:content-type:date:feedback-id:from:subject:to;
+	s=smtpapi; t=1789417213;
+	bh=SnMVlaoawW9QT5bBHVJNeMSecGoN2YsUz4w2BzmMgS4=;
+	b=EotP1/sa8Hh+TJR5wfIkoN+/W4k6tDOcszGTHV5CatrTnz3ln5dDW+iUxh0QksNnr7V9
+	pWQMGNIZvCgDIJXfNbVkUwKjh486+Hxm/1hhnJXRbbq6karIKsk3Z/InNDC29P6/x63DWw
+	silJ94fHVJPbK3gfDIwIxCEMAAQYMRqiI=
+Received: by recvd-586f56f74c-swxfb with SMTP id recvd-586f56f74c-swxfb-1-6AA856FD-BB
+	2026-09-14 20:20:13.801026188 +0000 UTC m=+427927.523892591
+Received: from MjE3NDM2NzQ (unknown)
+	by geopod-ismtpd-18 (SG) with HTTP
+	id T_JcZUjTTPC_mi4w3i3WQQ
+	Mon, 14 Sep 2026 20:20:13.752 +0000 (UTC)
+Content-Type: multipart/alternative; boundary=f660a29bb13a78065b7ae4d31a0649daa4a7d0ef80e6f6e438116c3b633d
+Date: Mon, 14 Sep 2026 20:20:13 +0000 (UTC)
+From: Udemy <hello@students.udemy.com>
+Mime-Version: 1.0
+Message-ID: <T_JcZUjTTPC_mi4w3i3WQQ@geopod-ismtpd-18>
+Subject: A full year of career growth: Save 30% today on a Udemy Personal Plan
+ annual subscription
+Reply-To: no-reply@students.udemy.com
+List-Unsubscribe:
+ <https://03.emailinboundprocessing.com/enc_user/list_unsubscribe?d=REDACTED&1=1>,
+ <mailto:4_ohokwiyidiioafjl6as4kfo3dkcixkjymhn1vbbnwid75fvdp4r5h9@unsubscribe-03.emailinboundprocessing.com?subject=Unsubscribe%20pnrcgsqfzef6sip1wi4hf7bfjbrpagrx0lhogf0bxnwovcfd&body=DO_NOT_DELETE-fsocsaq6hxc5oodb1q6q3x61tcvz1nu6fh072oopsm60cl7hkpsdbtb3h2g2jmv618czp6ildz2btldurunqja0d-DO_NOT_DELETE>
+List-Unsubscribe-Post: List-Unsubscribe=One-Click
+X-SG-EID: 
+ =?us-ascii?Q?u001=2EprZIduz3Hio3jjIVO=2F+qXJFDF+EteVTh5ZpznZu5a1S2mDSvHkxLDRiI2?=
+ =?us-ascii?Q?iSNk=2FkfvPCZGyuKQGTRMN2lekAoQbGAH0M8zI3Y?=
+ =?us-ascii?Q?Kmaa41Ohf5KBRzv6+sszHh2Wg9t4jYPzBCtXClR?=
+ =?us-ascii?Q?78aRC1uM+ZwFLb0nyOI=2Fb0JUYNx728w0lpfc6mW?=
+ =?us-ascii?Q?qpz83n=2Fd9aItZUTdxoGz50hK5gjKWucxwQjsDrS?=
+ =?us-ascii?Q?=2F5oTLrRQVOSpVrjyDzXnuCKCb+GA=2FknhaL2xKRt?=
+ =?us-ascii?Q?s4W7?=
+X-SG-ID: 
+ =?us-ascii?Q?u001=2ESdBcvi+Evd=2FbQef8eZF3BpTL9BgbK5wfSJMJGMsmprDrjDW6011yC6XOo?=
+ =?us-ascii?Q?3uya5MX+0PydALI4emoP51VkdZS398wbqzOka3Z?=
+ =?us-ascii?Q?uSSUbvnNtBoKyDQ9LA2vJqisr8s8QQRBFz=2Fz3bs?=
+ =?us-ascii?Q?VGhBJEpFQp=2Fm7ol=2FWBdEthvfeolakQ=2F7trmwq7G?=
+ =?us-ascii?Q?FjuMasdkp0Uj5PUQo1DbodmEvOJgVn7vC+Y2z8e?=
+ =?us-ascii?Q?My5JVOSXeGEceneWnQ0m57o=2FGi+yPDpJViqhl8W?=
+ =?us-ascii?Q?RUXgb0ieGNyBM7kecyKQdYD5mb7PehdewGUXhJT?=
+ =?us-ascii?Q?yXbtGPHiHapwb1Pc4ITI78ZTRLXAby9QBfcLdsb?=
+ =?us-ascii?Q?OjqdbXDqvSGRhOTDtP3IKKuwlgCCvPTVcySy+1h?=
+ =?us-ascii?Q?assGZOuJDTJHqXvbrC9H+c9JJwmfLgcGn00LycT?=
+ =?us-ascii?Q?bMJKr0yl4tAFCVxaqL1oHPwcS4x8IOzxciXzOpi?=
+ =?us-ascii?Q?odO2dDORapWarZZo1=2FsODbhAl41pXFlr7w5o2F8?=
+ =?us-ascii?Q?VKn+il01=2Fo6mp3Pt=2F80oSJml3W3GtLtvGaDIBN2?=
+ =?us-ascii?Q?18ACwPmBaqlIWVv46o7ZlQe=2FZE4btTO+eluiYCq?=
+ =?us-ascii?Q?3GSzpaXkoaNV76Wo=2Fhy55dXq9LwlC4MyvA=3D=3D?=
+To: analyst@example.com
+X-Entity-ID: u001.Akf8bWOMPmyk/zxQlcdHrQ==
+
+--f660a29bb13a78065b7ae4d31a0649daa4a7d0ef80e6f6e438116c3b633d
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/plain; charset=us-ascii
+Mime-Version: 1.0
+
+Achieve your career goals with Personal Plan.
+
+
+
+
+
+
+Udemy Logo=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+-----------------------------------------------------------------
+Invest in your skills for just $9.10/mo, billed annually
+-----------------------------------------------------------------
+
+Learn AI (and anything else) with Personal Plan. Terms apply.*
+
+
+
+Start now =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )   Udemy
+Personal Plan=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED ) Udemy
+Personal Plan=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Access these AI Courses and more with a Personal Plan.
+
+
+
+
+
+
+
+
+
+
+
+Succeed in the Age of AI=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+        Succeed in the Age of AI =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+   =20
+
+
+4.63
+(3,649)
+
+
+
+
+
+Full stack generative and Agentic AI with python=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+        Full stack generative and Agentic AI with python =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+   =20
+
+
+4.44
+(10,110)
+
+
+
+
+
+Complete Generative AI Course With Langchain and Huggingface=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+        Complete Generative AI Course With Langchain and Huggingface =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+   =20
+
+
+4.52
+(20,078)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Check out some of the <span style=3D"font-weight:700; font-style:bold;">Com=
+pTIA Security+</span> courses available in Personal Plan.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+CompTIA Security+ (SY0-701) Complete Course &amp; Practice Exam=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+        CompTIA Security+ (SY0-701) Complete Course &amp; Practice Exam =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+   =20
+
+
+4.67
+(123,068)
+
+
+
+
+
+TOTAL: CompTIA Security+  Course + Practice Exam SY0-701=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+        TOTAL: CompTIA Security+  Course + Practice Exam SY0-701 =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+   =20
+
+
+4.68
+(38,267)
+
+
+
+
+
+CompTIA Security+ SY0-701 Full Course, Labs, and Study Plan=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+        CompTIA Security+ SY0-701 Full Course, Labs, and Study Plan =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+   =20
+
+
+4.72
+(12,806)
+
+
+
+
+
+
+
+
+
+
+
+
+
+Get started with top categories:
+----------------------------------
+
+
+
+
+
+
+AI =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+    =20
+
+
+
+
+Development =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+
+
+
+
+IT & Software =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+
+
+
+
+Business =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+
+
+
+
+Lifestyle =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+
+
+
+
+Design =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+AI =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+         Development =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+IT & Software =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+Business =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+Lifestyle =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+Design =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+*Existing Personal Plan subscribers do not qualify. Must reside in the Unit=
+ed States. Subscription auto-renews at then-applicable yearly pricing after=
+ first year unless canceled. Promotion ends at midnight on September 21st, =
+2026.
+
+Udemy Logo ( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+
+
+
+
+The power of possibilities
+
+Udemy Logo ( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+
+
+
+
+The power of possibilities
+
+
+
+
+
+
+Download our app and learn anywhereGoogle Play=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )    App Store
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )Google Play=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )  App Store=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  Instagram (
+https://ablink.students.udemy.com/ls/click?upn=3DREDACTED
+) LinkedIn=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+ X (
+https://ablink.students.udemy.com/ls/click?upn=3DREDACTED
+) YT (
+https://ablink.students.udemy.com/ls/click?upn=3DREDACTED
+) Facebook (
+https://ablink.students.udemy.com/ls/click?upn=3DREDACTED
+)   About us=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+  |  Udemy Business (
+https://ablink.students.udemy.com/ls/click?upn=3DREDACTED
+)
+
+
+You are receiving this email because you signed up on Udemy.com with this e=
+mail address. Please do not reply to this unmonitored email account. Visit =
+the <a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED st=
+yle=3D"color:#ffffff !important">help center</a> for questions and support.
+
+
+Manage preferences=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+   Support  =20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+Unsubscribe (
+https://ablink.students.udemy.com/ls/click?upn=3DREDACTED
+)   Privacy terms=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+Manage preferences=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+   Support=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+Unsubscribe (
+https://ablink.students.udemy.com/ls/click?upn=3DREDACTED
+)   Privacy terms=20
+( https://ablink.students.udemy.com/ls/click?upn=3DREDACTED )
+
+Udemy, 600 Harrison Street, 3rd floor, San Francisco, CA 94107
+
+
+
+--f660a29bb13a78065b7ae4d31a0649daa4a7d0ef80e6f6e438116c3b633d
+Content-Transfer-Encoding: quoted-printable
+Content-Type: text/html; charset=utf-8
+Mime-Version: 1.0
+
+<!DOCTYPE html>
+<html xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:o=3D"urn:schemas-micr=
+osoft-com:office:office" lang=3D"">
+<head>
+<title></title>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+<meta name=3D"viewport" content=3D"width=3Ddevice-width,initial-scale=3D1">
+<!--[if mso]>
+<xml><w:WordDocument xmlns:w=3D"urn:schemas-microsoft-com:office:word"><w:D=
+ontUseAdvancedTypographyReadingMail/></w:WordDocument>
+<o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch><o:AllowPNG/=
+></o:OfficeDocumentSettings></xml>
+<![endif]--><!--[if !mso]><!--><link href=3D"https://www.udemy.com/staticx/=
+udemy/fonts/Udemy-Sans-Regular-v1.woff2" rel=3D"stylesheet" type=3D"text/cs=
+s">
+<!--<![endif]--><style>
+*{box-sizing:border-box}body{margin:0;padding:0}a[x-apple-data-detectors]{c=
+olor:inherit!important;text-decoration:inherit!important}#MessageViewBody a=
+{color:inherit;text-decoration:none}p{line-height:inherit}.desktop_hide,.de=
+sktop_hide table{mso-hide:all;display:none;max-height:0;overflow:hidden}.im=
+age_block img+div{display:none}sub,sup{font-size:75%;line-height:0} @media =
+(max-width:680px){.desktop_hide table.icons-outer{display:inline-table!impo=
+rtant}.image_block div.fullWidth{max-width:100%!important}.stack .column{wi=
+dth:100%!important;display:block}.mobile_hide{min-height:0;max-height:0;max=
+-width:0;display:none;overflow:hidden;font-size:0}.desktop_hide,.desktop_hi=
+de table{display:table!important;max-height:none!important}.row-3 .column-1=
+ .block-1.heading_block h2{font-size:38px!important}.row-3 .column-2 .block=
+-1.image_block td.pad div{margin:0 auto!important}.row-2 .column-1 .block-1=
+.image_block td.pad{padding:20px 0!important}.row-10 .column-1 .block-1.but=
+ton_block span{font-size:15px!important;line-height:18px!important}.row-15 =
+.column-2 .block-2.paragraph_block td.pad{padding:15px 0 10px 10px!importan=
+t}.row-16 .column-1 .block-2.divider_block td.pad{padding:25px 0!important;=
+text-align:left!important;font-size:1px}.row-17 .column-1 .block-2.paragrap=
+h_block td.pad>div{text-align:left!important;font-size:14px!important}.row-=
+17 .column-1 .block-2.paragraph_block td.pad{padding:0 0 5px 0!important}.r=
+ow-20 .column-1 .block-2.icons_block td.pad{text-align:left!important;paddi=
+ng:10px!important}.row-20 .column-1 .block-3.paragraph_block td.pad>div{tex=
+t-align:left!important}.row-16 .column-1 .block-4.paragraph_block td.pad{pa=
+dding:5px 0 10px 0!important}.row-20 .column-1 .block-4.paragraph_block td.=
+pad{padding:40px 0 15px 0!important}.row-20 .column-1 .block-8.paragraph_bl=
+ock td.pad{padding:50px 0!important}.row-16 .row-content{padding:40px 30px =
+0 30px!important}.row-17 .row-content{padding:30px 30px 5px 30px!important}=
+.row-3 .column-1{padding:25px 0 0 0!important}.row-6 .column-1{padding:25px=
+ 30px!important}.row-13 .column-1{padding:15px 30px 25px 30px!important}.ro=
+w-10 .column-1 .block-1.button_block td.pad .button,.row-10 .column-2 .bloc=
+k-1.button_block td.pad .button,.row-11 .column-1 .block-1.button_block td.=
+pad .button,.row-11 .column-2 .block-1.button_block td.pad .button,.row-12 =
+.column-1 .block-1.button_block td.pad .button,.row-12 .column-2 .block-1.b=
+utton_block td.pad .button,.row-3 .column-1 .block-4.button_block td.pad .b=
+utton,.row-content{width:100%!important}.row-10 .column-1 .block-1.button_b=
+lock td.pad,.row-10 .column-2 .block-1.button_block td.pad,.row-11 .column-=
+1 .block-1.button_block td.pad,.row-11 .column-2 .block-1.button_block td.p=
+ad,.row-12 .column-1 .block-1.button_block td.pad,.row-12 .column-2 .block-=
+1.button_block td.pad,.row-20 .column-1 .block-3.paragraph_block td.pad,.ro=
+w-20 .column-1 .block-5.divider_block td.pad,.row-3 .column-1 .block-1.head=
+ing_block td.pad,.row-8 .column-1 .block-2.button_block td.pad,.row-8 .colu=
+mn-2 .block-2.button_block td.pad,.row-8 .column-3 .block-2.button_block td=
+.pad,.row-9 .column-1 .block-2.button_block td.pad,.row-9 .column-2 .block-=
+2.button_block td.pad,.row-9 .column-3 .block-2.button_block td.pad{padding=
+:10px 0!important}.row-20 .column-1 .block-8.paragraph_block td.pad>div,.ro=
+w-3 .column-1 .block-4.button_block td.pad{text-align:center!important}.row=
+-3 .column-1 .block-4.button_block span,.row-8 .column-1 .block-2.button_bl=
+ock span,.row-8 .column-2 .block-2.button_block span,.row-8 .column-3 .bloc=
+k-2.button_block span,.row-9 .column-1 .block-2.button_block span,.row-9 .c=
+olumn-2 .block-2.button_block span,.row-9 .column-3 .block-2.button_block s=
+pan{line-height:32px!important}.row-10 .column-2 .block-1.button_block span=
+,.row-11 .column-2 .block-1.button_block span,.row-12 .column-2 .block-1.bu=
+tton_block span{line-height:19.2px!important}.row-11 .column-1 .block-1.but=
+ton_block span,.row-12 .column-1 .block-1.button_block span{font-size:16px!=
+important;line-height:19.2px!important}.row-15 .column-1 .block-1.image_blo=
+ck td.pad,.row-16 .column-1 .block-1.image_block td.pad,.row-19 .column-2 .=
+block-1.image_block td.pad{padding:0!important}.row-15 .column-2 .block-2.p=
+aragraph_block td.pad>div,.row-16 .column-1 .block-4.paragraph_block td.pad=
+>div{font-size:14px!important}.row-16 .column-1 .block-1.image_block td.pad=
+ div,.row-19 .column-1 .block-2.image_block td.pad div,.row-19 .column-2 .b=
+lock-1.image_block td.pad div{margin:0 auto 0 0!important}.row-16 .column-1=
+ .block-2.divider_block td.pad table,.row-20 .column-1 .block-5.divider_blo=
+ck td.pad table{display:inline-table}.row-10 .column-1,.row-11 .column-1,.r=
+ow-12 .column-1,.row-19 .column-1 .block-2.image_block td.pad{padding:0 5px=
+ 0 0!important}.row-20 .column-1 .block-6.paragraph_block td.pad,.row-20 .c=
+olumn-1 .block-7.paragraph_block td.pad{padding:30px 0 10px 0!important}.ro=
+w-10 .row-content,.row-11 .row-content,.row-12 .row-content,.row-19 .row-co=
+ntent,.row-20 .row-content,.row-3 .row-content,.row-7 .column-1{padding:0 3=
+0px!important}.row-8 .row-content,.row-9 .row-content{padding:10px 30px 0 3=
+0px!important}.row-8 .column-1,.row-9 .column-1{padding:5px 20px 0 20px!imp=
+ortant}.row-8 .column-2,.row-9 .column-2{padding:0 20px 5px 20px!important}=
+.row-10 .column-2,.row-11 .column-2,.row-12 .column-2{padding:0 0 5px 5px!i=
+mportant}.row-18 .column-1,.row-18 .column-2{padding:5px 0!important}}
+</style>
+<!--[if mso ]><style>sup, sub { font-size: 100% !important; } sup { mso-tex=
+t-raise:10% } sub { mso-text-raise:-10% }</style> <![endif]--><style>
+  /* Start - Header logo dark mode css */
+  @media (prefers-color-scheme: dark) {
+
+    .row-2 .row-content,
+    .row-25 .row-content,
+    .row-26 .row-content,
+    .row-27 .row-content,
+    .row-28 .row-content,
+    .row-29 .row-content,
+    .row-30 .row-content {
+      background-color: #1a1a1a !important;
+    }
+
+    .MX-Learner-Footer {
+      color: #FFFFFF !important;
+    }
+
+    #logo-dark {
+      content: url("https://braze-images.com/appboy/communication/assets/im=
+age_assets/images/REDACTED/original.png?1700762271") !important;
+    }
+  }
+
+  /* End - Header logo dark mode css */
+
+  /* Start - Headline section dark mode css */
+  /* =3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D
+GMAIL ANDROID DARK MODE - Headline text fix
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
+=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D */
+
+  /* Gmail Android - background that supports both=20
+     dark navy AND white text */
+
+  u+.body .row-3 .row-content {
+    background-color: #55a18a !important;
+  }
+
+  /* Keep text dark(not black) to ensure readability=20
+     in case Gmail doesn't invert it */
+  u+.body .row-3 h2 {
+    color: #1a1a1a !important;
+  }
+
+  /* End - Headline section dark mode css */
+
+  /* Start - Recommendation course card styles */
+  @media only screen and (max-width:599px) {
+    .deviceWidth {
+      width: 100% !important;
+    }
+
+    .placeholderforcontentpadding {
+      padding-left: 20px !important;
+      padding-right: 20px !important;
+    }
+
+    .container-cell-stack-col {
+      display: inline-block;
+      max-width: 373px;
+      width: 100% !important;
+      box-sizing: border-box;
+      transition-timing-function: ease-in-out;
+      transition: .9s;
+    }
+
+    .copy-ml {
+      font-size: 18px !important;
+      line-height: 120% !important;
+    }
+
+    .courseCardWrap {
+      display: inline-block !important;
+      width: 100% !important;
+      vertical-align: top !important;
+    }
+
+    .courseCardTop {
+      width: 30% !important;
+      float: left;
+      min-width: 30% !important;
+    }
+
+    .courseCardBottom {
+      width: 70% !important;
+      float: left;
+      min-width: 70% !important;
+      border-bottom: 0px !important;
+    }
+
+    .mobileCourseLine {
+      border-bottom: 1px #fffffe solid;
+    }
+
+    .titleHeight {
+      height: auto;
+    }
+
+    .titlePadding {
+      padding-top: 0px !important;
+      padding-bottom: 10px !important;
+      padding-left: 10px !important;
+      font-size: 16px !important;
+    }
+
+    .starPricePadding {
+      padding-top: 0px !important;
+      padding-bottom: 0px !important;
+      padding-left: 10px !important;
+      font-size: 80% !important;
+    }
+
+    .courseImage {
+      width: 100%;
+      height: auto !important;
+    }
+
+    .mobileCoursePadding {
+      padding: 15px 0px 15px 0px !important;
+      width: 100% !important;
+    }
+  }
+
+  /* End - Recommendation course card styles */
+</style>
+</head>
+<body><img src=3D"https://ablink.students.udemy.com/wf/open?upn=3DREDACTED"=
+ alt=3D"" width=3D"1" height=3D"1" border=3D"0" style=3D"height:1px !import=
+ant;width:1px !important;border-width:0 !important;margin-top:0 !important;=
+margin-bottom:0 !important;margin-right:0 !important;margin-left:0 !importa=
+nt;padding-top:0 !important;padding-bottom:0 !important;padding-right:0 !im=
+portant;padding-left:0 !important;"/>
+<div style=3D"display:none !important;visibility:hidden;mso-hide:all;font-s=
+ize:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:=
+0;overflow:hidden;">Achieve your career goals with Personal Plan.</div>
+<div style=3D"display:none !important;visibility:hidden;mso-hide:all;font-s=
+ize:1px;color:#ffffff;line-height:1px;max-height:0px;max-width:0px;opacity:=
+0;overflow:hidden;">=CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=
+=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=
+=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=
+=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=
+=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =
+=CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=
+=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =
+=C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=
+=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =
+=EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=
+=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =
+=E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=
+=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =
+=E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=
+=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=
+=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=
+=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=
+=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =
+=CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=
+=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =
+=C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=
+=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =
+=EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=
+=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =
+=E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=
+=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =
+=E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=
+=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=
+=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=
+=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=
+=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =
+=CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=
+=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =
+=C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=
+=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =
+=EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=
+=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =
+=E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=
+=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =
+=E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=
+=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=
+=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=
+=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=
+=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =
+=CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=
+=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =
+=C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=
+=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =
+=EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=
+=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =
+=E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=
+=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =
+=E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=
+=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=
+=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=
+=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=
+=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =
+=CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=
+=87 =EF=BB=BF =CD=8F =E2=80=8C =C2=A0 =E2=80=87 =EF=BB=BF =CD=8F =E2=80=8C =
+=C2=A0 =E2=80=87 =EF=BB=BF </div>
+<p>
+
+
+ <!-- Google Carousel -->
+<script type=3D"application/ld+json">
+  [{
+      "@context": "http://schema.org/",
+      "@type": "EmailMessage",
+      "subjectLine": "A full year of career growth: Save 30% today on a Ude=
+my Personal Plan annual subscription"
+    },
+    {
+      "@context": "http://schema.org/",
+      "@type": "DiscountOffer",
+      "availabilityStarts": "2026-09-14T00:00:00-07:00",
+      "availabilityEnds": "2026-09-21T23:59:00-07:00"
+    },
+    {
+      "@context": "http://schema.org/",
+      "@type": "PromotionCard",
+      "image": "https://braze-images.com/appboy/communication/assets/image_=
+assets/images/REDACTED/original.png?1784586891",
+      "url": "https://www.udemy.com/",
+      "headline": "It's one simple plan to help you reach your goals.",
+      "priceCurrency": "USD"
+    }
+  ]
+</script>
+
+
+<!-- VALIDITY TRACKING PIXEL -->
+<!-- place in the head tag of email template -->
+<style> @media print{ #_two50 { background-image:url('https://UdemyValidity=
+MX.everestengagement.com/ea/Tt6TxyFkgA/?t=3Dp&e=3DREDACTED&c=3DREDACTED'); =
+} } blockquote #_two50, #mailContainerBody #_two50, div.OutlookMessageHeade=
+r, table.moz-email-headers-table { background-image:url('https://UdemyValid=
+ityMX.everestengagement.com/ea/Tt6TxyFkgA/?t=3Df&e=3DREDACTED&c=3DREDACTED'=
+); } </style> </p>
+<div id=3D"_two50"></div> <img id=3D"_two50_img" src=3D"https://UdemyValidi=
+tyMX.everestengagement.com/ea/Tt6TxyFkgA/?e=3DREDACTED&amp;c=3DREDACTED" wi=
+dth=3D"1" height=3D"1" style=3D"margin:0 !important; padding:0 !important; =
+border:0 !important; height:1px !important; width:1px !important;">
+
+
+
+<!--  X-250ok-CID: 260914_Student-MX_EM-Sitewide_Promos_PP-Sale_T1_V3 -->
+
+<!-- //VALIDITY TRACKING PIXEL --><table class=3D"nl-container" width=3D"10=
+0%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" =
+style=3D"mso-table-lspace:0;mso-table-rspace:0;background-color:#fff"><tbod=
+y><tr><td>
+<table class=3D"row row-1" align=3D"center" width=3D"100%" border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-l=
+space:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-content stac=
+k" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=
+=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;background=
+-color:#fff;border-radius:0;color:#000;width:660px;margin:0 auto" width=3D"=
+660"><tbody><tr><td class=3D"column column-1" width=3D"100%" style=3D"mso-t=
+able-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertical-a=
+lign:top;width:100%"><table class=3D"html_block block-1" width=3D"100%" bor=
+der=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=
+=3D"mso-table-lspace:0;mso-table-rspace:0"><tr><td class=3D"pad"><div style=
+=3D"font-family:UdemySansWeb,Arial,Sans-serif;text-align:center" align=3D"c=
+enter">
+
+<style>
+@font-face {
+  font-family: 'UdemySansWeb';
+  src: url('https://braze-images.com/appboy/communication/assets/font_asset=
+s/files/REDACTED/original.woff?1777648485') format('woff'),
+       url('https://braze-images.com/appboy/communication/assets/font_asset=
+s/files/REDACTED/original.otf?1777995916') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UdemySansWeb';
+  src: url('https://braze-images.com/appboy/communication/assets/font_asset=
+s/files/REDACTED/original.woff?1777648598') format('woff'),
+       url('https://braze-images.com/appboy/communication/assets/font_asset=
+s/files/REDACTED/original.otf?1777995916') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'UdemySansWeb';
+  src: url('https://braze-images.com/appboy/communication/assets/font_asset=
+s/files/REDACTED/original.woff?1777648627') format('woff'),
+       url('https://braze-images.com/appboy/communication/assets/font_asset=
+s/files/REDACTED/original.otf?1777995916') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+}
+
+/* Headlines - UdemySansWeb Bold */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'UdemySansWeb', Helvetica, sans-serif;
+  font-weight: 700;
+}
+
+/* Body - UdemySansWeb Regular */
+p, td, div, span, li {
+  font-family: 'UdemySansWeb', Helvetica, sans-serif;
+}
+</style>
+<!-- START language assign --><!-- // END language assign -->
+</div></td></tr></table></td></tr></tbody></table></td></tr></tbody></table=
+>
+<table class=3D"row row-2" align=3D"center" width=3D"100%" border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-l=
+space:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-content stac=
+k" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=
+=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;background=
+-color:#fff;color:#000;width:660px;margin:0 auto" width=3D"660"><tbody><tr>=
+<td class=3D"column column-1" width=3D"100%" style=3D"mso-table-lspace:0;ms=
+o-table-rspace:0;font-weight:400;text-align:left;vertical-align:top;width:1=
+00%"><table class=3D"image_block block-1" width=3D"100%" border=3D"0" cellp=
+adding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lsp=
+ace:0;mso-table-rspace:0"><tr><td class=3D"pad" style=3D"width:100%;padding=
+-top:15px;padding-bottom:15px" align=3D"center"><div style=3D"max-width:132=
+px"><a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" t=
+arget=3D"_blank"><img src=3D"https://braze-images.com/appboy/communication/=
+assets/image_assets/images/REDACTED/original.png?1775583158" style=3D"displ=
+ay:block;height:auto;border:0;width:100%" width=3D"132" alt=3D"Udemy Logo" =
+title=3D"Udemy Logo" id=3D"logo-dark" height=3D"auto"></a></div></td></tr><=
+/table></td></tr></tbody></table></td></tr></tbody></table>
+<table class=3D"row row-3" align=3D"center" width=3D"100%" border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-l=
+space:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-content stac=
+k" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=
+=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;background=
+-color:#3b1b94;border-radius:0;color:#000;padding-left:50px;padding-right:5=
+0px;width:660px;margin:0 auto" width=3D"660"><tbody><tr><td><table width=3D=
+"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"mso-table-lspace:0;mso-table-rspace:0"><tbody><tr>
+<td class=3D"column column-1" width=3D"50%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0;font-weight:400;text-align:left;background-color:#3b1b94;pa=
+dding-bottom:25px;padding-right:10px;padding-top:25px;vertical-align:top;wi=
+dth:50%">
+<table class=3D"heading_block block-1" width=3D"100%" border=3D"0" cellpadd=
+ing=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace=
+:0;mso-table-rspace:0"><tr><td class=3D"pad" style=3D"width:100%;padding-bo=
+ttom:10px" align=3D"center"><h2 style=3D"margin:0;color:#fff;direction:ltr;=
+font-family:'UdemySansWeb','Helvetica',Arial,Sans-serif;font-size:38px;font=
+-weight:400;letter-spacing:normal;line-height:1.2;text-align:left;margin-to=
+p:0;margin-bottom:0;mso-line-height-alt:46px"><span class=3D"tinyMce-placeh=
+older" style=3D"word-break: break-word;"><strong>Invest in your skills for =
+just $9.10/mo, billed annually&nbsp;</strong></span></h2></td></tr></table>
+<table class=3D"paragraph_block block-2" width=3D"100%" border=3D"0" cellpa=
+dding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspa=
+ce:0;mso-table-rspace:0;word-break:break-word"><tr><td class=3D"pad" style=
+=3D"padding-top:10px;padding-bottom:25px"><div style=3D"color:#fff;directio=
+n:ltr;font-family:'UdemySansWeb','Helvetica',Arial,Sans-serif;font-size:20p=
+x;font-weight:400;letter-spacing:0;line-height:1.4;text-align:left;mso-line=
+-height-alt:28px"><p style=3D"margin:0">
+Learn AI (and anything else) with Personal Plan. Terms apply.*</p></div></t=
+d></tr></table>
+<table class=3D"html_block block-3" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+
+</div></td></tr></table>
+<table class=3D"button_block block-4" width=3D"100%" border=3D"0" cellpaddi=
+ng=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:=
+0;mso-table-rspace:0"><tr><td class=3D"pad" align=3D"left"><a href=3D"https=
+://ablink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" sty=
+le=3D"color:#fffff0;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/personal-plan/=
+?lid=3D2vxuti6eb0wk&utm_source=3Dbraze&utm_medium=3Demail&utm_campaign=3DRE=
+DACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dmx&utm_tact=
+ic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:42px;width:252px;v-tex=
+t-anchor:middle;" arcsize=3D"17%" fillcolor=3D"#000000">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#fffff0;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: #000000; mso-shading: tra=
+nsparent; border-bottom: 2px solid #000000; border-left: 2px solid #000000;=
+ border-radius: 8px; border-right: 2px solid #000000; border-top: 2px solid=
+ #000000; color: #fffff0; display: inline-block; font-family: 'UdemySansWeb=
+','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; mso-=
+border-alt: none; padding-bottom: 5px; padding-top: 5px; padding-left: 20px=
+; padding-right: 20px; text-align: center; width: 95%; word-break: keep-all=
+; letter-spacing: normal;"><span style=3D"word-break: break-word; line-heig=
+ht: 32px;">Start now</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a></td></tr><=
+/table>
+</td>
+<td class=3D"column column-2" width=3D"50%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0;font-weight:400;text-align:left;background-color:#3b1b94;pa=
+dding-bottom:25px;padding-left:10px;padding-top:25px;vertical-align:top;wid=
+th:50%">
+<table class=3D"image_block mobile_hide block-1" width=3D"100%" border=3D"0=
+" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0"><tr><td class=3D"pad" style=3D"width:100%"=
+ align=3D"center"><div class=3D"fullWidth" style=3D"max-width:257px"><a hre=
+f=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_=
+blank"><img src=3D"https://braze-images.com/appboy/communication/assets/ima=
+ge_assets/images/REDACTED/original.png?1788904405" style=3D"display:block;h=
+eight:auto;border:0;width:100%;border-radius:16px" width=3D"257" alt=3D"Ude=
+my Personal Plan" title=3D"Udemy Personal Plan" height=3D"auto"></a></div><=
+/td></tr></table>
+<table class=3D"image_block desktop_hide block-2" width=3D"100%" border=3D"=
+0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-t=
+able-lspace:0;mso-table-rspace:0;mso-hide:all;display:none;max-height:0;ove=
+rflow:hidden"><tr><td class=3D"pad" style=3D"width:100%" align=3D"center"><=
+div class=3D"fullWidth" style=3D"max-width:270px"><a href=3D"https://ablink=
+.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank"><img src=3D"=
+https://braze-images.com/appboy/communication/assets/image_assets/images/RE=
+DACTED/original.png?1788904404" style=3D"display:block;height:auto;border:0=
+;width:100%;border-radius:16px" width=3D"270" alt=3D"Udemy Personal Plan" t=
+itle=3D"Udemy Personal Plan" height=3D"auto"></a></div></td></tr></table>
+</td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+<table class=3D"row row-4" align=3D"center" width=3D"100%" border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-l=
+space:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-content stac=
+k" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=
+=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;background=
+-color:#f2efff;border-radius:0;color:#000;width:660px;margin:0 auto" width=
+=3D"660"><tbody><tr><td class=3D"column column-1" width=3D"100%" style=3D"m=
+so-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;paddin=
+g-top:25px;vertical-align:top;width:100%"><table class=3D"html_block block-=
+1" width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"=
+presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0"><tr><td class=
+=3D"pad"><div style=3D"font-family:UdemySansWeb,Arial,Sans-serif;text-align=
+:center" align=3D"center">
+<!-- START AI RECO COURSES -->
+<!-- Language assign code for Indonesian language --><!-- Language assign c=
+ode for Indonesian language -->
+
+
+
+
+
+
+
+
+
+
+<!-- Start - Catalog call for heading --><!-- End - Catalog call for headin=
+g --><!-- START MultiLANG_Content-12-bodycopy -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table width=3D"560" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" align=
+=3D"center" class=3D"deviceWidth">
+  <tr>
+    <td valign=3D"top" class=3D"placeholderforcontentpadding">
+      <!-- Content table -->
+      <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"100%=
+" style=3D"table-layout: fixed;">
+        <tr>
+          <td style=3D"padding:20px 0px 10px 0px;" valign=3D"top" width=3D"=
+100%" class=3D"container-cell-stack-col">
+            <!-- Elements/Content -->
+            <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=
+=3D"100%" style=3D"table-layout: fixed;">
+              <tr>
+                <td style=3D"text-align: left; line-height: 120%;color: #00=
+0000;font-family: 'UdemySansWeb', Helvetica, Arial, sans-serif; font-size: =
+20px; font-style: normal;font-weight: 400;" valign=3D"top" width=3D"100%" c=
+lass=3D"copy-ml text-dm">Access these AI Courses and more with a Personal P=
+lan.</td>
+              </tr>
+            </table>
+            <!-- // Elements/Content -->
+          </td>
+        </tr>
+      </table>
+      <!-- // Content table -->
+    </td>
+  </tr>
+</table>
+<!-- // END MultiLANG_Content-12-bodycopy -->
+
+
+
+
+
+
+
+
+
+
+
+<!-- course list recomendation section -->
+<table width=3D"560" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" align=
+=3D"center" class=3D"deviceWidth" style=3D"-webkit-text-size-adjust: 100%; =
+-ms-text-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; m=
+so-table-lspace: 0pt; mso-table-rspace: 0pt; border-width: 0;">
+  <tr style=3D"border-collapse: collapse;">
+    <td valign=3D"top" class=3D"placeholderforcontentpadding" style=3D"-web=
+kit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0=
+pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+      <!-- Content table -->
+      <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"100%=
+" style=3D"table-layout: fixed; font-family: 'UdemySansWeb', Helvetica, Ari=
+al, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;=
+ border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-t=
+able-rspace: 0pt; border-width: 0;">
+        <tr style=3D"border-collapse: collapse;">
+          <td style=3D"-webkit-text-size-adjust: 100%; -ms-text-size-adjust=
+: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: coll=
+apse; padding:20px 0px 10px 0px;" valign=3D"top" width=3D"100%" class=3D"co=
+ntainer-cell-stack-col">
+
+<!-- MODULE CONTENT -->=20
+<table width=3D"560" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" align=
+=3D"center" class=3D"deviceWidth" style=3D"-webkit-text-size-adjust: 100%; =
+-ms-text-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; m=
+so-table-lspace: 0pt; mso-table-rspace: 0pt; border-width: 0;">
+  <tr style=3D"border-collapse: collapse;">
+    <!--[if !mso]><!-- -->
+    <td colspan=3D"3" align=3D"center" style=3D"-webkit-text-size-adjust: 1=
+00%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0=
+pt; border-collapse: collapse;">
+    <!--<![endif]-->
+    <!--[if mso]><td colspan=3D"3" align=3D"center" style=3D"padding-left: =
+7px;"><![endif]-->
+
+
+
+
+
+  <div class=3D"courseCardWrap" style=3D"display: inline-block; vertical-al=
+ign: top; width: 183px;">
+    <table class=3D"mobileCourseLine" cellpadding=3D"0" cellspacing=3D"0" b=
+order=3D"0" align=3D"left" style=3D"-webkit-text-size-adjust: 100%; -ms-tex=
+t-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-tabl=
+e-lspace: 0pt; mso-table-rspace: 0pt; border-width: 0;">
+      <tr style=3D"border-collapse: collapse;">
+        <td class=3D"mobileCoursePadding" width=3D"165" style=3D"font-famil=
+y: 'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: =
+100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: =
+0pt; border-collapse: collapse; width: 183px; padding: 0px 9px 10px 9px;">
+        <!-- COURSE IMAGE -->
+          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-siz=
+e-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lsp=
+ace: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardTop">
+            <tr style=3D"border-collapse: collapse;">
+              <td style=3D"display: block; -webkit-text-size-adjust: 100%; =
+-ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; b=
+order-collapse: collapse;"><a href=3D"https://ablink.students.udemy.com/ls/=
+click?upn=3DREDACTED" style=3D"text-decoration: none ;color:#000000"> <img =
+alt=3D"Succeed in the Age of AI" src=3D"https://i.udemycdn.com/course/200_H=
+/6912949_cc4c_2.jpg" width=3D"165" style=3D"width: 100%; max-width: 165px; =
+height: auto; display: block; line-height: 100%; outline: none; text-decora=
+tion: none; -ms-interpolation-mode: bicubic; border-style: none; border-wid=
+th: 0;"></a></td>
+            </tr>
+          </table>
+        <!-- // COURSE IMAGE -->=20
+       =20
+        <!-- COURSE DESCRIPTION -->
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-size-a=
+djust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace=
+: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardBottom">
+          <tr height=3D"88" class=3D"titleHeight" style=3D"border-collapse:=
+ collapse;">
+            <td class=3D"titlePadding" width=3D"380" style=3D"font-size: 16=
+px; line-height: 20px; color: #000000; word-wrap: break-word; font-family: =
+'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse; padding: 4px 0px 0px;" valign=3D"top" align=3D=
+"left"><a style=3D"text-decoration:none; -webkit-text-size-adjust: 100%; -m=
+s-text-size-adjust: 100%; color: inherit;" href=3D"https://ablink.students.=
+udemy.com/ls/click?upn=3DREDACTED"><span style=3D"color:#000000; text-decor=
+ation:none" class=3D"darkModeTextWhite"> Succeed in the Age of AI </span></=
+a></td>
+          </tr>
+          <tr style=3D"border-collapse: collapse;">
+            <td class=3D"starPricePadding darkModeTextWhite" valign=3D"top"=
+ align=3D"left" style=3D"text-align:left; padding:0px 0px 10px 0px; font-si=
+ze:12px; color:#717171; text-decoration:none; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse;">=20
+             =20
+               <img width=3D"75" height=3D"12" src=3D"https://udemy-images.=
+s3.amazonaws.com/fb/email/global/2014/4p5star.png" style=3D"height: auto; l=
+ine-height: 100%; outline: none; text-decoration: none; -ms-interpolation-m=
+ode: bicubic; border-width: 0;">=20
+              &nbsp;<span style=3D"color:#666666">4.63</span>&nbsp; (3,649)=
+ </td>
+          </tr>
+        </table>
+        <!-- // COURSE DESCRIPTION -->
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- // COURSE CARD -->=20
+
+
+
+
+
+  <div class=3D"courseCardWrap" style=3D"display: inline-block; vertical-al=
+ign: top; width: 183px;">
+    <table class=3D"mobileCourseLine" cellpadding=3D"0" cellspacing=3D"0" b=
+order=3D"0" align=3D"left" style=3D"-webkit-text-size-adjust: 100%; -ms-tex=
+t-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-tabl=
+e-lspace: 0pt; mso-table-rspace: 0pt; border-width: 0;">
+      <tr style=3D"border-collapse: collapse;">
+        <td class=3D"mobileCoursePadding" width=3D"165" style=3D"font-famil=
+y: 'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: =
+100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: =
+0pt; border-collapse: collapse; width: 183px; padding: 0px 9px 10px 9px;">
+        <!-- COURSE IMAGE -->
+          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-siz=
+e-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lsp=
+ace: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardTop">
+            <tr style=3D"border-collapse: collapse;">
+              <td style=3D"display: block; -webkit-text-size-adjust: 100%; =
+-ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; b=
+order-collapse: collapse;"><a href=3D"https://ablink.students.udemy.com/ls/=
+click?upn=3DREDACTED" style=3D"text-decoration: none ;color:#000000"> <img =
+alt=3D"Full stack generative and Agentic AI with python" src=3D"https://i.u=
+demycdn.com/course/200_H/6197521_c636.jpg" width=3D"165" style=3D"width: 10=
+0%; max-width: 165px; height: auto; display: block; line-height: 100%; outl=
+ine: none; text-decoration: none; -ms-interpolation-mode: bicubic; border-s=
+tyle: none; border-width: 0;"></a></td>
+            </tr>
+          </table>
+        <!-- // COURSE IMAGE -->=20
+       =20
+        <!-- COURSE DESCRIPTION -->
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-size-a=
+djust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace=
+: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardBottom">
+          <tr height=3D"88" class=3D"titleHeight" style=3D"border-collapse:=
+ collapse;">
+            <td class=3D"titlePadding" width=3D"380" style=3D"font-size: 16=
+px; line-height: 20px; color: #000000; word-wrap: break-word; font-family: =
+'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse; padding: 4px 0px 0px;" valign=3D"top" align=3D=
+"left"><a style=3D"text-decoration:none; -webkit-text-size-adjust: 100%; -m=
+s-text-size-adjust: 100%; color: inherit;" href=3D"https://ablink.students.=
+udemy.com/ls/click?upn=3DREDACTED"><span style=3D"color:#000000; text-decor=
+ation:none" class=3D"darkModeTextWhite"> Full stack generative and Agentic =
+AI with python </span></a></td>
+          </tr>
+          <tr style=3D"border-collapse: collapse;">
+            <td class=3D"starPricePadding darkModeTextWhite" valign=3D"top"=
+ align=3D"left" style=3D"text-align:left; padding:0px 0px 10px 0px; font-si=
+ze:12px; color:#717171; text-decoration:none; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse;">=20
+             =20
+               <img width=3D"75" height=3D"12" src=3D"https://udemy-images.=
+s3.amazonaws.com/fb/email/global/2014/4p5star.png" style=3D"height: auto; l=
+ine-height: 100%; outline: none; text-decoration: none; -ms-interpolation-m=
+ode: bicubic; border-width: 0;">=20
+              &nbsp;<span style=3D"color:#666666">4.44</span>&nbsp; (10,110=
+) </td>
+          </tr>
+        </table>
+        <!-- // COURSE DESCRIPTION -->
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- // COURSE CARD -->=20
+
+
+
+
+
+  <div class=3D"courseCardWrap" style=3D"display: inline-block; vertical-al=
+ign: top; width: 183px;">
+    <table class=3D"mobileCourseLine" cellpadding=3D"0" cellspacing=3D"0" b=
+order=3D"0" align=3D"left" style=3D"-webkit-text-size-adjust: 100%; -ms-tex=
+t-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-tabl=
+e-lspace: 0pt; mso-table-rspace: 0pt; border-width: 0;">
+      <tr style=3D"border-collapse: collapse;">
+        <td class=3D"mobileCoursePadding" width=3D"165" style=3D"font-famil=
+y: 'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: =
+100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: =
+0pt; border-collapse: collapse; width: 183px; padding: 0px 9px 10px 9px;">
+        <!-- COURSE IMAGE -->
+          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-siz=
+e-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lsp=
+ace: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardTop">
+            <tr style=3D"border-collapse: collapse;">
+              <td style=3D"display: block; -webkit-text-size-adjust: 100%; =
+-ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; b=
+order-collapse: collapse;"><a href=3D"https://ablink.students.udemy.com/ls/=
+click?upn=3DREDACTED" style=3D"text-decoration: none ;color:#000000"> <img =
+alt=3D"Complete Generative AI Course With Langchain and Huggingface" src=3D=
+"https://i.udemycdn.com/course/200_H/6010764_b4b1_8.jpg" width=3D"165" styl=
+e=3D"width: 100%; max-width: 165px; height: auto; display: block; line-heig=
+ht: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bic=
+ubic; border-style: none; border-width: 0;"></a></td>
+            </tr>
+          </table>
+        <!-- // COURSE IMAGE -->=20
+       =20
+        <!-- COURSE DESCRIPTION -->
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-size-a=
+djust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace=
+: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardBottom">
+          <tr height=3D"88" class=3D"titleHeight" style=3D"border-collapse:=
+ collapse;">
+            <td class=3D"titlePadding" width=3D"380" style=3D"font-size: 16=
+px; line-height: 20px; color: #000000; word-wrap: break-word; font-family: =
+'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse; padding: 4px 0px 0px;" valign=3D"top" align=3D=
+"left"><a style=3D"text-decoration:none; -webkit-text-size-adjust: 100%; -m=
+s-text-size-adjust: 100%; color: inherit;" href=3D"https://ablink.students.=
+udemy.com/ls/click?upn=3DREDACTED"><span style=3D"color:#000000; text-decor=
+ation:none" class=3D"darkModeTextWhite"> Complete Generative AI Course With=
+ Langchain and Huggingface </span></a></td>
+          </tr>
+          <tr style=3D"border-collapse: collapse;">
+            <td class=3D"starPricePadding darkModeTextWhite" valign=3D"top"=
+ align=3D"left" style=3D"text-align:left; padding:0px 0px 10px 0px; font-si=
+ze:12px; color:#717171; text-decoration:none; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse;">=20
+             =20
+               <img width=3D"75" height=3D"12" src=3D"https://udemy-images.=
+s3.amazonaws.com/fb/email/global/2014/4p5star.png" style=3D"height: auto; l=
+ine-height: 100%; outline: none; text-decoration: none; -ms-interpolation-m=
+ode: bicubic; border-width: 0;">=20
+              &nbsp;<span style=3D"color:#666666">4.52</span>&nbsp; (20,078=
+) </td>
+          </tr>
+        </table>
+        <!-- // COURSE DESCRIPTION -->
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- // COURSE CARD -->=20
+
+
+</td>
+</tr>
+</table>
+<!-- //  MODULE CONTENT -->=20
+<!-- // MODULE -->
+<!-- GRAY HAIRLINE -->
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" disp=
+lay=3D"block" width=3D"100%" style=3D"min-width:100%;">
+<tr>
+<td width=3D"86%">
+<!--[if mso]>
+<table width=3D"560" align=3D"center" style=3D"text-align:center;">
+<tr>
+<td align=3D"center" style=3D"text-align:center;">
+<![endif]-->
+<table align=3D"center" width=3D"86%" style=3D"min-width: 86%;">
+<tr>
+<td width=3D"100%" style=3D"width:100%;"></td>
+</tr>
+</table>
+<!--[if mso]>
+</td></tr></table>
+<![endif]-->
+</td>
+</tr>
+</table>
+<!-- // MODULE -->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<!-- // END course list recommendation section --><!-- // END AI RECO COURS=
+ES -->
+</div></td></tr></table></td></tr></tbody></table></td></tr></tbody></table=
+>
+<table class=3D"row row-5" align=3D"center" width=3D"100%" border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-l=
+space:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-content stac=
+k" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=
+=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;background=
+-color:#f2efff;border-radius:0;color:#000;width:660px;margin:0 auto" width=
+=3D"660"><tbody><tr><td class=3D"column column-1" width=3D"100%" style=3D"m=
+so-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertic=
+al-align:top;width:100%"><table class=3D"html_block block-1" width=3D"100%"=
+ border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" sty=
+le=3D"mso-table-lspace:0;mso-table-rspace:0"><tr><td class=3D"pad"><div sty=
+le=3D"font-family:UdemySansWeb,Arial,Sans-serif;text-align:center" align=3D=
+"center">
+
+<!-- Language assign code for Indonesian language -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- PP Course Recs -->
+<!-- logic to display subcat OR cat OR overall at a min of 2 recos and a ma=
+x of 3 -->
+
+
+
+
+
+
+<!-- course list recomendation section -->
+
+
+<!-- Overall -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- Start - Catalog call for heading -->
+
+
+<!-- End - Catalog call for heading -->
+
+<!-- START MultiLANG_Content-12-bodycopy -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table width=3D"560" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" align=
+=3D"center" class=3D"deviceWidth">
+  <tr>
+    <td valign=3D"top" class=3D"placeholderforcontentpadding">
+      <!-- Content table -->
+      <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"100%=
+" style=3D"table-layout: fixed;">
+        <tr>
+          <td style=3D"padding:20px 0px 0px 0px;" valign=3D"top" width=3D"1=
+00%" class=3D"container-cell-stack-col">
+            <!-- Elements/Content -->
+            <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=
+=3D"100%" style=3D"table-layout: fixed;">
+              <tr>
+                <td style=3D"text-align: left; line-height: 120%;color: #00=
+0000;font-family: 'UdemySansWeb', Helvetica, Arial, sans-serif; font-size: =
+20px; font-style: normal;font-weight: 400;" valign=3D"top" width=3D"100%" c=
+lass=3D"copy-ml text-dm">Check out some of the <span style=3D"font-weight:7=
+00; font-style:bold;">CompTIA Security+</span> courses available in Persona=
+l Plan.</td>
+              </tr>
+            </table>
+            <!-- // Elements/Content -->
+          </td>
+        </tr>
+      </table>
+      <!-- // Content table -->
+    </td>
+  </tr>
+</table>
+<!-- // END MultiLANG_Content-12-bodycopy -->
+<!-- MODULE CONTENT -->=09
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- course list recomendation section -->
+<table width=3D"560" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" align=
+=3D"center" class=3D"deviceWidth" style=3D"-webkit-text-size-adjust: 100%; =
+-ms-text-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; m=
+so-table-lspace: 0pt; mso-table-rspace: 0pt; border-width: 0;">
+  <tr style=3D"border-collapse: collapse;">
+    <td valign=3D"top" class=3D"placeholderforcontentpadding" style=3D"-web=
+kit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0=
+pt; mso-table-rspace: 0pt; border-collapse: collapse;">
+      <!-- Content table -->
+      <table cellspacing=3D"0" cellpadding=3D"0" border=3D"0" width=3D"100%=
+" style=3D"table-layout: fixed; font-family: 'UdemySansWeb', Helvetica, Ari=
+al, sans-serif; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;=
+ border-collapse: collapse; border-spacing: 0; mso-table-lspace: 0pt; mso-t=
+able-rspace: 0pt; border-width: 0;">
+        <tr style=3D"border-collapse: collapse;">
+          <td style=3D"-webkit-text-size-adjust: 100%; -ms-text-size-adjust=
+: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; border-collapse: coll=
+apse; padding:20px 0px 0px 0px;" valign=3D"top" width=3D"100%" class=3D"con=
+tainer-cell-stack-col">
+
+<!-- MODULE CONTENT -->=20
+<table width=3D"560" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" align=
+=3D"center" class=3D"deviceWidth" style=3D"-webkit-text-size-adjust: 100%; =
+-ms-text-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; m=
+so-table-lspace: 0pt; mso-table-rspace: 0pt; border-width: 0;">
+  <tr style=3D"border-collapse: collapse;">
+    <!--[if !mso]><!-- -->
+    <td colspan=3D"3" align=3D"center" style=3D"-webkit-text-size-adjust: 1=
+00%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0=
+pt; border-collapse: collapse;">
+    <!--<![endif]-->
+    <!--[if mso]><td colspan=3D"3" align=3D"center" style=3D"padding-left: =
+7px;"><![endif]-->
+
+
+
+
+
+  <div class=3D"courseCardWrap" style=3D"display: inline-block; vertical-al=
+ign: top; width: 183px;">
+    <table class=3D"mobileCourseLine" cellpadding=3D"0" cellspacing=3D"0" b=
+order=3D"0" align=3D"left" style=3D"-webkit-text-size-adjust: 100%; -ms-tex=
+t-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-tabl=
+e-lspace: 0pt; mso-table-rspace: 0pt; border-width: 0;">
+      <tr style=3D"border-collapse: collapse;">
+        <td class=3D"mobileCoursePadding" width=3D"165" style=3D"font-famil=
+y: 'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: =
+100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: =
+0pt; border-collapse: collapse; width: 183px; padding: 0px 9px 10px 9px;">
+        <!-- COURSE IMAGE -->
+          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-siz=
+e-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lsp=
+ace: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardTop">
+            <tr style=3D"border-collapse: collapse;">
+              <td style=3D"display: block; -webkit-text-size-adjust: 100%; =
+-ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; b=
+order-collapse: collapse;"><a href=3D"https://ablink.students.udemy.com/ls/=
+click?upn=3DREDACTED" style=3D"text-decoration: none ;color:#000000"> <img =
+alt=3D"CompTIA Security+ (SY0-701) Complete Course &amp; Practice Exam" src=
+=3D"https://i.udemycdn.com/course/200_H/2015076_2944_8.jpg" width=3D"165" s=
+tyle=3D"width: 100%; max-width: 165px; height: auto; display: block; line-h=
+eight: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: =
+bicubic; border-style: none; border-width: 0;"></a></td>
+            </tr>
+          </table>
+        <!-- // COURSE IMAGE -->=20
+       =20
+        <!-- COURSE DESCRIPTION -->
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-size-a=
+djust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace=
+: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardBottom">
+          <tr height=3D"88" class=3D"titleHeight" style=3D"border-collapse:=
+ collapse;">
+            <td class=3D"titlePadding" width=3D"380" style=3D"font-size: 16=
+px; line-height: 20px; color: #000000; word-wrap: break-word; font-family: =
+'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse; padding: 4px 0px 0px;" valign=3D"top" align=3D=
+"left"><a style=3D"text-decoration:none; -webkit-text-size-adjust: 100%; -m=
+s-text-size-adjust: 100%; color: inherit;" href=3D"https://ablink.students.=
+udemy.com/ls/click?upn=3DREDACTED"><span style=3D"color:#000000; text-decor=
+ation:none" class=3D"darkModeTextWhite"> CompTIA Security+ (SY0-701) Comple=
+te Course &amp; Practice Exam </span></a></td>
+          </tr>
+          <tr style=3D"border-collapse: collapse;">
+            <td class=3D"starPricePadding darkModeTextWhite" valign=3D"top"=
+ align=3D"left" style=3D"text-align:left; padding:0px 0px 10px 0px; font-si=
+ze:12px; color:#666666; text-decoration:none; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse;">=20
+             =20
+               <img width=3D"75" height=3D"12" src=3D"https://udemy-images.=
+s3.amazonaws.com/fb/email/global/2014/4p5star.png" style=3D"height: auto; l=
+ine-height: 100%; outline: none; text-decoration: none; -ms-interpolation-m=
+ode: bicubic; border-width: 0;">=20
+              &nbsp;<span style=3D"color:#666666">4.67</span>&nbsp; (123,06=
+8) </td>
+          </tr>
+        </table>
+        <!-- // COURSE DESCRIPTION -->
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- // COURSE CARD -->=20
+
+
+
+
+
+  <div class=3D"courseCardWrap" style=3D"display: inline-block; vertical-al=
+ign: top; width: 183px;">
+    <table class=3D"mobileCourseLine" cellpadding=3D"0" cellspacing=3D"0" b=
+order=3D"0" align=3D"left" style=3D"-webkit-text-size-adjust: 100%; -ms-tex=
+t-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-tabl=
+e-lspace: 0pt; mso-table-rspace: 0pt; border-width: 0;">
+      <tr style=3D"border-collapse: collapse;">
+        <td class=3D"mobileCoursePadding" width=3D"165" style=3D"font-famil=
+y: 'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: =
+100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: =
+0pt; border-collapse: collapse; width: 183px; padding: 0px 9px 10px 9px;">
+        <!-- COURSE IMAGE -->
+          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-siz=
+e-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lsp=
+ace: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardTop">
+            <tr style=3D"border-collapse: collapse;">
+              <td style=3D"display: block; -webkit-text-size-adjust: 100%; =
+-ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; b=
+order-collapse: collapse;"><a href=3D"https://ablink.students.udemy.com/ls/=
+click?upn=3DREDACTED" style=3D"text-decoration: none ;color:#000000"> <img =
+alt=3D"TOTAL: CompTIA Security+  Course + Practice Exam SY0-701" src=3D"htt=
+ps://i.udemycdn.com/course/200_H/1596138_9344_4.jpg" width=3D"165" style=3D=
+"width: 100%; max-width: 165px; height: auto; display: block; line-height: =
+100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicubic=
+; border-style: none; border-width: 0;"></a></td>
+            </tr>
+          </table>
+        <!-- // COURSE IMAGE -->=20
+       =20
+        <!-- COURSE DESCRIPTION -->
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-size-a=
+djust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace=
+: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardBottom">
+          <tr height=3D"88" class=3D"titleHeight" style=3D"border-collapse:=
+ collapse;">
+            <td class=3D"titlePadding" width=3D"380" style=3D"font-size: 16=
+px; line-height: 20px; color: #000000; word-wrap: break-word; font-family: =
+'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse; padding: 4px 0px 0px;" valign=3D"top" align=3D=
+"left"><a style=3D"text-decoration:none; -webkit-text-size-adjust: 100%; -m=
+s-text-size-adjust: 100%; color: inherit;" href=3D"https://ablink.students.=
+udemy.com/ls/click?upn=3DREDACTED"><span style=3D"color:#000000; text-decor=
+ation:none" class=3D"darkModeTextWhite"> TOTAL: CompTIA Security+  Course +=
+ Practice Exam SY0-701 </span></a></td>
+          </tr>
+          <tr style=3D"border-collapse: collapse;">
+            <td class=3D"starPricePadding darkModeTextWhite" valign=3D"top"=
+ align=3D"left" style=3D"text-align:left; padding:0px 0px 10px 0px; font-si=
+ze:12px; color:#666666; text-decoration:none; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse;">=20
+             =20
+               <img width=3D"75" height=3D"12" src=3D"https://udemy-images.=
+s3.amazonaws.com/fb/email/global/2014/4p5star.png" style=3D"height: auto; l=
+ine-height: 100%; outline: none; text-decoration: none; -ms-interpolation-m=
+ode: bicubic; border-width: 0;">=20
+              &nbsp;<span style=3D"color:#666666">4.68</span>&nbsp; (38,267=
+) </td>
+          </tr>
+        </table>
+        <!-- // COURSE DESCRIPTION -->
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- // COURSE CARD -->=20
+
+
+
+
+
+  <div class=3D"courseCardWrap" style=3D"display: inline-block; vertical-al=
+ign: top; width: 183px;">
+    <table class=3D"mobileCourseLine" cellpadding=3D"0" cellspacing=3D"0" b=
+order=3D"0" align=3D"left" style=3D"-webkit-text-size-adjust: 100%; -ms-tex=
+t-size-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-tabl=
+e-lspace: 0pt; mso-table-rspace: 0pt; border-width: 0;">
+      <tr style=3D"border-collapse: collapse;">
+        <td class=3D"mobileCoursePadding" width=3D"165" style=3D"font-famil=
+y: 'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: =
+100%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: =
+0pt; border-collapse: collapse; width: 183px; padding: 0px 9px 10px 9px;">
+        <!-- COURSE IMAGE -->
+          <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=
+=3D"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-siz=
+e-adjust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lsp=
+ace: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardTop">
+            <tr style=3D"border-collapse: collapse;">
+              <td style=3D"display: block; -webkit-text-size-adjust: 100%; =
+-ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt; b=
+order-collapse: collapse;"><a href=3D"https://ablink.students.udemy.com/ls/=
+click?upn=3DREDACTED" style=3D"text-decoration: none ;color:#000000"> <img =
+alt=3D"CompTIA Security+ SY0-701 Full Course, Labs, and Study Plan" src=3D"=
+https://i.udemycdn.com/course/200_H/5668016_6aec.jpg" width=3D"165" style=
+=3D"width: 100%; max-width: 165px; height: auto; display: block; line-heigh=
+t: 100%; outline: none; text-decoration: none; -ms-interpolation-mode: bicu=
+bic; border-style: none; border-width: 0;"></a></td>
+            </tr>
+          </table>
+        <!-- // COURSE IMAGE -->=20
+       =20
+        <!-- COURSE DESCRIPTION -->
+        <table width=3D"100%" border=3D"0" cellspacing=3D"0" cellpadding=3D=
+"0" style=3D"display:block; -webkit-text-size-adjust: 100%; -ms-text-size-a=
+djust: 100%; border-collapse: collapse; border-spacing: 0; mso-table-lspace=
+: 0pt; mso-table-rspace: 0pt; border-width: 0;" class=3D"courseCardBottom">
+          <tr height=3D"88" class=3D"titleHeight" style=3D"border-collapse:=
+ collapse;">
+            <td class=3D"titlePadding" width=3D"380" style=3D"font-size: 16=
+px; line-height: 20px; color: #000000; word-wrap: break-word; font-family: =
+'UdemySansWeb', Helvetica, Arial, sans-serif; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse; padding: 4px 0px 0px;" valign=3D"top" align=3D=
+"left"><a style=3D"text-decoration:none; -webkit-text-size-adjust: 100%; -m=
+s-text-size-adjust: 100%; color: inherit;" href=3D"https://ablink.students.=
+udemy.com/ls/click?upn=3DREDACTED"><span style=3D"color:#000000; text-decor=
+ation:none" class=3D"darkModeTextWhite"> CompTIA Security+ SY0-701 Full Cou=
+rse, Labs, and Study Plan </span></a></td>
+          </tr>
+          <tr style=3D"border-collapse: collapse;">
+            <td class=3D"starPricePadding darkModeTextWhite" valign=3D"top"=
+ align=3D"left" style=3D"text-align:left; padding:0px 0px 10px 0px; font-si=
+ze:12px; color:#666666; text-decoration:none; -webkit-text-size-adjust: 100=
+%; -ms-text-size-adjust: 100%; mso-table-lspace: 0pt; mso-table-rspace: 0pt=
+; border-collapse: collapse;">=20
+             =20
+               <img width=3D"75" height=3D"12" src=3D"https://udemy-images.=
+s3.amazonaws.com/fb/email/global/2014/4p5star.png" style=3D"height: auto; l=
+ine-height: 100%; outline: none; text-decoration: none; -ms-interpolation-m=
+ode: bicubic; border-width: 0;">=20
+              &nbsp;<span style=3D"color:#666666">4.72</span>&nbsp; (12,806=
+) </td>
+          </tr>
+        </table>
+        <!-- // COURSE DESCRIPTION -->
+      </td>
+    </tr>
+  </table>
+</div>
+<!-- // COURSE CARD -->=20
+
+
+</td>
+</tr>
+</table>
+<!-- //  MODULE CONTENT -->=20
+<!-- // MODULE -->
+<!-- GRAY HAIRLINE -->
+<table align=3D"left" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" disp=
+lay=3D"block" width=3D"100%" style=3D"min-width:100%;">
+<tr>
+<td width=3D"86%">
+<!--[if mso]>
+<table width=3D"560" align=3D"center" style=3D"text-align:center;">
+<tr>
+<td align=3D"center" style=3D"text-align:center;">
+<![endif]-->
+<table align=3D"center" width=3D"86%" style=3D"min-width: 86%;">
+<tr>
+<td width=3D"100%" style=3D"width:100%;"></td>
+</tr>
+</table>
+<!--[if mso]>
+</td></tr></table>
+<![endif]-->
+</td>
+</tr>
+</table>
+<!-- // MODULE -->
+</td>
+</tr>
+</table>
+</td>
+</tr>
+</table>
+<!-- // END course list recommendation section -->
+
+
+
+<!-- // END PP Course Recs -->
+</div></td></tr></table></td></tr></tbody></table></td></tr></tbody></table=
+>
+<table class=3D"row row-6" align=3D"center" width=3D"100%" border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-l=
+space:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-content stac=
+k" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=
+=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;background=
+-color:#f2efff;border-radius:0;color:#000;width:660px;margin:0 auto" width=
+=3D"660"><tbody><tr><td class=3D"column column-1" width=3D"100%" style=3D"m=
+so-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;paddin=
+g-bottom:25px;padding-left:50px;padding-right:50px;padding-top:5px;vertical=
+-align:top;width:100%"><table class=3D"divider_block block-1" width=3D"100%=
+" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" st=
+yle=3D"mso-table-lspace:0;mso-table-rspace:0"><tr><td class=3D"pad" align=
+=3D"center"><table border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D=
+"presentation" width=3D"100%" style=3D"mso-table-lspace:0;mso-table-rspace:=
+0"><tr><td class=3D"divider_inner" style=3D"font-size:1px;line-height:1px;b=
+order-top:1px solid #000"><span style=3D"word-break: break-word;">=E2=80=8A=
+</span></td></tr></table></td></tr></table></td></tr></tbody></table></td><=
+/tr></tbody></table>
+<table class=3D"row row-7" align=3D"center" width=3D"100%" border=3D"0" cel=
+lpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-l=
+space:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-content stac=
+k" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=
+=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;background=
+-color:#f2efff;border-radius:0;color:#000;padding-bottom:25px;width:660px;m=
+argin:0 auto" width=3D"660"><tbody><tr><td><table width=3D"100%" border=3D"=
+0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-t=
+able-lspace:0;mso-table-rspace:0"><tbody><tr><td class=3D"column column-1" =
+width=3D"100%" style=3D"mso-table-lspace:0;mso-table-rspace:0;font-weight:4=
+00;text-align:left;padding-left:50px;padding-right:50px;vertical-align:top;=
+width:100%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- START Content-12-bodycopy_bold localization -->
+
+
+
+
+
+
+
+
+<!-- // END Content-12-bodycopy_bold localization -->
+</div></td></tr></table>
+<table class=3D"heading_block block-2" width=3D"100%" border=3D"0" cellpadd=
+ing=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace=
+:0;mso-table-rspace:0"><tr><td class=3D"pad" style=3D"width:100%" align=3D"=
+center"><h3 style=3D"margin:0;color:#2e3c47;direction:ltr;font-family:'Udem=
+ySansWeb','Helvetica',Arial,Sans-serif;font-size:28px;font-weight:700;lette=
+r-spacing:normal;line-height:1.2;text-align:left;margin-top:0;margin-bottom=
+:0;mso-line-height-alt:34px">
+<span class=3D"tinyMce-placeholder" style=3D"word-break: break-word;">Get s=
+tarted with top categories:</span>
+</h3></td></tr></table>
+</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></tab=
+le>
+<table class=3D"row row-8 mobile_hide" align=3D"center" width=3D"100%" bord=
+er=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D=
+"mso-table-lspace:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-=
+content stack" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0=
+;background-color:#f2efff;border-radius:0;color:#000;padding-bottom:25px;pa=
+dding-left:40px;padding-right:40px;width:660px;margin:0 auto" width=3D"660"=
+><tbody><tr><td><table width=3D"100%" border=3D"0" cellpadding=3D"0" cellsp=
+acing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rsp=
+ace:0"><tbody><tr>
+<td class=3D"column column-1" width=3D"33.333333333333336%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;padding-lef=
+t:10px;padding-right:10px;vertical-align:top;width:33.333333333333336%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- START category-title-7 localization -->
+
+
+
+
+ =20
+
+<!-- // END category-title-7 localization -->
+</div></td></tr></table>
+<table class=3D"button_block block-2" width=3D"100%" border=3D"0" cellpaddi=
+ng=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:=
+0;mso-table-rspace:0"><tr><td class=3D"pad" align=3D"center"><a href=3D"htt=
+ps://ablink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" s=
+tyle=3D"color:#1a1a1a;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/topic/artifici=
+al-intelligence/?lid=3Dz4omcihmp1st&utm_source=3Dbraze&utm_medium=3Demail&u=
+tm_campaign=3DREDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audien=
+ce=3Dmx&utm_tactic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:74px;w=
+idth:169px;v-text-anchor:middle;" arcsize=3D"10%" fillcolor=3D"#f2efff">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#1a1a1a;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: #f2efff; mso-shading: tra=
+nsparent; border-bottom: 2px solid #000000; border-left: 2px solid #000000;=
+ border-radius: 8px; border-right: 2px solid #000000; border-top: 2px solid=
+ #000000; color: #1a1a1a; display: inline-block; font-family: 'UdemySansWeb=
+','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; mso-=
+border-alt: none; padding-bottom: 5px; padding-top: 5px; padding-left: 15px=
+; padding-right: 15px; text-align: center; width: 100%; word-break: keep-al=
+l; letter-spacing: normal;"><span style=3D"word-break: break-word; line-hei=
+ght: 32px;">AI</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a></td></tr><=
+/table>
+</td>
+<td class=3D"column column-2" width=3D"33.333333333333336%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;padding-lef=
+t:10px;padding-right:10px;vertical-align:top;width:33.333333333333336%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- START category-title-1 localization -->
+
+
+
+
+ =20
+
+<!-- // END category-title-1 localization -->
+</div></td></tr></table>
+<table class=3D"button_block block-2" width=3D"100%" border=3D"0" cellpaddi=
+ng=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:=
+0;mso-table-rspace:0"><tr><td class=3D"pad" align=3D"center"><a href=3D"htt=
+ps://ablink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" s=
+tyle=3D"color:#1a1a1a;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/courses/develo=
+pment/?lid=3Dhvrhy3a8zt1o&utm_source=3Dbraze&utm_medium=3Demail&utm_campaig=
+n=3DREDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dmx&ut=
+m_tactic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:74px;width:169px=
+;v-text-anchor:middle;" arcsize=3D"10%" fillcolor=3D"#f2efff">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#1a1a1a;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: #f2efff; mso-shading: tra=
+nsparent; border-bottom: 2px solid #000000; border-left: 2px solid #000000;=
+ border-radius: 8px; border-right: 2px solid #000000; border-top: 2px solid=
+ #000000; color: #1a1a1a; display: inline-block; font-family: 'UdemySansWeb=
+','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; mso-=
+border-alt: none; padding-bottom: 5px; padding-top: 5px; padding-left: 15px=
+; padding-right: 15px; text-align: center; width: 100%; word-break: keep-al=
+l; letter-spacing: normal;"><span style=3D"word-break: break-word; line-hei=
+ght: 32px;">Development</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a></td></tr><=
+/table>
+</td>
+<td class=3D"column column-3" width=3D"33.333333333333336%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;padding-lef=
+t:10px;padding-right:10px;vertical-align:top;width:33.333333333333336%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- START category-title-2 localization -->
+
+
+
+
+ =20
+
+<!-- // END category-title-2 localization -->
+</div></td></tr></table>
+<table class=3D"button_block block-2" width=3D"100%" border=3D"0" cellpaddi=
+ng=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:=
+0;mso-table-rspace:0"><tr><td class=3D"pad" align=3D"left"><a href=3D"https=
+://ablink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" sty=
+le=3D"color:#1a1a1a;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/courses/it-and=
+-software/?lid=3D0epsvmuccdp3&utm_source=3Dbraze&utm_medium=3Demail&utm_cam=
+paign=3DREDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dm=
+x&utm_tactic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:74px;width:1=
+69px;v-text-anchor:middle;" arcsize=3D"10%" fillcolor=3D"#f2efff">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#1a1a1a;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: #f2efff; mso-shading: tra=
+nsparent; border-bottom: 2px solid #000000; border-left: 2px solid #000000;=
+ border-radius: 8px; border-right: 2px solid #000000; border-top: 2px solid=
+ #000000; color: #1a1a1a; display: inline-block; font-family: 'UdemySansWeb=
+','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; mso-=
+border-alt: none; padding-bottom: 5px; padding-top: 5px; padding-left: 15px=
+; padding-right: 15px; text-align: center; width: 100%; word-break: keep-al=
+l; letter-spacing: normal;"><span style=3D"word-break: break-word; line-hei=
+ght: 32px;">IT &amp; Software</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a></td></tr><=
+/table>
+</td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+<table class=3D"row row-9 mobile_hide" align=3D"center" width=3D"100%" bord=
+er=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D=
+"mso-table-lspace:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-=
+content stack" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0=
+;background-color:#f2efff;border-radius:0;color:#000;padding-bottom:25px;pa=
+dding-left:40px;padding-right:40px;width:660px;margin:0 auto" width=3D"660"=
+><tbody><tr><td><table width=3D"100%" border=3D"0" cellpadding=3D"0" cellsp=
+acing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rsp=
+ace:0"><tbody><tr>
+<td class=3D"column column-1" width=3D"33.333333333333336%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;padding-lef=
+t:10px;padding-right:10px;vertical-align:top;width:33.333333333333336%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- START category-title-3 localization -->
+
+
+
+
+ =20
+
+<!-- // END category-title-3 localization -->
+</div></td></tr></table>
+<table class=3D"button_block block-2" width=3D"100%" border=3D"0" cellpaddi=
+ng=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:=
+0;mso-table-rspace:0"><tr><td class=3D"pad" align=3D"center"><a href=3D"htt=
+ps://ablink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" s=
+tyle=3D"color:#1a1a1a;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/courses/busine=
+ss/?lid=3D1ili6b6fhmtk&utm_source=3Dbraze&utm_medium=3Demail&utm_campaign=
+=3DREDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dmx&utm=
+_tactic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:74px;width:169px;=
+v-text-anchor:middle;" arcsize=3D"7%" fillcolor=3D"#f2efff">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#1a1a1a;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: #f2efff; mso-shading: tra=
+nsparent; border-bottom: 2px solid #000000; border-left: 2px solid #000000;=
+ border-radius: 5px; border-right: 2px solid #000000; border-top: 2px solid=
+ #000000; color: #1a1a1a; display: inline-block; font-family: 'UdemySansWeb=
+','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; mso-=
+border-alt: none; padding-bottom: 5px; padding-top: 5px; padding-left: 15px=
+; padding-right: 15px; text-align: center; width: 100%; word-break: keep-al=
+l; letter-spacing: normal;"><span style=3D"word-break: break-word; line-hei=
+ght: 32px;">Business</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a></td></tr><=
+/table>
+</td>
+<td class=3D"column column-2" width=3D"33.333333333333336%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;padding-lef=
+t:10px;padding-right:10px;vertical-align:top;width:33.333333333333336%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- START category-title-4 localization -->
+
+
+
+
+ =20
+
+<!-- // END category-title-4 localization -->
+</div></td></tr></table>
+<table class=3D"button_block block-2" width=3D"100%" border=3D"0" cellpaddi=
+ng=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:=
+0;mso-table-rspace:0"><tr><td class=3D"pad" align=3D"center"><a href=3D"htt=
+ps://ablink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" s=
+tyle=3D"color:#1a1a1a;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/courses/Lifest=
+yle/?lid=3Dkj0czk2kpg2o&utm_source=3Dbraze&utm_medium=3Demail&utm_campaign=
+=3DREDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dmx&utm=
+_tactic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:74px;width:169px;=
+v-text-anchor:middle;" arcsize=3D"7%" fillcolor=3D"#f2efff">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#1a1a1a;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: #f2efff; mso-shading: tra=
+nsparent; border-bottom: 2px solid #000000; border-left: 2px solid #000000;=
+ border-radius: 5px; border-right: 2px solid #000000; border-top: 2px solid=
+ #000000; color: #1a1a1a; display: inline-block; font-family: 'UdemySansWeb=
+','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; mso-=
+border-alt: none; padding-bottom: 5px; padding-top: 5px; padding-left: 15px=
+; padding-right: 15px; text-align: center; width: 100%; word-break: keep-al=
+l; letter-spacing: normal;"><span style=3D"word-break: break-word; line-hei=
+ght: 32px;">Lifestyle</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a></td></tr><=
+/table>
+</td>
+<td class=3D"column column-3" width=3D"33.333333333333336%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;padding-lef=
+t:10px;padding-right:10px;vertical-align:top;width:33.333333333333336%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- START category-title-5 localization -->
+
+
+
+
+ =20
+
+<!-- // END category-title-5 localization -->
+</div></td></tr></table>
+<table class=3D"button_block block-2" width=3D"100%" border=3D"0" cellpaddi=
+ng=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:=
+0;mso-table-rspace:0"><tr><td class=3D"pad" align=3D"center"><a href=3D"htt=
+ps://ablink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" s=
+tyle=3D"color:#1a1a1a;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/courses/Design=
+/?lid=3Dm1c1veb74n0f&utm_source=3Dbraze&utm_medium=3Demail&utm_campaign=3DR=
+EDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dmx&utm_tac=
+tic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:74px;width:169px;v-te=
+xt-anchor:middle;" arcsize=3D"7%" fillcolor=3D"#f2efff">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#1a1a1a;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: #f2efff; mso-shading: tra=
+nsparent; border-bottom: 2px solid #000000; border-left: 2px solid #000000;=
+ border-radius: 5px; border-right: 2px solid #000000; border-top: 2px solid=
+ #000000; color: #1a1a1a; display: inline-block; font-family: 'UdemySansWeb=
+','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; mso-=
+border-alt: none; padding-bottom: 5px; padding-top: 5px; padding-left: 15px=
+; padding-right: 15px; text-align: center; width: 100%; word-break: keep-al=
+l; letter-spacing: normal;"><span style=3D"word-break: break-word; line-hei=
+ght: 32px;">Design</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a></td></tr><=
+/table>
+</td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+<!--[if !mso]><!--><table class=3D"row row-10 desktop_hide" align=3D"center=
+" width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"p=
+resentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;di=
+splay:none;max-height:0;overflow:hidden"><tbody><tr><td><table class=3D"row=
+-content" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"=
+ role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-h=
+ide:all;display:none;max-height:0;overflow:hidden;background-color:#f2efff;=
+border-radius:0;color:#000;padding:20px 50px 5px 50px;width:660px;margin:0 =
+auto" width=3D"660"><tbody><tr><td><table width=3D"100%" border=3D"0" cellp=
+adding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lsp=
+ace:0;mso-table-rspace:0;mso-hide:all;display:none;max-height:0;overflow:hi=
+dden"><tbody><tr>
+<td class=3D"column column-1" width=3D"50%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0;font-weight:400;text-align:left;padding-bottom:5px;padding-=
+top:5px;vertical-align:top;width:50%"><table class=3D"button_block block-1"=
+ width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"pr=
+esentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;dis=
+play:none;max-height:0;overflow:hidden"><tr><td class=3D"pad" style=3D"padd=
+ing-right:10px" align=3D"left">
+<a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" targe=
+t=3D"_blank" style=3D"color:#2e3c47;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/topic/artifici=
+al-intelligence/?lid=3Difsjiuajftj2&utm_source=3Dbraze&utm_medium=3Demail&u=
+tm_campaign=3DREDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audien=
+ce=3Dmx&utm_tactic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:39px;w=
+idth:185px;v-text-anchor:middle;" arcsize=3D"12%" fill=3D"false">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#2e3c47;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: transparent; mso-shading:=
+ transparent; border-bottom: 2px solid #000000; border-left: 2px solid #000=
+000; border-radius: 5px; border-right: 2px solid #000000; border-top: 2px s=
+olid #000000; color: #2e3c47; display: inline-block; font-family: 'UdemySan=
+sWeb','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; =
+mso-border-alt: none; padding-bottom: 10px; padding-top: 10px; padding-left=
+: 10px; padding-right: 10px; text-align: center; width: 70%; word-break: ke=
+ep-all; letter-spacing: normal;"><span style=3D"word-break: break-word; lin=
+e-height: 19.2px;">AI</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a>
+</td></tr></table></td>
+<td class=3D"column column-2" width=3D"50%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0;font-weight:400;text-align:left;padding-bottom:5px;padding-=
+top:5px;vertical-align:top;width:50%"><table class=3D"button_block block-1"=
+ width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"pr=
+esentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;dis=
+play:none;max-height:0;overflow:hidden"><tr><td class=3D"pad" align=3D"left=
+"><a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" tar=
+get=3D"_blank" style=3D"color:#2e3c47;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/courses/develo=
+pment/?lid=3Dvsxcc0ycmqdr&utm_source=3Dbraze&utm_medium=3Demail&utm_campaig=
+n=3DREDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dmx&ut=
+m_tactic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:39px;width:192px=
+;v-text-anchor:middle;" arcsize=3D"12%" fill=3D"false">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#2e3c47;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: transparent; mso-shading:=
+ transparent; border-bottom: 2px solid #000000; border-left: 2px solid #000=
+000; border-radius: 5px; border-right: 2px solid #000000; border-top: 2px s=
+olid #000000; color: #2e3c47; display: inline-block; font-family: 'UdemySan=
+sWeb','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; =
+mso-border-alt: none; padding-bottom: 10px; padding-top: 10px; padding-left=
+: 10px; padding-right: 10px; text-align: center; width: 70%; word-break: ke=
+ep-all; letter-spacing: normal;"><span style=3D"word-break: break-word; lin=
+e-height: 19.2px;">Development</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a></td></tr><=
+/table></td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+<!--<![endif]--><!--[if !mso]><!--><table class=3D"row row-11 desktop_hide"=
+ align=3D"center" width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0=
+;mso-hide:all;display:none;max-height:0;overflow:hidden"><tbody><tr><td><ta=
+ble class=3D"row-content" align=3D"center" border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-tabl=
+e-rspace:0;mso-hide:all;display:none;max-height:0;overflow:hidden;backgroun=
+d-color:#f2efff;border-radius:0;color:#000;padding:20px 50px 5px 50px;width=
+:660px;margin:0 auto" width=3D"660"><tbody><tr><td><table width=3D"100%" bo=
+rder=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=
+=3D"mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;display:none;max-hei=
+ght:0;overflow:hidden"><tbody><tr>
+<td class=3D"column column-1" width=3D"50%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0;font-weight:400;text-align:left;padding-bottom:5px;padding-=
+top:5px;vertical-align:top;width:50%"><table class=3D"button_block block-1"=
+ width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"pr=
+esentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;dis=
+play:none;max-height:0;overflow:hidden"><tr><td class=3D"pad" style=3D"padd=
+ing-right:10px" align=3D"left">
+<a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" targe=
+t=3D"_blank" style=3D"color:#000000;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/courses/it-and=
+-software/?lid=3D1h56lb496w1o&utm_source=3Dbraze&utm_medium=3Demail&utm_cam=
+paign=3DREDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dm=
+x&utm_tactic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:39px;width:1=
+85px;v-text-anchor:middle;" arcsize=3D"12%" fillcolor=3D"#f2efff">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#000000;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: #f2efff; mso-shading: tra=
+nsparent; border-bottom: 2px solid #000000; border-left: 2px solid #000000;=
+ border-radius: 5px; border-right: 2px solid #000000; border-top: 2px solid=
+ #000000; color: #000000; display: inline-block; font-family: 'UdemySansWeb=
+','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; mso-=
+border-alt: none; padding-bottom: 10px; padding-top: 10px; padding-left: 10=
+px; padding-right: 10px; text-align: center; width: 70%; word-break: keep-a=
+ll; letter-spacing: normal;"><span style=3D"word-break: break-word; line-he=
+ight: 19.2px;">IT &amp; Software</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a>
+</td></tr></table></td>
+<td class=3D"column column-2" width=3D"50%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0;font-weight:400;text-align:left;padding-bottom:5px;padding-=
+top:5px;vertical-align:top;width:50%"><table class=3D"button_block block-1"=
+ width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"pr=
+esentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;dis=
+play:none;max-height:0;overflow:hidden"><tr><td class=3D"pad" align=3D"left=
+"><a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" tar=
+get=3D"_blank" style=3D"color:#2e3c47;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/courses/busine=
+ss/?lid=3Dcdddgmz8rd5g&utm_source=3Dbraze&utm_medium=3Demail&utm_campaign=
+=3DREDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dmx&utm=
+_tactic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:39px;width:192px;=
+v-text-anchor:middle;" arcsize=3D"12%" fillcolor=3D"#f2efff">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#2e3c47;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: #f2efff; mso-shading: tra=
+nsparent; border-bottom: 2px solid #000000; border-left: 2px solid #000000;=
+ border-radius: 5px; border-right: 2px solid #000000; border-top: 2px solid=
+ #000000; color: #2e3c47; display: inline-block; font-family: 'UdemySansWeb=
+','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; mso-=
+border-alt: none; padding-bottom: 10px; padding-top: 10px; padding-left: 10=
+px; padding-right: 10px; text-align: center; width: 70%; word-break: keep-a=
+ll; letter-spacing: normal;"><span style=3D"word-break: break-word; line-he=
+ight: 19.2px;">Business</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a></td></tr><=
+/table></td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+<!--<![endif]--><!--[if !mso]><!--><table class=3D"row row-12 desktop_hide"=
+ align=3D"center" width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0=
+;mso-hide:all;display:none;max-height:0;overflow:hidden"><tbody><tr><td><ta=
+ble class=3D"row-content" align=3D"center" border=3D"0" cellpadding=3D"0" c=
+ellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-tabl=
+e-rspace:0;mso-hide:all;display:none;max-height:0;overflow:hidden;backgroun=
+d-color:#f2efff;border-radius:0;color:#000;padding:20px 50px;width:660px;ma=
+rgin:0 auto" width=3D"660"><tbody><tr><td><table width=3D"100%" border=3D"0=
+" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;mso-hide:all;display:none;max-height:0;over=
+flow:hidden"><tbody><tr>
+<td class=3D"column column-1" width=3D"50%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0;font-weight:400;text-align:left;padding-bottom:5px;padding-=
+top:5px;vertical-align:top;width:50%"><table class=3D"button_block block-1"=
+ width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"pr=
+esentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;dis=
+play:none;max-height:0;overflow:hidden"><tr><td class=3D"pad" style=3D"padd=
+ing-right:10px" align=3D"left">
+<a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" targe=
+t=3D"_blank" style=3D"color:#000000;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/courses/Lifest=
+yle/?lid=3Dqsp0a2xu90ar&utm_source=3Dbraze&utm_medium=3Demail&utm_campaign=
+=3DREDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dmx&utm=
+_tactic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:39px;width:185px;=
+v-text-anchor:middle;" arcsize=3D"12%" fill=3D"false">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#000000;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: transparent; mso-shading:=
+ transparent; border-bottom: 2px solid #000000; border-left: 2px solid #000=
+000; border-radius: 5px; border-right: 2px solid #000000; border-top: 2px s=
+olid #000000; color: #000000; display: inline-block; font-family: 'UdemySan=
+sWeb','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; =
+mso-border-alt: none; padding-bottom: 10px; padding-top: 10px; padding-left=
+: 10px; padding-right: 10px; text-align: center; width: 70%; word-break: ke=
+ep-all; letter-spacing: normal;"><span style=3D"word-break: break-word; lin=
+e-height: 19.2px;">Lifestyle</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a>
+</td></tr></table></td>
+<td class=3D"column column-2" width=3D"50%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0;font-weight:400;text-align:left;padding-bottom:5px;padding-=
+top:5px;vertical-align:top;width:50%"><table class=3D"button_block block-1"=
+ width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"pr=
+esentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;dis=
+play:none;max-height:0;overflow:hidden"><tr><td class=3D"pad" align=3D"left=
+"><a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" tar=
+get=3D"_blank" style=3D"color:#000000;text-decoration:none;"><!--[if mso]>
+<v:roundrect xmlns:v=3D"urn:schemas-microsoft-com:vml" xmlns:w=3D"urn:schem=
+as-microsoft-com:office:word"  href=3D"https://www.udemy.com/courses/Design=
+/?lid=3D9rqfh63ct8sf&utm_source=3Dbraze&utm_medium=3Demail&utm_campaign=3DR=
+EDACTED&utm_method=3DREDACTED&utm_funnel=3Dgrowth&utm_audience=3Dmx&utm_tac=
+tic=3Dupsell&utm_content=3DREDACTED"  style=3D"height:39px;width:192px;v-te=
+xt-anchor:middle;" arcsize=3D"12%" fillcolor=3D"#f2efff">
+<v:stroke dashstyle=3D"Solid" weight=3D"2px" color=3D"#000000"/>
+<w:anchorlock/>
+<v:textbox inset=3D"0px,0px,0px,0px">
+<center dir=3D"false" style=3D"color:#000000;font-family:sans-serif;font-si=
+ze:16px">
+<![endif]-->
+<span class=3D"button" style=3D"background-color: #f2efff; mso-shading: tra=
+nsparent; border-bottom: 2px solid #000000; border-left: 2px solid #000000;=
+ border-radius: 5px; border-right: 2px solid #000000; border-top: 2px solid=
+ #000000; color: #000000; display: inline-block; font-family: 'UdemySansWeb=
+','Helvetica', 'Arial', Sans-serif; font-size: 16px; font-weight: 700; mso-=
+border-alt: none; padding-bottom: 10px; padding-top: 10px; padding-left: 10=
+px; padding-right: 10px; text-align: center; width: 70%; word-break: keep-a=
+ll; letter-spacing: normal;"><span style=3D"word-break: break-word; line-he=
+ight: 19.2px;">Design</span></span>
+<!--[if mso]></center></v:textbox></v:roundrect><![endif]--></a></td></tr><=
+/table></td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+<!--<![endif]--><table class=3D"row row-13" align=3D"center" width=3D"100%"=
+ border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" sty=
+le=3D"mso-table-lspace:0;mso-table-rspace:0"><tbody><tr><td><table class=3D=
+"row-content stack" align=3D"center" border=3D"0" cellpadding=3D"0" cellspa=
+cing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspa=
+ce:0;background-color:#f2efff;border-radius:0;color:#000;width:660px;margin=
+:0 auto" width=3D"660"><tbody><tr><td class=3D"column column-1" width=3D"10=
+0%" style=3D"mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-ali=
+gn:left;padding-bottom:25px;padding-left:50px;padding-right:50px;padding-to=
+p:5px;vertical-align:top;width:100%"><table class=3D"divider_block block-1"=
+ width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"pr=
+esentation" style=3D"mso-table-lspace:0;mso-table-rspace:0"><tr><td class=
+=3D"pad" align=3D"center"><table border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" width=3D"100%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0"><tr><td class=3D"divider_inner" style=3D"font-size:1px;lin=
+e-height:1px;border-top:1px solid #000"><span style=3D"word-break: break-wo=
+rd;">=E2=80=8A</span></td></tr></table></td></tr></table></td></tr></tbody>=
+</table></td></tr></tbody></table>
+<table class=3D"row row-14" align=3D"center" width=3D"100%" border=3D"0" ce=
+llpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-=
+lspace:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-content sta=
+ck" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=
+=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;background=
+-color:#f2efff;border-radius:0;color:#000;width:660px;margin:0 auto" width=
+=3D"660"><tbody><tr><td class=3D"column column-1" width=3D"100%" style=3D"m=
+so-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;vertic=
+al-align:top;width:100%"><table class=3D"paragraph_block block-1" width=3D"=
+100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation=
+" style=3D"mso-table-lspace:0;mso-table-rspace:0;word-break:break-word"><tr=
+><td class=3D"pad" style=3D"padding-bottom:25px;padding-left:50px;padding-r=
+ight:50px">
+<div style=3D"color:#1c1d1f;direction:ltr;font-family:'UdemySansWeb','Helve=
+tica',Arial,Sans-serif;font-size:16px;font-weight:400;letter-spacing:0;line=
+-height:1.4;text-align:left;mso-line-height-alt:22px"><p style=3D"margin:0"=
+>*Existing Personal Plan subscribers do not qualify. Must reside in the Uni=
+ted States. Subscription auto-renews at then-applicable yearly pricing afte=
+r first year unless canceled. Promotion ends at midnight on September 21st,=
+ 2026.</p></div>
+</td></tr></table></td></tr></tbody></table></td></tr></tbody></table>
+<table class=3D"row row-15 mobile_hide" align=3D"center" width=3D"100%" bor=
+der=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=
+=3D"mso-table-lspace:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"r=
+ow-content stack" align=3D"center" border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace=
+:0;background-color:#1a1a1a;border-radius:0;color:#000;padding:40px 50px 35=
+px 50px;width:660px;margin:0 auto" width=3D"660"><tbody><tr><td><table widt=
+h=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"present=
+ation" style=3D"mso-table-lspace:0;mso-table-rspace:0"><tbody><tr>
+<td class=3D"column column-1" width=3D"33.333333333333336%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;background-=
+color:#1a1a1a;border-right:2px solid #d9dadd;padding-bottom:5px;padding-top=
+:5px;vertical-align:middle;width:33.333333333333336%"><table class=3D"image=
+_block block-1" width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=
+=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0=
+"><tr><td class=3D"pad" style=3D"width:100%;padding-right:30px" align=3D"le=
+ft"><div class=3D"fullWidth" style=3D"max-width:138.5px">
+<a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" targe=
+t=3D"_blank"><img src=3D"https://braze-images.com/appboy/communication/asse=
+ts/image_assets/images/REDACTED/original.png?1705568995" style=3D"display:b=
+lock;height:auto;border:0;width:100%" width=3D"138.5" alt=3D"Udemy Logo" ti=
+tle=3D"Udemy Logo" height=3D"auto"></a>
+</div></td></tr></table></td>
+<td class=3D"column column-2" width=3D"66.66666666666667%" style=3D"mso-tab=
+le-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;background-c=
+olor:#1a1a1a;padding-bottom:5px;padding-top:5px;vertical-align:middle;width=
+:66.66666666666667%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- START tagline-copy localization -->
+
+
+
+
+
+
+
+<!-- // END tagline-copy localization -->
+</div></td></tr></table>
+<table class=3D"paragraph_block block-2" width=3D"100%" border=3D"0" cellpa=
+dding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspa=
+ce:0;mso-table-rspace:0;word-break:break-word"><tr><td class=3D"pad" style=
+=3D"padding-left:35px;padding-right:20px"><div style=3D"color:#fff;directio=
+n:ltr;font-family:'UdemySansWeb','Helvetica',Arial,Sans-serif;font-size:16p=
+x;font-weight:400;letter-spacing:0;line-height:NaN;text-align:left;mso-line=
+-height-alt:NaNpx"><p style=3D"margin:0">The power of possibilities</p></di=
+v></td></tr></table>
+</td>
+</tr></tbody></table></td></tr></tbody></table></td></tr></tbody></table>
+<table class=3D"row row-16" align=3D"center" width=3D"100%" border=3D"0" ce=
+llpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-=
+lspace:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-content sta=
+ck" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=
+=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;background=
+-color:#1a1a1a;border-radius:0;color:#000;width:660px;margin:0 auto" width=
+=3D"660"><tbody><tr><td class=3D"column column-1" width=3D"100%" style=3D"m=
+so-table-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;backgr=
+ound-color:#1a1a1a;padding-bottom:5px;padding-top:5px;vertical-align:top;wi=
+dth:100%">
+<table class=3D"image_block desktop_hide block-1" width=3D"100%" border=3D"=
+0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-t=
+able-lspace:0;mso-table-rspace:0;mso-hide:all;display:none;max-height:0;ove=
+rflow:hidden"><tr><td class=3D"pad" style=3D"width:100%;padding-left:40px;p=
+adding-right:30px" align=3D"center"><div style=3D"max-width:99px"><a href=
+=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_b=
+lank"><img src=3D"https://braze-images.com/appboy/communication/assets/imag=
+e_assets/images/REDACTED/original.png?1775751311" style=3D"display:block;he=
+ight:auto;border:0;width:100%" width=3D"99" alt=3D"Udemy Logo" title=3D"Ude=
+my Logo" height=3D"auto"></a></div></td></tr></table>
+<table class=3D"divider_block desktop_hide block-2" width=3D"100%" border=
+=3D"0" cellpadding=3D"10" cellspacing=3D"0" role=3D"presentation" style=3D"=
+mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;display:none;max-height:=
+0;overflow:hidden"><tr><td class=3D"pad" align=3D"center"><table border=3D"=
+0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" width=3D"25%" =
+style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;display:none;ma=
+x-height:0;overflow:hidden"><tr><td class=3D"divider_inner" style=3D"font-s=
+ize:1px;line-height:1px;border-top:1px solid #bbb"><span style=3D"word-brea=
+k: break-word;">=E2=80=8A</span></td></tr></table></td></tr></table>
+<table class=3D"html_block desktop_hide block-3" width=3D"100%" border=3D"0=
+" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;mso-hide:all;display:none;max-height:0;over=
+flow:hidden"><tr><td class=3D"pad"><div style=3D"font-family:UdemySansWeb,A=
+rial,Sans-serif;text-align:center" align=3D"center">
+<!--[if false]><!-->
+
+<!-- START tagline-copy localization -->
+
+
+
+
+
+
+
+<!-- // END tagline-copy localization --><!--<![endif]-->
+</div></td></tr></table>
+<table class=3D"paragraph_block desktop_hide block-4" width=3D"100%" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"m=
+so-table-lspace:0;mso-table-rspace:0;mso-hide:all;display:none;max-height:0=
+;overflow:hidden;word-break:break-word"><tr><td class=3D"pad" style=3D"padd=
+ing-top:15px;padding-left:35px;padding-right:20px"><div style=3D"color:#fff=
+;direction:ltr;font-family:'UdemySansWeb','Helvetica',Arial,Sans-serif;font=
+-size:18px;font-weight:400;letter-spacing:0;line-height:1.4;text-align:left=
+;mso-line-height-alt:25px"><p style=3D"margin:0">The power of possibilities=
+</p></div></td></tr></table>
+</td></tr></tbody></table></td></tr></tbody></table>
+<table class=3D"row row-17" align=3D"center" width=3D"100%" border=3D"0" ce=
+llpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-=
+lspace:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"row-content sta=
+ck" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=
+=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;background=
+-color:#1a1a1a;border-radius:0;color:#000;padding-left:50px;padding-right:5=
+0px;width:660px;margin:0 auto" width=3D"660"><tbody><tr><td><table width=3D=
+"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentatio=
+n" style=3D"mso-table-lspace:0;mso-table-rspace:0"><tbody><tr><td class=3D"=
+column column-1" width=3D"100%" style=3D"mso-table-lspace:0;mso-table-rspac=
+e:0;font-weight:400;text-align:left;background-color:#1a1a1a;padding-bottom=
+:5px;padding-top:5px;vertical-align:top;width:100%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- START module_text_APPS localization -->
+
+
+
+
+
+
+
+<!-- // END module_text_APPS localization -->
+</div></td></tr></table>
+<table class=3D"paragraph_block block-2" width=3D"100%" border=3D"0" cellpa=
+dding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspa=
+ce:0;mso-table-rspace:0;word-break:break-word"><tr><td class=3D"pad" style=
+=3D"padding-top:10px;padding-bottom:5px"><div style=3D"color:#fff;direction=
+:ltr;font-family:'UdemySansWeb','Helvetica',Arial,Sans-serif;font-size:16px=
+;font-weight:700;letter-spacing:0;line-height:1.3;text-align:left;mso-line-=
+height-alt:21px"><p style=3D"margin:0">
+<span style=3D"word-break: break-word; overflow-wrap: break-word;">Download=
+ our app and learn anywhere</span></p></div></td></tr></table>
+</td></tr></tbody></table></td></tr></tbody></table></td></tr></tbody></tab=
+le>
+<table class=3D"row row-18 mobile_hide" align=3D"center" width=3D"100%" bor=
+der=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=
+=3D"mso-table-lspace:0;mso-table-rspace:0"><tbody><tr><td><table class=3D"r=
+ow-content stack" align=3D"center" border=3D"0" cellpadding=3D"0" cellspaci=
+ng=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace=
+:0;background-color:#1a1a1a;border-radius:0;color:#000;width:660px;margin:0=
+ auto" width=3D"660"><tbody><tr>
+<td class=3D"column column-1" width=3D"33.333333333333336%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;background-=
+color:#1a1a1a;padding-bottom:5px;padding-left:50px;padding-top:5px;vertical=
+-align:top;width:33.333333333333336%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- localized button / image / href -->=20
+<!-- localized button / image / href --><!-- // localized button / image / =
+href -->
+<!-- // localized button / image / href --> </div></td></tr></table>
+<table class=3D"image_block block-2" width=3D"100%" border=3D"0" cellpaddin=
+g=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0=
+;mso-table-rspace:0"><tr><td class=3D"pad" style=3D"width:100%" align=3D"le=
+ft"><div style=3D"max-width:136px">
+<a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" targe=
+t=3D"_blank"><img src=3D"https://braze-images.com/appboy/communication/asse=
+ts/image_assets/images/REDACTED/original.png" style=3D"display:block;height=
+:auto;border:0;width:100%" width=3D"136" alt=3D"Google Play" title=3D"Googl=
+e Play" height=3D"auto"></a>
+</div></td></tr></table>
+</td>
+<td class=3D"column column-2" width=3D"33.333333333333336%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;background-=
+color:#1a1a1a;padding-bottom:5px;padding-right:20px;padding-top:5px;vertica=
+l-align:top;width:33.333333333333336%"><table class=3D"image_block block-1"=
+ width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"pr=
+esentation" style=3D"mso-table-lspace:0;mso-table-rspace:0"><tr><td class=
+=3D"pad" style=3D"width:100%" align=3D"left"><div style=3D"max-width:140px"=
+>
+<a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" targe=
+t=3D"_blank"><img src=3D"https://braze-images.com/appboy/communication/asse=
+ts/image_assets/images/REDACTED/original.png" style=3D"display:block;height=
+:auto;border:0;width:100%" width=3D"140" alt=3D"App Store" title=3D"App Sto=
+re" height=3D"auto"></a>
+</div></td></tr></table></td>
+<td class=3D"column column-3" width=3D"16.666666666666668%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;background-=
+color:#1a1a1a;padding-bottom:5px;padding-top:5px;vertical-align:top;width:1=
+6.666666666666668%">
+<table class=3D"empty_block block-1" width=3D"100%" border=3D"0" cellpaddin=
+g=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0=
+;mso-table-rspace:0"><tr><td class=3D"pad"><div></div></td></tr></table>
+</td>
+<td class=3D"column column-4" width=3D"16.666666666666668%" style=3D"mso-ta=
+ble-lspace:0;mso-table-rspace:0;font-weight:400;text-align:left;background-=
+color:#1a1a1a;padding-bottom:5px;padding-right:50px;padding-top:5px;vertica=
+l-align:top;width:16.666666666666668%"><table class=3D"empty_block block-1"=
+ width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"pr=
+esentation" style=3D"mso-table-lspace:0;mso-table-rspace:0"><tr><td class=
+=3D"pad"><div></div></td></tr></table></td>
+</tr></tbody></table></td></tr></tbody></table>
+<!--[if !mso]><!--><table class=3D"row row-19 desktop_hide" align=3D"center=
+" width=3D"100%" border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"p=
+resentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-hide:all;di=
+splay:none;max-height:0;overflow:hidden"><tbody><tr><td><table class=3D"row=
+-content" align=3D"center" border=3D"0" cellpadding=3D"0" cellspacing=3D"0"=
+ role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspace:0;mso-h=
+ide:all;display:none;max-height:0;overflow:hidden;background-color:#1a1a1a;=
+border-radius:0;color:#000;width:660px;margin:0 auto" width=3D"660"><tbody>=
+<tr>
+<td class=3D"column column-1" width=3D"50%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0;font-weight:400;text-align:left;background-color:#1a1a1a;pa=
+dding-bottom:5px;padding-top:5px;vertical-align:top;width:50%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0;mso-hide:all;display:none;max-height:0;overflow:hidden">=
+<tr><td class=3D"pad"><div style=3D"font-family:UdemySansWeb,Arial,Sans-ser=
+if;text-align:center" align=3D"center">
+<!--[if false]><!--><!-- localized button / image / href -->=20
+<!-- localized button / image / href --><!-- // localized button / image / =
+href -->
+<!-- // localized button / image / href --> <!--<![endif]-->
+</div></td></tr></table>
+<table class=3D"image_block block-2" width=3D"100%" border=3D"0" cellpaddin=
+g=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0=
+;mso-table-rspace:0;mso-hide:all;display:none;max-height:0;overflow:hidden"=
+><tr><td class=3D"pad" style=3D"width:100%" align=3D"left"><div style=3D"ma=
+x-width:136px"><a href=3D"https://ablink.students.udemy.com/ls/click?upn=3D=
+REDACTED" target=3D"_blank"><img src=3D"https://braze-images.com/appboy/com=
+munication/assets/image_assets/images/REDACTED/original.png" style=3D"displ=
+ay:block;height:auto;border:0;width:100%" width=3D"136" alt=3D"Google Play"=
+ title=3D"Google Play" height=3D"auto"></a></div></td></tr></table>
+</td>
+<td class=3D"column column-2" width=3D"50%" style=3D"mso-table-lspace:0;mso=
+-table-rspace:0;font-weight:400;text-align:left;background-color:#1a1a1a;pa=
+dding-bottom:5px;padding-top:5px;vertical-align:top;width:50%"><table class=
+=3D"image_block block-1" width=3D"100%" border=3D"0" cellpadding=3D"0" cell=
+spacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-r=
+space:0;mso-hide:all;display:none;max-height:0;overflow:hidden"><tr><td cla=
+ss=3D"pad" style=3D"width:100%" align=3D"left"><div style=3D"max-width:140p=
+x"><a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" ta=
+rget=3D"_blank"><img src=3D"https://braze-images.com/appboy/communication/a=
+ssets/image_assets/images/REDACTED/original.png" style=3D"display:block;hei=
+ght:auto;border:0;width:100%" width=3D"140" alt=3D"App Store" title=3D"App =
+Store" height=3D"auto"></a></div></td></tr></table></td>
+</tr></tbody></table></td></tr></tbody></table>
+<!--<![endif]--><table class=3D"row row-20" align=3D"center" width=3D"100%"=
+ border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" sty=
+le=3D"mso-table-lspace:0;mso-table-rspace:0"><tbody><tr><td><table class=3D=
+"row-content stack" align=3D"center" border=3D"0" cellpadding=3D"0" cellspa=
+cing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;mso-table-rspa=
+ce:0;background-color:#0a0a0a;border-radius:0;color:#000;width:660px;margin=
+:0 auto" width=3D"660"><tbody><tr><td class=3D"column column-1" width=3D"10=
+0%" style=3D"mso-table-lspace:0;mso-table-rspace:0;font-weight:400;text-ali=
+gn:left;background-color:#1a1a1a;padding-bottom:50px;padding-top:5px;vertic=
+al-align:top;width:100%">
+<table class=3D"html_block block-1" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center">
+<!-- START localization -->
+<!-- START module_text_Support-href localization -->
+
+
+
+
+
+
+<!-- // END module_text_Support-href localization -->
+
+<!-- START module_text_ABOUT localization -->
+
+
+
+
+
+
+
+<!-- // END module_text_ABOUT localization -->
+
+<!-- START module_text_DISCLAIMER localization -->
+
+
+
+
+
+
+
+
+<!-- // END module_text_DISCLAIMER localization -->
+
+<!-- START module_text_ADDRESS localization -->
+
+
+
+
+
+
+
+<!-- // END module_text_ADDRESS localization -->
+
+<!-- START module_text_SUPPORT localization -->
+
+
+
+
+
+
+
+<!-- // END module_text_SUPPORT localization -->
+
+<!-- START module_text_UNSUBSCRIBE localization -->
+
+
+
+
+
+
+
+<!-- // END module_text_UNSUBSCRIBE localization -->
+
+<!-- START Manage_preferences localization -->
+
+
+
+
+
+
+
+<!-- // END Manage_preferences localization -->
+
+<!-- START module_text_PRIVACY localization -->
+
+
+
+
+
+
+
+<!-- // END module_text_PRIVACY localization -->
+
+<!-- START EXCLUSIONS localization -->
+
+
+
+
+
+
+
+<!-- // END EXCLUSIONS localization -->
+
+<!-- START COUPON_EXPIRATION localization -->
+
+
+
+
+
+
+
+
+<!-- // END COUPON_EXPIRATION localization -->
+<!-- // END localization -->
+
+
+
+
+
+</div></td></tr></table>
+<table class=3D"icons_block block-2" width=3D"100%" border=3D"0" cellpaddin=
+g=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0=
+;mso-table-rspace:0;text-align:left;line-height:0"><tr><td class=3D"pad" st=
+yle=3D"vertical-align:middle;color:#101b24;font-family:inherit;font-size:14=
+px;font-weight:400;padding-top:30px;padding-bottom:10px;padding-left:50px;p=
+adding-right:50px" align=3D"left"><table class=3D"icons-outer" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0;display:inline-table"><tr>
+<td style=3D"vertical-align:middle;text-align:center;padding-top:0;padding-=
+bottom:0;padding-left:0;padding-right:3px"><a href=3D"https://ablink.studen=
+ts.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" title=3D"Instagram"=
+ style=3D"text-decoration: none;"><img class=3D"icon" src=3D"https://braze-=
+images.com/appboy/communication/assets/image_assets/images/REDACTED/origina=
+l.png?1708355866" alt=3D"Instagram" height=3D"auto" width=3D"48" align=3D"c=
+enter" style=3D"display:block;height:auto;margin:0 auto;border:0"></a></td>
+<td style=3D"vertical-align:middle;text-align:center;padding-top:0;padding-=
+bottom:0;padding-left:3px;padding-right:3px"><a href=3D"https://ablink.stud=
+ents.udemy.com/ls/click?upn=3DREDACTED" target=3D"_self" title=3D"LinkedIn"=
+ style=3D"text-decoration: none;"><img class=3D"icon" src=3D"https://braze-=
+images.com/appboy/communication/assets/image_assets/images/REDACTED/origina=
+l.png?1708355866" alt=3D"LinkedIn" height=3D"auto" width=3D"48" align=3D"ce=
+nter" style=3D"display:block;height:auto;margin:0 auto;border:0"></a></td>
+<td style=3D"vertical-align:middle;text-align:center;padding-top:0;padding-=
+bottom:0;padding-left:3px;padding-right:3px"><a href=3D"https://ablink.stud=
+ents.udemy.com/ls/click?upn=3DREDACTED" target=3D"_self" title=3D"X" style=
+=3D"text-decoration: none;"><img class=3D"icon" src=3D"https://braze-images=
+.com/appboy/communication/assets/image_assets/images/REDACTED/original.png?=
+1708355866" alt=3D"X" height=3D"auto" width=3D"48" align=3D"center" style=
+=3D"display:block;height:auto;margin:0 auto;border:0"></a></td>
+<td style=3D"vertical-align:middle;text-align:center;padding-top:0;padding-=
+bottom:0;padding-left:3px;padding-right:3px"><a href=3D"https://ablink.stud=
+ents.udemy.com/ls/click?upn=3DREDACTED" target=3D"_self" title=3D"YouTube" =
+style=3D"text-decoration: none;"><img class=3D"icon" src=3D"https://braze-i=
+mages.com/appboy/communication/assets/image_assets/images/REDACTED/original=
+.png?1708355866" alt=3D"YT" height=3D"auto" width=3D"48" align=3D"center" s=
+tyle=3D"display:block;height:auto;margin:0 auto;border:0"></a></td>
+<td style=3D"vertical-align:middle;text-align:center;padding-top:0;padding-=
+bottom:0;padding-left:3px;padding-right:0"><a href=3D"https://ablink.studen=
+ts.udemy.com/ls/click?upn=3DREDACTED" target=3D"_self" title=3D"Facebook" s=
+tyle=3D"text-decoration: none;"><img class=3D"icon" src=3D"https://braze-im=
+ages.com/appboy/communication/assets/image_assets/images/REDACTED/original.=
+png?1708355866" alt=3D"Facebook" height=3D"auto" width=3D"48" align=3D"cent=
+er" style=3D"display:block;height:auto;margin:0 auto;border:0"></a></td>
+</tr></table></td></tr></table>
+<table class=3D"paragraph_block block-3" width=3D"100%" border=3D"0" cellpa=
+dding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspa=
+ce:0;mso-table-rspace:0;word-break:break-word"><tr><td class=3D"pad" style=
+=3D"padding-top:30px;padding-bottom:10px;padding-left:50px;padding-right:20=
+px"><div style=3D"color:#fff;direction:ltr;font-family:'UdemySansWeb','Helv=
+etica',Arial,Sans-serif;font-size:19px;font-weight:400;letter-spacing:0;lin=
+e-height:NaN;text-align:left;mso-line-height-alt:NaNpx"><p style=3D"margin:=
+0">
+<a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" targe=
+t=3D"_blank" style=3D"text-decoration: none; color: #ffffff;" data-mce-attr=
+ibute-name-1 data-mce-attribute-value-1 rel=3D"noopener"></a><a href=3D"htt=
+ps://ablink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" s=
+tyle=3D"text-decoration: none; color: #ffffff;" data-mce-attribute-name-1 d=
+ata-mce-attribute-value-1 rel=3D"noopener"></a><strong><a href=3D"https://a=
+blink.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" style=
+=3D"text-decoration: none; color: #ffffff;" rel=3D"noopener">About us</a></=
+strong> &nbsp; &nbsp;| &nbsp; &nbsp;<strong><a href=3D"https://ablink.stude=
+nts.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" style=3D"text-deco=
+ration: none; color: #ffffff;" rel=3D"noopener">Udemy Business</a></strong>
+</p></div></td></tr></table>
+<table class=3D"paragraph_block block-4" width=3D"100%" border=3D"0" cellpa=
+dding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspa=
+ce:0;mso-table-rspace:0;word-break:break-word"><tr><td class=3D"pad" style=
+=3D"padding-top:40px;padding-bottom:20px;padding-left:50px;padding-right:50=
+px"><div style=3D"color:#fff;direction:ltr;font-family:'UdemySansWeb','Helv=
+etica',Arial,Sans-serif;font-size:14px;font-weight:400;letter-spacing:0;lin=
+e-height:1.4;text-align:left;mso-line-height-alt:20px"><p style=3D"margin:0=
+">
+You are receiving this email because you signed up on Udemy.com with this e=
+mail address. Please do not reply to this unmonitored email account. Visit =
+the <a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" s=
+tyle=3D"color:#ffffff !important">help center</a> for questions and support=
+.
+</p></div></td></tr></table>
+<table class=3D"divider_block block-5" width=3D"100%" border=3D"0" cellpadd=
+ing=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace=
+:0;mso-table-rspace:0"><tr><td class=3D"pad" style=3D"padding-top:10px;padd=
+ing-bottom:10px;padding-left:40px;padding-right:40px" align=3D"center"><tab=
+le border=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" w=
+idth=3D"100%" style=3D"mso-table-lspace:0;mso-table-rspace:0"><tr><td class=
+=3D"divider_inner" style=3D"font-size:1px;line-height:1px;border-top:1px so=
+lid #717171"><span style=3D"word-break: break-word;">=E2=80=8A</span></td><=
+/tr></table></td></tr></table>
+<table class=3D"paragraph_block mobile_hide block-6" width=3D"100%" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"m=
+so-table-lspace:0;mso-table-rspace:0;word-break:break-word"><tr><td class=
+=3D"pad" style=3D"padding-top:10px;padding-bottom:10px;padding-left:20px;pa=
+dding-right:20px"><div style=3D"color:#fff;direction:ltr;font-family:'Udemy=
+SansWeb','Helvetica',Arial,Sans-serif;font-size:14px;font-weight:400;letter=
+-spacing:0;line-height:NaN;text-align:center;mso-line-height-alt:NaNpx"><p =
+style=3D"margin:0">
+<a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" targe=
+t=3D"_blank" style=3D"text-decoration: none; color: #ffffff;" rel=3D"noopen=
+er">Manage preferences</a> &nbsp; &nbsp; &nbsp;<a href=3D"https://ablink.st=
+udents.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" style=3D"text-d=
+ecoration: none; color: #ffffff;" rel=3D"noopener">Support &nbsp; &nbsp; &n=
+bsp;</a><a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTE=
+D" target=3D"_blank" style=3D"text-decoration: none; color: #ffffff;" rel=
+=3D"noopener">Unsubscribe</a> &nbsp; &nbsp; &nbsp;<a href=3D"https://ablink=
+.students.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" style=3D"tex=
+t-decoration: none; color: #ffffff;" rel=3D"noopener">Privacy terms</a>
+</p></div></td></tr></table>
+<table class=3D"paragraph_block desktop_hide block-7" width=3D"100%" border=
+=3D"0" cellpadding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"m=
+so-table-lspace:0;mso-table-rspace:0;mso-hide:all;display:none;max-height:0=
+;overflow:hidden;word-break:break-word"><tr><td class=3D"pad" style=3D"padd=
+ing-top:10px;padding-bottom:10px;padding-left:20px;padding-right:20px"><div=
+ style=3D"color:#fff;direction:ltr;font-family:'UdemySansWeb','Helvetica',A=
+rial,Sans-serif;font-size:14px;font-weight:400;letter-spacing:0;line-height=
+:NaN;text-align:center;mso-line-height-alt:NaNpx"><p style=3D"margin:0">
+<a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" targe=
+t=3D"_blank" style=3D"text-decoration: none; color: #ffffff;" rel=3D"noopen=
+er">Manage preferences</a> &nbsp; &nbsp; &nbsp;<a href=3D"https://ablink.st=
+udents.udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" style=3D"text-d=
+ecoration: none; color: #ffffff;" rel=3D"noopener">Support</a> <br>&nbsp; &=
+nbsp; &nbsp;<br>
+<a href=3D"https://ablink.students.udemy.com/ls/click?upn=3DREDACTED" targe=
+t=3D"_blank" style=3D"text-decoration: none; color: #ffffff;" rel=3D"noopen=
+er">Unsubscribe</a> &nbsp; &nbsp; &nbsp;<a href=3D"https://ablink.students.=
+udemy.com/ls/click?upn=3DREDACTED" target=3D"_blank" style=3D"text-decorati=
+on: none; color: #ffffff;" rel=3D"noopener">Privacy terms</a></p></div></td=
+></tr></table>
+<table class=3D"paragraph_block block-8" width=3D"100%" border=3D"0" cellpa=
+dding=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspa=
+ce:0;mso-table-rspace:0;word-break:break-word"><tr><td class=3D"pad" style=
+=3D"padding-top:50px;padding-bottom:15px;padding-left:20px;padding-right:20=
+px"><div style=3D"color:#fff;direction:ltr;font-family:'UdemySansWeb','Helv=
+etica',Arial,Sans-serif;font-size:12px;font-weight:400;letter-spacing:0;lin=
+e-height:NaN;text-align:center;mso-line-height-alt:NaNpx"><p style=3D"margi=
+n:0">Udemy, 600 Harrison Street, 3rd floor, San Francisco, CA 94107</p></di=
+v></td></tr></table>
+<table class=3D"html_block block-9" width=3D"100%" border=3D"0" cellpadding=
+=3D"0" cellspacing=3D"0" role=3D"presentation" style=3D"mso-table-lspace:0;=
+mso-table-rspace:0"><tr><td class=3D"pad"><div style=3D"font-family:UdemySa=
+nsWeb,Arial,Sans-serif;text-align:center" align=3D"center"> <span class=3D"=
+addTerms" style=3D"font: inherit;"></span>
+</div></td></tr></table>
+</td></tr></tbody></table></td></tr></tbody></table>
+</td></tr></tbody></table>
+<!-- End -->
+</body>
+</html>
+
+--f660a29bb13a78065b7ae4d31a0649daa4a7d0ef80e6f6e438116c3b633d--

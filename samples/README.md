@@ -8,8 +8,8 @@ uv run python scripts/make_samples.py
 
 ## Provenance and sanitisation
 
-Nothing here came from a real inbox yet. Every message is hand-built to exercise
-one or two specific techniques, using:
+The numbered files (`01-*.eml` ...) are synthetic: each is hand-built to
+exercise one or two specific techniques, using:
 
 - `example.com` as the recipient organisation (`analyst@example.com`, MX `mx.example.com`)
 - `example.net` and `*.example` for senders, and RFC 5737 documentation ranges
@@ -18,14 +18,13 @@ one or two specific techniques, using:
 - Inert attachments: the "executable" is a PE header with no code, the "macro"
   document is a ZIP with a placeholder `vbaProject.bin`, the PDF is a stub
 
-Real samples exported from an inbox go through `scripts/sanitize.py` (rewrites
-the recipient to `analyst@example.com` and strips tracking tokens) before being
-committed.
+The `real-*.eml` files are sanitised inbox exports; see the section at the end.
 
 ## Expected scores (offline mode)
 
 The regression test in `tests/test_scoring.py` asserts every `phish/` file scores
-at least 50 and every `benign/` file scores under 50.
+at least 50 and every `benign/` file scores under 50, except the files listed in
+`known-misses.txt`, which must score 20-49.
 
 ### phish/
 
@@ -63,3 +62,54 @@ the form's raw-IP action) is what would push a real one higher.
 `02-password-reset` and `06-shared-doc` also serve as regression cases for the
 hop analyser: both have a `[10.x]` submission hop that must be treated as
 internal relaying, not as a private IP presented at the boundary.
+
+## Real samples (`real-*.eml`)
+
+Fifteen messages exported from the author's Gmail and university Microsoft 365
+inboxes on 2026-09-16, sanitised with `scripts/sanitize.py` (recipient and
+display name replaced with `analyst@example.com` / `Analyst`, mailbox-naming
+headers dropped, tracking tokens inside URLs redacted). Senders, hosts, hop
+chains and bodies are otherwise untouched: they are the evidence. Fifteen is an
+anecdote, not a benchmark; treat the numbers accordingly.
+
+### phish/
+
+| File | What it is | Score | Verdict | Notes |
+|---|---|---:|---|---|
+| `real-01-mychart-medicare-kit.eml` | "MyChart" Medicare lure from a random `.us` domain with a six-label bounce domain, landing page on `storage.googleapis.com` | 65 | LIKELY PHISH | display_name_spoof, spf_misaligned, dkim none, subdomain_depth, file_hosting |
+| `real-02-uc-account-job-scam-admin.eml` | Personal-assistant job scam sent from a compromised student account, `shorturl.at` apply link, "$650 weekly" | 35 | SUSPICIOUS | **known miss** |
+| `real-03-uc-account-job-scam-assistant.eml` | Same scam family, contact by text message only | 25 | SUSPICIOUS | **known miss** |
+| `real-04-uc-account-credential-update.eml` | "System maintenance: update your school email and password within 48 hours", Google Form | 40 | SUSPICIOUS | **known miss** |
+| `real-05-uc-account-credential-update-2.eml` | Same template, different compromised account | 35 | SUSPICIOUS | **known miss** |
+
+The four UC-account emails are listed in `known-misses.txt`. They are
+intra-tenant Exchange Online mail: no `Authentication-Results`, no external
+hop, sender domain genuinely the university's. Every infrastructure signal is
+clean because the infrastructure *is* clean. Offline, only the text gives them
+away, and text alone caps at 15 points by design. The regression test requires
+them to stay at least SUSPICIOUS and fails if one ever reaches 50 without being
+removed from the list.
+
+### benign/
+
+| File | What it is | Score | Verdict | Notes |
+|---|---|---:|---|---|
+| `real-01-udemy-promo.eml` | Marketing email via SendGrid, fully aligned | 0 | CLEAN | |
+| `real-02-golfnow-promo.eml` | Marketing email, fully aligned | 0 | CLEAN | |
+| `real-03-isc2-webinar.eml` | Webinar invite via Salesforce Marketing Cloud | 25 | SUSPICIOUS | visible text `isc2.org`, href `cl.s12.exct.net` click-tracker: a real link-text mismatch that every ESP produces |
+| `real-04-labcorp-notice.eml` | Transactional notice into the M365 tenant | 0 | CLEAN | |
+| `real-05-website-listing-claimed.eml` | SaaS notification via SendGrid | 0 | CLEAN | |
+| `real-06-bootcamp-promo.eml` | Promo sent from Gmail API into the M365 tenant | 0 | CLEAN | |
+
+### unlabeled/
+
+Four "internship" emails the author has not classified. They are excluded from
+the regression test and the confusion matrix until they move to `phish/` or
+`benign/`.
+
+| File | What it is | Score |
+|---|---|---:|
+| `real-01-globifye-assessment.eml` | "Dear Candidate", complete a Google Form assessment by Monday | 15 |
+| `real-02-intrastack-interview.eml` | Handshake application follow-up with a Calendly link | 0 |
+| `real-03-insureio-teams-interview.eml` | "Set up Microsoft Teams to meet a senior technical recruiter" | 0 |
+| `real-04-glowup-charity-form.eml` | "Fill out this form for our charity", Brevo tracking links | 5 |

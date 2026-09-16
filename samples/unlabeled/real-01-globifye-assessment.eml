@@ -1,0 +1,421 @@
+Received: from BN0PR01MB7085.prod.exchangelabs.com (::1) by
+ SJ2PR01MB8619.prod.exchangelabs.com with HTTPS; Wed, 18 Mar 2026 21:01:45
+ +0000
+ARC-Seal: i=2; a=rsa-sha256; s=arcselector10001; d=microsoft.com; cv=pass;
+ b=ekfQjqXcMVz1p6NwGNtNuW77XZX1YGJeXvYoqxZM9zPZwzc3Ns8Nczuz3lUqmlF8MrXMezFYNlVWSyo304qbwtLcjbeA3lZBqyfEN8t218ZzQnG1R14W1C3yTMg/53Xs0KrhkXzgkZeuE53qZLTnxR8xQ0Pr370sMl45VjHiRbBhPpoMZyZbv3ivRIx9od+4cGfIoYOih5or5djqAb6MmWV2YCZ91GWTukON58DCGUMsXmB4ukPjR++3x+9lqnl3L5k/Jwwvx9TnblCSv2ttJVbVtEDdn3zmxAlB1DoDm84bd1cgcLcAHQJc2Okd4E8yQ8tlJvDo+hz+Q2cRXXkm3Q==
+ARC-Message-Signature: i=2; a=rsa-sha256; c=relaxed/relaxed; d=microsoft.com;
+ s=arcselector10001;
+ h=From:Date:Subject:Message-ID:Content-Type:MIME-Version:X-MS-Exchange-AntiSpam-MessageData-ChunkCount:X-MS-Exchange-AntiSpam-MessageData-0:X-MS-Exchange-AntiSpam-MessageData-1;
+ bh=nB73MnZ3129G3WcW4kokNt1VuiG5OSs8om9C8VqfxaM=;
+ b=rT4b+Ju7dZakbc9EA8gF6v3wvYRZ69D8fu5XD8lr+bJU4hxg3ZjOO+ZCF8GXMcw/EmB35NZWHITmxUksNYNeiZparjLiHFWKr9oKNcZKIMkSC5FbAHNJHDsUMFjvgI9IHVdY5u9P22Iy+bDIrgBc8yfTQpRhbuBDnifWUn1E+CSeUuar4XcetsJyGhScFEZs7rnSGQD1hEJcyDvQ666mGS1qOlYj8DICui+NfbXSsjARgVkDCvH1ITr5oFSpgOPOUKX4qFnlUuo0Z+IcoqhrpPqVmhzwMSkVA8dRJMCu5gQEfxZITozbJk2bx8XjiHVdNFNFK5TrlMaE2mh9Ovfsmw==
+ARC-Authentication-Results: i=2; mx.microsoft.com 1; spf=pass (sender ip is
+ 103.117.158.51) smtp.rcpttodomain=mail.uc.edu smtp.mailfrom=globifye.com;
+ dmarc=pass (p=none sp=none pct=100) action=none header.from=globifye.com;
+ dkim=pass (signature was verified) header.d=globifye.com; arc=pass (0 oda=0
+ ltdi=0 93)
+Received: from MN2PR18CA0004.namprd18.prod.outlook.com (2603:10b6:208:23c::9)
+ by BN0PR01MB7085.prod.exchangelabs.com (2603:10b6:408:160::9) with Microsoft
+ SMTP Server (version=TLS1_2, cipher=TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384) id
+ 15.20.9723.19; Wed, 18 Mar 2026 21:01:48 +0000
+Received: from BL6PEPF0001AB56.namprd02.prod.outlook.com
+ (2603:10b6:208:23c:cafe::f0) by MN2PR18CA0004.outlook.office365.com
+ (2603:10b6:208:23c::9) with Microsoft SMTP Server (version=TLS1_3,
+ cipher=TLS_AES_256_GCM_SHA384) id 15.20.9700.27 via Frontend Transport; Wed,
+ 18 Mar 2026 21:01:26 +0000
+Authentication-Results: spf=pass (sender IP is 103.117.158.51)
+ smtp.mailfrom=globifye.com; dkim=pass (signature was verified)
+ header.d=globifye.com;dmarc=pass action=none
+ header.from=globifye.com;compauth=pass reason=100
+Received-SPF: Pass (protection.outlook.com: domain of globifye.com designates
+ 103.117.158.51 as permitted sender) receiver=protection.outlook.com;
+ client-ip=103.117.158.51; helo=sender-of-o51.zoho.in; pr=C
+Received: from sender-of-o51.zoho.in (103.117.158.51) by
+ BL6PEPF0001AB56.mail.protection.outlook.com (10.167.241.8) with Microsoft
+ SMTP Server (version=TLS1_3, cipher=TLS_AES_256_GCM_SHA384) id 15.20.9723.19
+ via Frontend Transport; Wed, 18 Mar 2026 21:01:47 +0000
+ARC-Seal: i=1; a=rsa-sha256; t=1773867689; cv=none; 
+	d=zohomail.in; s=zohoarc; 
+	b=Zw5d93iQ+nVe3HybEzdVlna4aiywKlGJzclSrU/Xr8FU6vy+R2SrIhf7K0ZP2Rsin7j5EcQTpxOr+tVjBkptxFFr0xJvoIN8QOwg94PH7ZyfbLBWLKdSlU1Rp8wNveEEBAvF2ePaOKwkw43w2vwO9Sr6/Rkd7DtMSZ3svZN2c9Y=
+ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in; s=zohoarc; 
+	t=1773867689; h=Content-Type:Date:Date:From:From:MIME-Version:Message-ID:Subject:Subject:Message-Id:Reply-To:To:Cc; 
+	bh=nB73MnZ3129G3WcW4kokNt1VuiG5OSs8om9C8VqfxaM=; 
+	b=BJUc8oNRSHOlc58nQctWJJTrRildGmerf680cA/7pYoBsuQ4pcWKM4KAW1KEgyBVWkpCQRqqFZ65PDtqsVA5inkBQsa8ZL0OVDV65KRFHTPKO8bZF4GmX8PgyZ64O+qC9EAVniuXWlZMiJtYj1mg7abekQheckbZhjk/7jcri9Q=
+ARC-Authentication-Results: i=1; mx.zohomail.in;
+	dkim=pass  header.i=globifye.com;
+	spf=pass  smtp.mailfrom=william.anderson@globifye.com;
+	dmarc=pass header.from=<william.anderson@globifye.com>
+DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1773867689;
+	s=txt; d=globifye.com; i=william.anderson@globifye.com;
+	h=Date:Date:From:From:Message-Id:Message-Id:In-Reply-To:Subject:Subject:MIME-Version:Content-Type:Reply-To:To:Cc;
+	bh=nB73MnZ3129G3WcW4kokNt1VuiG5OSs8om9C8VqfxaM=;
+	b=eIEHxvj0JtItfWUj2euU2yR3ie0d3zwhKjxoPwBvIEfpx4Tn0IRW8DPNB+7oLnSd
+	J8qSHBXLVy/cSe2xjqfDpzEPnNnw/tdd3lBlnXcziEjB6PvvzBfgVoo187SKFXvHAa6
+	M6ZCMMgauE4skXlBvhU/arwDxkYISV+J2FDLTMaQ=
+Received: from mail.zoho.in by mx.zoho.in
+	with SMTP id 177386768727989.02485399632735; Thu, 19 Mar 2026 02:31:27 +0530 (IST)
+Date: Thu, 19 Mar 2026 02:31:27 +0530
+From: William Anderson <william.anderson@globifye.com>
+BCC: <analyst@example.com>
+Message-Id: <19d02c0dd56.507cb509179328.495778418527345403@globifye.com>
+In-Reply-To:
+Subject: =?UTF-8?Q?GlobiFYE_Software_Developer_Internship?=
+ =?UTF-8?Q?_Assessment_=E2=80=93_Action_Required_by_Monday?=
+Content-Type: multipart/alternative; 
+	boundary="----=_Part_521538_1946116915.1773867687254"
+User-Agent: Zoho Mail
+X-Mailer: Zoho Mail
+Return-Path: william.anderson@globifye.com
+X-MS-Exchange-Organization-ExpirationStartTime: 18 Mar 2026 21:01:48.4480
+ (UTC)
+X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit
+X-MS-Exchange-Organization-ExpirationInterval: 1:00:00:00.0000000
+X-MS-Exchange-Organization-ExpirationIntervalReason: OriginalSubmit
+X-MS-Exchange-Organization-Network-Message-Id: 025ea19a-9b4b-4fb7-64ff-08de8531921d
+X-EOPAttributedMessage: 0
+X-EOPTenantAttributedMessage: f5222e6c-5fc6-48eb-8f03-73db18203b63:0
+X-MS-Exchange-Organization-MessageDirectionality: Incoming
+X-MS-PublicTrafficType: Email
+X-MS-TrafficTypeDiagnostic: BL6PEPF0001AB56:EE_|BN0PR01MB7085:EE_|SJ2PR01MB8619:EE_
+X-MS-Exchange-Organization-AuthSource: BL6PEPF0001AB56.namprd02.prod.outlook.com
+X-MS-Exchange-Organization-AuthAs: Anonymous
+X-MS-Office365-Filtering-Correlation-Id: 025ea19a-9b4b-4fb7-64ff-08de8531921d
+X-MS-Exchange-AtpMessageProperties: SA|SL
+X-UI-Tagging: External
+X-MS-Exchange-Organization-SCL: 5
+X-Forefront-Antispam-Report: CIP:103.117.158.51;CTRY:IN;LANG:en;SCL:5;SRV:;IPV:NLI;SFV:SPM;H:sender-of-o51.zoho.in;PTR:sender-of-o51.zoho.in;CAT:SPM;SFS:(13230040)(704162111799003)(13003099007)(8096899003)(18002099003)(55112099003)(22082099003)(19002099003)(16102099003)(56012099003);DIR:INB;
+X-Microsoft-Antispam: BCL:0;ARA:13230040|704162111799003|13003099007|8096899003|18002099003|55112099003|22082099003|19002099003|16102099003|56012099003;
+X-MS-Exchange-CrossTenant-OriginalArrivalTime: 18 Mar 2026 21:01:47.8511
+ (UTC)
+X-MS-Exchange-CrossTenant-Network-Message-Id: 025ea19a-9b4b-4fb7-64ff-08de8531921d
+X-MS-Exchange-CrossTenant-Id: f5222e6c-5fc6-48eb-8f03-73db18203b63
+X-MS-Exchange-CrossTenant-AuthSource: BL6PEPF0001AB56.namprd02.prod.outlook.com
+X-MS-Exchange-CrossTenant-AuthAs: Anonymous
+X-MS-Exchange-CrossTenant-FromEntityHeader: Internet
+X-MS-Exchange-Transport-CrossTenantHeadersStamped: BN0PR01MB7085
+X-MS-Exchange-Processed-By-BccFoldering: 15.20.9723.008
+X-Microsoft-Antispam-Mailbox-Delivery:
+	ucf:0;jmr:0;auth:0;dest:J;OFR:SpamFilterAuthJ;ENG:(910005)(944506478)(944626604)(4710137)(4715077)(4999163)(920097)(930201)(3100021)(140003);RF:JunkEmail;
+X-Microsoft-Antispam-Message-Info:
+	=?utf-8?B?STFYNFF1TFJMelVsdEtYSEtGaTlzSlBtTE1RZXIwa2JEelJsNXBNQlppTUxx?=
+ =?utf-8?B?T3RUTzFqU0lVWTFSQ3ZyaDVTRHdqMUdGbVQ4SzVrSXJxVVVFTTIycmNCN2Z0?=
+ =?utf-8?B?YjArSnRLN0Y4T2MyWjUvT2owWlJQNCt1NFdCNnVaMyt3YzlFM0RPamJrODky?=
+ =?utf-8?B?dk95anR3aGFGNmVpUXMxOGg0L3BDUU5ac2pkc3c5UEMvMFZDeGUzMXpZRVpv?=
+ =?utf-8?B?c2RidEthZlN4enIxVTFlNDllNGNQNlBpbkQ0a3YwYmtkdkZickVsMnJaRUN5?=
+ =?utf-8?B?Ymh1a3NSUzduYWlTSTVNczU2VFYvSnlFVDJTMU83Y0ZlakhZR1dxUXRucC8v?=
+ =?utf-8?B?YldjSEMvekgrR3N4TnZZVm5tUjZTeG5aTkN4K2ZDOHJFMmhCdTYwVXhPdklQ?=
+ =?utf-8?B?d1F2cWtpdFRMcVdFU0RrREh6WHFINUFVR2xtWWpFYUwxZWVIeldsOFRHSUFU?=
+ =?utf-8?B?ZGpYZG5YZWlSVlpCUUx3R2gyY3VXTDBicEpLbFVxd3NuZ0xTaG0vK2hYRGhU?=
+ =?utf-8?B?T2IvS2ZyM3padWROL2NRRmJyK2FkYkVsRitEK2Q3eXVxZ0RlNDUwa0hpTGkr?=
+ =?utf-8?B?Y3U5UUNKcStjTVdNTnE4cUE5UDRkVXRNZE1hbGNqRkgxb0RTam5iODRwVDdx?=
+ =?utf-8?B?MkpGejJGRFVheWw2c1lLU2kycHFldEtVTUlHSnNEWTdTQzEwQ0dPeVVRV2dN?=
+ =?utf-8?B?NEVOSFNFVnhwTE45N0hsRHQydzRyTmc0ejFCVFhSVDlybUFvRHZtRGxEWGxo?=
+ =?utf-8?B?R1Fuc2NuYzV6aFVQWEZpb2s0UmRLTHB4RGJqYkVVVGRNMzNWOVE1ZEx0Zm53?=
+ =?utf-8?B?VGRrRGVoS2JvRC9reUNBYnltdG5JZUo4QWU3VFBGVmIwQy9vcEZNeXZjYmtl?=
+ =?utf-8?B?cHBzNG91dWllY3RHdWl3dWhlNGFEc0dNcEw2b2MxK2oxSUFmcWNnYTRGMzNw?=
+ =?utf-8?B?YzczQzIrWksyK2JsaG5FcGRvTDJLTnorUkt4QXNBOEJrTmVsK1crcG00NGpl?=
+ =?utf-8?B?L3M5a0J2ZnFHbWlVVEloZ3ZqOTA3L3JrN0V0UUttbjA2VGxDckFtbGUxLzdn?=
+ =?utf-8?B?YW1KeXpjQlZ1djkxNlEyN0xBRFV5UXhrdEI4cGpaZyszYjcwRFJyT0hwaUFk?=
+ =?utf-8?B?OGxON2FFTFJibkhTNXZnYkZEcG9jSVkzaThjUUlQazJYc2pVZnZlSis4L1Iv?=
+ =?utf-8?B?UUdCN3VrU0xwTjgwVHdUdzdlV25HRU5KMElVZXJDZEQxLzU4STlKZHlteVBx?=
+ =?utf-8?B?OUMyc2l5ZkhLMkxpQmtNanpaMzJ5RDhTaTdPOHlaOVZoL1pxMlhwNGhXTEtj?=
+ =?utf-8?B?eDM2dTYwT0xSZDdqbmhCdlpyNlFoZCtxaStOdUhaQ2JUbkhTZTR6UFpNaW5z?=
+ =?utf-8?B?bXB5dzQ3aitiUWZwc1AvTDJndzRhamsrcFQyU0R6RzJoNFV4YjBqZE5tNEV6?=
+ =?utf-8?B?R1dWQi9lMEVIemV4R254WVdKdndLMUUxMTh6MG9HMEppZlJCYlFJWTc0VVkw?=
+ =?utf-8?B?aFo3Q2l0cExYRXE5ZEJralB6WEphMm50bHRUQWhyemZKak03UFdmOUZtU0g4?=
+ =?utf-8?B?VFJrQks1bmJYcEp6MWt0ODRYVXdCTnVkNmxWZ1huaHNXSmRCUGl4WmwzaE55?=
+ =?utf-8?B?Wlk3MTlpK3M2RkpYSHM4cUx3MjlmVFU5dFpCaERoQTdKdEhyMHJtSnEybjht?=
+ =?utf-8?B?OHd2cFRwZmJXTnZUaVhadHVBSnRWaFF0UnZGZVQ4c1ZpMWUvU0l5WVpZZXhu?=
+ =?utf-8?B?MHNOR1QvdVREUVV6d2ZTQmJXS1M0eW5jUE1aeEhtSWlvV1JlK3ZTTEhmZk1D?=
+ =?utf-8?B?dmFuckFFSnJVS2dkM2FtL0piMWVzcmsyazA4UHVjT2E0cXlHOGlWS2ZNUUlH?=
+ =?utf-8?B?L2JkUmxyQ3NaZ1hrVEtYRnptRUlUTVZ4aUFxd2dOZkFVZmRhMldma1MyNGpn?=
+ =?utf-8?B?aVZyZTBrRGxVT25lL0tPbzhDZHJTYW1HdTdyK0JQTlNGN3FBS1JlTllqM21W?=
+ =?utf-8?B?RG5aYk9aMTBFcjBBTncya0QxeHlUd0ZYeVh0a0RrSU5ZdVhFK0hGUDNWWVA2?=
+ =?utf-8?B?YVpZaE5MS3E2VlcrSFZGVGF0dVBTTHFEVk5oVFJuQUFaSi9MRzZSQXozMVR4?=
+ =?utf-8?B?Rk1hQitIanFzTlA2emJ2VTh6REdoSVZHeXB6VS94QnVNZndUR1ZEcEU3dFlv?=
+ =?utf-8?B?ZlFTOHZ0VGdNY09yV1p4NlM5UC92KzhoUXBINFZwNGlBQUY5bDRhYjc1YzE0?=
+ =?utf-8?B?VEVVSkxvbTczUDA0eGhva1FJeTVDT2Vob0JWMlNPK3I5S21kRU1jMkNoaUsz?=
+ =?utf-8?B?TkpkREkyNXVOL3NRRkdCaG9DdXkvbm85L1gxWmJSOFpROWhFK1RRb2RSQWRM?=
+ =?utf-8?B?SEVxZEV1czg2NGlicDUycjVkVExLU2tNcUkwNE0wZlVCanNDVFN5NHlmT1k1?=
+ =?utf-8?B?bTY3RDNuK1JqY2h3d2MzWXlmZnYyQnBSQkVKUllIdUYzVko2d1NaLzREKzhK?=
+ =?utf-8?B?dVBtS3prNzJsRWtMVjFtTmRvN2RWQ1loQU8xZVo2anJ0Q2tHaWFHUlpzWWJC?=
+ =?utf-8?B?TCtwUWdhLytaM2l4TThkd1JsUnFuQkZmaklYWGtSdzl3L1VOQitYSDY4ZkFv?=
+ =?utf-8?B?ZHlKVUR5eTdPUjZXVmorZ0ptenVERG56b1JlWkJvWjlaUW50SnY4ZFhSNVhX?=
+ =?utf-8?B?YzVKUkFMVjloZHRvbXlNaWNnNjNpTkRDbHBpcTE2WDNKM0lQWElFQUUwVTkv?=
+ =?utf-8?B?UlhVcCtDNEtmL1Z0VzlwOGdtR0F1Vk1QeG1CSzNVS0tQNjhiOWQ5V2hNa05h?=
+ =?utf-8?B?MzdhbGNKekdtM2h0dU9Pd3lVa0pKTFBxUGoxZE1JVTZWaU5TOTFIVHVjU1Y3?=
+ =?utf-8?B?YW51eGdEODlIdU05M2NZRC95MEdia3g2TXVNODlKYzdGbGExUDQ2ZkhqTFdl?=
+ =?utf-8?B?VE42RlVYdzNRVS85d0hTMzNUdHBVcXlwYXg5dDFxZDZFSWVoYzNKK0xoSGV0?=
+ =?utf-8?B?bStQOHMyOStPNEZFRFg4eWMza1J3aGhLVmhlZkhBQ21SMTNMbEcvWUYrRHdk?=
+ =?utf-8?B?RWpKOHZhTjRYNHJGUXNhSmQ3Z1Z1VkxJNTNTa3FTVHlDbU1mZk1jUGxoTkJr?=
+ =?utf-8?B?RDNFMThEZG5CRTJqaEE3Q09icnNyK1hnUlBRbG5HY1JtTlNrMXkrSlZBcGlS?=
+ =?utf-8?B?NzJQTnJsUTBUM2tpdkZSelQ1Rnh1R2ZrWDY4WnVUOGh4K1VpNHpSSnhLK0p5?=
+ =?utf-8?B?elJ3UnJHUlpMallMVWNmdHB5M28wQmFQSmpjdTZXZkIwVEN6YXdPQ0tBRHVU?=
+ =?utf-8?B?M0gxWEFEelpwVXNINEg4SjZsOWpRV0E4S2V5WnV2V1RjZHphMjB0QkN3UHVu?=
+ =?utf-8?B?MVIxNkF1cDRZcjI1Q0todE0yL2VrdDZBd0pubnp6V2U2U2tGNHZtSm1MK0R4?=
+ =?utf-8?B?cEp6eGlzVWtPSjBVNTFaaTVwZEk4L3c0dFdvUW43bVg2T2E4eWRVN1dGOGFw?=
+ =?utf-8?B?VUNidDRqQUEvOWQxQ09Ud3NhakgyQlYwbWxNSVkwM0ZWNDVLTmpkbWJ0TkxX?=
+ =?utf-8?B?eHlnVXozRTRsNDY0TnlZZ1ExcVdzNDI4V1lhQ1lBc3RTNVAzSjlzb2tMbTBO?=
+ =?utf-8?B?cWtreEVPeGJaTUpqa0I5VHUwSm9YbXh3OWZ5eXhsUDQyNjVZMmxSbFlLUTRr?=
+ =?utf-8?B?RDkwVTk5TE9aRDFscjBuNWJRNTN3SkpJVUxoSlZBd3RSaVdITEM3amhNVXhm?=
+ =?utf-8?B?WkNFUy81Z0phZDF1MWp4ckxlZW50M3Nhb1BPblNQb3ladUdGRlAzNnhkWGtN?=
+ =?utf-8?B?TXNjUDQ0anU3TkZ6TkhkTExQS0xYTkpqblp3MWxwVjhwR00vR3dCdzlNb2NS?=
+ =?utf-8?B?Q1BHcHAzTXdPT3NDb2hVNmU5Q1dnR2szdG44V056Z1hTeGZzZXJFTktWKy8x?=
+ =?utf-8?B?cnM1akQ3RVNlczZmNEhaOHczblk4ZW5Sc3VLaEtTNjV5VklqdkltYzZPcldl?=
+ =?utf-8?B?MDVwRmxKL1ZiTnVONHJBMFUrV1NPYWU5SE5CSktEQzRBS25jSjZXMnRnNzF1?=
+ =?utf-8?B?c0pPbzkzOWdmUU5ZRUZVb1o1L2JJNG5EWDZiWWdueDQrY3JPeEMva2lNenJK?=
+ =?utf-8?B?WHlaOXpzOWlnZ282aEdCU0VHRklTUXRwbkd1U1lPL1d0cFlKQlNML202ZUNK?=
+ =?utf-8?B?bUZHQmNzZStxZUFqeG1VazJYb3ByVU8xYy9TeW9XU21DdnNYN1g4WEMwd0RZ?=
+ =?utf-8?B?TEwwaXRMeDEzc1BnR0FmUitTZDhqU2dzZFZ6ZC9GaFdSNzdaK0doUWtrdG9C?=
+ =?utf-8?B?eHJoRVBwU0lYV3YwaU04RmJ4b25KSllSc0pzZFNHVmpCVjZYa250OGRXanFS?=
+ =?utf-8?B?NXFacVFNYmxXMXp1Mmh6dTREbE05VVMwVHRYaUJyMzZQQmEvdTNLM3J1a1N0?=
+ =?utf-8?B?cVI0dGlyTDZwL1EvcTJTWUVtNjNkKzVjMkJiUGt4d2x4VjZJaFEzcFQzVGxM?=
+ =?utf-8?B?a1orby9CaG1scTlITDlPWkduMktIRUE3VGE2T3pNV0hWN00rVHRmSTl0TlVL?=
+ =?utf-8?B?U0NyRFdiU0ZpOWdjUzMvSG1EZTMzeFdMa21sb0RWNVhOQmlCMlFxSjFQUlpn?=
+ =?utf-8?B?K1FjWGtGT0RBb3ArbVpQMmcrTUxSTkF2c2VUdFg5aFNuMDhLbEJiY1IwMVhI?=
+ =?utf-8?B?S295eGkxZjY1Q2p6TUYxMVN6TkZsMHNveW5NY25hd1FIZU9wcTEwWGM0RWQ0?=
+ =?utf-8?B?Q2F0Q0pDOWUxTjBrWGRRemZYalltL3RTUngzNitweW5oVHNMK1pZNmQ4TER1?=
+ =?utf-8?B?dHVidkt2TldmOVo1WkFiWExBdCtHUFUwcWxrblNWcFNQRWw2SHBBLzZPMHlC?=
+ =?utf-8?Q?FuLTqr0s=3D?=
+MIME-Version: 1.0
+
+------=_Part_521538_1946116915.1773867687254
+Content-Type: text/plain; charset="utf-8"
+Content-Transfer-Encoding: quoted-printable
+
+External Email: Use Caution
+
+
+Dear Candidate,
+
+Thank you for your interest in the Software Developer Internship opportunit=
+y with GlobiFYE.
+
+As part of our selection process, you are required to complete an assessmen=
+t designed to evaluate your understanding of software development concepts =
+and WordPress fundamentals. The assessment is structured in an OMR (multipl=
+e-choice) format to ensure a streamlined and efficient experience.
+
+Assessment Details:
+
+  *   Format: OMR-based (Multiple Choice Questions)
+
+  *   Duration: Approximately 5 minutes to 1 hour
+
+  *   Focus Areas: Software Development fundamentals, problem-solving, and =
+WordPress knowledge
+
+Submission Deadline:
+All candidates are required to complete and submit the assessment before Mo=
+nday, 23rd March.
+
+Please access the assessment using the link below:
+https://forms.gle/aaLeCme9p6Rpt4Fi7
+
+We recommend completing the assessment in one sitting in a distraction-free=
+ environment to ensure the best performance.
+
+For any queries or technical issues, please feel free to reach out to us.
+
+We appreciate your time and effort and look forward to reviewing your submi=
+ssion.
+
+Sincerely,
+Team GlobiFYE
+
+
+------=_Part_521538_1946116915.1773867687254
+Content-Type: text/html; charset="UTF-8"
+Content-Transfer-Encoding: quoted-printable
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"><html><head>
+<meta http-equiv=3D"Content-Type" content=3D"text/html; charset=3Dutf-8">
+</head>
+<body>
+<p><strong><span title=3D"This email came from an address that is outside o=
+f the University, proceed with caution!" style=3D"color:white"><span style=
+=3D"font-size:=0A=
+11pt;font-family:&quot;Open Sans&quot;,sans-serif;color:#ffffff; windowtext=
+ 3.0pt;=0A=
+padding:4.0pt;background:#e00122">External
+ Email: Use Caution</span></strong></p>
+<br>
+</span>
+<div>
+<div style=3D"font-family: Verdana, Arial, Helvetica, sans-serif; font-size=
+: 10pt;">
+<p style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sa=
+ns-serif; font-style: normal; font-variant-ligatures: normal; font-variant-=
+caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-al=
+ign: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing=
+: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration=
+-thickness: initial; text-decoration-style: initial; text-decoration-color:=
+ initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);" clas=
+s=3D"x_819921875x_468598048isSelectedEnd">
+<span>Dear Candidate,</span><br>
+</p>
+<p style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sa=
+ns-serif; font-style: normal; font-variant-ligatures: normal; font-variant-=
+caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-al=
+ign: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing=
+: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration=
+-thickness: initial; text-decoration-style: initial; text-decoration-color:=
+ initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);" clas=
+s=3D"x_819921875x_468598048isSelectedEnd">
+<span>Thank you for your interest in the Software Developer Internship oppo=
+rtunity with GlobiFYE.</span><br>
+</p>
+<p style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sa=
+ns-serif; font-style: normal; font-variant-ligatures: normal; font-variant-=
+caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-al=
+ign: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing=
+: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration=
+-thickness: initial; text-decoration-style: initial; text-decoration-color:=
+ initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);" clas=
+s=3D"x_819921875x_468598048isSelectedEnd">
+<span>As part of our selection process, you are required to complete an ass=
+essment designed to evaluate your understanding of software development con=
+cepts and WordPress fundamentals. The assessment is structured in an OMR (m=
+ultiple-choice) format to ensure
+ a streamlined and efficient experience.</span><br>
+</p>
+<p style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sa=
+ns-serif; font-style: normal; font-variant-ligatures: normal; font-variant-=
+caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-al=
+ign: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing=
+: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration=
+-thickness: initial; text-decoration-style: initial; text-decoration-color:=
+ initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);" clas=
+s=3D"x_819921875x_468598048isSelectedEnd">
+<b><span>Assessment Details:</span></b><br>
+</p>
+<ul style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, s=
+ans-serif; font-style: normal; font-variant-ligatures: normal; font-variant=
+-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-a=
+lign: start; text-indent: 0px; text-transform: none; widows: 2; word-spacin=
+g: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoratio=
+n-thickness: initial; text-decoration-style: initial; text-decoration-color=
+: initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);">
+<li>
+<p style=3D"margin-top: 0px;" class=3D"x_819921875x_468598048isSelectedEnd"=
+><span>Format: OMR-based (Multiple Choice Questions)</span><br>
+</p>
+</li><li>
+<p style=3D"margin-top: 0px;" class=3D"x_819921875x_468598048isSelectedEnd"=
+><span>Duration: Approximately 5 minutes to 1 hour</span><br>
+</p>
+</li><li>
+<p style=3D"margin-top: 0px;" class=3D"x_819921875x_468598048isSelectedEnd"=
+><span>Focus Areas: Software Development fundamentals, problem-solving, and=
+ WordPress knowledge</span><br>
+</p>
+</li></ul>
+<div style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, =
+sans-serif; font-style: normal; font-variant-ligatures: normal; font-varian=
+t-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-=
+align: start; text-indent: 0px; text-transform: none; widows: 2; word-spaci=
+ng: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decorati=
+on-thickness: initial; text-decoration-style: initial; text-decoration-colo=
+r: initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);">
+<b><span>Submission Deadline:</span></b><br>
+</div>
+<div style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, =
+sans-serif; font-style: normal; font-variant-ligatures: normal; font-varian=
+t-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-=
+align: start; text-indent: 0px; text-transform: none; widows: 2; word-spaci=
+ng: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decorati=
+on-thickness: initial; text-decoration-style: initial; text-decoration-colo=
+r: initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);">
+<span>All candidates are required to complete and submit the assessment<spa=
+n>&nbsp;</span></span><b><span>before<span>&nbsp;</span><span class=3D"x_81=
+9921875zm_inLnk_disabled"><span aria-label=3D"Add a task, event, or reminde=
+r for Monday, 23rd March" aria-haspopup=3D"true" tabindex=3D"0" role=3D"but=
+ton" data-value=3D"2026-03-23 02:00:00" class=3D"zm_inLnk_disabled">Monday,
+ 23rd March</span></span></span></b><span>.</span><br>
+</div>
+<div style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, =
+sans-serif; font-style: normal; font-variant-ligatures: normal; font-varian=
+t-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-=
+align: start; text-indent: 0px; text-transform: none; widows: 2; word-spaci=
+ng: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decorati=
+on-thickness: initial; text-decoration-style: initial; text-decoration-colo=
+r: initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);">
+<br>
+</div>
+<div style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, =
+sans-serif; font-style: normal; font-variant-ligatures: normal; font-varian=
+t-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-=
+align: start; text-indent: 0px; text-transform: none; widows: 2; word-spaci=
+ng: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decorati=
+on-thickness: initial; text-decoration-style: initial; text-decoration-colo=
+r: initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);">
+<span>Please access the assessment using the link below:</span><br>
+</div>
+<div style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, =
+sans-serif; font-style: normal; font-variant-ligatures: normal; font-varian=
+t-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-=
+align: start; text-indent: 0px; text-transform: none; widows: 2; word-spaci=
+ng: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decorati=
+on-thickness: initial; text-decoration-style: initial; text-decoration-colo=
+r: initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);">
+<span><span class=3D"x_819921875x_468598048text-token-text-primary x_819921=
+875x_468598048cursor-text x_819921875x_468598048rounded-sm"><a href=3D"http=
+s://forms.gle/aaLeCme9p6Rpt4Fi7" target=3D"_blank">https://forms.gle/aaLeCm=
+e9p6Rpt4Fi7</a></span></span><br>
+</div>
+<p style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sa=
+ns-serif; font-style: normal; font-variant-ligatures: normal; font-variant-=
+caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-al=
+ign: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing=
+: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration=
+-thickness: initial; text-decoration-style: initial; text-decoration-color:=
+ initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);" clas=
+s=3D"x_819921875x_468598048isSelectedEnd">
+<span>We recommend completing the assessment in one sitting in a distractio=
+n-free environment to ensure the best performance.</span><br>
+</p>
+<div style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, =
+sans-serif; font-style: normal; font-variant-ligatures: normal; font-varian=
+t-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-=
+align: start; text-indent: 0px; text-transform: none; widows: 2; word-spaci=
+ng: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decorati=
+on-thickness: initial; text-decoration-style: initial; text-decoration-colo=
+r: initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);">
+<span>For any queries or technical issues, please feel free to reach out to=
+ us.</span><br>
+</div>
+<p style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, sa=
+ns-serif; font-style: normal; font-variant-ligatures: normal; font-variant-=
+caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-al=
+ign: start; text-indent: 0px; text-transform: none; widows: 2; word-spacing=
+: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decoration=
+-thickness: initial; text-decoration-style: initial; text-decoration-color:=
+ initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);" clas=
+s=3D"x_819921875x_468598048isSelectedEnd">
+<span>We appreciate your time and effort and look forward to reviewing your=
+ submission.</span><br>
+</p>
+<div style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, =
+sans-serif; font-style: normal; font-variant-ligatures: normal; font-varian=
+t-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-=
+align: start; text-indent: 0px; text-transform: none; widows: 2; word-spaci=
+ng: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decorati=
+on-thickness: initial; text-decoration-style: initial; text-decoration-colo=
+r: initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);">
+<span>Sincerely,</span><br>
+</div>
+<div style=3D"color: rgb(0, 0, 0); font-family: Verdana, Arial, Helvetica, =
+sans-serif; font-style: normal; font-variant-ligatures: normal; font-varian=
+t-caps: normal; font-weight: 400; letter-spacing: normal; orphans: 2; text-=
+align: start; text-indent: 0px; text-transform: none; widows: 2; word-spaci=
+ng: 0px; -webkit-text-stroke-width: 0px; white-space: normal; text-decorati=
+on-thickness: initial; text-decoration-style: initial; text-decoration-colo=
+r: initial; font-size: 13.3333px; background-color: rgb(255, 255, 255);">
+<span><b>Team GlobiFYE</b></span><br>
+</div>
+</div>
+<br>
+</div>
+</body>
+</html>
+
+------=_Part_521538_1946116915.1773867687254--

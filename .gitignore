@@ -27,3 +27,6 @@ coverage.xml
 .idea/
 .DS_Store
 Thumbs.db
+
+# raw inbox exports dropped at the repo root: sanitise into samples/ first
+/*.eml

@@ -86,7 +86,8 @@ against it. The design notes behind each weight are in
 Synthetic corpus: 12/12 phish, 6/6 benign, 0 missed, 0 false alarms.
 
 Then 15 real emails from my own Gmail and university Microsoft 365 inboxes
-(sanitised, see [`samples/README.md`](samples/README.md)):
+(sanitised: my details replaced, tracking tokens redacted, and the compromised
+classmates' accounts pseudonymised; see [`samples/README.md`](samples/README.md)):
 
 | File | Score | Verdict | Top rule |
 |---|---:|---|---|

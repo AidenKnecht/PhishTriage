@@ -69,8 +69,12 @@ internal relaying, not as a private IP presented at the boundary.
 Fifteen messages exported from the author's Gmail and university Microsoft 365
 inboxes on 2026-09-16, sanitised with `scripts/sanitize.py` (recipient and
 display name replaced with `analyst@example.com` / `Analyst`, mailbox-naming
-headers dropped, tracking tokens inside URLs redacted). Senders, hosts, hop
-chains and bodies are otherwise untouched: they are the evidence. Fifteen is an
+headers dropped, tracking tokens inside URLs redacted, quoted-printable and
+base64 bodies decoded first so split URLs can't slip through). The four
+university phish came from real students' compromised accounts; those students
+are victims, so their names and NetIDs are pseudonymised as `Student, A
+(studenta)` through `studentd`. Hosts, hop chains and the rest of each body
+are otherwise untouched: they are the evidence. Fifteen is an
 anecdote, not a benchmark; treat the numbers accordingly.
 
 ### phish/

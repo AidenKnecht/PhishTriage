@@ -170,10 +170,13 @@ def to_png(html: str, out: Path, browser: str, columns: int, lines: int) -> None
     with tempfile.TemporaryDirectory() as tmp:
         page = Path(tmp) / "shot.html"
         page.write_text(html, encoding="utf-8")
+        before = out.stat().st_mtime if out.exists() else None
         subprocess.run(
             [
                 browser,
                 "--headless=new",
+                # Own profile, or a running Edge swallows the job and exits 0.
+                f"--user-data-dir={Path(tmp) / 'profile'}",
                 "--disable-gpu",
                 "--hide-scrollbars",
                 "--force-device-scale-factor=2",
@@ -185,6 +188,8 @@ def to_png(html: str, out: Path, browser: str, columns: int, lines: int) -> None
             capture_output=True,
             timeout=60,
         )
+        if not out.exists() or out.stat().st_mtime == before:
+            raise RuntimeError(f"{browser} exited without writing {out}")
 
 
 def main(argv: list[str]) -> int:

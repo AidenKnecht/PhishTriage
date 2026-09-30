@@ -232,6 +232,34 @@ def test_enrichment_conditions_and_supersedes(tmp_path):
     assert result.fired == []
 
 
+def test_shared_hosting_host_reputation_does_not_score():
+    """storage.googleapis.com carries thousands of URLhaus URLs from other tenants;
+    that says nothing about this email. A hit on the specific URL still counts."""
+    rec, auth, hops, ind = _empty()
+    dom = Indicator(IndicatorType.DOMAIN, "storage.googleapis.com", flags=["shared_hosting"])
+    dom.enrichment.append(
+        EnrichmentResult(
+            "urlhaus",
+            dom.value,
+            EnrichStatus.MALICIOUS,
+            "2242 malware URL(s) on host",
+            {"url_count": 2242},
+        )
+    )
+    dom.enrichment.append(
+        EnrichmentResult("virustotal", dom.value, EnrichStatus.SUSPICIOUS, "1/91", {"malicious": 1})
+    )
+    ind.domains.append(dom)
+    fired = [r.id for r in score(rec, auth, hops, ind).fired]
+    assert "urlhaus_hit" not in fired
+    assert "vt_suspicious" not in fired
+
+    url = Indicator(IndicatorType.URL, "https://storage.googleapis.com/x/y.html")
+    url.enrichment.append(EnrichmentResult("urlhaus", url.value, EnrichStatus.MALICIOUS))
+    ind.urls.append(url)
+    assert "urlhaus_hit" in [r.id for r in score(rec, auth, hops, ind).fired]
+
+
 def test_keyword_rule_scales_per_category_with_cap(tmp_path):
     rs = _rules(
         tmp_path,

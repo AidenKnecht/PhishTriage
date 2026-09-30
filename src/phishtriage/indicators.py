@@ -221,6 +221,12 @@ def analyze_indicators(
 
     for ind in domains.values():
         _flag_domain(ind, brands)
+        if _in_list(ind.value, filehosts):
+            _flag(
+                ind,
+                "shared_hosting",
+                f"{ind.value} is shared hosting; its host reputation reflects other tenants",
+            )
     analysis.domains = list(domains.values())
     analysis.ips = list(ips.values())
 

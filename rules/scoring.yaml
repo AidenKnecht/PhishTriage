@@ -16,6 +16,9 @@
 #   {flag: lookalike_domain}                         any URL, domain, IP or attachment carries the flag
 #   {flag: macro_enabled, scope: attachments}           restrict to urls | domains | ips | attachments
 #   {enrichment: {source: virustotal, status: malicious, data_gte: {malicious: 3}}}
+#   {enrichment: {source: urlhaus, unless_flag: shared_hosting}}  ignore results on indicators
+#                                                    carrying the flag (e.g. a shared host's
+#                                                    reputation says nothing about this email)
 #   {keywords: true}                                 one or more keyword categories matched
 #   {all: [...]}, {any: [...]}, {not: {...}}         composition
 #
@@ -252,8 +255,8 @@ rules:
     description: URL or host is listed on URLhaus
     category: enrichment
     weight: 40
-    rationale: URLhaus is a curated feed of active malware distribution URLs; a hit means someone already confirmed it is bad.
-    when: {enrichment: {source: urlhaus, status: malicious}}
+    rationale: URLhaus is a curated feed of active malware distribution URLs; a hit means someone already confirmed it is bad. Host-level hits on shared platforms (storage.googleapis.com etc.) are ignored; the specific URL still counts.
+    when: {enrichment: {source: urlhaus, status: malicious, unless_flag: shared_hosting}}
 
   - id: vt_malicious
     description: Three or more VirusTotal vendors flag it malicious
@@ -261,14 +264,14 @@ rules:
     weight: 40
     rationale: Multi-vendor agreement on VirusTotal is about as close to ground truth as a free lookup gets.
     supersedes: [vt_suspicious]
-    when: {enrichment: {source: virustotal, data_gte: {malicious: 3}}}
+    when: {enrichment: {source: virustotal, data_gte: {malicious: 3}, unless_flag: shared_hosting}}
 
   - id: vt_suspicious
     description: One or two VirusTotal vendors flag it malicious or suspicious
     category: enrichment
     weight: 15
     rationale: One or two detections are often early signal on a fresh campaign, worth a closer look but not conclusive.
-    when: {enrichment: {source: virustotal, status: [malicious, suspicious]}}
+    when: {enrichment: {source: virustotal, status: [malicious, suspicious], unless_flag: shared_hosting}}
 
   - id: domain_age_7d
     description: Domain registered less than 7 days ago

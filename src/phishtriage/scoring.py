@@ -313,13 +313,13 @@ def _eval_flag(cond: dict[str, Any], ctx: _Context) -> tuple[bool, list[str]]:
     return bool(evidence), evidence
 
 
-def _all_enrichment(ctx: _Context) -> list[tuple[str, EnrichmentResult]]:
-    out: list[tuple[str, EnrichmentResult]] = []
+def _all_enrichment(ctx: _Context) -> list[tuple[str, list[str], EnrichmentResult]]:
+    out: list[tuple[str, list[str], EnrichmentResult]] = []
     for group in _INDICATOR_GROUPS:
         for item in getattr(ctx.indicators, group, []):
             label = getattr(item, "value", None) or getattr(item, "filename", "?")
             for res in item.enrichment:
-                out.append((label, res))
+                out.append((label, item.flags, res))
     return out
 
 
@@ -330,9 +330,12 @@ def _eval_enrichment(spec: dict[str, Any], ctx: _Context) -> tuple[bool, list[st
         statuses = [statuses]
     data_gte: dict[str, Any] = spec.get("data_gte") or {}
     data_lt: dict[str, Any] = spec.get("data_lt") or {}
+    unless_flag = spec.get("unless_flag")
     evidence: list[str] = []
-    for label, res in _all_enrichment(ctx):
+    for label, flags, res in _all_enrichment(ctx):
         if source and res.source != source:
+            continue
+        if unless_flag and unless_flag in flags:
             continue
         if statuses and res.status.value not in statuses:
             continue

@@ -144,6 +144,10 @@ def test_url_flags():
     assert "credentials_in_url" in by_url["https://paypal.com@evil.example/"].flags
     assert by_url["https://fine.example/"].flags == []
 
+    by_domain = {d.value: d for d in a.domains}
+    assert by_domain["www.dropbox.com"].flags == ["shared_hosting"]
+    assert by_domain["fine.example"].flags == []
+
     assert [i.value for i in a.ips] == ["203.0.113.5"]
     assert "evil.example" in [d.value for d in a.domains]
     assert "example.net" in [d.value for d in a.domains]

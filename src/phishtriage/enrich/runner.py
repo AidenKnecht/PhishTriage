@@ -94,7 +94,9 @@ class Runner:
             out.append((item, IndicatorType.IP, item.value))
         for att in ind.attachments:
             out.append((att, IndicatorType.HASH, att.sha256))
-        out.sort(key=lambda t: 0 if t[0].flags else 1)
+        # shared_hosting marks a host whose reputation can't score, so it doesn't
+        # earn priority on its own.
+        out.sort(key=lambda t: 0 if set(t[0].flags) - {"shared_hosting"} else 1)
         return out
 
 

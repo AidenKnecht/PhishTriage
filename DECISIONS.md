@@ -1,6 +1,6 @@
 # Decisions
 
-Choices that weren't spelled out in `CLAUDE.md`, and why. Newest at the bottom.
+Choices that weren't spelled out in the original project spec, and why. Newest at the bottom.
 
 ## Tooling
 
@@ -57,7 +57,7 @@ Choices that weren't spelled out in `CLAUDE.md`, and why. Newest at the bottom.
 - **`supersedes:`** lets a stronger rule suppress a weaker one that would otherwise double count the same fact (`vt_malicious` over `vt_suspicious`, `domain_age_7d` over `domain_age_30d`). Everything else stacks, on purpose: a double-extension *and* an executable *and* a MIME mismatch on the same file are three lies, not one.
 - **Keyword scoring is per category with a cap** (`weight_per: keyword_category`, `max_weight: 15`): 5 points for each of urgency / credential / financial / threat / reward, so a mail that leans on three lure styles gets 15 and a plain "invoice attached" gets 5.
 - **Verdict bands live in the YAML** (`verdicts:`), so they are tunable without code: CLEAN 0-19, SUSPICIOUS 20-49, LIKELY PHISH 50-79, MALICIOUS 80-100.
-- **Initial weights follow CLAUDE.md** with three additions: `dmarc_none` (5) because most synthetic and real phish come from domains with no DMARC and the absence is itself a weak signal; `dkim_misaligned` (10) so the "authenticated but not aligned" case scores on both SPF and DKIM misalignment; `executable_attachment` (30), `encrypted_archive` (20) and `archive_with_executable` (25) because the attachment analyser detects them and they are unambiguous. No weight was lowered.
+- **Initial weights follow the original spec** with three additions: `dmarc_none` (5) because most synthetic and real phish come from domains with no DMARC and the absence is itself a weak signal; `dkim_misaligned` (10) so the "authenticated but not aligned" case scores on both SPF and DKIM misalignment; `executable_attachment` (30), `encrypted_archive` (20) and `archive_with_executable` (25) because the attachment analyser detects them and they are unambiguous. No weight was lowered.
 - **Calibration on the synthetic corpus (offline):** every phish scores 50-90, every benign 0-20. The internal-no-auth email lands at exactly 20 (SUSPICIOUS) from `no_auth_headers` + `dkim_fail_or_none`, which is the intended calibration. The lowest phish is `12-html-attachment` at 50: an HTML attachment plus a brand display name and no DMARC. That is deliberately close to the line; in live mode the RDAP/URLhaus/VT rules would push a real one higher.
 - **Boundary-hop refinement found during calibration:** a recipient-org server accepting mail from a private address (or from another recipient-org host) is internal relaying/submission, not the boundary, so `private_ip_origin` no longer fires on a legitimate `[10.x] -> mail.example.com -> mx.example.com` chain. It still fires when a non-org host presents a private IP to the recipient's MX, or when the recipient org is unknown and the last hop is private.
 

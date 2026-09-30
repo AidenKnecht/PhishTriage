@@ -4,8 +4,13 @@ Rich records the exact terminal rendering as HTML; a headless Edge/Chrome
 turns that into a PNG. No extra Python dependencies.
 
 Usage:
-    uv run python scripts/screenshot.py            # all shots into docs/screenshots/
-    uv run python scripts/screenshot.py analyze    # just one
+    uv run python scripts/screenshot.py                     # all shots, offline
+    uv run python scripts/screenshot.py analyze             # just one
+    uv run python scripts/screenshot.py --online            # with URLhaus/VirusTotal/RDAP
+
+--online reads API keys from .env like the CLI does. VirusTotal's free tier
+allows 4 lookups a minute, so the first online batch shot can take a long
+time; results are cached for 24 hours, so reruns are fast.
 """
 
 from __future__ import annotations
@@ -23,8 +28,9 @@ from rich.console import Console
 from rich.table import Table
 from rich.terminal_theme import TerminalTheme
 
-from phishtriage.cli import _batch_table, _confusion
-from phishtriage.pipeline import eml_files, triage
+from phishtriage.cli import _batch_table, _confusion, _runner, load_dotenv
+from phishtriage.models import TriageResult
+from phishtriage.pipeline import EnrichmentRunner, eml_files, triage
 from phishtriage.report import render_terminal
 from phishtriage.scoring import load_rules
 
@@ -35,6 +41,10 @@ BATCH_WIDTH = 150
 FONT_PX = 15
 LINE_HEIGHT = 1.32
 CHAR_W = 9.05  # px per column at 15px Cascadia/Consolas
+OFFLINE = True
+"""Set by ``--online``; every analyze/batch shot uses the same mode."""
+RUNNER: EnrichmentRunner | None = None
+"""One runner for the whole run, so VirusTotal's per-minute bucket is shared."""
 
 BROWSERS = [
     r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe",
@@ -101,20 +111,28 @@ def _console(width: int = WIDTH) -> Console:
     )
 
 
+def _flag() -> str:
+    return " --offline" if OFFLINE else ""
+
+
+def _triage(path: Path) -> TriageResult:
+    return triage(path, offline=OFFLINE, enricher=RUNNER)
+
+
 def shot_analyze(sample: str, name: str) -> tuple[str, Console]:
     console = _console()
     console.print(
-        f"[bold green]$[/bold green] [bold]phishtriage analyze samples/{sample} --offline[/bold]"
+        f"[bold green]$[/bold green] [bold]phishtriage analyze samples/{sample}{_flag()}[/bold]"
     )
-    render_terminal(triage(Path("samples") / sample, offline=True), console)
+    render_terminal(_triage(Path("samples") / sample), console)
     return name, console
 
 
 def shot_batch() -> tuple[str, Console]:
     console = _console(width=BATCH_WIDTH)
-    console.print("[bold green]$[/bold green] [bold]phishtriage batch samples/ --offline[/bold]")
+    console.print(f"[bold green]$[/bold green] [bold]phishtriage batch samples/{_flag()}[/bold]")
     base = Path("samples")
-    results = [(p, triage(p, offline=True)) for p in eml_files(base)]
+    results = [(p, _triage(p)) for p in eml_files(base)]
     console.print(_batch_table(results, base))
     matrix = _confusion(results)
     if matrix is not None:
@@ -193,7 +211,13 @@ def to_png(html: str, out: Path, browser: str, columns: int, lines: int) -> None
 
 
 def main(argv: list[str]) -> int:
+    global OFFLINE, RUNNER
     os.chdir(ROOT)
+    if "--online" in argv:
+        argv = [a for a in argv if a != "--online"]
+        OFFLINE = False
+        load_dotenv()
+        RUNNER = _runner(offline=False)
     browser = find_browser()
     if browser is None:
         print("No Edge/Chrome found; cannot render PNGs.", file=sys.stderr)

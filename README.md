@@ -58,9 +58,15 @@ threshold is a text edit, and `uv run pytest` re-checks the sample corpus
 against it. The design notes behind each weight are in
 [`DECISIONS.md`](DECISIONS.md).
 
+![phishtriage rules output](docs/screenshots/rules.png)
+
 ## Batch results
 
-`uv run phishtriage batch samples/ --offline` on the synthetic corpus:
+`uv run phishtriage batch samples/ --offline` on the whole corpus:
+
+![phishtriage batch output](docs/screenshots/batch.png)
+
+The synthetic half:
 
 | File | Score | Verdict | Top rule |
 |---|---:|---|---|

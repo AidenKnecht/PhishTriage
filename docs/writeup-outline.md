@@ -10,7 +10,8 @@ marked **[TODO]** still needs a run or a decision.
 
 ## 0. The story in three beats
 
-1. I wrote down the checks I did by hand for a year as 34 YAML rules. The rules
+1. I wrote down the checks I did by hand during a co-op rotation as 34 YAML
+   rules. The rules
    went 18/18 on the synthetic emails I built to test them.
 2. On 15 real emails from my own inboxes they missed 5 phish, and four of those
    came from my classmates' compromised university accounts. Every
@@ -37,8 +38,8 @@ Pick one opening. My recommendation is (a).
   `From:`. It's the cleanest way to teach aligned vs. authenticated, but it's a
   synthetic sample, so use it in section 2 rather than as the hook.
 
-Then one paragraph on the setup: a year of doing this by hand on a corporate IT
-security team, the same checks every time, and the decision to write them down
+Then one paragraph on the setup: a co-op rotation doing this by hand on a
+corporate IT security team, the same checks every time, and the decision to write them down
 as rules.
 
 ## 2. What triage actually is (300 words)

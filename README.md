@@ -8,8 +8,8 @@ whether the authenticated domain actually matches the displayed one, walk the
 `Received:` chain back to the origin, pull out every URL and attachment, look the
 indicators up against free threat-intel APIs, and print a scored verdict with
 the evidence behind every point. Every rule is a line in a YAML file you can
-read and argue with. I built it after a year of doing this by hand on a
-corporate IT security team.
+read and argue with. I built it after a co-op rotation doing this by hand on
+a corporate IT security team.
 
 ![phishtriage analyze output](docs/screenshots/analyze.png)
 

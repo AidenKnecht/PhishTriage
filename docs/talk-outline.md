@@ -24,7 +24,7 @@ Demo commands are in `scripts/demo.ps1` (all `--offline`, so the Wi-Fi can't hur
 
 ## Act 2: The checks that matter, by example (about 6 min)
 
-**5. Authenticated is not aligned.** Demo step 2 (synthetic Chase sample). SPF and DKIM pass; DKIM is for an unrelated domain; DMARC fails. This is the trick most people miss: "DKIM pass" means a valid signature for *some* domain. Fallback: `analyze.png` (retake first, see the writeup outline TODOs).
+**5. Authenticated is not aligned.** Demo step 2 (synthetic Chase sample). SPF and DKIM pass; DKIM is for an unrelated domain; DMARC fails. This is the trick most people miss: "DKIM pass" means a valid signature for *some* domain. Fallback: `analyze.png`.
 
 **6. A real one: MyChart.** Demo step 3. Display name says MyChart, sender is a random `.us` domain, SPF passes for a seven-label bounce domain nobody sees, landing page on `storage.googleapis.com`. Open the HTML report the step writes and show "where the points came from": every colour is a rule category, every segment a line of YAML. Fallback: `html-report.png`, `analyze-real-mychart.png`.
 
@@ -68,7 +68,7 @@ Demo commands are in `scripts/demo.ps1` (all `--offline`, so the Wi-Fi can't hur
 - Run `uv sync` on the presenting laptop, then `scripts/demo.ps1` once end to end with Wi-Fi off.
 - Terminal at about 150 columns, large font, dark theme.
 - Optional online segment: the day of the talk, run `uv run phishtriage batch samples` once with keys in `.env` to fill the 24 h cache, so an online demo replays from cache.
-- Retake `analyze.png` and `analyze-real-uc-scam.png` (see `docs/writeup-outline.md`).
+- Screenshots are current as of 2026-11-09. The "90" before-shot of the classmate scam (slide 12) is in git: `git show 8162403:docs/screenshots/analyze-real-uc-scam.png > before-90.png`.
 
 ## If the slot is 15 minutes
 

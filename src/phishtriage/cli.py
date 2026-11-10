@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import csv
+import dataclasses
 import os
 from pathlib import Path
 from typing import Annotated
 
 import typer
 from rich import box
+from rich.columns import Columns
 from rich.console import Console
 from rich.markup import escape
 from rich.table import Table
@@ -20,7 +22,7 @@ from phishtriage.htmlreport import write_html
 from phishtriage.models import TriageResult, Verdict
 from phishtriage.pipeline import EnrichmentRunner, eml_files, triage
 from phishtriage.report import VERDICT_COLORS, render_terminal, write_json, write_markdown
-from phishtriage.scoring import RuleError, RuleSet, load_rules
+from phishtriage.scoring import RuleError, RuleSet, load_rules, score
 
 app = typer.Typer(
     help="SOC-style phishing email triage. Parses .eml files, checks auth and alignment, "
@@ -131,17 +133,29 @@ def batch(
     csv_out: Annotated[
         Path | None, typer.Option("--csv", help="Write one row per email to this CSV file.")
     ] = None,
+    compare: Annotated[
+        Path | None,
+        typer.Option(
+            "--compare",
+            exists=True,
+            dir_okay=False,
+            help="Also score every email with this rules file and show what changes.",
+        ),
+    ] = None,
 ) -> None:
     """Triage every .eml under a directory and print a summary table.
 
     If the files live under folders named 'phish' and 'benign', a confusion
     matrix is printed at the bottom (phish should score >= 50, benign < 50).
+    With --compare, each email is parsed and enriched once and scored with
+    both rule files, and only the emails whose score changes are listed.
     """
     files = eml_files(directory)
     if not files:
         err_console.print(f"[yellow]No .eml files found under {directory}[/yellow]")
         raise typer.Exit(code=1)
     ruleset = _load_rules_or_exit()
+    ruleset_b = _load_rules_or_exit(compare.resolve()) if compare is not None else None
     runner = _runner(offline)
     results: list[tuple[Path, TriageResult]] = []
     failures: list[tuple[Path, str]] = []
@@ -158,10 +172,22 @@ def batch(
                 continue
             results.append((path, result))
 
-    console.print(_batch_table(results, directory))
-    matrix = _confusion(results, threshold=_phish_threshold(ruleset))
-    if matrix is not None:
-        console.print(matrix)
+    if ruleset_b is None:
+        console.print(_batch_table(results, directory))
+        matrix = _confusion(results, threshold=_phish_threshold(ruleset))
+        if matrix is not None:
+            console.print(matrix)
+    else:
+        rescored = [
+            (
+                p,
+                dataclasses.replace(
+                    r, score=score(r.record, r.auth, r.hops, r.indicators, ruleset=ruleset_b)
+                ),
+            )
+            for p, r in results
+        ]
+        _print_compare(results, rescored, directory, ruleset, ruleset_b)
     if csv_out is not None:
         _write_csv(results, directory, csv_out)
         console.print(Text(f"CSV written to {csv_out}", style="dim"))
@@ -170,6 +196,95 @@ def batch(
             err_console.print(Text(f"ERROR {_shown(path, directory)}: {reason}", style="red"))
         err_console.print(f"[red]{len(failures)} file(s) could not be analysed.[/red]")
         raise typer.Exit(code=1)
+
+
+def _rules_name(ruleset: RuleSet) -> str:
+    try:
+        return ruleset.source.resolve().relative_to(Path.cwd().resolve()).as_posix()
+    except ValueError:
+        return ruleset.source.name
+
+
+def _rule_diff(a: TriageResult, b: TriageResult) -> str:
+    wa = {f.id: f.weight for f in a.score.fired}
+    wb = {f.id: f.weight for f in b.score.fired}
+    parts = [f"+{i} ({wb[i]})" for i in wb if i not in wa]
+    parts += [f"-{i} ({wa[i]})" for i in wa if i not in wb]
+    parts += [f"{i} {wa[i]}->{wb[i]}" for i in wa if i in wb and wa[i] != wb[i]]
+    return ", ".join(parts)
+
+
+def _print_compare(
+    results_a: list[tuple[Path, TriageResult]],
+    results_b: list[tuple[Path, TriageResult]],
+    base: Path,
+    ruleset_a: RuleSet,
+    ruleset_b: RuleSet,
+) -> None:
+    name_a, name_b = _rules_name(ruleset_a), _rules_name(ruleset_b)
+    t = Table(
+        title=f"Rule-file comparison  A = {name_a}  B = {name_b}", box=box.SIMPLE_HEAD, expand=True
+    )
+    t.add_column("File", overflow="fold")
+    t.add_column("Label")
+    t.add_column("A", justify="right")
+    t.add_column("B", justify="right")
+    t.add_column("Change", justify="right")
+    t.add_column("Verdict A -> B", overflow="fold")
+    t.add_column("Rules that changed", overflow="fold")
+    unchanged = 0
+    for (path, a), (_, b) in zip(results_a, results_b, strict=True):
+        delta = b.score.score - a.score.score
+        if delta == 0 and a.score.verdict == b.score.verdict:
+            unchanged += 1
+            continue
+        label = _label(path) or ""
+        # Up is good for phish and bad for benign; unlabelled mail stays neutral.
+        good = (delta > 0) == (label == "phish")
+        style = "" if not label else ("green" if good else "red")
+        verdict = Text(str(a.score.verdict), style=VERDICT_COLORS[a.score.verdict])
+        if b.score.verdict != a.score.verdict:
+            verdict.append(" -> ")
+            verdict.append(str(b.score.verdict), style=f"bold {VERDICT_COLORS[b.score.verdict]}")
+        t.add_row(
+            Text(_shown(path, base)),
+            label,
+            str(a.score.score),
+            str(b.score.score),
+            Text(f"{delta:+d}", style=style),
+            verdict,
+            Text(_rule_diff(a, b)),
+        )
+    t.caption = f"{unchanged} of {len(results_a)} emails unchanged"
+    console.print(t)
+
+    thr_a, thr_b = _phish_threshold(ruleset_a), _phish_threshold(ruleset_b)
+    ma = _confusion(results_a, threshold=thr_a, title=f"A: {name_a}")
+    mb = _confusion(results_b, threshold=thr_b, title=f"B: {name_b}")
+    if ma is None or mb is None:
+        return
+    console.print(Columns([ma, mb], padding=(0, 6)))
+
+    def caught(results: list[tuple[Path, TriageResult]], thr: int) -> tuple[int, int, int]:
+        phish = [r for p, r in results if _label(p) == "phish"]
+        benign = [r for p, r in results if _label(p) == "benign"]
+        tp = sum(r.score.score >= thr for r in phish)
+        fp = sum(r.score.score >= thr for r in benign)
+        return tp, len(phish), fp
+
+    tp_a, n_phish, fp_a = caught(results_a, thr_a)
+    tp_b, _, fp_b = caught(results_b, thr_b)
+    order = [v for v, _ in ruleset_b.verdicts]
+    benign_up = sum(
+        1
+        for (p, a), (_, b) in zip(results_a, results_b, strict=True)
+        if _label(p) == "benign" and order.index(b.score.verdict) > order.index(a.score.verdict)
+    )
+    summary = Text("B catches ", style="bold")
+    summary.append(f"{tp_b}/{n_phish} phish ({tp_b - tp_a:+d})", style="bold")
+    summary.append(f", {fp_b} false alarms ({fp_b - fp_a:+d})", style="bold")
+    summary.append(f"; {benign_up} benign email(s) move up a verdict band.")
+    console.print(summary)
 
 
 def _load_rules_or_exit(path: Path | None = None) -> RuleSet:

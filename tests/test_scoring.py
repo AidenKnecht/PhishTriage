@@ -412,3 +412,57 @@ def test_aligned_vs_authenticated_sample():
     assert result.auth.spf.status is AuthStatus.PASS
     assert result.auth.dkim.status is AuthStatus.PASS
     assert {"dmarc_fail", "spf_misaligned", "dkim_misaligned"} <= ids
+
+
+# --------------------------------------------------------------------------- overlays
+
+
+def _overlay(tmp_path: Path, body: str):
+    base = tmp_path / "base.yaml"
+    base.write_text(
+        "verdicts: {CLEAN: 0, SUSPICIOUS: 20, LIKELY PHISH: 50, MALICIOUS: 80}\nrules:\n"
+        + _rule("a", 5, "{keywords: true}")
+        + _rule("b", 10, "{keywords: true}"),
+        encoding="utf-8",
+    )
+    return _rules(tmp_path, body)
+
+
+def test_overlay_overrides_removes_and_adds(tmp_path):
+    rs = _overlay(
+        tmp_path,
+        "extends: base.yaml\n"
+        "override: {a: {weight: 7, max_weight: 9, attack: [T1566]}}\n"
+        "remove: [b]\n"
+        "rules:\n" + _rule("c", 3, "{keywords: true}"),
+    )
+    by_id = {r.id: r for r in rs.rules}
+    assert set(by_id) == {"a", "c"}
+    assert (by_id["a"].weight, by_id["a"].max_weight, by_id["a"].attack) == (7, 9, ("T1566",))
+    assert by_id["a"].description == "a"  # untouched fields inherited
+    assert rs.verdict_for(50) is Verdict.LIKELY_PHISH  # verdicts inherited
+
+
+@pytest.mark.parametrize(
+    ("body", "match"),
+    [
+        ("extends: base.yaml\noverride: {zzz: {weight: 1}}\n", "unknown rule id"),
+        ("extends: base.yaml\nremove: [zzz]\n", "unknown rule id"),
+        ("extends: base.yaml\noverride: {a: {colour: red}}\n", "unknown keys"),
+        ("extends: base.yaml\noverride: {a: {weight: lots}}\n", "invalid"),
+        ("extends: base.yaml\noverride: {a: {attack: [X1]}}\n", "ATT&CK"),
+        ("extends: base.yaml\nrules:\n" + _rule("a", 1, "{keywords: true}"), "duplicate"),
+        ("extends: scoring.yaml\n", "extend itself"),
+        ("extends: missing.yaml\n", "not found"),
+    ],
+)
+def test_overlay_errors(tmp_path, body, match):
+    with pytest.raises(RuleError, match=match):
+        _overlay(tmp_path, body)
+
+
+def test_shipped_example_overlays_load():
+    for path in sorted((ROOT / "rules" / "examples").glob("*.yaml")):
+        load_rules.cache_clear()
+        rs = load_rules(path.resolve())
+        assert len(rs.rules) == len(load_rules().rules), path.name

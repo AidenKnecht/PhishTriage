@@ -240,3 +240,32 @@ def test_markdown_neutralises_inline_links(tmp_path):
     md = to_markdown(triage(eml, offline=True))
     assert "[click](" not in md
     assert r"[click]\(" in md
+
+
+def test_batch_compare_shows_changes_and_both_matrices(tmp_path):
+    overlay = tmp_path / "heavy.yaml"
+    base = (ROOT / "rules" / "scoring.yaml").as_posix()
+    overlay.write_text(
+        f"extends: {base}\noverride: {{lure_keywords: {{weight: 10, max_weight: 30}}}}\n",
+        encoding="utf-8",
+    )
+    r = runner.invoke(
+        app,
+        ["batch", str(ROOT / "samples"), "--offline", "--compare", str(overlay)],
+        env={"COLUMNS": "220"},
+    )
+    assert r.exit_code == 0, r.output
+    assert "Rule-file comparison" in r.output
+    assert "lure_keywords 15->30" in r.output
+    assert "SUSPICIOUS -> LIKELY PHISH" in r.output
+    assert "B catches" in r.output
+    assert "emails unchanged" in r.output
+    assert r.output.count("correct;") == 2
+
+
+def test_batch_compare_bad_rules_file_exits_2(tmp_path):
+    (tmp_path / "a.eml").write_bytes(BENIGN.read_bytes())
+    bad = tmp_path / "bad.yaml"
+    bad.write_text("extends: nowhere.yaml\n", encoding="utf-8")
+    r = runner.invoke(app, ["batch", str(tmp_path), "--offline", "--compare", str(bad)])
+    assert r.exit_code == 2

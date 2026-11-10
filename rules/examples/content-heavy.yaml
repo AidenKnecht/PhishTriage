@@ -1,0 +1,14 @@
+# Tuning proposal: let the words carry more weight.
+#
+# The four compromised-account scams in samples/phish/real-0[2-5] pass every
+# infrastructure check; only their text is wrong, and lure keywords are capped
+# at 15. This proposal doubles keyword weight and raises the cap to 30.
+#
+# Measure it before arguing about it:
+#   uv run phishtriage batch samples --offline --compare rules/examples/content-heavy.yaml
+extends: ../scoring.yaml
+
+override:
+  lure_keywords:
+    weight: 10
+    max_weight: 30

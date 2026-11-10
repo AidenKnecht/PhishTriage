@@ -79,62 +79,126 @@ class _Context:
 # --------------------------------------------------------------------------- loading
 
 
-@lru_cache(maxsize=4)
+_OVERRIDABLE = frozenset(
+    {"description", "weight", "category", "rationale", "when", "supersedes", "max_weight", "attack"}
+)
+
+_DEFAULT_VERDICTS = (
+    (Verdict.CLEAN, 0),
+    (Verdict.SUSPICIOUS, 20),
+    (Verdict.LIKELY_PHISH, 50),
+    (Verdict.MALICIOUS, 80),
+)
+
+
+@lru_cache(maxsize=8)
 def load_rules(path: Path | None = None) -> RuleSet:
+    """Load a rules file.
+
+    A file may instead start with ``extends: <other.yaml>`` (relative to
+    itself) and then list only what changes: ``override:`` (rule id ->
+    fields to replace), ``remove:`` (rule ids), extra ``rules:``, and
+    optionally ``verdicts:``. That keeps a tuning proposal a five-line diff
+    that ``batch --compare`` can measure, instead of a 300-line copy.
+    """
     path = path or rules_dir() / "scoring.yaml"
     try:
         raw = yaml.safe_load(path.read_text(encoding="utf-8")) or {}
     except FileNotFoundError as exc:
         raise RuleError(f"scoring rules not found at {path}") from exc
-    if not isinstance(raw, dict) or "rules" not in raw:
+    if not isinstance(raw, dict) or ("rules" not in raw and "extends" not in raw):
         raise RuleError(f"{path}: expected a mapping with a 'rules' list")
 
-    rules: list[Rule] = []
+    if "extends" in raw:
+        base_path = (path.parent / str(raw["extends"])).resolve()
+        if base_path == path.resolve():
+            raise RuleError(f"{path}: a rules file cannot extend itself")
+        base = load_rules(base_path)
+        rules = _apply_overlay(path, raw, list(base.rules))
+        verdicts = _parse_verdicts(path, raw) or list(base.verdicts)
+    else:
+        rules = [_parse_rule(path, i, entry) for i, entry in enumerate(raw["rules"] or [])]
+        verdicts = _parse_verdicts(path, raw) or list(_DEFAULT_VERDICTS)
+
     seen: set[str] = set()
-    for i, entry in enumerate(raw["rules"] or []):
-        if not isinstance(entry, dict):
-            raise RuleError(f"{path}: rule #{i} is not a mapping")
-        try:
-            rule = Rule(
-                id=str(entry["id"]),
-                description=str(entry["description"]),
-                weight=int(entry["weight"]),
-                category=str(entry["category"]),
-                rationale=str(entry["rationale"]),
-                when=dict(entry["when"]),
-                supersedes=tuple(entry.get("supersedes", []) or []),
-                weight_per=str(entry.get("weight_per", "") or ""),
-                max_weight=int(entry["max_weight"]) if "max_weight" in entry else None,
-                attack=tuple(str(t) for t in entry.get("attack", []) or []),
-            )
-        except (KeyError, TypeError, ValueError) as exc:
-            raise RuleError(
-                f"{path}: rule #{i} ({entry.get('id', '?')}) is invalid: {exc}"
-            ) from exc
-        bad = [t for t in rule.attack if not _ATTACK_ID.match(t)]
-        if bad:
-            raise RuleError(f"{path}: rule {rule.id!r} has malformed ATT&CK ids {bad}")
+    for rule in rules:
         if rule.id in seen:
             raise RuleError(f"{path}: duplicate rule id {rule.id!r}")
         seen.add(rule.id)
-        rules.append(rule)
+    verdicts.sort(key=lambda v: v[1])
+    return RuleSet(rules=tuple(rules), verdicts=tuple(verdicts), source=path)
 
-    verdict_map = raw.get("verdicts") or {}
+
+def _parse_rule(path: Path, i: int, entry: Any) -> Rule:
+    if not isinstance(entry, dict):
+        raise RuleError(f"{path}: rule #{i} is not a mapping")
+    try:
+        rule = Rule(
+            id=str(entry["id"]),
+            description=str(entry["description"]),
+            weight=int(entry["weight"]),
+            category=str(entry["category"]),
+            rationale=str(entry["rationale"]),
+            when=dict(entry["when"]),
+            supersedes=tuple(entry.get("supersedes", []) or []),
+            weight_per=str(entry.get("weight_per", "") or ""),
+            max_weight=int(entry["max_weight"]) if "max_weight" in entry else None,
+            attack=tuple(str(t) for t in entry.get("attack", []) or []),
+        )
+    except (KeyError, TypeError, ValueError) as exc:
+        raise RuleError(f"{path}: rule #{i} ({entry.get('id', '?')}) is invalid: {exc}") from exc
+    _check_attack(path, rule)
+    return rule
+
+
+def _check_attack(path: Path, rule: Rule) -> None:
+    bad = [t for t in rule.attack if not _ATTACK_ID.match(t)]
+    if bad:
+        raise RuleError(f"{path}: rule {rule.id!r} has malformed ATT&CK ids {bad}")
+
+
+def _apply_overlay(path: Path, raw: dict[str, Any], rules: list[Rule]) -> list[Rule]:
+    by_id = {r.id: r for r in rules}
+    for rule_id in raw.get("remove") or []:
+        if rule_id not in by_id:
+            raise RuleError(f"{path}: remove: unknown rule id {rule_id!r}")
+        del by_id[rule_id]
+    for rule_id, changes in (raw.get("override") or {}).items():
+        if rule_id not in by_id:
+            raise RuleError(f"{path}: override: unknown rule id {rule_id!r}")
+        if not isinstance(changes, dict) or not changes:
+            raise RuleError(f"{path}: override {rule_id!r} must be a non-empty mapping")
+        unknown = set(changes) - _OVERRIDABLE
+        if unknown:
+            raise RuleError(f"{path}: override {rule_id!r} has unknown keys {sorted(unknown)}")
+        fields: dict[str, Any] = {}
+        try:
+            for key, value in changes.items():
+                if key in ("weight", "max_weight"):
+                    fields[key] = int(value)
+                elif key in ("supersedes", "attack"):
+                    fields[key] = tuple(str(v) for v in value or [])
+                elif key == "when":
+                    fields[key] = dict(value)
+                else:
+                    fields[key] = str(value)
+        except (TypeError, ValueError) as exc:
+            raise RuleError(f"{path}: override {rule_id!r} is invalid: {exc}") from exc
+        by_id[rule_id] = dataclasses.replace(by_id[rule_id], **fields)
+        _check_attack(path, by_id[rule_id])
+    merged = list(by_id.values())
+    merged += [_parse_rule(path, i, e) for i, e in enumerate(raw.get("rules") or [])]
+    return merged
+
+
+def _parse_verdicts(path: Path, raw: dict[str, Any]) -> list[tuple[Verdict, int]]:
     verdicts: list[tuple[Verdict, int]] = []
-    for name, floor in verdict_map.items():
+    for name, floor in (raw.get("verdicts") or {}).items():
         try:
             verdicts.append((Verdict(str(name)), int(floor)))
         except ValueError as exc:
             raise RuleError(f"{path}: unknown verdict {name!r}") from exc
-    if not verdicts:
-        verdicts = [
-            (Verdict.CLEAN, 0),
-            (Verdict.SUSPICIOUS, 20),
-            (Verdict.LIKELY_PHISH, 50),
-            (Verdict.MALICIOUS, 80),
-        ]
-    verdicts.sort(key=lambda v: v[1])
-    return RuleSet(rules=tuple(rules), verdicts=tuple(verdicts), source=path)
+    return verdicts
 
 
 # --------------------------------------------------------------------------- scoring

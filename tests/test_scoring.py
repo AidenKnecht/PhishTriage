@@ -63,6 +63,30 @@ def test_real_rules_load_and_are_well_formed():
     assert rs.verdict_for(100) is Verdict.MALICIOUS
 
 
+def test_attack_ids_are_documented_in_the_yaml_header():
+    """Every ATT&CK id a rule uses is listed (with its name) in the file's header comment."""
+    rs = load_rules()
+    header = rs.source.read_text(encoding="utf-8").split("verdicts:")[0]
+    used = {t for r in rs.rules for t in r.attack}
+    assert used, "no rule carries an ATT&CK tag"
+    for technique in used:
+        assert technique in header, f"{technique} is used but not documented"
+    tagged = {r.id for r in rs.rules if r.attack}
+    assert {"dmarc_fail", "double_extension", "display_name_spoof"} <= tagged
+
+
+def test_malformed_attack_id_rejected(tmp_path):
+    rule = _rule("x", 5, "{keywords: true}", extra=", attack: [T1566.2]")
+    with pytest.raises(RuleError, match="ATT&CK"):
+        _rules(tmp_path, "rules:\n" + rule)
+
+
+def test_fired_rule_carries_attack_tags():
+    result = triage(ROOT / "samples" / "phish" / "07-double-extension.eml", offline=True)
+    fired = {r.id: r for r in result.score.fired}
+    assert fired["double_extension"].attack == ["T1036.007", "T1566.001"]
+
+
 def test_every_rule_condition_is_evaluable():
     """Every condition in the real file must evaluate without raising on an empty result."""
     rs = load_rules()

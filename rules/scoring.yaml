@@ -8,6 +8,17 @@
 #   rationale    one sentence on why an analyst cares
 #   when         the condition (see below)
 #   supersedes   optional list of rule ids that are dropped when this rule fires
+#   attack       optional list of MITRE ATT&CK technique ids (Enterprise v20.1) the
+#                signal is evidence of. Left off where no technique honestly fits
+#                (the hop-chain rules describe odd plumbing, not a technique).
+#                  T1566     Phishing                 T1566.001 Spearphishing Attachment
+#                  T1566.002 Spearphishing Link       T1684.001 Impersonation
+#                  T1684.002 Email Spoofing           T1583.001 Acquire Infrastructure: Domains
+#                  T1608.005 Stage Capabilities: Link Target
+#                  T1036.007 Double File Extension    T1036.008 Masquerade File Type
+#                  T1553.005 Mark-of-the-Web Bypass   T1027.013 Encrypted/Encoded File
+#                  T1204.001 User Execution: Malicious Link
+#                  T1204.002 User Execution: Malicious File
 #
 # Conditions are data. Supported forms:
 #   {field: auth.dmarc.status, in: [fail]}          dotted path into the result, with one of:
@@ -37,6 +48,7 @@ rules:
   - id: dmarc_fail
     description: DMARC check failed
     category: authentication
+    attack: [T1684.002]
     weight: 25
     rationale: The domain owner published a policy and this message failed it, which is the strongest single header-based spoofing signal available.
     when: {field: auth.dmarc.status, in: [fail, permerror]}
@@ -44,6 +56,7 @@ rules:
   - id: dmarc_none
     description: No DMARC result for the sender domain
     category: authentication
+    attack: [T1684.002]
     weight: 5
     rationale: Without a DMARC policy the From domain can be spoofed freely, so every other check has to carry more weight.
     when: {field: auth.dmarc.status, in: [none]}
@@ -51,6 +64,7 @@ rules:
   - id: spf_fail
     description: SPF failed or soft-failed
     category: authentication
+    attack: [T1684.002]
     weight: 15
     rationale: The sending server is not one the envelope domain authorised, which is what you see when someone else's server sends as that domain.
     when: {field: auth.spf.status, in: [fail, softfail, permerror]}
@@ -58,6 +72,7 @@ rules:
   - id: dkim_fail_or_none
     description: DKIM failed or is absent
     category: authentication
+    attack: [T1684.002]
     weight: 10
     rationale: An unsigned or broken signature means the message body and key headers could have been altered or forged in transit.
     when: {field: auth.dkim.status, in: [fail, none, missing, permerror]}
@@ -65,6 +80,7 @@ rules:
   - id: no_auth_headers
     description: No authentication results recorded at all
     category: authentication
+    attack: [T1684.002]
     weight: 10
     rationale: Mail that never passed through an authenticating gateway (or had those headers stripped) cannot be trusted on its headers alone.
     when: {field: auth.no_auth_headers, is_true: true}
@@ -72,6 +88,7 @@ rules:
   - id: live_spf_unauthorized
     description: Live SPF lookup says the origin IP is not authorised
     category: authentication
+    attack: [T1684.002]
     weight: 15
     rationale: Independently re-checking SPF catches cases where the receiving server's result is missing or was forged in a relayed header.
     when: {field: auth.live_dns_spf_authorized, is_false: true}
@@ -80,6 +97,7 @@ rules:
   - id: spf_misaligned
     description: Return-Path domain does not align with From domain
     category: alignment
+    attack: [T1684.002]
     weight: 15
     rationale: An SPF pass for a domain the user never sees is exactly how bulk phishing kits get a green check while displaying a spoofed From; scored only when DMARC did not pass, because DMARC passing means the other mechanism aligned.
     when:
@@ -90,6 +108,7 @@ rules:
   - id: dkim_misaligned
     description: DKIM signing domain does not align with From domain
     category: alignment
+    attack: [T1684.002]
     weight: 10
     rationale: A valid signature from an unrelated domain proves nothing about the displayed sender; it is the classic "authenticated but not aligned" trick. Scored only when DMARC did not pass, since Microsoft 365 tenants routinely sign with onmicrosoft.com while SPF aligns.
     when:
@@ -100,6 +119,7 @@ rules:
   - id: reply_to_mismatch
     description: Reply-To points to a different domain than From
     category: sender
+    attack: [T1684.001]
     weight: 15
     rationale: Replies are silently redirected to the attacker, which is the mechanism behind most CEO-fraud and invoice-redirect scams.
     when: {field: auth.reply_to_mismatch, is_true: true}
@@ -107,6 +127,7 @@ rules:
   - id: display_name_spoof
     description: Display name impersonates a brand or embeds a different address
     category: sender
+    attack: [T1684.001]
     weight: 20
     rationale: Mobile clients show only the display name, so "Microsoft Support <random@freemail>" looks legitimate to most recipients.
     when: {field: auth.display_name_spoof, is_true: true}
@@ -115,6 +136,7 @@ rules:
   - id: link_text_mismatch
     description: Visible link text points somewhere other than its href
     category: links
+    attack: [T1566.002, T1204.001]
     weight: 20
     rationale: Showing one URL and linking another has no legitimate purpose in a plain notification and is the signature of credential-harvest lures.
     when: {flag: link_text_mismatch, scope: urls}
@@ -122,6 +144,7 @@ rules:
   - id: lookalike_domain
     description: Domain imitates a known brand
     category: links
+    attack: [T1583.001, T1684.001]
     weight: 25
     rationale: Typosquats and brand-plus-word domains exist to be mistaken for the real thing; legitimate senders use their own domain.
     when: {flag: lookalike_domain}
@@ -129,6 +152,7 @@ rules:
   - id: raw_ip_url
     description: URL uses a bare IP address instead of a hostname
     category: links
+    attack: [T1566.002]
     weight: 15
     rationale: Legitimate services almost never link to raw IPs; attackers do because throwaway hosts have no DNS.
     when: {flag: raw_ip_url, scope: urls}
@@ -136,6 +160,7 @@ rules:
   - id: url_shortener
     description: Link goes through a URL shortener
     category: links
+    attack: [T1608.005]
     weight: 5
     rationale: Shorteners hide the destination from both the user and URL reputation checks.
     when: {flag: shortener, scope: urls}
@@ -143,6 +168,7 @@ rules:
   - id: punycode_domain
     description: Internationalised (punycode) domain
     category: links
+    attack: [T1583.001]
     weight: 15
     rationale: IDN homograph domains render as a familiar brand while resolving somewhere else entirely.
     when: {flag: punycode}
@@ -150,6 +176,7 @@ rules:
   - id: credentials_in_url
     description: URL contains userinfo before an @ sign
     category: links
+    attack: [T1566.002]
     weight: 15
     rationale: A link such as https://paypal.com@evil.example displays a trusted name, but the browser connects to the host after the @.
     when: {flag: credentials_in_url, scope: urls}
@@ -157,6 +184,7 @@ rules:
   - id: subdomain_depth
     description: Excessively deep subdomain
     category: links
+    attack: [T1583.001]
     weight: 5
     rationale: Long subdomain chains are used to push the real domain off the edge of a mobile address bar.
     when: {flag: subdomain_depth}
@@ -164,6 +192,7 @@ rules:
   - id: file_hosting_link
     description: Link to a file-hosting or form service
     category: links
+    attack: [T1608.005]
     weight: 5
     rationale: Free hosting and form builders are a cheap way to serve a phishing page from a reputable domain; weak on its own, meaningful with other signals.
     when: {flag: file_hosting, scope: urls}
@@ -172,6 +201,7 @@ rules:
   - id: double_extension
     description: Attachment has a misleading double extension
     category: attachments
+    attack: [T1036.007, T1566.001]
     weight: 30
     rationale: A name like invoice.pdf.exe only exists to fool a user whose client hides the real extension.
     when: {flag: double_extension, scope: attachments}
@@ -179,6 +209,7 @@ rules:
   - id: mime_mismatch
     description: Attachment content does not match its extension
     category: attachments
+    attack: [T1036.008, T1566.001]
     weight: 30
     rationale: A file whose bytes say "executable" while its name says "PDF" is disguised on purpose.
     when: {flag: mime_mismatch, scope: attachments}
@@ -186,6 +217,7 @@ rules:
   - id: executable_attachment
     description: Directly executable attachment
     category: attachments
+    attack: [T1566.001, T1204.002]
     weight: 30
     rationale: No business process emails .exe/.scr/.js files; every mail gateway blocks them for a reason.
     when: {flag: executable, scope: attachments}
@@ -193,6 +225,7 @@ rules:
   - id: macro_attachment
     description: Macro-enabled Office attachment
     category: attachments
+    attack: [T1566.001, T1204.002]
     weight: 20
     rationale: VBA macros remain a top initial-access technique; unexpected .docm/.xlsm files should be treated as payload delivery.
     when: {flag: macro_enabled, scope: attachments}
@@ -200,6 +233,7 @@ rules:
   - id: container_attachment
     description: Disk image, shortcut, or HTML attachment
     category: attachments
+    attack: [T1553.005, T1566.001]
     weight: 25
     rationale: .iso/.img/.lnk/.html attachments bypass mark-of-the-web and macro blocking and became the default loader wrapper after Office hardened macros.
     when: {flag: dangerous_container, scope: attachments}
@@ -207,6 +241,7 @@ rules:
   - id: encrypted_archive
     description: Password-protected archive
     category: attachments
+    attack: [T1027.013, T1566.001]
     weight: 20
     rationale: Encrypting the archive defeats gateway scanning; the password is in the email body so only the user can open it.
     when: {flag: password_protected_archive, scope: attachments}
@@ -214,6 +249,7 @@ rules:
   - id: archive_with_executable
     description: Archive contains an executable or script
     category: attachments
+    attack: [T1566.001, T1204.002]
     weight: 25
     rationale: Wrapping a payload in a ZIP is the simplest way to get an executable past an attachment filter.
     when: {flag: archive_contains_executable, scope: attachments}
@@ -222,6 +258,7 @@ rules:
   - id: lure_keywords
     description: Urgency, credential, financial, threat or reward language
     category: content
+    attack: [T1566]
     weight: 5
     weight_per: keyword_category
     max_weight: 15
@@ -254,6 +291,7 @@ rules:
   - id: urlhaus_hit
     description: URL or host is listed on URLhaus
     category: enrichment
+    attack: [T1566]
     weight: 40
     rationale: URLhaus is a curated feed of active malware distribution URLs; a hit means someone already confirmed it is bad. Host-level hits on shared platforms (storage.googleapis.com etc.) are ignored; the specific URL still counts.
     when: {enrichment: {source: urlhaus, status: malicious, unless_flag: shared_hosting}}
@@ -261,6 +299,7 @@ rules:
   - id: vt_malicious
     description: Three or more VirusTotal vendors flag it malicious
     category: enrichment
+    attack: [T1566]
     weight: 40
     rationale: Multi-vendor agreement on VirusTotal is about as close to ground truth as a free lookup gets.
     supersedes: [vt_suspicious]
@@ -269,6 +308,7 @@ rules:
   - id: vt_suspicious
     description: One or two VirusTotal vendors flag it malicious or suspicious
     category: enrichment
+    attack: [T1566]
     weight: 15
     rationale: One or two detections are often early signal on a fresh campaign, worth a closer look but not conclusive.
     when: {enrichment: {source: virustotal, status: [malicious, suspicious], unless_flag: shared_hosting}}
@@ -276,6 +316,7 @@ rules:
   - id: domain_age_7d
     description: Domain registered less than 7 days ago
     category: enrichment
+    attack: [T1583.001]
     weight: 30
     rationale: Phishing domains are usually registered days before the campaign; a week-old domain emailing you a login link is not a coincidence.
     supersedes: [domain_age_30d]
@@ -284,6 +325,7 @@ rules:
   - id: domain_age_30d
     description: Domain registered less than 30 days ago
     category: enrichment
+    attack: [T1583.001]
     weight: 20
     rationale: Established organisations do not send from month-old domains; new registrations are cheap and disposable.
     when: {enrichment: {source: rdap, data_lt: {age_days: 30}}}

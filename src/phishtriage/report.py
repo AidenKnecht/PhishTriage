@@ -260,6 +260,8 @@ def _why_panel(result: TriageResult, defang: bool = True) -> Panel:
 def _rule_cell(rule: FiredRule) -> Text:
     cell = Text(rule.description)
     cell.append(f"\n{rule.id} | {rule.category}", style="dim")
+    if rule.attack:
+        cell.append(f" | ATT&CK {', '.join(rule.attack)}", style="cyan")
     return cell
 
 
@@ -385,7 +387,8 @@ def to_markdown(result: TriageResult, *, defang: bool = True) -> str:
     if not sc.fired:
         out.append("_No rules fired._")
     for rule in sc.fired:
-        out.append(f"- **+{rule.weight} {_md(rule.description)}** (`{rule.id}`)")
+        attack = "".join(f", {t}" for t in rule.attack)
+        out.append(f"- **+{rule.weight} {_md(rule.description)}** (`{rule.id}`{attack})")
         for ev in rule.evidence:
             out.append(f"  - {_md(_d(ev, defang))}")
         out.append(f"  - _{_md(rule.rationale)}_")

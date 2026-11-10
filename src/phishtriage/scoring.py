@@ -9,6 +9,7 @@ makes a verdict a verdict lives in the YAML file.
 from __future__ import annotations
 
 import dataclasses
+import re
 from dataclasses import dataclass, field
 from functools import lru_cache
 from pathlib import Path
@@ -46,6 +47,10 @@ class Rule:
     supersedes: tuple[str, ...] = ()
     weight_per: str = ""
     max_weight: int | None = None
+    attack: tuple[str, ...] = ()
+
+
+_ATTACK_ID = re.compile(r"^T\d{4}(\.\d{3})?$")
 
 
 @dataclass(frozen=True)
@@ -100,11 +105,15 @@ def load_rules(path: Path | None = None) -> RuleSet:
                 supersedes=tuple(entry.get("supersedes", []) or []),
                 weight_per=str(entry.get("weight_per", "") or ""),
                 max_weight=int(entry["max_weight"]) if "max_weight" in entry else None,
+                attack=tuple(str(t) for t in entry.get("attack", []) or []),
             )
         except (KeyError, TypeError, ValueError) as exc:
             raise RuleError(
                 f"{path}: rule #{i} ({entry.get('id', '?')}) is invalid: {exc}"
             ) from exc
+        bad = [t for t in rule.attack if not _ATTACK_ID.match(t)]
+        if bad:
+            raise RuleError(f"{path}: rule {rule.id!r} has malformed ATT&CK ids {bad}")
         if rule.id in seen:
             raise RuleError(f"{path}: duplicate rule id {rule.id!r}")
         seen.add(rule.id)
@@ -159,6 +168,7 @@ def score(
             category=rule.category,
             rationale=rule.rationale,
             evidence=evidence,
+            attack=list(rule.attack),
         )
 
     for rule in ruleset.rules:

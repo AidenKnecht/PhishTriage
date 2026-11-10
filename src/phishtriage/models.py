@@ -241,6 +241,8 @@ class FiredRule:
     category: str
     rationale: str
     evidence: list[str] = field(default_factory=list)
+    attack: list[str] = field(default_factory=list)
+    """MITRE ATT&CK technique ids from the rule's ``attack:`` key."""
 
 
 @dataclass(slots=True)

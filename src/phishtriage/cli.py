@@ -240,8 +240,11 @@ def _confusion(
 def _write_csv(results: list[tuple[Path, TriageResult]], base: Path, out: Path) -> None:
     with out.open("w", newline="", encoding="utf-8") as fh:
         w = csv.writer(fh)
-        w.writerow(["file", "label", "from", "subject", "score", "verdict", "top_rule", "rules"])
+        w.writerow(
+            ["file", "label", "from", "subject", "score", "verdict", "top_rule", "rules", "attack"]
+        )
         for path, r in results:
+            techniques = sorted({t for f in r.score.fired for t in f.attack})
             w.writerow(
                 [
                     _shown(path, base),
@@ -252,6 +255,7 @@ def _write_csv(results: list[tuple[Path, TriageResult]], base: Path, out: Path) 
                     str(r.score.verdict),
                     r.score.fired[0].id if r.score.fired else "",
                     " ".join(f"{f.id}({f.weight})" for f in r.score.fired),
+                    " ".join(techniques),
                 ]
             )
 
@@ -268,13 +272,21 @@ def rules() -> None:
     t.add_column("ID", style="bold", no_wrap=True)
     t.add_column("Category", no_wrap=True)
     t.add_column("Weight", justify="right")
+    t.add_column("ATT&CK", style="cyan")
     t.add_column("Description", overflow="fold")
     t.add_column("Rationale", overflow="fold")
     for rule in rs.rules:
         weight = str(rule.weight)
         if rule.max_weight is not None:
             weight += f" (max {rule.max_weight})"
-        t.add_row(rule.id, rule.category, weight, rule.description, rule.rationale)
+        t.add_row(
+            rule.id,
+            rule.category,
+            weight,
+            Text("\n".join(rule.attack) or "-"),
+            Text(rule.description),
+            Text(rule.rationale),
+        )
     console.print(t)
     bands = ", ".join(f"{v} >= {floor}" for v, floor in rs.verdicts if v is not Verdict.CLEAN)
     console.print(f"[dim]Verdicts: CLEAN below the first band; {bands}[/dim]")

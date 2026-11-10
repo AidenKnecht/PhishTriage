@@ -34,3 +34,6 @@ Thumbs.db
 # private agent instructions
 CLAUDE.md
 AGENTS.md
+
+# Local-only talk tooling (not part of the project)
+/scripts/make_deck.py

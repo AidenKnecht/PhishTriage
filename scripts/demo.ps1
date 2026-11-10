@@ -54,14 +54,14 @@ $Steps = @(
         After = { if (Test-Path $HtmlReport) { Start-Process $HtmlReport } }
     },
     @{
-        Title = "The miss: a job scam from a classmate's compromised university account"
-        Say   = "Every infrastructure check passes, because the infrastructure is fine. Only the words are wrong."
-        Cmd   = "uv run phishtriage analyze samples/phish/real-02-uc-account-job-scam-admin.eml --offline"
-    },
-    @{
         Title = "The whole corpus: 18 synthetic + 15 real, one command"
         Say   = "18 for 18 on mail I wrote. 10 for 15 on mail I got. Guess which number matters."
         Cmd   = "uv run phishtriage batch samples --offline"
+    },
+    @{
+        Title = "The miss: a job scam from a classmate's compromised university account"
+        Say   = "Every infrastructure check passes, because the infrastructure is fine. Only the words are wrong."
+        Cmd   = "uv run phishtriage analyze samples/phish/real-02-uc-account-job-scam-admin.eml --offline"
     },
     @{
         Title = "So just weight the words more? Measure it first."

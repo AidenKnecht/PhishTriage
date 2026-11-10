@@ -32,9 +32,9 @@ Demo commands are in `scripts/demo.ps1` (all `--offline`, so the Wi-Fi can't hur
 
 ## Act 3: The finding (about 8 min, the heart of the talk)
 
-**8. The scoreboard.** Synthetic corpus: 18 of 18. Then 15 real emails from my own Gmail and university inbox: 10 of 15. Demo step 5 (batch). Fallback: `batch.png`. Pause on the confusion matrix.
+**8. The scoreboard.** Synthetic corpus: 18 of 18. Then 15 real emails from my own Gmail and university inbox: 10 of 15. Demo step 4 (batch). Fallback: `batch.png`. Pause on the confusion matrix.
 
-**9. The misses came from my classmates.** Four of the five misses are job scams and "update your password" lures sent from real, compromised student accounts *inside* the university's Microsoft 365 tenant. Demo step 4. No `Authentication-Results` (intra-tenant mail never crosses a boundary), no external hop, sender domain genuinely `uc.edu`. Every infrastructure check passes because the infrastructure is fine. ATT&CK has a name for this: T1586.002, Compromise Accounts: Email Accounts. No header rule can see it. (The victims are pseudonymised in every sample; say so on the slide.)
+**9. The misses came from my classmates.** Four of the five misses are job scams and "update your password" lures sent from real, compromised student accounts *inside* the university's Microsoft 365 tenant. Demo step 5. No `Authentication-Results` (intra-tenant mail never crosses a boundary), no external hop, sender domain genuinely `uc.edu`. Every infrastructure check passes because the infrastructure is fine. ATT&CK has a name for this: T1586.002, Compromise Accounts: Email Accounts. No header rule can see it. (The victims are pseudonymised in every sample; say so on the slide.)
 
 **10. The fifth miss scores CLEAN.** Fake recruiter: "install Microsoft Teams to meet a senior technical recruiter for an online briefing." Polite, authenticated, nothing structurally wrong. It impersonates a real company's name as a recruiter; it was not sent by them.
 

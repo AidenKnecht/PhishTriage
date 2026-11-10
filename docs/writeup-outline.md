@@ -161,8 +161,8 @@ the strongest technical section.
   +15 because one VirusTotal vendor flags it. The shortened link itself was
   "never seen". The ISC2 newsletter went from 25 to 40 because one vendor flags
   Salesforce's click-tracker domain (`analyze-real-isc2.png`). The "90" capture
-  of the classmate scam is in git history: `git show
-  8162403:docs/screenshots/analyze-real-uc-scam.png > before-90.png`.
+  of the classmate scam is in git history: `cmd /c "git show
+  8162403:docs/screenshots/analyze-real-uc-scam.png > before-90.png"` (via `cmd`, since PowerShell 5.1 redirection corrupts binary files).
 - The point: a URL shortener, a cloud bucket and a marketing click-tracker are
   shared by millions of senders. Their reputation describes the other tenants,
   not your email. A verdict that's right for the wrong reason is a false

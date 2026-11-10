@@ -68,7 +68,7 @@ Demo commands are in `scripts/demo.ps1` (all `--offline`, so the Wi-Fi can't hur
 - Run `uv sync` on the presenting laptop, then `scripts/demo.ps1` once end to end with Wi-Fi off.
 - Terminal at about 150 columns, large font, dark theme.
 - Optional online segment: the day of the talk, run `uv run phishtriage batch samples` once with keys in `.env` to fill the 24 h cache, so an online demo replays from cache.
-- Screenshots are current as of 2026-11-09. The "90" before-shot of the classmate scam (slide 12) is in git: `git show 8162403:docs/screenshots/analyze-real-uc-scam.png > before-90.png`.
+- Screenshots are current as of 2026-11-09. The "90" before-shot of the classmate scam (slide 12) is in git: `cmd /c "git show 8162403:docs/screenshots/analyze-real-uc-scam.png > before-90.png"` (through `cmd`: PowerShell 5.1 redirection corrupts binary files).
 
 ## If the slot is 15 minutes
 

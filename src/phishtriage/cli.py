@@ -16,6 +16,7 @@ from rich.text import Text
 
 from phishtriage import __version__
 from phishtriage.enrich.base import Cache
+from phishtriage.htmlreport import write_html
 from phishtriage.models import TriageResult, Verdict
 from phishtriage.pipeline import EnrichmentRunner, eml_files, triage
 from phishtriage.report import VERDICT_COLORS, render_terminal, write_json, write_markdown
@@ -94,6 +95,12 @@ def analyze(
     markdown_out: Annotated[
         Path | None, typer.Option("--markdown", help="Write a Markdown report to this file.")
     ] = None,
+    html_out: Annotated[
+        Path | None,
+        typer.Option(
+            "--html", help="Write a self-contained HTML report (no scripts) to this file."
+        ),
+    ] = None,
     no_defang: Annotated[
         bool, typer.Option("--no-defang", help="Print live URLs instead of hxxp://x[.]y.")
     ] = False,
@@ -111,6 +118,9 @@ def analyze(
     if markdown_out is not None:
         write_markdown(result, markdown_out, defang=not no_defang)
         console.print(Text(f"Markdown written to {markdown_out}", style="dim"))
+    if html_out is not None:
+        write_html(result, html_out, defang=not no_defang)
+        console.print(Text(f"HTML written to {html_out}", style="dim"))
 
 
 @app.command()

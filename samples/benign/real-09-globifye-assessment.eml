@@ -42,10 +42,10 @@ ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=zohomail.in; s=zo
 	b=BJUc8oNRSHOlc58nQctWJJTrRildGmerf680cA/7pYoBsuQ4pcWKM4KAW1KEgyBVWkpCQRqqFZ65PDtqsVA5inkBQsa8ZL0OVDV65KRFHTPKO8bZF4GmX8PgyZ64O+qC9EAVniuXWlZMiJtYj1mg7abekQheckbZhjk/7jcri9Q=
 ARC-Authentication-Results: i=1; mx.zohomail.in;
 	dkim=pass  header.i=globifye.com;
-	spf=pass  smtp.mailfrom=william.anderson@globifye.com;
-	dmarc=pass header.from=<william.anderson@globifye.com>
+	spf=pass  smtp.mailfrom=recruiter.b@globifye.com;
+	dmarc=pass header.from=<recruiter.b@globifye.com>
 DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1773867689;
-	s=txt; d=globifye.com; i=william.anderson@globifye.com;
+	s=txt; d=globifye.com; i=recruiter.b@globifye.com;
 	h=Date:Date:From:From:Message-Id:Message-Id:In-Reply-To:Subject:Subject:MIME-Version:Content-Type:Reply-To:To:Cc;
 	bh=nB73MnZ3129G3WcW4kokNt1VuiG5OSs8om9C8VqfxaM=;
 	b=eIEHxvj0JtItfWUj2euU2yR3ie0d3zwhKjxoPwBvIEfpx4Tn0IRW8DPNB+7oLnSd
@@ -54,7 +54,7 @@ DKIM-Signature: v=1; a=rsa-sha256; q=dns/txt; c=relaxed/relaxed; t=1773867689;
 Received: from mail.zoho.in by mx.zoho.in
 	with SMTP id 177386768727989.02485399632735; Thu, 19 Mar 2026 02:31:27 +0530 (IST)
 Date: Thu, 19 Mar 2026 02:31:27 +0530
-From: William Anderson <william.anderson@globifye.com>
+From: Recruiter B <recruiter.b@globifye.com>
 BCC: <analyst@example.com>
 Message-Id: <19d02c0dd56.507cb509179328.495778418527345403@globifye.com>
 In-Reply-To:
@@ -64,7 +64,7 @@ Content-Type: multipart/alternative;
 	boundary="----=_Part_521538_1946116915.1773867687254"
 User-Agent: Zoho Mail
 X-Mailer: Zoho Mail
-Return-Path: william.anderson@globifye.com
+Return-Path: recruiter.b@globifye.com
 X-MS-Exchange-Organization-ExpirationStartTime: 18 Mar 2026 21:01:48.4480
  (UTC)
 X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit

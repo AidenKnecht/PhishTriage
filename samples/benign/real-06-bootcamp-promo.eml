@@ -94,8 +94,8 @@ Received: from 1082471248903 named unknown by gmailapi.google.com with
  HTTPREST; Fri, 11 Sep 2026 14:50:45 -0700
 Received: from 1082471248903 named unknown by gmailapi.google.com with
  HTTPREST; Fri, 11 Sep 2026 14:50:45 -0700
-Sender: rajesh@codingmacaw.com
-From: rajesh@codingmacaw.com
+Sender: sender@codingmacaw.com
+From: sender@codingmacaw.com
 Date: Fri, 11 Sep 2026 14:50:45 -0700
 X-Google-Sender-Auth: oAV53TzLta7aRzVqP77_s-mSRVA
 X-Gm-Features: AcwNN1WrhZQW2EVO2wgSEM6_wWFHTc1Fu-rIpqc6jzfC3MdCGLAbq7zl_sAuNtI
@@ -104,7 +104,7 @@ Subject: =?UTF-8?Q?FREE_10=2DDay_Cybersecurity_Bootcamp_=E2=80=93_Starts_Septem?
 	=?UTF-8?Q?ber_22nd?=
 To: analyst@example.com
 Content-Type: multipart/alternative; boundary="000000000000b0fc16065b3c138f"
-Return-Path: rajesh@codingmacaw.com
+Return-Path: sender@codingmacaw.com
 X-MS-Exchange-Organization-ExpirationStartTime: 11 Sep 2026 21:50:47.8129
  (UTC)
 X-MS-Exchange-Organization-ExpirationStartTimeReason: OriginalSubmit

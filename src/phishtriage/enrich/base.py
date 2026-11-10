@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import hashlib
+import ipaddress
 import json
 import os
 import threading
@@ -10,6 +11,7 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Protocol, runtime_checkable
+from urllib.parse import urlsplit
 
 from phishtriage.models import EnrichmentResult, EnrichStatus, IndicatorType
 
@@ -24,6 +26,40 @@ class Enricher(Protocol):
     supports: frozenset[IndicatorType]
 
     def lookup(self, indicator: str, kind: IndicatorType) -> EnrichmentResult: ...
+
+
+_RESERVED_TLDS = ("example", "test", "invalid", "localhost", "local")
+_RESERVED_DOMAINS = ("example.com", "example.net", "example.org")
+
+
+def unroutable_reason(value: str, kind: IndicatorType) -> str:
+    """Why an indicator can't mean anything to a public threat-intel API, or ``""``.
+
+    RFC 2606/6761 reserved names and non-global IPs (RFC 1918, RFC 5737
+    documentation ranges, loopback...) never resolve on the internet, so
+    sending them to VirusTotal or RDAP only produces confusing API errors.
+    """
+    if kind is IndicatorType.HASH:
+        return ""
+    host = value
+    if kind is IndicatorType.URL:
+        try:
+            host = urlsplit(value).hostname or ""
+        except ValueError:
+            return ""
+    host = host.lower().rstrip(".")
+    if not host:
+        return ""
+    try:
+        addr = ipaddress.ip_address(host)
+    except ValueError:
+        pass
+    else:
+        return "" if addr.is_global else "non-routable IP"
+    labels = host.split(".")
+    if labels[-1] in _RESERVED_TLDS or ".".join(labels[-2:]) in _RESERVED_DOMAINS:
+        return "reserved name"
+    return ""
 
 
 def cache_dir() -> Path:
@@ -72,10 +108,11 @@ class Cache:
             return None
         return result
 
-    def put(self, result: EnrichmentResult) -> None:
+    def put(self, result: EnrichmentResult, key: str | None = None) -> None:
+        """Store ``result``; ``key`` overrides the indicator as the cache key."""
         if result.status is EnrichStatus.NOT_CHECKED:
             return  # never cache "no key" / "API error"
-        path = self._path(result.source, result.indicator)
+        path = self._path(result.source, key or result.indicator)
         path.parent.mkdir(parents=True, exist_ok=True)
         payload = {
             "ts": time.time(),

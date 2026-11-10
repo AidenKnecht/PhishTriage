@@ -5,9 +5,11 @@ from pathlib import Path
 
 from typer.testing import CliRunner
 
+from phishtriage import cli as cli_module
 from phishtriage.cli import app, load_dotenv
 from phishtriage.pipeline import triage
 from phishtriage.report import to_markdown
+from phishtriage.scoring import RuleError
 
 ROOT = Path(__file__).resolve().parents[1]
 PHISH = ROOT / "samples" / "phish" / "10-dmarc-fail-dkim-unrelated.eml"
@@ -156,3 +158,85 @@ def test_markdown_escapes_pipes_and_lists_rules(fixtures):
     assert "a \\| b" in md
     assert "## Attachments" in md
     assert "invoice-4471.pdf" in md
+
+
+HOSTILE = (
+    'From: "[bold]Pay[/bold]Pal" <service@paypa1.example>\r\n'
+    "To: analyst@example.com\r\n"
+    "Subject: [/b] [external] Invoice `x` <script>alert(1)</script> | due\r\n"
+    "Date: Mon, 03 Mar 2025 10:00:00 +0000\r\n"
+    "Message-ID: <hostile@example.com>\r\n"
+    "Content-Type: text/plain; charset=utf-8\r\n"
+    "\r\n"
+    "Log in at http://admin@login.paypa1.example/verify now.\r\n"
+)
+
+
+def test_analyze_survives_markup_in_email_text(tmp_path):
+    """Email text is data, not rich markup: no crash, nothing swallowed."""
+    eml = tmp_path / "[red]hostile.eml"
+    eml.write_text(HOSTILE, encoding="utf-8", newline="")
+    r = _run("analyze", str(eml), "--offline")
+    assert r.exit_code == 0, r.output
+    assert "[/b] [external] Invoice" in r.output
+    assert "[bold]Pay[/bold]Pal" in r.output
+    assert "admin[@]login[.]paypa1[.]example" in r.output
+    assert "[red]hostile.eml" in r.output
+
+
+def test_batch_survives_markup_and_bad_files(tmp_path, monkeypatch):
+    (tmp_path / "good.eml").write_text(HOSTILE, encoding="utf-8", newline="")
+    (tmp_path / "bad.eml").write_bytes(b"x")
+    real_triage = cli_module.triage
+
+    def flaky(path, **kwargs):
+        if Path(path).name == "bad.eml":
+            raise OSError("disk on fire")
+        return real_triage(path, **kwargs)
+
+    monkeypatch.setattr(cli_module, "triage", flaky)
+    r = runner.invoke(app, ["batch", str(tmp_path), "--offline"], env={"COLUMNS": "200"})
+    assert r.exit_code == 1
+    assert "good.eml" in r.output
+    assert "[/b] [external]" in r.output
+    assert "ERROR bad.eml: OSError: disk on fire" in r.output
+
+
+def test_batch_rules_error_exits_2(tmp_path, monkeypatch):
+    (tmp_path / "a.eml").write_bytes(BENIGN.read_bytes())
+
+    def broken(path=None):
+        raise RuleError("bad yaml")
+
+    monkeypatch.setattr(cli_module, "load_rules", broken)
+    r = runner.invoke(app, ["batch", str(tmp_path), "--offline"])
+    assert r.exit_code == 2
+    assert "bad yaml" in r.output
+
+
+def test_markdown_escapes_hostile_text(tmp_path):
+    eml = tmp_path / "h.eml"
+    eml.write_text(HOSTILE, encoding="utf-8", newline="")
+    md = to_markdown(triage(eml, offline=True))
+    assert "<script>" not in md
+    assert r"\<script\>" in md
+    assert r"\| due" in md
+    assert r"\`x\`" in md  # backticks in plain text are escaped, not a code span
+    assert "`hxxp://admin[@]login[.]paypa1[.]example/verify`" in md
+    assert "not checked (offline)" in md
+    # The From cell is a code span, so <addr> can't be eaten as an HTML tag.
+    assert "| From | `[bold]Pay[/bold]Pal <service@paypa1[.]example>` |" in md
+    # Defanged evidence stays readable: [.] is not backslash-escaped.
+    assert "login[.]paypa1[.]example looks like paypal" in md
+
+
+def test_markdown_neutralises_inline_links(tmp_path):
+    eml = tmp_path / "l.eml"
+    eml.write_text(
+        HOSTILE.replace("Subject: [/b]", "Subject: [click](http://evil.example) [/b]"),
+        encoding="utf-8",
+        newline="",
+    )
+    md = to_markdown(triage(eml, offline=True))
+    assert "[click](" not in md
+    assert r"[click]\(" in md

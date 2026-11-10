@@ -103,10 +103,21 @@ def _registrar(payload: dict[str, Any]) -> str:
 
 
 def _entity_country(payload: dict[str, Any]) -> str:
+    """Country from an entity's jCard address.
+
+    Prefer the ``cc`` parameter (an ISO code). Otherwise the last address
+    component is a free-text country name ("United States"), which is
+    returned as is, never truncated into a fake two-letter code.
+    """
     for entity in payload.get("entities") or []:
         for item in (entity.get("vcardArray") or [None, []])[1]:
-            if isinstance(item, list) and item and item[0] == "adr" and len(item) >= 4:
-                adr = item[3]
-                if isinstance(adr, list) and adr and adr[-1]:
-                    return str(adr[-1]).upper()[:2]
+            if not (isinstance(item, list) and len(item) >= 4 and item[0] == "adr"):
+                continue
+            params = item[1] if isinstance(item[1], dict) else {}
+            if isinstance(params.get("cc"), str) and params["cc"].strip():
+                return params["cc"].strip().upper()
+            adr = item[3]
+            if isinstance(adr, list) and adr and isinstance(adr[-1], str) and adr[-1].strip():
+                name = adr[-1].strip()
+                return name.upper() if len(name) == 2 and name.isalpha() else name
     return ""

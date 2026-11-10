@@ -6,7 +6,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from phishtriage.enrich.base import Cache, TokenBucket
+from phishtriage.enrich.base import Cache, TokenBucket, unroutable_reason
 from phishtriage.enrich.rdap import RdapEnricher
 from phishtriage.enrich.runner import Runner, build_runner
 from phishtriage.enrich.urlhaus import UrlhausEnricher
@@ -322,6 +322,24 @@ def test_rdap_ip_country():
     assert e.lookup("192.0.2.1", IndicatorType.IP).status is EnrichStatus.NOT_CHECKED
 
 
+@pytest.mark.parametrize(
+    ("params", "last", "expected"),
+    [
+        ({}, "United States", "United States"),  # was truncated to "UN"
+        ({"cc": "us"}, "United States", "US"),
+        ({}, "ca", "CA"),
+    ],
+)
+def test_rdap_entity_country_never_truncates(params, last, expected):
+    payload = {
+        "entities": [
+            {"vcardArray": ["vcard", [["adr", params, "text", ["", "", "", "", "", "", last]]]]}
+        ]
+    }
+    e = RdapEnricher(_client(lambda request: _json(payload)))
+    assert e.lookup("8.8.8.8", IndicatorType.IP).data["country"] == expected
+
+
 # --------------------------------------------------------------------------- runner
 
 
@@ -355,7 +373,7 @@ def _indicators():
 
 def test_runner_orders_flagged_first_and_respects_budget(tmp_path):
     vt = FakeEnricher("virustotal", {IndicatorType.URL, IndicatorType.DOMAIN, IndicatorType.HASH})
-    runner = Runner([vt], Cache(tmp_path), budget={"virustotal": 2})
+    runner = Runner([vt], Cache(tmp_path), budget={"virustotal": 2}, skip_unroutable=False)
     ind = _indicators()
 
     stats = runner.run(ind)
@@ -370,7 +388,7 @@ def test_runner_orders_flagged_first_and_respects_budget(tmp_path):
 
 def test_runner_uses_cache_on_second_run(tmp_path):
     e = FakeEnricher("urlhaus", {IndicatorType.URL})
-    runner = Runner([e], Cache(tmp_path))
+    runner = Runner([e], Cache(tmp_path), skip_unroutable=False)
     ind = _indicators()
     first = runner.run(ind)
     assert first.lookups == 2 and first.cached == 0
@@ -383,14 +401,76 @@ def test_runner_uses_cache_on_second_run(tmp_path):
 def test_runner_survives_enricher_exception_and_country(tmp_path):
     bad = FakeEnricher("urlhaus", {IndicatorType.URL}, fail=True)
     rdap = FakeEnricher("rdap", {IndicatorType.IP, IndicatorType.DOMAIN})
-    runner = Runner([bad, rdap], Cache(tmp_path))
+    runner = Runner([bad, rdap], Cache(tmp_path), skip_unroutable=False)
     ind = _indicators()
     runner.run(ind)
 
     assert ind.urls[0].enrichment[0].status is EnrichStatus.NOT_CHECKED
     assert "kaboom" in ind.urls[0].enrichment[0].detail
     assert runner.origin_country("203.0.113.5") == "US"
-    assert Runner([bad], Cache(tmp_path)).origin_country("203.0.113.5") == ""
+    assert Runner([bad], Cache(tmp_path), skip_unroutable=False).origin_country("203.0.113.5") == ""
+
+
+def test_runner_origin_country_survives_exception(tmp_path):
+    bad = FakeEnricher("rdap", {IndicatorType.IP}, fail=True)
+    runner = Runner([bad], Cache(tmp_path), skip_unroutable=False)
+    assert runner.origin_country("198.51.100.7") == ""  # no traceback, just no country
+
+
+@pytest.mark.parametrize(
+    ("value", "kind", "reason"),
+    [
+        ("evil.example", IndicatorType.DOMAIN, "reserved name"),
+        ("http://login.example.com/x", IndicatorType.URL, "reserved name"),
+        ("a.b.test", IndicatorType.DOMAIN, "reserved name"),
+        ("203.0.113.5", IndicatorType.IP, "non-routable IP"),
+        ("10.1.2.3", IndicatorType.IP, "non-routable IP"),
+        ("http://192.168.1.1/a", IndicatorType.URL, "non-routable IP"),
+        ("8.8.8.8", IndicatorType.IP, ""),
+        ("paypal.com", IndicatorType.DOMAIN, ""),
+        ("https://shorturl.at/abc", IndicatorType.URL, ""),
+        ("f" * 64, IndicatorType.HASH, ""),
+    ],
+)
+def test_unroutable_reason(value, kind, reason):
+    assert unroutable_reason(value, kind) == reason
+
+
+def test_runner_skips_reserved_names_without_calling_api(tmp_path):
+    vt = FakeEnricher("virustotal", {IndicatorType.URL, IndicatorType.DOMAIN, IndicatorType.HASH})
+    rdap = FakeEnricher("rdap", {IndicatorType.IP, IndicatorType.DOMAIN})
+    runner = Runner([vt, rdap], Cache(tmp_path))
+    ind = _indicators()
+
+    stats = runner.run(ind)
+
+    assert [c[0] for c in vt.calls] == ["f" * 64]  # only the hash is a real lookup
+    assert rdap.calls == []
+    assert ind.urls[0].enrichment[0].detail == "reserved name"
+    assert ind.ips[0].enrichment[0].detail == "non-routable IP"
+    assert stats.skipped == 5
+    assert runner.origin_country("203.0.113.5") == ""
+
+
+def test_rdap_domain_cache_is_shared_across_subdomains(tmp_path):
+    rdap = FakeEnricher("rdap", {IndicatorType.DOMAIN})
+    runner = Runner([rdap], Cache(tmp_path))
+    ind = IndicatorAnalysis()
+    ind.domains = [
+        Indicator(IndicatorType.DOMAIN, "a.phish-corp.com"),
+        Indicator(IndicatorType.DOMAIN, "b.phish-corp.com"),
+        Indicator(IndicatorType.DOMAIN, "phish-corp.com"),
+    ]
+
+    stats = runner.run(ind)
+
+    assert [c[0] for c in rdap.calls] == ["a.phish-corp.com"]
+    assert stats.cached == 2
+    assert [d.enrichment[0].indicator for d in ind.domains] == [
+        "a.phish-corp.com",
+        "b.phish-corp.com",
+        "phish-corp.com",
+    ]
 
 
 def test_build_runner_reads_env(tmp_path, monkeypatch):
@@ -407,7 +487,7 @@ def test_pipeline_online_with_fake_enrichers_changes_verdict(tmp_path):
     """Enrichment results feed the scorer: a URLhaus hit adds 40 and RDAP fills the country."""
     uh = FakeEnricher("urlhaus", {IndicatorType.URL}, status=EnrichStatus.MALICIOUS)
     rdap = FakeEnricher("rdap", {IndicatorType.IP})
-    runner = Runner([uh, rdap], Cache(tmp_path))
+    runner = Runner([uh, rdap], Cache(tmp_path), skip_unroutable=False)
 
     result = triage(
         ROOT / "samples" / "phish" / "12-html-attachment.eml", offline=False, enricher=runner
@@ -430,7 +510,37 @@ def test_offline_flag_skips_runner(tmp_path, offline):
     result = triage(
         ROOT / "samples" / "benign" / "01-newsletter.eml",
         offline=offline,
-        enricher=Runner([uh], Cache(tmp_path)),
+        enricher=Runner([uh], Cache(tmp_path), skip_unroutable=False),
     )
     assert uh.calls == []
     assert result.offline is True
+
+
+class _HostReputation:
+    """URLhaus stand-in: the shortener *host* is listed, the specific URL may or may not be."""
+
+    name = "urlhaus"
+    supports = frozenset({IndicatorType.URL, IndicatorType.DOMAIN})
+
+    def __init__(self, url_listed: bool) -> None:
+        self.url_listed = url_listed
+
+    def lookup(self, indicator: str, kind: IndicatorType) -> EnrichmentResult:
+        listed = indicator == "shorturl.at" or (self.url_listed and "shorturl.at/" in indicator)
+        status = EnrichStatus.MALICIOUS if listed else EnrichStatus.UNKNOWN
+        return EnrichmentResult(self.name, indicator, status, "listed" if listed else "")
+
+
+def test_shortener_host_reputation_does_not_score(tmp_path):
+    """A public shortener's host listing reflects other users' links, not this email."""
+    sample = ROOT / "samples" / "phish" / "real-02-uc-account-job-scam-admin.eml"
+    runner = Runner([_HostReputation(url_listed=False)], Cache(tmp_path / "a"))
+    result = triage(sample, offline=False, enricher=runner)
+    host = next(d for d in result.indicators.domains if d.value == "shorturl.at")
+    assert "shared_hosting" in host.flags
+    assert "urlhaus_hit" not in {r.id for r in result.score.fired}
+
+    runner = Runner([_HostReputation(url_listed=True)], Cache(tmp_path / "b"))
+    result = triage(sample, offline=False, enricher=runner)
+    hit = next(r for r in result.score.fired if r.id == "urlhaus_hit")
+    assert hit.evidence == ["https://shorturl.at/U6p5C: urlhaus: malicious (listed)"]

@@ -7,7 +7,7 @@ import os
 from collections.abc import Sequence
 from dataclasses import dataclass, field
 
-from phishtriage.enrich.base import Cache, Enricher
+from phishtriage.enrich.base import Cache, Enricher, unroutable_reason
 from phishtriage.enrich.http import make_client
 from phishtriage.enrich.rdap import RdapEnricher
 from phishtriage.enrich.urlhaus import UrlhausEnricher
@@ -21,6 +21,7 @@ from phishtriage.models import (
     IndicatorAnalysis,
     IndicatorType,
 )
+from phishtriage.rulesdata import organizational_domain
 
 DEFAULT_BUDGET = {"virustotal": 8, "urlhaus": 20, "rdap": 20}
 """Max live lookups per source per email; flagged indicators go first."""
@@ -31,6 +32,8 @@ class Runner:
     enrichers: Sequence[Enricher]
     cache: Cache
     budget: dict[str, int] = field(default_factory=lambda: dict(DEFAULT_BUDGET))
+    skip_unroutable: bool = True
+    """Don't send reserved names (``*.example``) or non-global IPs to any API."""
 
     def run(self, indicators: IndicatorAnalysis, *, origin_ip: str = "") -> EnrichmentStats:
         stats = EnrichmentStats()
@@ -44,10 +47,10 @@ class Runner:
         return stats
 
     def origin_country(self, ip: str) -> str:
+        """Country of the origin IP. ``run`` has normally cached it already."""
         for enricher in self.enrichers:
             if enricher.name == "rdap" and IndicatorType.IP in enricher.supports:
-                result = self.cache.get("rdap", ip) or enricher.lookup(ip, IndicatorType.IP)
-                self.cache.put(result)
+                result = self._lookup(enricher, ip, IndicatorType.IP, {}, EnrichmentStats())
                 return str(result.data.get("country") or "")
         return ""
 
@@ -59,10 +62,16 @@ class Runner:
         spent: dict[str, int],
         stats: EnrichmentStats,
     ) -> EnrichmentResult:
-        cached = self.cache.get(enricher.name, value)
+        reason = unroutable_reason(value, kind) if self.skip_unroutable else ""
+        if reason:
+            stats.skipped += 1
+            return EnrichmentResult(enricher.name, value, EnrichStatus.NOT_CHECKED, reason)
+        key = _cache_key(enricher.name, value, kind)
+        cached = self.cache.get(enricher.name, key)
         if cached is not None:
             stats.lookups += 1
             stats.cached += 1
+            cached.indicator = value  # a sibling subdomain may have filled the entry
             return cached
         limit = self.budget.get(enricher.name)
         if limit is not None and spent.get(enricher.name, 0) >= limit:
@@ -78,7 +87,7 @@ class Runner:
             result = EnrichmentResult(
                 enricher.name, value, EnrichStatus.NOT_CHECKED, f"API error: {exc}"
             )
-        self.cache.put(result)
+        self.cache.put(result, key=key)
         return result
 
     @staticmethod
@@ -98,6 +107,13 @@ class Runner:
         # earn priority on its own.
         out.sort(key=lambda t: 0 if set(t[0].flags) - {"shared_hosting"} else 1)
         return out
+
+
+def _cache_key(source: str, value: str, kind: IndicatorType) -> str:
+    """RDAP answers for the registered domain, so subdomains share one entry."""
+    if source == "rdap" and kind is IndicatorType.DOMAIN:
+        return f"domain:{organizational_domain(value)}"
+    return value
 
 
 def build_runner(cache: Cache | None = None) -> Runner:

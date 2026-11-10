@@ -221,11 +221,21 @@ def analyze_indicators(
 
     for ind in domains.values():
         _flag_domain(ind, brands)
+        # Host reputation on a platform anyone can publish to (file hosts, form
+        # builders, URL shorteners) reflects other tenants, not this email. The
+        # specific URL is still enriched and still scores.
         if _in_list(ind.value, filehosts):
             _flag(
                 ind,
                 "shared_hosting",
                 f"{ind.value} is shared hosting; its host reputation reflects other tenants",
+            )
+        elif _in_list(ind.value, shorteners):
+            _flag(
+                ind,
+                "shared_hosting",
+                f"{ind.value} is a public URL shortener; its host reputation reflects "
+                "other users' links",
             )
     analysis.domains = list(domains.values())
     analysis.ips = list(ips.values())

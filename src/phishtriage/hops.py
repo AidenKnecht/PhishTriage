@@ -281,8 +281,7 @@ def _check_timestamps(hops: list[Hop], analysis: HopAnalysis) -> None:
     prev: Hop | None = None
     for hop in hops:
         if hop.timestamp is None:
-            prev = prev or None
-            continue
+            continue  # compare the next dated hop with the last dated one
         if prev is not None and prev.timestamp is not None:
             delta = hop.timestamp - prev.timestamp
             if delta < -BACKWARDS_TOLERANCE:

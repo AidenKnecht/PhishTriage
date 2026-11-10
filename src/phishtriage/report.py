@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import json
+import re
 from datetime import datetime
 from pathlib import Path
 from typing import Any
 
 from rich import box
 from rich.console import Console, Group
+from rich.markup import escape
 from rich.panel import Panel
 from rich.table import Table
 from rich.text import Text
@@ -18,6 +20,8 @@ from phishtriage.models import (
     AttachmentAnalysis,
     AuthResult,
     AuthStatus,
+    EnrichmentResult,
+    FiredRule,
     Indicator,
     TriageResult,
     Verdict,
@@ -92,16 +96,16 @@ def _header_panel(result: TriageResult, *, ascii_only: bool = False) -> Panel:
     body = Table.grid(padding=(0, 2))
     body.add_column(style="bold", no_wrap=True)
     body.add_column()
-    body.add_row("Subject", rec.subject or "(none)")
+    body.add_row("Subject", Text(rec.subject or "(none)"))
     sender = (
         f"{rec.from_display} <{rec.from_addr}>" if rec.from_display else rec.from_addr or "(none)"
     )
-    body.add_row("From", sender)
+    body.add_row("From", Text(sender))
     body.add_row("Date", _when(rec.date, rec.date_raw))
     body.add_row("Verdict", Text(f"{sc.verdict}  {sc.score}/100", style=f"bold {color}"))
     body.add_row("", Text(score_bar(sc.score, ascii_only=ascii_only), style=color))
     title = Path(rec.source).name if rec.source else "phishtriage"
-    return Panel(body, title=f"[bold]{title}[/bold]", border_style=color, expand=True)
+    return Panel(body, title=f"[bold]{escape(title)}[/bold]", border_style=color, expand=True)
 
 
 def _auth_table(result: TriageResult) -> Table:
@@ -119,8 +123,8 @@ def _auth_table(result: TriageResult) -> Table:
             res.mechanism.upper(),
             Text(str(res.status), style=style),
             _yes_no(aligned),
-            res.domain or "-",
-            res.detail or "",
+            Text(res.domain or "-"),
+            Text(res.detail or ""),
         )
 
     row(a.spf, a.spf_aligned)
@@ -136,7 +140,7 @@ def _auth_table(result: TriageResult) -> Table:
     if a.live_dns_detail:
         extras.append(a.live_dns_detail)
     if extras:
-        t.caption = " | ".join(extras)
+        t.caption = Text(" | ".join(extras))
         t.caption_justify = "left"
     return t
 
@@ -181,9 +185,9 @@ def _indicators_table(result: TriageResult, defang: bool) -> Table:
         )
         t.add_row(
             str(item.type),
-            _d(item.value, defang),
+            Text(_d(item.value, defang)),
             Text(flags, style="red" if flags else ""),
-            enrich,
+            Text(enrich),
         )
 
     for item in ind.urls + ind.domains + ind.ips:
@@ -191,8 +195,11 @@ def _indicators_table(result: TriageResult, defang: bool) -> Table:
     if not (ind.urls or ind.domains or ind.ips):
         t.add_row("-", "(no indicators)", "", "")
     if ind.link_mismatches:
-        t.caption = "Link mismatches: " + " | ".join(
-            f"'{_d(m.text[:40], defang)}' -> {_d(m.href, defang)}" for m in ind.link_mismatches
+        t.caption = Text(
+            "Link mismatches: "
+            + " | ".join(
+                f"'{_d(m.text[:40], defang)}' -> {_d(m.href, defang)}" for m in ind.link_mismatches
+            )
         )
         t.caption_justify = "left"
     return t
@@ -204,7 +211,7 @@ def _attachments_table(result: TriageResult) -> Table:
     t.add_column("Declared")
     t.add_column("Magic")
     t.add_column("Size", justify="right")
-    t.add_column("SHA-256", overflow="fold")
+    t.add_column("SHA-256 / MD5", overflow="fold")
     t.add_column("Flags", overflow="fold")
     t.add_column("Enrichment", overflow="fold")
     for att in result.indicators.attachments:
@@ -213,13 +220,13 @@ def _attachments_table(result: TriageResult) -> Table:
             "not checked (offline)" if result.offline else ""
         )
         t.add_row(
-            att.filename,
-            att.declared_mime,
-            att.magic_mime or "?",
+            Text(att.filename),
+            Text(att.declared_mime),
+            Text(att.magic_mime or "?"),
             str(att.size),
-            att.sha256,
+            Text(f"{att.sha256}\nmd5 {att.md5}"),
             Text(flags, style="red" if flags else ""),
-            enrich,
+            Text(enrich),
         )
     return t
 
@@ -235,8 +242,8 @@ def _why_panel(result: TriageResult, defang: bool = True) -> Panel:
     for rule in sc.fired:
         t.add_row(
             f"+{rule.weight}",
-            f"{rule.description}\n[dim]{rule.id} | {rule.category}[/dim]",
-            "\n".join(_d(ev, defang) for ev in rule.evidence),
+            _rule_cell(rule),
+            Text("\n".join(_d(ev, defang) for ev in rule.evidence)),
         )
     total = f"Total {sc.score}/100"
     if sc.raw_score > 100:
@@ -248,6 +255,12 @@ def _why_panel(result: TriageResult, defang: bool = True) -> Panel:
         box=box.SIMPLE,
         expand=True,
     )
+
+
+def _rule_cell(rule: FiredRule) -> Text:
+    cell = Text(rule.description)
+    cell.append(f"\n{rule.id} | {rule.category}", style="dim")
+    return cell
 
 
 def _footer(result: TriageResult) -> str:
@@ -276,24 +289,29 @@ def write_json(result: TriageResult, path: str | Path) -> None:
 
 
 def to_markdown(result: TriageResult, *, defang: bool = True) -> str:
+    """A report that pastes cleanly into a ticket, a GitHub issue, or a blog post.
+
+    Everything taken from the email is either escaped or placed in a code span,
+    so a hostile subject line can't inject links, HTML or table breaks.
+    """
     rec, a, h, ind, sc = result.record, result.auth, result.hops, result.indicators, result.score
     out: list[str] = []
     name = Path(rec.source).name if rec.source else "email"
-    out.append(f"# Phishing triage: {name}")
+    out.append(f"# Phishing triage: {_md(name)}")
     out.append("")
     out.append(f"**Verdict: {sc.verdict} ({sc.score}/100)**")
     out.append("")
     out.append("| | |")
     out.append("|---|---|")
-    out.append(f"| Subject | {_md(rec.subject)} |")
+    out.append(f"| Subject | {_md(rec.subject) or '(none)'} |")
     sender = f"{rec.from_display} <{rec.from_addr}>" if rec.from_display else rec.from_addr
-    out.append(f"| From | {_md(_d(sender, defang))} |")
+    out.append(f"| From | {_code(_d(sender, defang)) if sender else '(none)'} |")
     if rec.reply_to_addr:
-        out.append(f"| Reply-To | {_md(_d(rec.reply_to_addr, defang))} |")
+        out.append(f"| Reply-To | {_code(_d(rec.reply_to_addr, defang))} |")
     if rec.return_path:
-        out.append(f"| Return-Path | {_md(_d(rec.return_path, defang))} |")
-    out.append(f"| Date | {_when(rec.date, rec.date_raw)} |")
-    out.append(f"| Message-ID | {_md(rec.message_id or '(missing)')} |")
+        out.append(f"| Return-Path | {_code(_d(rec.return_path, defang))} |")
+    out.append(f"| Date | {_md(_when(rec.date, rec.date_raw))} |")
+    out.append(f"| Message-ID | {_code(rec.message_id) if rec.message_id else '(missing)'} |")
     out.append("")
 
     out.append("## Authentication")
@@ -301,12 +319,15 @@ def to_markdown(result: TriageResult, *, defang: bool = True) -> str:
     out.append("| Mechanism | Result | Aligned | Domain | Notes |")
     out.append("|---|---|---|---|---|")
     for res, aligned in ((a.spf, a.spf_aligned), (a.dkim, a.dkim_aligned), (a.dmarc, None)):
+        domain = _code(_d(res.domain, defang)) if res.domain else "-"
         out.append(
             f"| {res.mechanism.upper()} | {res.status} | {_yes_no(aligned)} | "
-            f"{_md(res.domain or '-')} | {_md(res.detail)} |"
+            f"{domain} | {_md(res.detail)} |"
         )
+    if a.flags:
+        out.append("")
     for flag in a.flags:
-        out.append(f"- {_md(flag)}")
+        out.append(f"- {_md(_d(flag, defang))}")
     out.append("")
 
     out.append("## Hop chain (origin first)")
@@ -314,17 +335,18 @@ def to_markdown(result: TriageResult, *, defang: bool = True) -> str:
     if not h.hops:
         out.append("_No Received headers._")
     for i, hop in enumerate(h.hops, 1):
-        src = hop.from_host or "?"
+        src = _d(hop.from_host, defang) if hop.from_host else "?"
         if hop.from_ip:
             src += f" [{_d(hop.from_ip, defang)}]"
-        line = f"{i}. {_md(src)} -> {_md(hop.by_host or '?')} ({_when(hop.timestamp)})"
+        by = _d(hop.by_host, defang) if hop.by_host else "?"
+        line = f"{i}. {_code(src)} -> {_code(by)} ({_md(_when(hop.timestamp))})"
         if hop.flags:
-            line += " **" + "; ".join(hop.flags) + "**"
+            line += " **" + _md("; ".join(hop.flags)) + "**"
         out.append(line)
     if h.first_external_ip:
-        origin = f"External origin: {_d(h.first_external_ip, defang)}"
+        origin = f"External origin: {_code(_d(h.first_external_ip, defang))}"
         if h.origin_country:
-            origin += f" ({h.origin_country})"
+            origin += f" ({_md(h.origin_country)})"
         out.append("")
         out.append(origin)
     out.append("")
@@ -334,22 +356,28 @@ def to_markdown(result: TriageResult, *, defang: bool = True) -> str:
     out.append("| Type | Value | Flags | Enrichment |")
     out.append("|---|---|---|---|")
     for item in ind.urls + ind.domains + ind.ips:
-        enrich = "; ".join(r.summary for r in item.enrichment)
-        value = _md(_d(item.value, defang))
-        out.append(f"| {item.type} | `{value}` | {', '.join(item.flags)} | {_md(enrich)} |")
+        out.append(
+            f"| {item.type} | {_code(_d(item.value, defang))} | {_md(', '.join(item.flags))} | "
+            f"{_md(_enrichment_text(result, item.enrichment))} |"
+        )
+    if not (ind.urls or ind.domains or ind.ips):
+        out.append("| - | (no indicators) | | |")
     if ind.link_mismatches:
         out.append("")
         for m in ind.link_mismatches:
-            out.append(f"- Link text `{_md(m.text[:60])}` points to `{_md(_d(m.href, defang))}`")
+            out.append(
+                f"- Link text {_code(_d(m.text[:60], defang))} points to "
+                f"{_code(_d(m.href, defang))}"
+            )
     out.append("")
 
     if ind.attachments:
         out.append("## Attachments")
         out.append("")
-        out.append("| Filename | Declared | Magic | Size | SHA-256 | Flags |")
-        out.append("|---|---|---|---:|---|---|")
+        out.append("| Filename | Declared | Magic | Size | SHA-256 / MD5 | Flags | Enrichment |")
+        out.append("|---|---|---|---:|---|---|---|")
         for att in ind.attachments:
-            out.append(_md_attachment(att))
+            out.append(_md_attachment(result, att))
         out.append("")
 
     out.append("## Why this verdict")
@@ -357,28 +385,59 @@ def to_markdown(result: TriageResult, *, defang: bool = True) -> str:
     if not sc.fired:
         out.append("_No rules fired._")
     for rule in sc.fired:
-        out.append(f"- **+{rule.weight} {rule.description}** (`{rule.id}`)")
+        out.append(f"- **+{rule.weight} {_md(rule.description)}** (`{rule.id}`)")
         for ev in rule.evidence:
             out.append(f"  - {_md(_d(ev, defang))}")
-        out.append(f"  - _{rule.rationale}_")
+        out.append(f"  - _{_md(rule.rationale)}_")
     out.append("")
     out.append(
         f"Total: **{sc.score}/100**" + (f" (raw {sc.raw_score})" if sc.raw_score > 100 else "")
     )
+    if rec.warnings:
+        out.append("")
+        out.append("## Parser warnings")
+        out.append("")
+        for warning in rec.warnings:
+            out.append(f"- {_md(warning)}")
     out.append("")
     out.append(f"_{_footer(result)}_")
     return "\n".join(out) + "\n"
 
 
-def _md_attachment(att: AttachmentAnalysis) -> str:
+def _enrichment_text(result: TriageResult, enrichment: list[EnrichmentResult]) -> str:
+    text = "; ".join(r.summary for r in enrichment)
+    return text or ("not checked (offline)" if result.offline else "")
+
+
+def _md_attachment(result: TriageResult, att: AttachmentAnalysis) -> str:
     return (
-        f"| `{_md(att.filename)}` | {att.declared_mime} | {att.magic_mime or '?'} | {att.size} | "
-        f"`{att.sha256}` | {', '.join(att.flags)} |"
+        f"| {_code(att.filename)} | {_md(att.declared_mime)} | {_md(att.magic_mime or '?')} | "
+        f"{att.size} | {_code(att.sha256)}<br>{_code(att.md5)} | {_md(', '.join(att.flags))} | "
+        f"{_md(_enrichment_text(result, att.enrichment))} |"
     )
 
 
+_MD_SPECIAL = str.maketrans({c: "\\" + c for c in "\\`*<>|"})
+
+
 def _md(value: str) -> str:
-    return value.replace("|", "\\|").replace("\n", " ")
+    """Escape text for a Markdown table cell or list item.
+
+    Escapes what can inject (code spans, emphasis, HTML, table breaks, inline
+    links) and leaves the rest readable, so defanged ``[.]`` and rule ids
+    with underscores still paste cleanly into a ticket.
+    """
+    escaped = value.translate(_MD_SPECIAL).replace("](", "]\\(")
+    return " ".join(escaped.splitlines())
+
+
+def _code(value: str) -> str:
+    """Inline code span that survives backticks and pipes in the value."""
+    value = " ".join(value.splitlines()).replace("|", "\\|")
+    longest = max((len(run) for run in re.findall(r"`+", value)), default=0)
+    fence = "`" * (longest + 1)
+    pad = " " if value.startswith("`") or value.endswith("`") else ""
+    return f"{fence}{pad}{value}{pad}{fence}"
 
 
 def write_markdown(result: TriageResult, path: str | Path, *, defang: bool = True) -> None:

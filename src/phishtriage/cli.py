@@ -10,6 +10,7 @@ from typing import Annotated
 import typer
 from rich import box
 from rich.console import Console
+from rich.markup import escape
 from rich.table import Table
 from rich.text import Text
 
@@ -18,7 +19,7 @@ from phishtriage.enrich.base import Cache
 from phishtriage.models import TriageResult, Verdict
 from phishtriage.pipeline import EnrichmentRunner, eml_files, triage
 from phishtriage.report import VERDICT_COLORS, render_terminal, write_json, write_markdown
-from phishtriage.scoring import RuleError, load_rules
+from phishtriage.scoring import RuleError, RuleSet, load_rules
 
 app = typer.Typer(
     help="SOC-style phishing email triage. Parses .eml files, checks auth and alignment, "
@@ -106,10 +107,10 @@ def analyze(
     render_terminal(result, console, defang=not no_defang)
     if json_out is not None:
         write_json(result, json_out)
-        console.print(f"[dim]JSON written to {json_out}[/dim]")
+        console.print(Text(f"JSON written to {json_out}", style="dim"))
     if markdown_out is not None:
         write_markdown(result, markdown_out, defang=not no_defang)
-        console.print(f"[dim]Markdown written to {markdown_out}[/dim]")
+        console.print(Text(f"Markdown written to {markdown_out}", style="dim"))
 
 
 @app.command()
@@ -130,22 +131,58 @@ def batch(
     if not files:
         err_console.print(f"[yellow]No .eml files found under {directory}[/yellow]")
         raise typer.Exit(code=1)
+    ruleset = _load_rules_or_exit()
     runner = _runner(offline)
     results: list[tuple[Path, TriageResult]] = []
-    with console.status("Analysing...") as status:
+    failures: list[tuple[Path, str]] = []
+    spinner = "dots" if (console.encoding or "").lower().startswith("utf") else "line"
+    with console.status("Analysing...", spinner=spinner) as status:
         for path in files:
-            status.update(f"Analysing {path.name}")
-            results.append(
-                (path, triage(path, offline=offline, live_dns=live_dns, enricher=runner))
-            )
+            status.update(f"Analysing {escape(path.name)}")
+            try:
+                result = triage(
+                    path, offline=offline, live_dns=live_dns, enricher=runner, ruleset=ruleset
+                )
+            except Exception as exc:  # one unreadable file must not sink the whole run
+                failures.append((path, f"{type(exc).__name__}: {exc}"))
+                continue
+            results.append((path, result))
 
     console.print(_batch_table(results, directory))
-    matrix = _confusion(results)
+    matrix = _confusion(results, threshold=_phish_threshold(ruleset))
     if matrix is not None:
         console.print(matrix)
     if csv_out is not None:
         _write_csv(results, directory, csv_out)
-        console.print(f"[dim]CSV written to {csv_out}[/dim]")
+        console.print(Text(f"CSV written to {csv_out}", style="dim"))
+    if failures:
+        for path, reason in failures:
+            err_console.print(Text(f"ERROR {_shown(path, directory)}: {reason}", style="red"))
+        err_console.print(f"[red]{len(failures)} file(s) could not be analysed.[/red]")
+        raise typer.Exit(code=1)
+
+
+def _load_rules_or_exit(path: Path | None = None) -> RuleSet:
+    try:
+        return load_rules(path)
+    except RuleError as exc:
+        err_console.print(Text(f"Rules error: {exc}", style="red"))
+        raise typer.Exit(code=2) from exc
+
+
+def _phish_threshold(ruleset: RuleSet) -> int:
+    """The score at which an email counts as caught: the LIKELY PHISH band floor."""
+    for verdict, floor in ruleset.verdicts:
+        if verdict is Verdict.LIKELY_PHISH:
+            return floor
+    return 50
+
+
+def _shown(path: Path, base: Path) -> str:
+    try:
+        return path.relative_to(base).as_posix()
+    except ValueError:
+        return path.name
 
 
 def _label(path: Path) -> str | None:
@@ -166,16 +203,12 @@ def _batch_table(results: list[tuple[Path, TriageResult]], base: Path) -> Table:
     t.add_column("Verdict")
     t.add_column("Top rule", overflow="fold")
     for path, r in results:
-        try:
-            shown = path.relative_to(base).as_posix()
-        except ValueError:
-            shown = path.name
         color = VERDICT_COLORS[r.score.verdict]
         top = r.score.fired[0].id if r.score.fired else "-"
         t.add_row(
-            shown,
-            r.record.from_addr or "(none)",
-            r.record.subject,
+            Text(_shown(path, base)),
+            Text(r.record.from_addr or "(none)"),
+            Text(r.record.subject),
             Text(str(r.score.score), style=color),
             Text(str(r.score.verdict), style=f"bold {color}"),
             top,
@@ -183,18 +216,20 @@ def _batch_table(results: list[tuple[Path, TriageResult]], base: Path) -> Table:
     return t
 
 
-def _confusion(results: list[tuple[Path, TriageResult]]) -> Table | None:
+def _confusion(
+    results: list[tuple[Path, TriageResult]], *, threshold: int = 50, title: str = ""
+) -> Table | None:
     labelled = [(lbl, r) for p, r in results if (lbl := _label(p)) is not None]
     if not labelled:
         return None
-    tp = sum(1 for lbl, r in labelled if lbl == "phish" and r.score.score >= 50)
-    fn = sum(1 for lbl, r in labelled if lbl == "phish" and r.score.score < 50)
-    tn = sum(1 for lbl, r in labelled if lbl == "benign" and r.score.score < 50)
-    fp = sum(1 for lbl, r in labelled if lbl == "benign" and r.score.score >= 50)
-    t = Table(title="Confusion matrix (threshold 50)", box=box.SIMPLE_HEAD)
+    tp = sum(1 for lbl, r in labelled if lbl == "phish" and r.score.score >= threshold)
+    fn = sum(1 for lbl, r in labelled if lbl == "phish" and r.score.score < threshold)
+    tn = sum(1 for lbl, r in labelled if lbl == "benign" and r.score.score < threshold)
+    fp = sum(1 for lbl, r in labelled if lbl == "benign" and r.score.score >= threshold)
+    t = Table(title=title or f"Confusion matrix (threshold {threshold})", box=box.SIMPLE_HEAD)
     t.add_column("")
-    t.add_column("scored >= 50", justify="right")
-    t.add_column("scored < 50", justify="right")
+    t.add_column(f"scored >= {threshold}", justify="right")
+    t.add_column(f"scored < {threshold}", justify="right")
     t.add_row("phish/", Text(str(tp), style="green"), Text(str(fn), style="red" if fn else ""))
     t.add_row("benign/", Text(str(fp), style="red" if fp else ""), Text(str(tn), style="green"))
     total = tp + fn + tn + fp
@@ -207,13 +242,9 @@ def _write_csv(results: list[tuple[Path, TriageResult]], base: Path, out: Path) 
         w = csv.writer(fh)
         w.writerow(["file", "label", "from", "subject", "score", "verdict", "top_rule", "rules"])
         for path, r in results:
-            try:
-                shown = path.relative_to(base).as_posix()
-            except ValueError:
-                shown = path.name
             w.writerow(
                 [
-                    shown,
+                    _shown(path, base),
                     _label(path) or "",
                     r.record.from_addr,
                     r.record.subject,

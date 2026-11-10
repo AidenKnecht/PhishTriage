@@ -7,7 +7,6 @@ command, and the regression tests all go through :func:`triage`.
 from __future__ import annotations
 
 import time
-from collections.abc import Sequence
 from pathlib import Path
 from typing import Protocol
 
@@ -65,7 +64,3 @@ def triage(
 def eml_files(directory: str | Path) -> list[Path]:
     """All ``.eml`` files under ``directory``, recursively, sorted."""
     return sorted(p for p in Path(directory).rglob("*.eml") if p.is_file())
-
-
-def triage_many(paths: Sequence[str | Path], **kwargs: object) -> list[TriageResult]:
-    return [triage(p, **kwargs) for p in paths]  # type: ignore[arg-type]

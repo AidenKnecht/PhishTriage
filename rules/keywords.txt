@@ -44,6 +44,18 @@ sign in to review
 login to review
 re-enter your
 reactivate your account
+# Added after the first real-mail run: phrasing used by compromised-account
+# "system maintenance" credential harvests.
+email and password
+update your details
+update his/her details
+update their details
+lose access
+losing access
+for verification
+system maintenance
+security features
+security mechanisms
 
 [financial]
 invoice attached
@@ -89,20 +101,6 @@ free gift
 exclusive offer
 bonus
 
-# Added after the first real-mail run: phrasing used by compromised-account
-# "system maintenance" credential harvests.
-[credential]
-email and password
-update your details
-update his/her details
-update their details
-lose access
-losing access
-for verification
-system maintenance
-security features
-security mechanisms
-
 # Work-from-home / personal-assistant scams sent from compromised student
 # accounts. Individually weak; together they read like nothing else.
 [job_scam]
@@ -119,6 +117,15 @@ for details kindly
 send your resume to
 one-time submission
 competitive salary
+# Fake-interview scams: the "interview" happens in a Teams/Telegram chat with
+# a "recruiter" who never appears on camera.
+set up an account with microsoft teams
+download the microsoft teams
+interview via microsoft teams
+interview will be conducted via
+senior technical recruiter
+online briefing
+hiring manager will contact you via
 
 # Impersonal greetings: bulk lures don't know your name.
 [generic_greeting]
@@ -130,14 +137,3 @@ dear user
 dear account holder
 dear valued
 good day
-
-# Fake-interview scams: the "interview" happens in a Teams/Telegram chat with
-# a "recruiter" who never appears on camera.
-[job_scam]
-set up an account with microsoft teams
-download the microsoft teams
-interview via microsoft teams
-interview will be conducted via
-senior technical recruiter
-online briefing
-hiring manager will contact you via

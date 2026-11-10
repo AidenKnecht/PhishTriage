@@ -15,6 +15,7 @@ time; results are cached for 24 hours, so reruns are fast.
 
 from __future__ import annotations
 
+import dataclasses
 import io
 import os
 import shutil
@@ -23,16 +24,22 @@ import sys
 import tempfile
 from pathlib import Path
 
-from rich import box
 from rich.console import Console
-from rich.table import Table
 from rich.terminal_theme import TerminalTheme
 
-from phishtriage.cli import _batch_table, _confusion, _runner, load_dotenv
+from phishtriage.cli import (
+    _batch_table,
+    _confusion,
+    _print_compare,
+    _runner,
+    load_dotenv,
+    rules_table,
+)
+from phishtriage.htmlreport import to_html
 from phishtriage.models import TriageResult
 from phishtriage.pipeline import EnrichmentRunner, eml_files, triage
 from phishtriage.report import render_terminal
-from phishtriage.scoring import load_rules
+from phishtriage.scoring import load_rules, score
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / "docs" / "screenshots"
@@ -141,22 +148,43 @@ def shot_batch() -> tuple[str, Console]:
 
 
 def shot_rules(limit: int = 12) -> tuple[str, Console]:
-    console = _console()
+    console = _console(width=BATCH_WIDTH)
     console.print(
         "[bold green]$[/bold green] [bold]phishtriage rules[/bold]  [dim](first rows)[/dim]"
     )
     rs = load_rules()
-    t = Table(title="Scoring rules (rules/scoring.yaml)", box=box.SIMPLE_HEAD, expand=True)
-    t.add_column("ID", style="bold", no_wrap=True)
-    t.add_column("Category", no_wrap=True)
-    t.add_column("Weight", justify="right")
-    t.add_column("Description", overflow="fold")
-    t.add_column("Rationale", overflow="fold")
-    for rule in rs.rules[:limit]:
-        t.add_row(rule.id, rule.category, str(rule.weight), rule.description, rule.rationale)
-    console.print(t)
+    console.print(rules_table(rs, limit=limit))
     console.print(f"[dim]... {len(rs.rules) - limit} more rules[/dim]")
     return "rules", console
+
+
+def shot_compare() -> tuple[str, Console]:
+    console = _console(width=BATCH_WIDTH)
+    overlay = Path("rules/examples/content-heavy.yaml")
+    console.print(
+        f"[bold green]$[/bold green] [bold]phishtriage batch samples/{_flag()} "
+        f"--compare {overlay.as_posix()}[/bold]"
+    )
+    base = Path("samples")
+    rs_a, rs_b = load_rules(), load_rules(overlay.resolve())
+    results = [(p, _triage(p)) for p in eml_files(base)]
+    rescored = [
+        (p, dataclasses.replace(r, score=score(r.record, r.auth, r.hops, r.indicators, rs_b)))
+        for p, r in results
+    ]
+    _print_compare(results, rescored, base, rs_a, rs_b, out=console)
+    return "compare", console
+
+
+def shot_html_report(browser: str) -> Path:
+    """The HTML report itself, rendered in the browser (light theme, top of page)."""
+    out = OUT / "html-report.png"
+    result = _triage(Path("samples/phish/real-01-mychart-medicare-kit.eml"))
+    with tempfile.TemporaryDirectory() as tmp:
+        page = Path(tmp) / "report.html"
+        page.write_text(to_html(result), encoding="utf-8")
+        _browser_png(browser, page, out, width=1100, height=1500, tmp=Path(tmp))
+    return out
 
 
 SHOTS = {
@@ -172,7 +200,9 @@ SHOTS = {
     ),
     "batch": shot_batch,
     "rules": shot_rules,
+    "compare": shot_compare,
 }
+BROWSER_SHOTS = {"html-report": shot_html_report}
 
 
 def find_browser() -> str | None:
@@ -188,26 +218,32 @@ def to_png(html: str, out: Path, browser: str, columns: int, lines: int) -> None
     with tempfile.TemporaryDirectory() as tmp:
         page = Path(tmp) / "shot.html"
         page.write_text(html, encoding="utf-8")
-        before = out.stat().st_mtime if out.exists() else None
-        subprocess.run(
-            [
-                browser,
-                "--headless=new",
-                # Own profile, or a running Edge swallows the job and exits 0.
-                f"--user-data-dir={Path(tmp) / 'profile'}",
-                "--disable-gpu",
-                "--hide-scrollbars",
-                "--force-device-scale-factor=2",
-                f"--window-size={width},{height}",
-                f"--screenshot={out}",
-                page.as_uri(),
-            ],
-            check=True,
-            capture_output=True,
-            timeout=60,
-        )
-        if not out.exists() or out.stat().st_mtime == before:
-            raise RuntimeError(f"{browser} exited without writing {out}")
+        _browser_png(browser, page, out, width=width, height=height, tmp=Path(tmp))
+
+
+def _browser_png(
+    browser: str, page: Path, out: Path, *, width: int, height: int, tmp: Path
+) -> None:
+    before = out.stat().st_mtime if out.exists() else None
+    subprocess.run(
+        [
+            browser,
+            "--headless=new",
+            # Own profile, or a running Edge swallows the job and exits 0.
+            f"--user-data-dir={tmp / 'profile'}",
+            "--disable-gpu",
+            "--hide-scrollbars",
+            "--force-device-scale-factor=2",
+            f"--window-size={width},{height}",
+            f"--screenshot={out}",
+            page.as_uri(),
+        ],
+        check=True,
+        capture_output=True,
+        timeout=60,
+    )
+    if not out.exists() or out.stat().st_mtime == before:
+        raise RuntimeError(f"{browser} exited without writing {out}")
 
 
 def main(argv: list[str]) -> int:
@@ -222,11 +258,16 @@ def main(argv: list[str]) -> int:
     if browser is None:
         print("No Edge/Chrome found; cannot render PNGs.", file=sys.stderr)
         return 1
-    wanted = argv or list(SHOTS)
+    wanted = argv or [*SHOTS, *BROWSER_SHOTS]
     OUT.mkdir(parents=True, exist_ok=True)
     for key in wanted:
+        if key in BROWSER_SHOTS:
+            out = BROWSER_SHOTS[key](browser)
+            print(f"wrote {out.relative_to(ROOT)}")
+            continue
         if key not in SHOTS:
-            print(f"unknown shot {key!r}; choose from {', '.join(SHOTS)}", file=sys.stderr)
+            choices = ", ".join([*SHOTS, *BROWSER_SHOTS])
+            print(f"unknown shot {key!r}; choose from {choices}", file=sys.stderr)
             return 2
         name, console = SHOTS[key]()
         lines = console.export_text(clear=False).rstrip("\n").count("\n") + 1

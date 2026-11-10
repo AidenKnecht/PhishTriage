@@ -23,7 +23,11 @@ uv run phishtriage analyze samples/phish/01-lookalike-domain.eml
 
 Add `--offline` to skip enrichment entirely; everything else still runs.
 `--json out.json` and `--markdown out.md` write the same report in
-ticket-friendly forms. `uv run phishtriage rules` prints every scoring rule.
+ticket-friendly forms, and `--html out.html` writes a single self-contained
+page (no scripts, nothing loaded from the network) for sharing.
+`uv run phishtriage rules` prints every scoring rule.
+
+![phishtriage HTML report](docs/screenshots/html-report.png)
 
 ## What it checks
 
@@ -55,10 +59,25 @@ the weights of the rules that fire, caps at 100, and reports:
 
 Rules are data. Adding a lure keyword, changing a weight, or moving a verdict
 threshold is a text edit, and `uv run pytest` re-checks the sample corpus
-against it. The design notes behind each weight are in
-[`DECISIONS.md`](DECISIONS.md).
+against it. Each rule also names the MITRE ATT&CK technique it is evidence of
+(for example `T1684.002` Email Spoofing, `T1036.007` Double File Extension),
+so a fired rule maps straight onto the language a SOC already uses. The design
+notes behind each weight are in [`DECISIONS.md`](DECISIONS.md).
 
 ![phishtriage rules output](docs/screenshots/rules.png)
+
+Tuning is measurable. A rules file can `extends:` the main one and change only
+what it proposes, and `batch --compare` scores the corpus both ways:
+
+```
+uv run phishtriage batch samples --offline --compare rules/examples/content-heavy.yaml
+```
+
+![phishtriage batch --compare output](docs/screenshots/compare.png)
+
+Doubling the weight of lure keywords catches one more compromised-account
+scam and moves a real internship email from CLEAN to SUSPICIOUS. That trade
+is why the main rules keep content capped at 15 points.
 
 ## Batch results
 
@@ -157,8 +176,9 @@ itself failed; and `storage.googleapis.com` is Google, not a Google lookalike.
 
 - Decode IDN hostnames and run the lookalike check on the Unicode form, so
   `xn--` domains are scored for the brand they imitate, not just for being IDN.
-- A `--compare` mode that diffs two rule files against the corpus, to make
-  weight tuning a reviewable change.
+- A content signal for compromised-account mail that doesn't lean on keywords:
+  a body that moves the conversation off-platform (text this number, reply to
+  this free-mail address) while the sender is a real internal account.
 - QR-code extraction from image attachments (quishing), which is now a common
   way to keep the URL out of the body.
 - An `.msg` (Outlook) reader, since that is what users actually forward.

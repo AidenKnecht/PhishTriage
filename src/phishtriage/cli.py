@@ -220,7 +220,9 @@ def _print_compare(
     base: Path,
     ruleset_a: RuleSet,
     ruleset_b: RuleSet,
+    out: Console | None = None,
 ) -> None:
+    out = out or console
     name_a, name_b = _rules_name(ruleset_a), _rules_name(ruleset_b)
     t = Table(
         title=f"Rule-file comparison  A = {name_a}  B = {name_b}", box=box.SIMPLE_HEAD, expand=True
@@ -256,14 +258,14 @@ def _print_compare(
             Text(_rule_diff(a, b)),
         )
     t.caption = f"{unchanged} of {len(results_a)} emails unchanged"
-    console.print(t)
+    out.print(t)
 
     thr_a, thr_b = _phish_threshold(ruleset_a), _phish_threshold(ruleset_b)
     ma = _confusion(results_a, threshold=thr_a, title=f"A: {name_a}")
     mb = _confusion(results_b, threshold=thr_b, title=f"B: {name_b}")
     if ma is None or mb is None:
         return
-    console.print(Columns([ma, mb], padding=(0, 6)))
+    out.print(Columns([ma, mb], padding=(0, 6)))
 
     def caught(results: list[tuple[Path, TriageResult]], thr: int) -> tuple[int, int, int]:
         phish = [r for p, r in results if _label(p) == "phish"]
@@ -284,7 +286,7 @@ def _print_compare(
     summary.append(f"{tp_b}/{n_phish} phish ({tp_b - tp_a:+d})", style="bold")
     summary.append(f", {fp_b} false alarms ({fp_b - fp_a:+d})", style="bold")
     summary.append(f"; {benign_up} benign email(s) move up a verdict band.")
-    console.print(summary)
+    out.print(summary)
 
 
 def _load_rules_or_exit(path: Path | None = None) -> RuleSet:
@@ -386,21 +388,34 @@ def _write_csv(results: list[tuple[Path, TriageResult]], base: Path, out: Path) 
 
 
 @app.command()
-def rules() -> None:
+def rules(
+    file: Annotated[
+        Path | None,
+        typer.Option(
+            "--file",
+            exists=True,
+            dir_okay=False,
+            help="Rules file to show (default: scoring.yaml).",
+        ),
+    ] = None,
+) -> None:
     """Print every scoring rule from rules/scoring.yaml."""
-    try:
-        rs = load_rules()
-    except RuleError as exc:
-        err_console.print(f"[red]Rules error:[/red] {exc}")
-        raise typer.Exit(code=2) from exc
-    t = Table(title=f"Scoring rules ({rs.source})", box=box.SIMPLE_HEAD, expand=True)
+    rs = _load_rules_or_exit(file.resolve() if file is not None else None)
+    console.print(rules_table(rs))
+    bands = ", ".join(f"{v} >= {floor}" for v, floor in rs.verdicts if v is not Verdict.CLEAN)
+    console.print(f"[dim]Verdicts: CLEAN below the first band; {bands}[/dim]")
+
+
+def rules_table(rs: RuleSet, limit: int | None = None) -> Table:
+    """The rules as a table; ``limit`` keeps the first N rows (for screenshots)."""
+    t = Table(title=f"Scoring rules ({_rules_name(rs)})", box=box.SIMPLE_HEAD, expand=True)
     t.add_column("ID", style="bold", no_wrap=True)
     t.add_column("Category", no_wrap=True)
     t.add_column("Weight", justify="right")
-    t.add_column("ATT&CK", style="cyan")
+    t.add_column("ATT&CK", style="cyan", no_wrap=True)
     t.add_column("Description", overflow="fold")
     t.add_column("Rationale", overflow="fold")
-    for rule in rs.rules:
+    for rule in rs.rules[:limit]:
         weight = str(rule.weight)
         if rule.max_weight is not None:
             weight += f" (max {rule.max_weight})"
@@ -412,9 +427,7 @@ def rules() -> None:
             Text(rule.description),
             Text(rule.rationale),
         )
-    console.print(t)
-    bands = ", ".join(f"{v} >= {floor}" for v, floor in rs.verdicts if v is not Verdict.CLEAN)
-    console.print(f"[dim]Verdicts: CLEAN below the first band; {bands}[/dim]")
+    return t
 
 
 @cache_app.command("clear")

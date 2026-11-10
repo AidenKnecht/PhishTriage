@@ -1,0 +1,10 @@
+From: "[bold]PayPal[/bold] Support" <service@paypa1-support.example>
+To: analyst@example.com
+Subject: [/b] [external] Your account is on hold
+Date: Mon, 03 Nov 2026 09:14:00 +0000
+Message-ID: <hostile-subject@paypa1-support.example>
+Authentication-Results: mx.example.com; spf=softfail smtp.mailfrom=paypa1-support.example; dkim=none; dmarc=fail header.from=paypa1-support.example
+Content-Type: text/plain; charset=utf-8
+
+We noticed unusual activity. Verify your account immediately:
+http://support@login.paypa1-support.example/verify

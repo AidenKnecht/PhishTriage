@@ -34,7 +34,7 @@ ticket-friendly forms. `uv run phishtriage rules` prints every scoring rule.
 | Hop chain | `Received:` headers reversed to origin-first, boundary hop and external origin IP, private IPs presented as external, timestamps out of order or jumping >24h, reverse-DNS mismatch with `--live-dns` |
 | Links | URL extraction from text and HTML, visible-text vs `href` mismatch, lookalike and typosquat domains against `rules/brands.txt`, URL shorteners, raw-IP URLs, punycode, credentials-in-URL, deep subdomains, file-hosting services |
 | Attachments | SHA-256/MD5, declared vs magic-byte type, double extensions, executables, macro-enabled Office (by extension or by `vbaProject.bin` inside the ZIP), `.iso`/`.img`/`.lnk`/`.html`, password-protected archives |
-| Content | Urgency, credential, financial, threat and reward lure phrases from `rules/keywords.txt` |
+| Content | Urgency, credential, financial, threat, reward, job-scam and generic-greeting lure phrases from `rules/keywords.txt` |
 | Enrichment | URLhaus URL/host listings, VirusTotal URL/domain/hash detections, RDAP domain age and origin-IP country. Cached 24h on disk. |
 
 Attachments are never opened or executed, and URLs are never fetched. All
@@ -73,7 +73,7 @@ The synthetic half:
 | benign/01-newsletter.eml | 5 | CLEAN | lure_keywords |
 | benign/02-password-reset.eml | 10 | CLEAN | lure_keywords |
 | benign/03-github-notification.eml | 0 | CLEAN | |
-| benign/04-internal-no-auth.eml | 20 | SUSPICIOUS | no_auth_headers |
+| benign/04-internal-no-auth.eml | 20 | SUSPICIOUS | dkim_fail_or_none |
 | benign/05-invoice-pdf.eml | 0 | CLEAN | |
 | benign/06-shared-doc.eml | 0 | CLEAN | |
 | phish/01-lookalike-domain.eml | 65 | LIKELY PHISH | lookalike_domain |
@@ -122,9 +122,10 @@ infrastructure is clean; only the text is wrong, and text is deliberately
 capped at 15 points. They are listed in `samples/known-misses.txt` and the
 regression test holds them at SUSPICIOUS. The fifth miss is worse: a
 fake-interview scam ("install Microsoft Teams to meet a recruiter") that
-scores CLEAN because nothing about it is structurally wrong. The one benign
-SUSPICIOUS is an ISC2
-webinar invite whose visible link text says `isc2.org` while every href goes
+scores CLEAN because nothing about it is structurally wrong. (It impersonates
+Insureio as a recruiter; it was not sent by the company.) The one benign
+SUSPICIOUS is an ISC2 webinar invite whose visible link text says `isc2.org`
+while every href goes
 through Salesforce's click-tracker, which is a real mismatch that every
 marketing platform produces.
 
